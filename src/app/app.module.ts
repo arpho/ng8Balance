@@ -17,10 +17,10 @@ import { FilterPopupPage } from './modules/item/pages/filter-popup/filter-popup.
 import { SelectorItemsPage } from './modules/item/pages/selector-items/selector-items.page';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FilterPopupPage, SelectorItemsPage],
   entryComponents: [
-    // FilterPopupPage,
-    // SelectorItemsPage
+    FilterPopupPage,
+    SelectorItemsPage
   ],
   imports: [
     ItemModule,
