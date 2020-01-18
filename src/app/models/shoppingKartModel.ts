@@ -3,7 +3,7 @@ import { ItemModelInterface, Genere } from '../modules/item/models/itemModelInte
 import { SupplierModel } from './supplierModel';
 import { PaymentsModel } from './paymentModel';
 import { PurchaseModel } from './purchasesModel';
-import { getTranslationForTemplate } from '@angular/core/src/render3/i18n';
+// import { getTranslationForTemplate } from '@angular/core/src/render3/i18n';
 import { Value } from '../modules/item/models/value';
 import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 import { ItemServiceInterface } from '../modules/item/models/ItemServiceInterface';
