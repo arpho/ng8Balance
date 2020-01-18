@@ -15,6 +15,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FilterPopupPage } from './modules/item/pages/filter-popup/filter-popup.page';
 import { SelectorItemsPage } from './modules/item/pages/selector-items/selector-items.page';
+import { UserModel } from './models/profile.model';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { SelectorItemsPage } from './modules/item/pages/selector-items/selector-
   ],
   imports: [
     ItemModule,
+    UserModel,
     DynamicFormModule,
     GeoLocationModule,
     BrowserModule,
