@@ -8,7 +8,7 @@ import { ItemServiceInterface } from '../modules/item/models/ItemServiceInterfac
 import { Value } from '../modules/item/models/value';
 import { FirebaseObject } from '../models/firebaseObject';
 import { Coordinates } from '../modules/geo-location/models/coordinates';
-import { FornitoriPage } from '../pages/fornitori/fornitori.page';
+// import { FornitoriPage } from '../pages/fornitori/fornitori.page';
 import { QuickAction } from '../modules/item/models/QuickAction';
 import { ModalController, AlertController } from '@ionic/angular';
 export class SupplierModel implements ItemModelInterface, FirebaseObject {
