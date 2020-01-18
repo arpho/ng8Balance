@@ -6,6 +6,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ItemModule } from '../app/modules/item/item.module'
+import { GeoLocationModule } from './modules/geo-location/geo-location.module';
+import { DynamicFormModule } from './modules/dynamic-form/dynamic-form.module';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,8 +18,14 @@ import { SelectorItemsPage } from './modules/item/pages/selector-items/selector-
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
+  entryComponents: [
+    FilterPopupPage,
+    SelectorItemsPage
+  ],
   imports: [
+    ItemModule,
+    DynamicFormModule,
+    GeoLocationModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
