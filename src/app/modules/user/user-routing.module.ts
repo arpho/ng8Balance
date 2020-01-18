@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "./services/authguard.service";
-import { CanActivate } from "@angular/router/src/utils/preactivation";
+// import { CanActivate } from "@angular/router/src/utils/preactivation";
 
 const routes: Routes = [
   {
