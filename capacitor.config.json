@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "com.ng8Balance.app",
   "appName": "ng8Balance",
   "bundledWebRuntime": false,
   "npmClient": "npm",
