@@ -1,5 +1,7 @@
 {
   "name": "ng8Balance",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
