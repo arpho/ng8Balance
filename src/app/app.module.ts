@@ -18,13 +18,58 @@ import { FilterPopupPage } from './modules/item/pages/filter-popup/filter-popup.
 import { SelectorItemsPage } from './modules/item/pages/selector-items/selector-items.page';
 import { GoogleChartModule} from 'angular-google-chart'
 import {StoreModule} from '@ngrx/store'
+import { InfoModule } from './modules/info/info.module';
+import { CreateSupplierPage } from './pages/create-supplier/create-supplier.page';
+import { CreateShoppingKartPage } from './pages/create-shopping-kart/create-shopping-kart.page';
+import { ViewSupplierPage } from './pages/view-supplier/view-supplier.page';
+import { CreatePurchasePage } from './pages/create-purchase/create-purchase.page';
+import { TotalComponent } from './components/total/total.component';
+import { DetailPurchasePage } from './pages/detail-purchase/detail-purchase.page';
+import { DetailShoppingKartPage } from './pages/detail-shopping-kart/detail-shopping-kart.page';
+import { CreatePaymentPage } from './pages/create-payment/create-payment.page';
+import { CategoriesSelectorComponent } from './components/categories-selector/categories-selector.component';
+import { CategoriesSelectorPage } from './pages/categories-selector/categories-selector.page';
+import { CategoryComponent } from './components/category/category.component';
+import { CategoriesViewerComponent } from './components/categories-viewer/categories-viewer.component';
+import { GoogleChartsModule } from 'angular-google-chart';
+import { DetailCategoryPage } from './pages/detail-category/detail-category.page';
+import { DetailPaymentPage } from './pages/detail-payment/detail-payment.page';
 
 @NgModule({
-  declarations: [AppComponent, FilterPopupPage, SelectorItemsPage],
   entryComponents: [
+    CreateSupplierPage,
+    CreateShoppingKartPage,
+    ViewSupplierPage,
     FilterPopupPage,
-    SelectorItemsPage
+    SelectorItemsPage,
+    CreatePurchasePage,
+    DetailPurchasePage,
+    DetailShoppingKartPage,
+    DetailPaymentPage,
+    DetailCategoryPage,
+    CreatePaymentPage,
+    CategoriesSelectorPage
   ],
+  declarations: [
+    AppComponent,
+     FilterPopupPage,
+     SelectorItemsPage,
+    CreateSupplierPage,
+    CreateShoppingKartPage,
+    ViewSupplierPage,
+    FilterPopupPage,
+    SelectorItemsPage,
+    CreatePurchasePage,
+    DetailPurchasePage,
+    DetailCategoryPage,
+    DetailPaymentPage,
+    DetailShoppingKartPage,
+    CreatePaymentPage,
+    TotalComponent,
+    CategoriesSelectorComponent,
+    CategoriesSelectorPage,
+    CategoryComponent,
+    CategoriesViewerComponent],
   imports: [
     ItemModule,
     DynamicFormModule,
@@ -33,7 +78,8 @@ import {StoreModule} from '@ngrx/store'
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     OnlineStatusModule,
-    // GoogleChartModule.forRoot(),
+     GoogleChartModule.forRoot(),
+     OnlineStatusModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -44,5 +90,6 @@ import {StoreModule} from '@ngrx/store'
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }
