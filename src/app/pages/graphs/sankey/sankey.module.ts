@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { SankeyPage } from './sankey.page';
-import { GoogleChartsModule } from 'angular-google-charts';
+import { GoogleChartsModule } from 'angular-google-chart';
 import { DynamicFormModule } from 'src/app/modules/dynamic-form/dynamic-form.module';
 
 const routes: Routes = [

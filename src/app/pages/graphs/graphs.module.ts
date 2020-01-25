@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { GraphsPage } from './graphs.page';
-import { GoogleChartsModule } from 'angular-google-charts';
+import { GoogleChartsModule } from 'angular-google-chart';
 
 const routes: Routes = [
   {
