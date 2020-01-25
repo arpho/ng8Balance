@@ -17,9 +17,34 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'Categorie',
+      url: '/categorie',
+      icon: 'pricetags'
+    },
+    {
+      title: 'Pagamenti',
+      url: '/pagamenti',
+      icon: 'cash'
+    },
+    {
+      title: 'Fornitori',
+      url: '/fornitori',
+      icon: 'people'
+    },
+    {
+      title: 'Carrelli della spesa',
+      url: '/shopping-karts',
+      icon: 'cart'
+    },
+   /* {
+      title: 'Grafici',
+      url: '/graphs',
+      icon: 'stats'
+    }, */
+    {
+      title: 'info',
+      url: '/info/release',
+      icon: 'information-circle'
     }
   ];
 
