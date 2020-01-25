@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { reducers, metaReducers } from './reducers';
-
+import { OnlineStatusModule } from './modules/online-status/online-status.module';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -32,6 +32,7 @@ import {StoreModule} from '@ngrx/store'
     BrowserModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
+    OnlineStatusModule,
     // GoogleChartModule.forRoot(),
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
