@@ -20,6 +20,20 @@ import { OnlineStatusModule } from '../modules/online-status/online-status.modul
       }
     ])
   ],
+  entryComponents: [
+    CreateSupplierPage,
+    CreateShoppingKartPage,
+    ViewSupplierPage,
+    FilterPopupPage,
+    SelectorItemsPage,
+    CreatePurchasePage,
+    DetailPurchasePage,
+    DetailShoppingKartPage,
+    DetailPaymentPage,
+    DetailCategoryPage,
+    CreatePaymentPage,
+    CategoriesSelectorPage
+  ],
   declarations: [HomePage]
 })
 export class HomePageModule {}
