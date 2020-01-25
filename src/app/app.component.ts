@@ -3,6 +3,10 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { InfoService } from './modules/info/services/info/info.service'
+import { Router } from '@angular/router'
+import { configs } from './configs/credentials';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -36,11 +40,11 @@ export class AppComponent {
       url: '/shopping-karts',
       icon: 'cart'
     },
-   /* {
-      title: 'Grafici',
-      url: '/graphs',
-      icon: 'stats'
-    }, */
+    /* {
+       title: 'Grafici',
+       url: '/graphs',
+       icon: 'stats'
+     }, */
     {
       title: 'info',
       url: '/info/release',
@@ -56,6 +60,10 @@ export class AppComponent {
     private router: Router,
   ) {
     this.initializeApp();
+    if (!firebase.apps.length) {
+      firebase.initializeApp(configs.firebase);
+      // const  cat = this.categoriesService.getDummyItem();
+    }
   }
 
   initializeApp() {
