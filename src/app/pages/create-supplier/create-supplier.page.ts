@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
 import { SwitchQuestion } from 'src/app/modules/dynamic-form/models/question-switch';
 import { ViewController } from '@ionic/core';
-import { filterQueryId } from '@angular/core/src/view/util';
+// import { filterQueryId } from '@angular/core/src/view/util';
 import { GeoLocateQuestion } from 'src/app/modules/dynamic-form/models/question-geolocate';
 import { SupplierModel } from 'src/app/models/supplierModel';
 

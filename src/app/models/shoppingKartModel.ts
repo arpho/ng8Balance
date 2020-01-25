@@ -160,10 +160,10 @@ export class ShoppingKartModel implements ItemModelInterface {
     getAggregate(): Value {
         return new Value({ value: undefined, label: 'aggregate to be defined' })
     }
-
+/* 
     aggregateAction?() {
         throw new Error('Method not implemented.');
-    }
+    } */
 
     hasQuickActions?(): boolean {
         return false;
