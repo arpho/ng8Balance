@@ -21,6 +21,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ItemModule,
+    FormsModule,
     RouterModule.forChild(routes)
   ],
   // declarations: [CategoriesSelectorPage]

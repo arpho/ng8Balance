@@ -30,6 +30,7 @@
     "@ionic/storage": "^2.2.0",
     "@ngrx/store": "^8.6.0",
     "angular-google-chart": "^0.1.0",
+    "angular-google-charts": "^0.1.6",
     "core-js": "^2.5.4",
     "firebase": "^7.7.0",
     "firebase-admin": "^8.9.1",
