@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Statistiche</ion-title>
+    <ion-buttons slot="start">
+
+      <ion-back-button
+      class="button-clear ion-chevron-left"
+      defaultHref="/home"
+    ></ion-back-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="piechart">
+        <ion-icon name="pie"></ion-icon>
+        <ion-label>torta</ion-label>
+        <!--ion-badge>6</ion-badge-->
+      </ion-tab-button>
+  
+      <ion-tab-button tab="sankey">
+        <ion-icon name="logo-skype"></ion-icon>
+        <ion-label>Sankey</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="pareto">
+        <ion-icon name="stats"></ion-icon>
+        <ion-label>stats</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="about">
+        <ion-icon name="information-circle"></ion-icon>
+        <ion-label>About</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

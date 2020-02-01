@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>piechart</ion-title>
+    <ion-buttons slot="start">
+
+      <ion-back-button
+      class="button-clear ion-chevron-left"
+      defaultHref="/graphs"
+    ></ion-back-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="options">
+
+  <app-dynamic-form
+    [questions]="options"
+    [submitText]="submitText"
+    (interactiveSubmit)="filter($event)"
+    (singleSubmit)="submit($event)"
+  ></app-dynamic-form>
+</div>
+
+
+</ion-content>

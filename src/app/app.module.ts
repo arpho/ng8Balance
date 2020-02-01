@@ -16,7 +16,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FilterPopupPage } from './modules/item/pages/filter-popup/filter-popup.page';
 import { SelectorItemsPage } from './modules/item/pages/selector-items/selector-items.page';
-// import { GoogleChartModule} from 'angular-google-chart'
+import { GoogleChartModule} from 'angular-google-chart'
 import {StoreModule} from '@ngrx/store'
 import { InfoModule } from './modules/info/info.module';
 import { CreateSupplierPage } from './pages/create-supplier/create-supplier.page';
@@ -78,8 +78,8 @@ import { DetailPaymentPage } from './pages/detail-payment/detail-payment.page';
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     OnlineStatusModule,
-     // GoogleChartModule.forRoot(),
-     OnlineStatusModule,
+    //GoogleChartModule.forRoot(),
+    OnlineStatusModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     StoreModule.forRoot(reducers, { metaReducers }),
