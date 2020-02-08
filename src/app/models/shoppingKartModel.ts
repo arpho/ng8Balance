@@ -148,7 +148,7 @@ export class ShoppingKartModel implements ItemModelInterface {
 
     getValue4(): Value {
         const out = !this.title ? new Value({
-            value: ' ' + (this.fornitore && this.fornitore.getTitle()) ? this.fornitore.getTitle().value : '' || this.fornitore.nome, label: ' titolo '
+            value: ' ' + (this.fornitore && this.fornitore) ? this.fornitore.getTitle().value : '' || this.fornitore.nome, label: ' titolo '
         }) :
             new Value({ value: this.title, label: ' titolo ' })
         return out

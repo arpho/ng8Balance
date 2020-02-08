@@ -68,9 +68,7 @@ import { DetailPaymentPage } from './pages/detail-payment/detail-payment.page';
     TotalComponent,
     CategoriesSelectorComponent,
     CategoriesSelectorPage,
-    PieChartComponent,
     CategoryComponent,
-    PieChartComponent,
     
     CategoriesViewerComponent],
 
