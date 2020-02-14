@@ -21,7 +21,6 @@ export class TotalComponent implements OnInit, OnChanges {
   
 
   ngOnChanges(changes: SimpleChanges) {
-    console.table('items',this.items)
     const reducer: (acc: number, curr: PurchaseModel) => number = (acc: number, curr: PurchaseModel) =>{ 
       return   (curr&&curr.prezzo)?acc+curr.prezzo:acc}
     const total = this.items ? this.items.reduce<number>(reducer, 0) : 0

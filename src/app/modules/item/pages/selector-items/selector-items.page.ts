@@ -54,7 +54,7 @@ export class SelectorItemsPage implements OnInit, OnChanges {
     }
   }
   filter(ev) {
-    this.filterFunction = (item: ItemModelInterface) => item.title.toUpperCase().includes(ev.detail.value.toUpperCase())
+    this.filterFunction = (item: ItemModelInterface) => (item.title)?item.title.toUpperCase().includes(ev.detail.value.toUpperCase()):false
   }
 
   ngOnChanges(changes: SimpleChanges) {
