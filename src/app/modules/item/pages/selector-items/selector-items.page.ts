@@ -31,6 +31,7 @@ export class SelectorItemsPage implements OnInit, OnChanges {
   async createItem() {
     const modal = await this.modalCtrl.create({ component: this.createPopup })
     modal.onDidDismiss().then(item => {
+      console.table('created',item)
       this.dismiss(item.data)
     })
     return await modal.present()

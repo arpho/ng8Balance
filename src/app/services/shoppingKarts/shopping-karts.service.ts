@@ -75,7 +75,6 @@ export class ShoppingKartsService implements ItemServiceInterface {
       if (user) {
         this.shoppingKartsListRef = firebase.database().ref(`/acquisti/${user.uid}/`);
         this.getEntitiesList().on('value', eventSuppliersListSnapshot => {
-            console.log('init loading kart')
           this.items_list = [];
           eventSuppliersListSnapshot.forEach(snap => {
             const kart = new ShoppingKartModel({ key: snap.val() }).initialize(snap.val())

@@ -25,8 +25,6 @@ export class PaymentsService implements ItemServiceInterface {
       if (user) {
         this.paymentsListRef = firebase.database().ref(`/pagamenti/${user.uid}/`);
         this.getEntitiesList().on('value', eventCategoriesListSnapshot => {
-          console.log('loading payments')
-
           this.items_list = [];
           eventCategoriesListSnapshot.forEach(snap => {
             const payment =  new PaymentsModel().initialize(snap.val())
