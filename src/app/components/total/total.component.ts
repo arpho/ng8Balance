@@ -24,7 +24,6 @@ export class TotalComponent implements OnInit, OnChanges {
     const reducer: (acc: number, curr: PurchaseModel) => number = (acc: number, curr: PurchaseModel) =>{ 
       return   (curr&&curr.prezzo)?acc+curr.prezzo:acc}
     const total = this.items ? this.items.reduce<number>(reducer, 0) : 0
-    console.log('total',total)
     this.totalValue = Math.round(total * 100) / 100
     this.total.emit(total)
   }

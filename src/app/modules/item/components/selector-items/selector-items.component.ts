@@ -18,7 +18,7 @@ import { ItemServiceInterface } from '../../models/ItemServiceInterface';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { QuestionProperties } from 'src/app/modules/dynamic-form/models/questionproperties';
 import { CategoryModel } from 'src/app/models/CategoryModel';
-import { ModalsService } from 'src/app/services/modals.service';
+import { ModalsService } from 'src/app/modules/item/services/modals/modals-service';
 
 @Component({
   selector: 'app-selector-items',
@@ -89,7 +89,7 @@ export class SelectorItemsComponent implements OnInit, OnChanges, ControlValueAc
   }
 
 
-  constructor(public modalCtrl: ModalController,public modals:ModalsService) { }
+  constructor(public modalCtrl: ModalController, public modals: ModalsService) { }
 
   ngOnInit() {
   }
@@ -105,7 +105,6 @@ export class SelectorItemsComponent implements OnInit, OnChanges, ControlValueAc
   }
   async action() {
     const modalId = new Date().getTime()
-    console.log('opening selector-item-page',modalId)
     const modal = await this.modalCtrl.create({
       component: SelectorItemsPage,
       componentProps: {
@@ -115,12 +114,12 @@ export class SelectorItemsComponent implements OnInit, OnChanges, ControlValueAc
         filterFunction: this.filterFunction,
         sorterFunction: this.sorterFunction,
         createPopup: this.createPopup,
-        modalId:modalId
+        modalId: modalId
 
       }
-    
+
     });
-    this.modals.setModal(modalId,modal)
+    this.modals.setModal(modalId, modal)
     modal.onDidDismiss().then(data => {
       this.item = data.data
       this.selectedItem.emit(data.data)
