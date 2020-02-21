@@ -4,6 +4,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { ItemModelInterface } from '../../models/itemModelInterface';
 import { ItemServiceInterface } from '../../models/ItemServiceInterface';
 import { ComponentRef } from '@ionic/core';
+import { ModalsService } from 'src/app/services/modals.service';
 
 @Component({
   selector: 'app-selector-items-page',
@@ -16,25 +17,31 @@ export class SelectorItemsPage implements OnInit, OnChanges {
   service: ItemServiceInterface
   itemsList: Array<ItemModelInterface>
   filterText: string
+  modalB:Promise<HTMLIonModalElement>
   createPopup:ComponentRef
   filterFunction: any // (item: ItemModelInterface) => boolean
   sorterFunction: any // (a: ItemModelInterface, b: ItemModelInterface) => number
+  modalId:number
 
-  constructor(public modalCtrl: ModalController, public navParams: NavParams) {
+  constructor(public modalCtrl: ModalController, public navParams: NavParams,public modalsService:ModalsService) {
     this.title = `Seleziona  ${this.navParams.get('title')}`
     this.selectedItem = this.navParams.get('item')
     this.service = this.navParams.get('service')   
     this.createPopup = this.navParams.get('createPopup')     
     this.filterFunction = this.navParams.get('filterFunction')
     this.sorterFunction = this.navParams.get('sorterFunction')
+    this.modalId = this.navParams.get('modalId')
   }
   async createItem() {
     const modal = await this.modalCtrl.create({ component: this.createPopup })
+    
     modal.onDidDismiss().then(item => {
-      console.table('created',item)
-      this.dismiss(item.data)
+      this.modalsService.dismissModal(this.modalId,item.data)
+      // this.selected(item.data)
     })
+
     return await modal.present()
+    
   }
 
   ngOnInit() {
@@ -68,12 +75,15 @@ export class SelectorItemsPage implements OnInit, OnChanges {
   }
 
   selected(item: ItemModelInterface) {
+    console.log('slected',item)
     this.selectedItem = item
     this.dismiss(item)
   }
 
 
   dismiss(item?: ItemModelInterface) {
+    console.log('dismissing',item)
+    this.selectedItem = item 
     this.modalCtrl.dismiss(item)
   }
 

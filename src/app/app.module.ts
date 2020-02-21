@@ -34,7 +34,6 @@ import { CategoriesViewerComponent } from './components/categories-viewer/catego
 import { GoogleChartsModule } from 'angular-google-chart';
 import { DetailCategoryPage } from './pages/detail-category/detail-category.page';
 import { DetailPaymentPage } from './pages/detail-payment/detail-payment.page';
-
 @NgModule({
   entryComponents: [
     CreateSupplierPage,
