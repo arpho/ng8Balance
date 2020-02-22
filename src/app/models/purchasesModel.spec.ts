@@ -40,8 +40,8 @@ describe('testing purchaseModel', () => {
     })
     it('clone should work', () => {
         const clonedata = {
-            barcode: '9632', prezzo: '123456.5', note: 'ìqwertyu', moneta: '$', descrizione: 'poiuytr',
-            picture: 'asdfghj', categorie:
+            barcode: '123456', prezzo: '123456.5', note: 'ìqwertyu', moneta: '$', descrizione: 'poiuytr',
+            picture: 'picture', categorie:
                 [new CategoryModel().build({ title: 'a', key: 'a' }), new CategoryModel().build({ title: 'b', key: 'b' }),
                 new CategoryModel().build({ title: 'c', key: 'c' })]
         }
