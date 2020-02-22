@@ -6,7 +6,7 @@ import { CategoryModel } from './CategoryModel';
 import { MockCategoriesService } from './mockers/mockCategoriesService';
 describe('testing purchaseModel', () => {
     const testdata = {
-        barcode: '123456', key: '0', descrizione: 'questo è un test', picture: 'picture', prezzo: '125.5',
+        barcode: '123456', key: '0', descrizione: 'poiuytr', picture: 'picture', prezzo: '125.5',
         categorieId: ['a', 'b', 'c']
     }
     let purchase = new PurchaseModel(testdata)
