@@ -102,9 +102,11 @@ describe('serialize must not have undefined fields', () => {
         expect(kart.items[1].prezzo).toBe(2)
     })
 
-    it('removing item should work', () => {
-        kart.removeItem(new PurchaseModel({ key: 'a' }))
-        expect(kart.items.length).toBe(0)
+    it('removing item wrong key', () => {
+        console.log('kart before',kart)
+        kart.removeItem(new PurchaseModel({ key: 'a' })) // removing wrong key
+        console.log('kart after',kart)
+        expect(kart.items.length).toBe(1)
         expect(kart.items[0].key).toBe('b')
     })
 })

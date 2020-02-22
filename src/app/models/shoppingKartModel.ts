@@ -133,6 +133,7 @@ export class ShoppingKartModel implements ItemModelInterface {
     }
 
     removeItem(purchase: PurchaseModel) {
+        console.log('removing item',purchase,'from',this.items)
         this.items = this.items.filter((v: PurchaseModel) => v.key !== purchase.key)
     }
 
