@@ -8,6 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
 
 describe('AppComponent', () => {
 
@@ -26,8 +27,9 @@ describe('AppComponent', () => {
         { provide: StatusBar, useValue: statusBarSpy },
         { provide: SplashScreen, useValue: splashScreenSpy },
         { provide: Platform, useValue: platformSpy },
+        { provide: Storage }
       ],
-      imports: [ RouterTestingModule.withRoutes([]),HttpClientModule],
+      imports: [RouterTestingModule.withRoutes([]), HttpClientModule],
     }).compileComponents();
   }));
 
@@ -50,7 +52,7 @@ describe('AppComponent', () => {
     await fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-label');
-    expect(menuItems.length).toEqual(6);
+    expect(menuItems.length).toEqual(7);
     expect(menuItems[0].textContent).toContain('Home');
     expect(menuItems[1].textContent).toContain('Categorie');
     expect(menuItems[2].textContent).toContain('Pagamenti');
@@ -63,9 +65,9 @@ describe('AppComponent', () => {
     await fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-item');
-    expect(menuItems.length).toEqual(2);
+    expect(menuItems.length).toEqual(7);
     expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/home');
-    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/list');
+    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/categorie');
   });
 
 });
