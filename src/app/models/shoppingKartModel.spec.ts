@@ -104,7 +104,7 @@ describe('serialize must not have undefined fields', () => {
 
     it('removing item should work', () => {
         kart.removeItem(new PurchaseModel({ key: 'a' }))
-        expect(kart.items.length).toBe(1)
+        expect(kart.items.length).toBe(0)
         expect(kart.items[0].key).toBe('b')
     })
 })
