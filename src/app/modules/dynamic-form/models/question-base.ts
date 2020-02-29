@@ -3,6 +3,8 @@
 // tslint:disable: no-string-literal
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { QuestionProperties } from './questionproperties';
+import { ItemServiceInterface } from '../../item/models/ItemServiceInterface';
+import { ComboValue } from './ComboValueinterface';
 //import { Options } from 'selenium-webdriver';
 
 export class QuestionBase<T> {
@@ -16,7 +18,10 @@ export class QuestionBase<T> {
   iconTrue: string;
   iconFalse: string;
   labelTrue: string;
+  service: ItemServiceInterface
   labelFalse: string;
+  text: string;
+  options: ComboValue[]
   neutralFilter: (item: ItemModelInterface) => true
   // any solo per testing TOBE refactored
   public filterFunction: (item: ItemModelInterface, arg: ItemModelInterface | any) => boolean
@@ -43,6 +48,12 @@ export class QuestionBase<T> {
     this.neutralFilter = (item: ItemModelInterface) => true
     this.filterFunction = options['filterFunction'] || this.neutralFilter;
   }
+  selectedItem(item: ItemModelInterface) { }
+  itemsFilterFunction(item: ItemModelInterface): boolean {
+    return true
+  }
+  createPopup(service: ItemServiceInterface) { }
+  sorterFunction(a: ItemModelInterface, b: ItemModelInterface): number { return 0 }
   filterFactory = (options: {}) => {
     return options && options[this.key] ? (item: ItemModelInterface) =>
       this.filterFunction(options[this.key], item) : this.neutralFilter

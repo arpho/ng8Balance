@@ -144,7 +144,7 @@ export class CreateShoppingKartPage implements OnInit {
     this.supplierFilterFunction = (item: SupplierModel) => true // neutral filter
 
   }
-  removeItem(item) {
+  removeItem(item,slidingItem) {
     this.kart.removeItem(item)
   }
 

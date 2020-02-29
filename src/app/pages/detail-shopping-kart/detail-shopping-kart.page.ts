@@ -171,7 +171,7 @@ export class DetailShoppingKartPage implements OnInit {
   }
 
 
-  removeItem(item: PurchaseModel) {
+  removeItem(item: PurchaseModel, slidingitem) {
     this.kart.removeItem(item)
   }
 

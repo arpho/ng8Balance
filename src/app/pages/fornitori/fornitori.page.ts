@@ -18,7 +18,7 @@ import { CreateSupplierPage } from '../create-supplier/create-supplier.page';
   styleUrls: ['./fornitori.page.scss'],
 })
 export class FornitoriPage implements OnInit, OnChanges, ItemControllerInterface {
-  public ItemsList: Array<SupplierModel>;
+  public ItemsList: [SupplierModel]
   public filterLabel = 'Categorie';
   public filterString: string;
   public filterFields: any;
@@ -105,7 +105,7 @@ export class FornitoriPage implements OnInit, OnChanges, ItemControllerInterface
     });
     if (this.suppliers.getEntitiesList()) {
       this.suppliers.getEntitiesList().on('value', eventSuppliersListSnapshot => {
-        this.ItemsList = [];
+        this.ItemsList = [undefined];
         eventSuppliersListSnapshot.forEach(snap => {
           const supplier = new SupplierModel(snap.val(), snap.key)
           supplier.load()
