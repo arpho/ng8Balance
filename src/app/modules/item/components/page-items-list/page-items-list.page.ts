@@ -63,8 +63,9 @@ export class PageItemsListComponent implements OnInit, OnChanges {
           this.ref.markForCheck()
         }
         this.items_list.forEach(item => {
-          if(item){
-          item.load(next)}
+          if (item) {
+            item.load(next)
+          }
         })
       }
     }

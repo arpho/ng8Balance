@@ -160,7 +160,7 @@ export class CreateShoppingKartPage implements OnInit {
   }
 
   async selectedSupplier(supplier: SupplierModel) {
-    if (supplier) {
+    if (supplier && this.kart) {
 
       this.kart.setSupplier(supplier)
     }
