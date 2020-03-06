@@ -49,7 +49,7 @@ export class QuestionBase<T> {
     this.filterFunction = options['filterFunction'] || this.neutralFilter;
   }
   selectedItem(item: ItemModelInterface) { }
-  itemsFilterFunction(item: ItemModelInterface): boolean {
+  ItemsFilterFunction(item: ItemModelInterface): boolean {
     return true
   }
   createPopup(service: ItemServiceInterface) { }
