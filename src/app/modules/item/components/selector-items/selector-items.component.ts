@@ -19,7 +19,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { QuestionProperties } from 'src/app/modules/dynamic-form/models/questionproperties';
 import { CategoryModel } from 'src/app/models/CategoryModel';
 import { ModalsService } from 'src/app/modules/item/services/modals/modals-service';
-import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-selector-items',
