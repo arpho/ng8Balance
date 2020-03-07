@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WidgetService } from '../../services/widget-service.';
 
 @Component({
   selector: 'app-widget-drawer',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./widget-drawer.component.scss'],
 })
 export class WidgetDrawerComponent implements OnInit {
+  keys//: Promise<string[]>
 
-  constructor() { }
+  constructor(public service:WidgetService) {
+    this.keys = this.service.keys()
+   }
 
   ngOnInit() {}
 

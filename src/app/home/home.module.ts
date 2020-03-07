@@ -6,12 +6,14 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { OnlineStatusModule } from '../modules/online-status/online-status.module';
+import { WidgetModule } from '../modules/widget/widget.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     OnlineStatusModule,
+    WidgetModule,
     RouterModule.forChild([
       {
         path: '',

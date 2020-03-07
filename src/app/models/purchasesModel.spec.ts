@@ -27,6 +27,11 @@ describe('testing purchaseModel', () => {
         expect(purchase.picture).toBe(testdata.picture)
     })
     it('prezzo should a float', () => {
+        const testdata = {
+            barcode: '123456', key: '0', descrizione: 'poiuytr', picture: 'picture', prezzo: '125.5',
+            categorieId: ['a', 'b', 'c']
+        }
+        let purchase = new PurchaseModel(testdata)
         expect(purchase.prezzo).toBe(125.5)
     })
 

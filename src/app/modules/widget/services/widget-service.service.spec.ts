@@ -1,12 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
-import { WidgetServiceService } from './widget-service.service';
+import { WidgetService } from './widget-service.';
+import { Storage, IonicStorageModule } from '@ionic/storage';
 
-describe('WidgetServiceService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+describe('WidgetService', () => {
+  beforeEach(() => TestBed.configureTestingModule({
+    imports:[IonicStorageModule.forRoot()]
+  }));
 
   it('should be created', () => {
-    const service: WidgetServiceService = TestBed.get(WidgetServiceService);
+    const service: WidgetService = TestBed.get(WidgetService);
     expect(service).toBeTruthy();
   });
 });

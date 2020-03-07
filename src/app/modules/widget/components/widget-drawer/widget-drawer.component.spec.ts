@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { WidgetDrawerComponent } from './widget-drawer.component';
+import { IonicStorageModule } from '@ionic/storage';
 
 describe('WidgetDrawerComponent', () => {
   let component: WidgetDrawerComponent;
@@ -10,7 +11,7 @@ describe('WidgetDrawerComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ WidgetDrawerComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(),IonicStorageModule.forRoot()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(WidgetDrawerComponent);
