@@ -11,7 +11,8 @@ import { Coordinates } from '../modules/geo-location/models/coordinates';
 // import { FornitoriPage } from '../pages/fornitori/fornitori.page';
 import { QuickAction } from '../modules/item/models/QuickAction';
 import { ModalController, AlertController } from '@ionic/angular';
-export class SupplierModel implements ItemModelInterface, FirebaseObject {
+import { Geolocatated } from '../modules/geo-location/models/geolocationInterface';
+export class SupplierModel implements ItemModelInterface, FirebaseObject,Geolocatated {
     nome: string;
     note: string;
     indirizzo: string;
