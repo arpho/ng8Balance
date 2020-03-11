@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ItemModule } from '../app/modules/item/item.module'
 import { GeoLocationModule } from './modules/geo-location/geo-location.module';
 import { DynamicFormModule } from './modules/dynamic-form/dynamic-form.module';
-import { Storage, IonicStorageModule } from '@ionic/storage';
+import {  IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
