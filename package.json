@@ -36,6 +36,7 @@
     "d3": "^5.15.0",
     "firebase": "^7.9.3",
     "firebase-admin": "^8.9.2",
+    "idb": "^5.0.1",
     "ng-connection-service": "^1.0.4",
     "rxjs": "~6.5.1",
     "tslib": "^1.11.1",
