@@ -126,8 +126,10 @@ export class DetailShoppingKartPage implements OnInit {
      * spaghetti code TODO remove asap
      */
     this.supplierService.items.subscribe(suppliers => {
-      this.kart.setSupplier(suppliers.filter(sup => sup.key == this.kart.fornitoreId)[0])
-      this.setKartFields()
+      if (this.kart) {
+        this.kart.setSupplier(suppliers.filter(sup => sup.key == this.kart.fornitoreId)[0])
+        this.setKartFields()
+      }
     })
     this.supplierSorterFunction = (a: SupplierModel, b: SupplierModel) => {
       return this.geo.distance(a.address.latitude, a.address.longitude, this.position.latitude, this.position.longitude) -
