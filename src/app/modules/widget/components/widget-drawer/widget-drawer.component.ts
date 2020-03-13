@@ -10,7 +10,10 @@ export class WidgetDrawerComponent implements OnInit {
   keys//: Promise<string[]>
 
   constructor(public service:WidgetService) {
-    this.keys = this.service.keys()
+    this.service.connectToIDB().then(()=>{
+      this.keys= this.service.keys()
+    })
+     this.keys = this.service.keys()
    }
 
   ngOnInit() {}

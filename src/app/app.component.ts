@@ -8,6 +8,13 @@ import { Router } from '@angular/router'
 import { configs } from './configs/credentials';
 import * as firebase from 'firebase/app';
 
+export interface Schedule {
+  time: string;
+  subject: string;
+  location?: string;
+  description?: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
