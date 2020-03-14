@@ -13,7 +13,6 @@ export class WidgetDrawerComponent implements OnInit {
     this.service.connectToIDB().then(()=>{
       this.keys= this.service.keys()
     })
-     this.keys = this.service.keys()
    }
 
   ngOnInit() {}

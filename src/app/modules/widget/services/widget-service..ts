@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { openDB, deleteDB, wrap, unwrap } from 'idb'
-import { Observable,Subject } from 'rxjs';
+import { openDB, deleteDB, wrap, unwrap, IDBPDatabase } from 'idb'
+import { Observable,Subject, BehaviorSubject } from 'rxjs';
 import {Schedule} from '../../../app.component'
+import { promise } from 'protractor';
 
 
 @Injectable({
@@ -9,7 +10,9 @@ import {Schedule} from '../../../app.component'
 })
 export class WidgetService {
   private _dataChange: Subject<Schedule> = new Subject<Schedule>();
-private _db;
+private _db 
+private _widgets:BehaviorSubject<Promise<any>> = new  BehaviorSubject(new Promise((success,fail)=>{success(undefined)}))
+public readonly widgets:Observable<any>=  this._widgets.asObservable()
 
 constructor(public service:WidgetService) {
   // this.storage.keys().then(keys=>keys.forEach(k=>this.get(k).then(v=>console.log('value for ',k,v))))
@@ -18,7 +21,14 @@ constructor(public service:WidgetService) {
 }
 
   keys() {
-     return this._db.getAllKeys('widgetsList')
+    this.widgets.subscribe(db=>{
+      console.log('db',db)
+      if (db.getAllKeys){
+        
+        return db.getAllKeys('widgetsList')
+      }
+    })
+     
   }
 
   set(key: string, value) {
@@ -45,10 +55,11 @@ constructor(public service:WidgetService) {
         // …
       },
       terminated() {
-        console.log('terminaated')
+        console.log('terminated')
         // …
       },
     });
+    this._widgets.next(this._db)
   }
 
   
