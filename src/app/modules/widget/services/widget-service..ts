@@ -20,12 +20,12 @@ constructor(public service:WidgetService) {
   this.connectToIDB()
 }
 
-  keys() {
+  keys(next) {
     this.widgets.subscribe(db=>{
       console.log('db',db)
       if (db.getAllKeys){
-        
-        return db.getAllKeys('widgetsList')
+        next(db.getAllKeys('widgetsList'))
+        // return db.getAllKeys('widgetsList')
       }
     })
      
@@ -40,10 +40,10 @@ constructor(public service:WidgetService) {
   }
 
   async connectToIDB() {
-    this._db = await openDB('widgets', 2, {
+    this._db = await openDB('widgets', 2.7, {
       upgrade(db, oldVersion, newVersion, transaction) {
         console.log(`updating db:${db}, oldVersion:${oldVersion},newVersion:${newVersion},transaction:${transaction}`)
-        db.createObjectStore('widgetsList')
+        db.createObjectStore('widgetsList',{keyPath:'id',autoIncrement:true})
 
       },
       blocked() {
