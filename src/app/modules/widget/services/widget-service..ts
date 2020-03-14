@@ -3,6 +3,7 @@ import { openDB, deleteDB, wrap, unwrap, IDBPDatabase } from 'idb'
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Schedule } from '../../../app.component'
 import { promise } from 'protractor';
+import { values } from 'd3';
 
 
 @Injectable({
@@ -32,12 +33,21 @@ export class WidgetService {
 
   }
 
-  set(key: string, value) {
-    // this.storage.set(key, value)
+  put(key: string, value: any, next: (v) => void) {
+    this.widgets.subscribe((db: IDBPDatabase) => {
+
+      if (db.put) {
+        next(db.put(this.storeName, value, key))
+      }
+    })
   }
 
-  get(key: string) {
-    // return this.storage.get(key)
+  get(key: string, next: (v: Promise<any>) => void) {
+    this.widgets.subscribe((db: IDBPDatabase) => {
+      if (db.get) {
+        next(db.get(this.storeName, key))
+      }
+    })
   }
 
   async connectToIDB() {

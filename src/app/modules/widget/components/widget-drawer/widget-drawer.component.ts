@@ -11,9 +11,21 @@ export class WidgetDrawerComponent implements OnInit {
 
   constructor(public service: WidgetService) {
     this.service.connectToIDB().then(() => {
-      this.service.keys((keys:Promise<any>) => { this.keys = keys
-        keys.then(k=>{
-          console.log('keys',k)
+      this.service.keys((keys: Promise<any>) => {
+        this.keys = keys
+        keys.then(k => {
+          console.log('keys', k)
+        })
+      })
+      const test = { a: 1, b: 2, c: 3 ,d:4}
+      this.service.put('test1', test, (p: Promise<any>) => {
+        p.then(v => {
+          console.log('put', v)
+        })
+      })
+      this.service.get('test1', (p: Promise<any>) => {
+        p.then(v => {
+          console.log('got', v)
         })
       })
     })
