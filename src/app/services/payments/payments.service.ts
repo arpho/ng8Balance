@@ -12,9 +12,9 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 export class PaymentsService implements ItemServiceInterface {
 
   public paymentsListRef: firebase.database.Reference;
-  private _items:BehaviorSubject<Array<PaymentsModel>> = new BehaviorSubject([])
-  public readonly items:Observable<Array<PaymentsModel>> = this._items.asObservable()
-  private items_list:Array<PaymentsModel> = []
+   _items:BehaviorSubject<Array<PaymentsModel>> = new BehaviorSubject([])
+   readonly items:Observable<Array<PaymentsModel>> = this._items.asObservable()
+   items_list:Array<PaymentsModel> = []
   getDummyItem() {
     return new PaymentsModel();
 

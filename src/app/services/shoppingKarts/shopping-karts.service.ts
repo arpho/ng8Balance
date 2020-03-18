@@ -20,9 +20,9 @@ import { CategoryModel } from 'src/app/models/CategoryModel';
 })
 export class ShoppingKartsService implements ItemServiceInterface {
   public shoppingKartsListRef: firebase.database.Reference;
-  private _items: BehaviorSubject<Array<ShoppingKartModel>> = new BehaviorSubject([])
-  public readonly items: Observable<Array<ShoppingKartModel>> = this._items.asObservable()
-  private items_list: Array<ShoppingKartModel> = []
+   _items: BehaviorSubject<Array<ShoppingKartModel>> = new BehaviorSubject([])
+   readonly items: Observable<Array<ShoppingKartModel>> = this._items.asObservable()
+   items_list: Array<ShoppingKartModel> = []
   categoriesService?: ItemServiceInterface;
 
   getItem(key: string): firebase.database.Reference {

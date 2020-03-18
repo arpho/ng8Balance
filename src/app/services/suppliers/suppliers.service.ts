@@ -10,9 +10,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class SuppliersService implements ItemServiceInterface {
   public suppliersListRef: firebase.database.Reference;
-  private _items:BehaviorSubject<Array<SupplierModel>> = new BehaviorSubject([])
-  public readonly items:Observable<Array<SupplierModel>> = this._items.asObservable()
-  private items_list:Array<SupplierModel> = []
+  _items: BehaviorSubject<Array<SupplierModel>> = new BehaviorSubject([])
+  readonly items: Observable<Array<SupplierModel>> = this._items.asObservable()
+  items_list: Array<SupplierModel> = []
   constructor() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {

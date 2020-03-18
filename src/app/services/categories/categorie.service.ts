@@ -10,9 +10,9 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class CategoriesService implements ItemServiceInterface {
   public categoriesListRef: firebase.database.Reference;
-  private _items: BehaviorSubject<Array<CategoryModel>> = new BehaviorSubject([])
-  public readonly items: Observable<Array<CategoryModel>> = this._items.asObservable()
-  private items_list: Array<CategoryModel> = []
+   _items: BehaviorSubject<Array<CategoryModel>> = new BehaviorSubject([])
+   readonly items: Observable<Array<CategoryModel>> = this._items.asObservable()
+   items_list: Array<CategoryModel> = []
   initializeCategory(cat) {
     const Cat = new CategoryModel(cat.key).initialize(cat)
     if (Cat.fatherKey) {
