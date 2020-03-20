@@ -1,10 +1,15 @@
 // tslint:disable: semicolon
 import { ItemServiceInterface } from 'src/app/modules/item/models/ItemServiceInterface';
 import { SupplierModel } from '../supplierModel';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterface';
 
 export class MockSupplierService implements ItemServiceInterface {
     categoriesService?: ItemServiceInterface; suppliersService?: ItemServiceInterface;
     paymentsService?: ItemServiceInterface;
+    _items: BehaviorSubject<Array<ItemModelInterface>> = new BehaviorSubject([])
+    readonly items: Observable<Array<ItemModelInterface>> = this._items.asObservable()
+    items_list: Array<ItemModelInterface> = []
     public suppliersListRef: firebase.database.Reference;
     getItem(key: string): any {
         const data = {
