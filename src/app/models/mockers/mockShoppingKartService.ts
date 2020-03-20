@@ -15,9 +15,9 @@ export class MockShoppingKartervice implements ItemServiceInterface {
     paymentsService?: MockPaymentService;
     data: {}
     public shoppingKartsListRef: firebase.database.Reference
-    private _items:BehaviorSubject<Array<ShoppingKartModel>> = new BehaviorSubject([])
+     _items:BehaviorSubject<Array<ShoppingKartModel>> = new BehaviorSubject([])
     public readonly items:Observable<Array<ShoppingKartModel>> = this._items.asObservable()
-    private items_list:Array<ShoppingKartModel> = []
+     items_list:Array<ShoppingKartModel> = []
 
     constructor(data: {}) {
         this.data = data

@@ -1,9 +1,14 @@
 import { ItemServiceInterface } from '../../modules/item/models/ItemServiceInterface';
 import { CategoryModel } from '../CategoryModel';
+import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterface';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export class MockCategoriesService implements ItemServiceInterface {
     categoriesService?: ItemServiceInterface; suppliersService?: ItemServiceInterface;
     paymentsService?: ItemServiceInterface;
+    _items: BehaviorSubject<Array<ItemModelInterface>> = new BehaviorSubject([])
+    readonly items: Observable<Array<ItemModelInterface>> = this._items.asObservable()
+    items_list: Array<ItemModelInterface> = []
     public categoriesListRef: firebase.database.Reference;
     getItem(key: string): any {
         const data = {
