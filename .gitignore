@@ -33,3 +33,5 @@ npm-debug.log*
 src/app/configs/credentials.ts
 
 package-lock.json
+
+diagrams/
