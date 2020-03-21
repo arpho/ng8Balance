@@ -11,10 +11,10 @@ import { values } from 'd3';
 })
 export class WidgetService {
   private _dataChange: Subject<Schedule> = new Subject<Schedule>();
-   storeName = 'widgetsList'
   private _db
   private _widgets: BehaviorSubject<Promise<any>> = new BehaviorSubject(new Promise((success, fail) => { success(undefined) }))
   public readonly widgets: Observable<any> = this._widgets.asObservable()
+  storeName = 'widgetsList';
 
   constructor(public service: WidgetService) {
     // this.storage.keys().then(keys=>keys.forEach(k=>this.get(k).then(v=>console.log('value for ',k,v))))
@@ -26,8 +26,9 @@ export class WidgetService {
     this.widgets.subscribe(db => {
       console.log('db', db)
       if (db.getAllKeys) {
+        if(next){
         next(db.getAllKeys(this.storeName))
-        // return db.getAllKeys('widgetsList')
+}        // return db.getAllKeys('widgetsList')
       }
     })
 
@@ -54,7 +55,7 @@ export class WidgetService {
     this._db = await openDB('widgets', 2.7, {
       upgrade(db, oldVersion, newVersion, transaction) {
         console.log(`updating db:${db}, oldVersion:${oldVersion},newVersion:${newVersion},transaction:${transaction}`)
-        db.createObjectStore(this.storeName, { keyPath: 'id', autoIncrement: true })
+        db.createObjectStore(this?this.storeName:'widgetsList', { keyPath: 'id', autoIncrement: true })
 
       },
       blocked() {

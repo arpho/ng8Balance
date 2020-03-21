@@ -16,7 +16,7 @@ export class WidgetDrawerComponent implements OnInit {
         keys.then(k => {
           console.log('keys', k)
         })
-      })
+      })/* 
       const test = { a: 1, b: 2, c: 3 ,d:4}
       this.service.put('test1', test, (p: Promise<any>) => {
         p.then(v => {
@@ -27,7 +27,7 @@ export class WidgetDrawerComponent implements OnInit {
         p.then(v => {
           console.log('got', v)
         })
-      })
+      }) */
     })
   }
 
