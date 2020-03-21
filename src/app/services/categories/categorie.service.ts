@@ -4,11 +4,12 @@ import * as firebase from 'firebase';
 import { ItemModelInterface } from '../../modules/item/models/itemModelInterface';
 import { CategoryModel } from 'src/app/models/CategoryModel';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { EntityWidgetServiceInterface } from 'src/app/modules/widget/models/EntityWidgetServiceInterface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriesService implements ItemServiceInterface {
+export class CategoriesService implements ItemServiceInterface,EntityWidgetServiceInterface {
   public categoriesListRef: firebase.database.Reference;
    _items: BehaviorSubject<Array<CategoryModel>> = new BehaviorSubject([])
    readonly items: Observable<Array<CategoryModel>> = this._items.asObservable()
@@ -42,6 +43,14 @@ export class CategoriesService implements ItemServiceInterface {
 
 
   }
+  entityKey="categories";
+  entitityLabel="Categoria";
+  counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
+  adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
+  categoriesService?: ItemServiceInterface;
+  suppliersService?: ItemServiceInterface;
+  paymentsService?: ItemServiceInterface;
+  suppliersListRef?: any;
 
 
   getDummyItem() {
