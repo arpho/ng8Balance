@@ -11,7 +11,7 @@ import { values } from 'd3';
 })
 export class WidgetService {
   private _dataChange: Subject<Schedule> = new Subject<Schedule>();
-  private storeName = 'widgetsList'
+   storeName = 'widgetsList'
   private _db
   private _widgets: BehaviorSubject<Promise<any>> = new BehaviorSubject(new Promise((success, fail) => { success(undefined) }))
   public readonly widgets: Observable<any> = this._widgets.asObservable()
