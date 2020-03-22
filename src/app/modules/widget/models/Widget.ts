@@ -4,14 +4,15 @@ import { Value } from '../../item/models/value';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
 
 export class Widget  {
-    constructor(args?: { service: EntityWidgetServiceInterface, entityKey: string, period: number, counter: boolean, _order: number }) {
+    constructor(args?: { service: EntityWidgetServiceInterface, entityKey: string, period: number, counter: boolean, _order: number,_key?:number }) {
         this.value = new BehaviorSubject(new Value({ value: 0, label: this.service ? this.service.entitityLabel : 'testing' }))
         this.load(args)
+        this._key = this._key||new Date().getTime()
 
     }
     title: string;
-    note?: string;
-    key: string;
+   _key:number
+    privatekey: string;
     quickActions?: import("../../item/models/QuickAction").QuickAction[];
     archived?: boolean;
     getTitle(): Value {
@@ -25,6 +26,7 @@ export class Widget  {
     private period: number
     private entityKey: string
     private _order: number
+    
     private counter: boolean
     private value: BehaviorSubject<Value> // = new BehaviorSubject
 
@@ -34,6 +36,9 @@ export class Widget  {
 
     get order() {
         return this._order
+    }
+    get key(){
+        return this._key
     }
 
     load(args) {
@@ -45,6 +50,7 @@ export class Widget  {
         return {
             period: this.period || 0,
             entityKey: this.entityKey || '',
+            key: this._key,
             counter: this.counter,
             _order: this._order || 0,
             widget: 'regular' // r'regular||by
