@@ -9,11 +9,11 @@ import { EntityWidgetServiceInterface } from 'src/app/modules/widget/models/Enti
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriesService implements ItemServiceInterface,EntityWidgetServiceInterface {
+export class CategoriesService implements ItemServiceInterface, EntityWidgetServiceInterface {
   public categoriesListRef: firebase.database.Reference;
-   _items: BehaviorSubject<Array<CategoryModel>> = new BehaviorSubject([])
-   readonly items: Observable<Array<CategoryModel>> = this._items.asObservable()
-   items_list: Array<CategoryModel> = []
+  _items: BehaviorSubject<Array<CategoryModel>> = new BehaviorSubject([])
+  readonly items: Observable<Array<CategoryModel>> = this._items.asObservable()
+  items_list: Array<CategoryModel> = []
   initializeCategory(cat) {
     const Cat = new CategoryModel(cat.key).initialize(cat)
     if (Cat.fatherKey) {
@@ -43,8 +43,9 @@ export class CategoriesService implements ItemServiceInterface,EntityWidgetServi
 
 
   }
-  entityKey="categories";
-  entitityLabel="Categoria";
+  entityKey = "categories";
+  filterableField = 'purchaseDate' // we filter shoppingkart's entities by purchase date
+  entitityLabel = "Categoria";
   counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   categoriesService?: ItemServiceInterface;
