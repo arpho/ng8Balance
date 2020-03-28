@@ -1,10 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Widget } from '../Widget';
 import { stringify } from 'querystring';
+import { WidgetServiceMocker } from './mockWidgetService';
+import { WidgetOperation } from '../WidgetsTypes';
 describe("testing Widget", () => {
     let widget;
     beforeEach(() => {
-        widget = new Widget({ service: undefined, entityKey: 'testKey', temporalWindow: 1, counter: true, _order: 0,_key:12 })
+        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: true, _order: 0,_key:12 })
 
     })
     it('widget should instantiate', () => {
@@ -33,4 +35,13 @@ describe("testing Widget", () => {
         widget.order = 3
         expect(widget.order).toBe(3)
     })
+     it('should call the rigth calculateWidget',()=>{
+        widget.calculateWidget().then(v=>{
+            expect(v).toBe(WidgetOperation.Counter)
+        })
+        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: false, _order: 0,_key:12 })
+        widget.calculateWidget().then(v=>{
+            expect(v).toBe(WidgetOperation.Adder)
+        })
+     })
 })

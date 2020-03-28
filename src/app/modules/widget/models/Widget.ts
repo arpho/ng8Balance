@@ -70,7 +70,10 @@ export class Widget  {
     }
 
 
-    async calculateWidget() {
-        this.service.items.subscribe()
+    async calculateWidget(key:string) {
+        // this.service.items.subscribe()
+        if(this.counter)
+            return this.service.counterWidget(this.entityKey,this.service.items_list.filter(this.filterFactory()))
+        return this.service.adderWidget(this.entityKey,this.service.items_list.filter(this.filterFactory()))
     }
 }
