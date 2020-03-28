@@ -29,18 +29,18 @@ export class ShoppingKartsService implements ItemServiceInterface {
     return this.shoppingKartsListRef.child(key);
   }
 
-  itemsKartMapper(karts: ShoppingKartModel[]) {
-    /**
+     /**
      * trasforma una lista di carrelli in una lista di items
      */
-    return karts.reduce((pv: PurchaseModel[], cv: ShoppingKartModel) => [...pv, ...cv.items], [])
-  }
+  ItemskartMapper2 = (pv: PurchaseModel[], cv: ShoppingKartModel) => [...pv, ...cv.items]
 
-  ItemsMapper(items:PurchaseModel[]){
-    /**mappa ogni item con un oggetto {categories:CategoryModel[],price:number} */
-    return items.map((item:PurchaseModel)=>{
-      return  {categorie:item.categorie,price:item.prezzo}
-    })
+
+
+  itemsMapper2 = (item: PurchaseModel) => {
+    /**
+     * 
+     */
+    return { categorie: item.categorie, price: item.prezzo }
   }
 
   updateItem(item: ItemModelInterface) {

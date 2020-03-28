@@ -35,26 +35,9 @@ describe('ShoppingKartsService', () => {
     b.categorie = b.categorieId.map(key => new CategoryModel(key)).map(initializeCategoryWrapper)
     kart.addItem(b)
     kart.addItem(a)
-    expect(service.itemsKartMapper([kart]).length).toBe(2)
-    expect(
-      service.ItemsMapper(
-        service.itemsKartMapper([kart])).length).toBe(2)
-    expect(
-      service.ItemsMapper(
-        service.itemsKartMapper([kart]))[0].categorie).toBeTruthy()
-    expect(
-      service.ItemsMapper(
-        service.itemsKartMapper([kart]))[0].price).toBeTruthy()
-    expect(
-      service.ItemsMapper(
-        service.itemsKartMapper([kart]))[0].categorie.length).toBe(3)
-    expect(
-      service.ItemsMapper(
-        service.itemsKartMapper([kart]))[0].price).toBe(2)
-    expect(
-      service.ItemsMapper(
-        service.itemsKartMapper([kart]))[1].price).toBe(1)
-
-
+    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).length).toBe(2)
+    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[0].price).toBe(2)
+    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[1].price).toBe(1)
+    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[1].categorie.length).toBe(3)
   })
 });
