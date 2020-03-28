@@ -4,7 +4,7 @@ import { Value } from '../../item/models/value';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
 
 export class Widget  {
-    constructor(args?: { service: EntityWidgetServiceInterface, entityKey: string, period: number, counter: boolean, _order: number,_key?:number }) {
+    constructor(args?: { service: EntityWidgetServiceInterface, entityKey: string, temporalWindow: number, counter: boolean, _order: number,_key?:number }) {
         this.value = new BehaviorSubject(new Value({ value: 0, label: this.service ? this.service.entitityLabel : 'testing' }))
         this.load(args)
         this._key = this._key||new Date().getTime()
@@ -23,7 +23,7 @@ export class Widget  {
         return new Value({ label: 'widget', value: 'totale' })
     }
     service: EntityWidgetServiceInterface
-    private period: number
+    private temporalWindow: number
     private entityKey: string
     private _order: number
     
@@ -32,6 +32,16 @@ export class Widget  {
 
     set order(value: number) {
         this._order = value
+    }
+
+    filterFactory(){
+        return  ()=>{
+            const out = (item:ItemModelInterface)=>{
+                const date = new Date()
+                date.setDate(date.getDate()- this.temporalWindow)
+                return item['purchaseDate'] >=  date
+            }
+        }
     }
 
 
@@ -49,7 +59,7 @@ export class Widget  {
 
     serialize() {
         return {
-            period: this.period || 0,
+            temporalWindow: this.temporalWindow || 0,
             entityKey: this.entityKey || '',
             key: this._key,
             counter: this.counter,
