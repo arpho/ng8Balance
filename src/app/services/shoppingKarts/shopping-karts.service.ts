@@ -20,22 +20,20 @@ import { CategoryModel } from 'src/app/models/CategoryModel';
 })
 export class ShoppingKartsService implements ItemServiceInterface {
   public shoppingKartsListRef: firebase.database.Reference;
-   _items: BehaviorSubject<Array<ShoppingKartModel>> = new BehaviorSubject([])
-   readonly items: Observable<Array<ShoppingKartModel>> = this._items.asObservable()
-   items_list: Array<ShoppingKartModel> = []
+  _items: BehaviorSubject<Array<ShoppingKartModel>> = new BehaviorSubject([])
+  readonly items: Observable<Array<ShoppingKartModel>> = this._items.asObservable()
+  items_list: Array<ShoppingKartModel> = []
   categoriesService?: ItemServiceInterface;
 
   getItem(key: string): firebase.database.Reference {
     return this.shoppingKartsListRef.child(key);
   }
 
-  itemsKartMapper(karts:ShoppingKartModel[]){
+  itemsKartMapper(karts: ShoppingKartModel[]) {
     /**
      * trasforma una lista di carrelli in una lista di items
      */
-    let out = []
-    karts.forEach((kart:ShoppingKartModel)=>{out=[...out,...kart.items]})
-    return out
+    return karts.reduce((pv: PurchaseModel[], cv: ShoppingKartModel) => [...pv, ...cv.items], [])
   }
 
   updateItem(item: ItemModelInterface) {
@@ -61,7 +59,7 @@ export class ShoppingKartsService implements ItemServiceInterface {
 
   }
 
-  private  initializeItems() {
+  private initializeItems() {
     const purchaseInitializer = (purchase2initialize) => {
       const Purchase = new PurchaseModel().initialize(purchase2initialize)
 
@@ -90,10 +88,10 @@ export class ShoppingKartsService implements ItemServiceInterface {
             const kart = new ShoppingKartModel({ key: snap.val() }).initialize(snap.val())
             kart.key = snap.key
             kart.items = kart.items.map(purchaseInitializer)
-            
-              
-            
-            
+
+
+
+
             this.items_list.push(kart);
 
           });
