@@ -12,7 +12,7 @@ describe('ShoppingKartsService', () => {
     const service: ShoppingKartsService = TestBed.get(ShoppingKartsService);
     expect(service).toBeTruthy();
   });
-  it('should trasform karts list in items list',()=>{
+  it('should trasform karts list ', () => {
     const service: ShoppingKartsService = TestBed.get(ShoppingKartsService);
     const kartdata = {
       archived: false,
@@ -23,18 +23,38 @@ describe('ShoppingKartsService', () => {
       title: 'title',
       note: 'note',
       key: 'zxcvbnm'
-  }
-  const kart = new ShoppingKartModel()
-kart.build(kartdata)
-const a = new PurchaseModel({ key: 'a', prezzo: 1, categorieId: ['a', 'b', 'c'], descrizione: 'a' }).initialize({ key: 'a', prezzo: 1, categorieId: ['a', 'b', 'c'], descrizione: 'a' })
-const b = new PurchaseModel({ key: 'b', prezzo: 2, categorieId: ['a', 'b', 'c'], descrizione: 'b' }).initialize({ key: 'b', prezzo: 2, categorieId: ['a', 'b', 'c'], descrizione: 'b' })
-const inizializeCategory = (cat: CategoryModel, categoriesServiceMocker: any) => cat.initialize(categoriesServiceMocker.filter((Cat) => Cat.key == cat.key)[0])
-const catService = [{ key: 'a', title: 'A' }, { key: 'b', title: 'B' }, { key: 'c', title: 'C' }]
-const initializeCategoryWrapper = (cat: CategoryModel) => inizializeCategory(cat, catService)
-a.categorie =  a.categorieId.map(key => new CategoryModel(key)).map(initializeCategoryWrapper)
-b.categorie =  b.categorieId.map(key => new CategoryModel(key)).map(initializeCategoryWrapper)
-kart.addItem(b)
-kart.addItem(a)
-expect(service.itemsKartMapper([kart]).length).toBe(2)
+    }
+    const kart = new ShoppingKartModel()
+    kart.build(kartdata)
+    const a = new PurchaseModel({ key: 'a', prezzo: 1, categorieId: ['a', 'b', 'c'], descrizione: 'a' }).initialize({ key: 'a', prezzo: 1, categorieId: ['a', 'b', 'c'], descrizione: 'a' })
+    const b = new PurchaseModel({ key: 'b', prezzo: 2, categorieId: ['a', 'b', 'c'], descrizione: 'b' }).initialize({ key: 'b', prezzo: 2, categorieId: ['a', 'b', 'c'], descrizione: 'b' })
+    const inizializeCategory = (cat: CategoryModel, categoriesServiceMocker: any) => cat.initialize(categoriesServiceMocker.filter((Cat) => Cat.key == cat.key)[0])
+    const catService = [{ key: 'a', title: 'A' }, { key: 'b', title: 'B' }, { key: 'c', title: 'C' }]
+    const initializeCategoryWrapper = (cat: CategoryModel) => inizializeCategory(cat, catService)
+    a.categorie = a.categorieId.map(key => new CategoryModel(key)).map(initializeCategoryWrapper)
+    b.categorie = b.categorieId.map(key => new CategoryModel(key)).map(initializeCategoryWrapper)
+    kart.addItem(b)
+    kart.addItem(a)
+    expect(service.itemsKartMapper([kart]).length).toBe(2)
+    expect(
+      service.ItemsMapper(
+        service.itemsKartMapper([kart])).length).toBe(2)
+    expect(
+      service.ItemsMapper(
+        service.itemsKartMapper([kart]))[0].categorie).toBeTruthy()
+    expect(
+      service.ItemsMapper(
+        service.itemsKartMapper([kart]))[0].price).toBeTruthy()
+    expect(
+      service.ItemsMapper(
+        service.itemsKartMapper([kart]))[0].categorie.length).toBe(3)
+    expect(
+      service.ItemsMapper(
+        service.itemsKartMapper([kart]))[0].price).toBe(2)
+    expect(
+      service.ItemsMapper(
+        service.itemsKartMapper([kart]))[1].price).toBe(1)
+
+
   })
 });

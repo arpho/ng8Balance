@@ -36,6 +36,13 @@ export class ShoppingKartsService implements ItemServiceInterface {
     return karts.reduce((pv: PurchaseModel[], cv: ShoppingKartModel) => [...pv, ...cv.items], [])
   }
 
+  ItemsMapper(items:PurchaseModel[]){
+    /**mappa ogni item con un oggetto {categories:CategoryModel[],price:number} */
+    return items.map((item:PurchaseModel)=>{
+      return  {categorie:item.categorie,price:item.prezzo}
+    })
+  }
+
   updateItem(item: ItemModelInterface) {
     return this.shoppingKartsListRef.child(item.key).update(item.serialize());
   }
