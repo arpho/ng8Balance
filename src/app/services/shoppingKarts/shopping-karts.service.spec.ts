@@ -39,5 +39,7 @@ describe('ShoppingKartsService', () => {
     expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[0].price).toBe(2)
     expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[1].price).toBe(1)
     expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[1].categorie.length).toBe(3)
+    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).map(service.blowupCategories).length).toBe(2)
+    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).map(service.blowupCategories)[0].length).toBe(3)
   })
 });
