@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Widget } from '../Widget';
 import { stringify } from 'querystring';
 import { WidgetServiceMocker } from './mockWidgetService';
-import { WidgetOperation } from '../WidgetsTypes';
+import { WidgetOperation, WidgetTypes } from '../WidgetsTypes';
 describe("testing Widget", () => {
     let widget;
     beforeEach(() => {
@@ -20,6 +20,7 @@ describe("testing Widget", () => {
         expect(serialized.entityKey).toBe('testKey')
         expect(serialized.temporalWindow).toBe(1)
         expect(serialized.counter).toBeTruthy()
+        expect(serialized.widget).toBe(WidgetTypes.Regular)
     })
     it('widget should load',()=>{
         widget = new Widget().load({entityKey:'testKey2',_order:2,temporalWindow:2})

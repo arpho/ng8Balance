@@ -2,6 +2,7 @@ import { EntityWidgetServiceInterface } from './EntityWidgetServiceInterface';
 import { BehaviorSubject } from 'rxjs';
 import { Value } from '../../item/models/value';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
+import { WidgetTypes } from './WidgetsTypes';
 
 export class Widget  {
     constructor(args?: { service: EntityWidgetServiceInterface, entityKey: string, temporalWindow: number, counter: boolean, _order: number,_key?:number }) {
@@ -64,7 +65,7 @@ export class Widget  {
             key: this._key,
             counter: this.counter,
             _order: this._order || 0,
-            widget: 'regular' // r'regular||by
+            widget: WidgetTypes.Regular // r'regular||by
 
         }
     }
