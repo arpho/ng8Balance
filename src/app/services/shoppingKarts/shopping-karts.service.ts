@@ -28,6 +28,16 @@ export class ShoppingKartsService implements ItemServiceInterface {
   getItem(key: string): firebase.database.Reference {
     return this.shoppingKartsListRef.child(key);
   }
+
+  itemsKartMapper(karts:ShoppingKartModel[]){
+    /**
+     * trasforma una lista di carrelli in una lista di items
+     */
+    let out = []
+    karts.forEach((kart:ShoppingKartModel)=>{out=[...out,...kart.items]})
+    return out
+  }
+
   updateItem(item: ItemModelInterface) {
     return this.shoppingKartsListRef.child(item.key).update(item.serialize());
   }
