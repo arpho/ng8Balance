@@ -47,6 +47,9 @@ export class ShoppingKartsService implements ItemServiceInterface {
      */
     return { categorie: item.categorie, price: item.prezzo }
   }
+  flattener  = (pv,cv)=>{
+    return [...pv,...cv]
+  }
 
   updateItem(item: ItemModelInterface) {
     return this.shoppingKartsListRef.child(item.key).update(item.serialize());
