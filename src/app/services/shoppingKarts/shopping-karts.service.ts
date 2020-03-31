@@ -13,6 +13,7 @@ import { SupplierModel } from 'src/app/models/supplierModel';
 import { PaymentsModel } from 'src/app/models/paymentModel';
 import { PurchaseModel } from 'src/app/models/purchasesModel';
 import { CategoryModel } from 'src/app/models/CategoryModel';
+import { PricedCategory } from 'src/app/models/pricedCategory';
 // tslint:disable:semicolon
 
 @Injectable({
@@ -31,7 +32,7 @@ export class ShoppingKartsService implements ItemServiceInterface {
 
   /**mappa ad ogni ogetto {categorie:CategoriModel[],price:number} con [{category:CategoryModel,price:number}]  */
   blowupCategories = (item: { categorie: CategoryModel[], price: number }) => item.categorie.map((cat: CategoryModel) => {
-    return { category: cat, price: item.price }
+    return new PricedCategory( { category: cat, price: item.price })
   })
 
   /**
@@ -39,7 +40,7 @@ export class ShoppingKartsService implements ItemServiceInterface {
   */
   ItemskartMapper2 = (pv: PurchaseModel[], cv: ShoppingKartModel) => [...pv, ...cv.items]
 
-
+ 
 
   itemsMapper2 = (item: PurchaseModel) => {
     /**
