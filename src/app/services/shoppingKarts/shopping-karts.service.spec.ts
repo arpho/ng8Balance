@@ -12,36 +12,4 @@ describe('ShoppingKartsService', () => {
     const service: ShoppingKartsService = TestBed.get(ShoppingKartsService);
     expect(service).toBeTruthy();
   });
-  it('should trasform karts list ', () => {
-    const service: ShoppingKartsService = TestBed.get(ShoppingKartsService);
-    const kartdata = {
-      archived: false,
-      dataAcquisto: '1977-03-16',
-      fornitoreId: 'qwerty',
-      pagamentoId: 'asdfghj',
-      totale: 15,
-      title: 'title',
-      note: 'note',
-      key: 'zxcvbnm'
-    }
-    const kart = new ShoppingKartModel()
-    kart.build(kartdata)
-    const a = new PurchaseModel({ key: 'a', prezzo: 1, categorieId: ['a', 'b', 'c'], descrizione: 'a' }).initialize({ key: 'a', prezzo: 1, categorieId: ['a', 'b', 'c'], descrizione: 'a' })
-    const b = new PurchaseModel({ key: 'b', prezzo: 2, categorieId: ['a', 'b', 'c'], descrizione: 'b' }).initialize({ key: 'b', prezzo: 2, categorieId: ['a', 'b', 'c'], descrizione: 'b' })
-    const inizializeCategory = (cat: CategoryModel, categoriesServiceMocker: any) => cat.initialize(categoriesServiceMocker.filter((Cat) => Cat.key == cat.key)[0])
-    const catService = [{ key: 'a', title: 'A' }, { key: 'b', title: 'B' }, { key: 'c', title: 'C' }]
-    const initializeCategoryWrapper = (cat: CategoryModel) => inizializeCategory(cat, catService)
-    a.categorie = a.categorieId.map(key => new CategoryModel(key)).map(initializeCategoryWrapper)
-    b.categorie = b.categorieId.map(key => new CategoryModel(key)).map(initializeCategoryWrapper)
-    kart.addItem(b)
-    kart.addItem(a)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).length).toBe(2)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[0].price).toBe(2)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[1].price).toBe(1)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[1].categorie.length).toBe(3)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).map(service.blowupCategories).length).toBe(2)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).map(service.blowupCategories)[0].length).toBe(3)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).map(service.blowupCategories).reduce(service.flattener).length).toBe(6)
-    console.log( 'infine',[kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).map(service.blowupCategories).reduce(service.flattener))
-  })
 });
