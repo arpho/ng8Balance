@@ -8,6 +8,7 @@ export class Widget  {
     constructor(args?: { service: EntityWidgetServiceInterface, entityKey: string, temporalWindow: number, counter: boolean, _order: number,_key?:number }) {
         this.value = new BehaviorSubject(new Value({ value: 0, label: this.service ? this.service.entitityLabel : 'testing' }))
         this.load(args)
+        console.log('service widget',this.service)
         this._key = this._key||new Date().getTime()
 
     }
@@ -71,7 +72,7 @@ export class Widget  {
     }
 
 
-    async calculateWidget(key:string) {
+     calculateWidget(key:string) {
         // this.service.items.subscribe()
         if(this.counter)
             return this.service.counterWidget(this.entityKey,this.service.items_list.filter(this.filterFactory()))

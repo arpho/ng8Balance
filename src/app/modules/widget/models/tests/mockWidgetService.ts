@@ -4,6 +4,9 @@ import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterfa
 import { WidgetOperation } from '../WidgetsTypes';
 
 export class WidgetServiceMocker implements ItemServiceInterface, EntityWidgetServiceInterface {
+    constructor(){
+        this.items_list = []
+    }
     entityKey: string;
     entitityLabel: string;
     filterableField: string;
@@ -13,9 +16,9 @@ export class WidgetServiceMocker implements ItemServiceInterface, EntityWidgetSe
     suppliersService?: ItemServiceInterface;
     paymentsService?: ItemServiceInterface;
     suppliersListRef?: any;
-    _items: import("rxjs").BehaviorSubject<import("../../../item/models/itemModelInterface").ItemModelInterface[]>;
-    items_list: import("../../../item/models/itemModelInterface").ItemModelInterface[];
-    items: import("rxjs").Observable<import("../../../item/models/itemModelInterface").ItemModelInterface[]>;
+    _items: import("rxjs").BehaviorSubject<ItemModelInterface[]>;
+    items_list: ItemModelInterface[];
+    items: import("rxjs").Observable<ItemModelInterface[]>;
     getItem(key: string): import("firebase").database.Reference {
         throw new Error("Method not implemented.");
     }
@@ -35,6 +38,6 @@ export class WidgetServiceMocker implements ItemServiceInterface, EntityWidgetSe
         throw new Error("Method not implemented.");
     }
 
-    
+
 
 }
