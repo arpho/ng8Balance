@@ -48,6 +48,8 @@ describe('CategorieService', () => {
     expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).map(service.blowupCategories)[0].length).toBe(3)
     console.log('cataservice 2',service)
     expect(service.blowCategoriesUp([kart]).length).toBe(6)}
+    expect(service.counterWidget('a',[kart])).toBe(2)
+    expect(service.adderWidget('a',[kart])).toBe(3)
   })
 
 });

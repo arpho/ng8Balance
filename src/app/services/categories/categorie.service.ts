@@ -28,29 +28,14 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
     return Cat
   }
 
-  constructor() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.categoriesListRef = firebase.database().ref(`/categorie/${user.uid}/`); this.getEntitiesList().on('value', eventCategoriesListSnapshot => {
-          this.items_list = [];
-          eventCategoriesListSnapshot.forEach(snap => {
-            const cat = this.initializeCategory(snap.val())
-            cat.key = cat.key || snap.key // inizialmente il campo key non  veniva serializzato
-            this.items_list.push(cat)
-          }
-          );
-          this._items.next(this.items_list)
-        });
-      }
-    });
-
-
-  }
+  
+  counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
+  adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   entityKey = "categories";
   filterableField = 'purchaseDate' // we filter shoppingkart's entities by purchase date
   entitityLabel = "Categoria";
-  counterwidget(entityKey: string, entities: ShoppingKartModel[]) { this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => 1).reduce((pv, cv) => { return pv += cv }, 0) }
-  adderwidget(entityKey: string, entities: ShoppingKartModel[]) { this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => item.price).reduce((pv, cv) => { return pv += cv }, 0); }
+  
+ 
   categoriesService?: ItemServiceInterface;
   suppliersService?: ItemServiceInterface;
   paymentsService?: ItemServiceInterface;
@@ -110,6 +95,27 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
   }
   deleteItem(key: string) {
     return this.categoriesListRef.child(key).remove();
+  }
+
+  constructor() {
+    this.counterWidget = (entityKey: string, entities: ShoppingKartModel[]) => { return this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => 1).reduce((pv, cv) => { return pv += cv }, 0) }
+    this.adderWidget = (entityKey: string, entities: ShoppingKartModel[])=> { return this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => item.price).reduce((pv, cv) => { return pv += cv }, 0); }
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.categoriesListRef = firebase.database().ref(`/categorie/${user.uid}/`); this.getEntitiesList().on('value', eventCategoriesListSnapshot => {
+          this.items_list = [];
+          eventCategoriesListSnapshot.forEach(snap => {
+            const cat = this.initializeCategory(snap.val())
+            cat.key = cat.key || snap.key // inizialmente il campo key non  veniva serializzato
+            this.items_list.push(cat)
+          }
+          );
+          this._items.next(this.items_list)
+        });
+      }
+    });
+
+
   }
 
 }
