@@ -49,8 +49,8 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
   entityKey = "categories";
   filterableField = 'purchaseDate' // we filter shoppingkart's entities by purchase date
   entitityLabel = "Categoria";
-  counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
-  adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
+  counterwidget(entityKey: string, entities: ShoppingKartModel[]) { this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => 1).reduce((pv, cv) => { return pv += cv }, 0) }
+  adderwidget(entityKey: string, entities: ShoppingKartModel[]) { this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => item.price).reduce((pv, cv) => { return pv += cv }, 0); }
   categoriesService?: ItemServiceInterface;
   suppliersService?: ItemServiceInterface;
   paymentsService?: ItemServiceInterface;
@@ -66,7 +66,7 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
 
   /**mappa ad ogni ogetto {categorie:CategoriModel[],price:number} con [{category:CategoryModel,price:number}]  */
   blowupCategories = (item: { categorie: CategoryModel[], price: number }) => item.categorie.map((cat: CategoryModel) => {
-    return new PricedCategory( { category: cat, price: item.price })
+    return new PricedCategory({ category: cat, price: item.price })
   })
 
   /**
@@ -74,7 +74,7 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
   */
   ItemskartMapper2 = (pv: PurchaseModel[], cv: ShoppingKartModel) => [...pv, ...cv.items]
 
- 
+
 
   itemsMapper2 = (item: PurchaseModel) => {
     /**
@@ -82,11 +82,11 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
      */
     return { categorie: item.categorie, price: item.prezzo }
   }
-  flattener  = (pv,cv)=>{
-    return [...pv,...cv]
+  flattener = (pv, cv) => {
+    return [...pv, ...cv]
   }
-  
-  blowCategoriesUp = (karts:ShoppingKartModel[])=>{
+
+  blowCategoriesUp = (karts: ShoppingKartModel[]) => {
     return karts.reduce(this.ItemskartMapper2, []).map(this.itemsMapper2).map(this.blowupCategories).reduce(this.flattener)
   }
 
