@@ -38,18 +38,19 @@ describe('CategorieService', () => {
     b.categorie = b.categorieId.map(key => new CategoryModel(key)).map(initializeCategoryWrapper)
     kart.addItem(b)
     kart.addItem(a)
-    if(service){
-      console.log('cataservice',service)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).length).toBe(2)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[0].price).toBe(2)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[1].price).toBe(1)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[1].categorie.length).toBe(3)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).map(service.blowupCategories).length).toBe(2)
-    expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).map(service.blowupCategories)[0].length).toBe(3)
-    console.log('cataservice 2',service)
-    expect(service.blowCategoriesUp([kart]).length).toBe(6)}
-    expect(service.counterWidget('a',[kart])).toBe(2)
-    expect(service.adderWidget('a',[kart])).toBe(3)
+    if (service) {
+      console.log('cataservice', service)
+      expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).length).toBe(2)
+      expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[0].price).toBe(2)
+      expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[1].price).toBe(1)
+      expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2)[1].categorie.length).toBe(3)
+      expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).map(service.blowupCategories).length).toBe(2)
+      expect([kart].reduce(service.ItemskartMapper2, []).map(service.itemsMapper2).map(service.blowupCategories)[0].length).toBe(3)
+      console.log('cataservice 2', service)
+      expect(service.blowCategoriesUp([kart]).length).toBe(6)
+    }
+    expect(service.counterWidget('a', [kart])).toBe(2)
+    expect(service.adderWidget('a', [kart])).toBe(3)
   })
 
 });

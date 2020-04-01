@@ -28,14 +28,14 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
     return Cat
   }
 
-  
+
   counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   entityKey = "categories";
   filterableField = 'purchaseDate' // we filter shoppingkart's entities by purchase date
   entitityLabel = "Categoria";
-  
- 
+
+
   categoriesService?: ItemServiceInterface;
   suppliersService?: ItemServiceInterface;
   paymentsService?: ItemServiceInterface;
@@ -99,7 +99,7 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
 
   constructor() {
     this.counterWidget = (entityKey: string, entities: ShoppingKartModel[]) => { return this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => 1).reduce((pv, cv) => { return pv += cv }, 0) }
-    this.adderWidget = (entityKey: string, entities: ShoppingKartModel[])=> { return this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => item.price).reduce((pv, cv) => { return pv += cv }, 0); }
+    this.adderWidget = (entityKey: string, entities: ShoppingKartModel[]) => { return this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => item.price).reduce((pv, cv) => { return pv += cv }, 0); }
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.categoriesListRef = firebase.database().ref(`/categorie/${user.uid}/`); this.getEntitiesList().on('value', eventCategoriesListSnapshot => {
