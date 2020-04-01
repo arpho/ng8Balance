@@ -4,14 +4,14 @@ import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterfa
 import { WidgetOperation } from '../WidgetsTypes';
 
 export class WidgetServiceMocker implements ItemServiceInterface, EntityWidgetServiceInterface {
-    constructor(){
+    constructor() {
         this.items_list = []
     }
     entityKey: string;
     entitityLabel: string;
     filterableField: string;
-    counterWidget: (entityKey: string, entities: ItemModelInterface[]) => WidgetOperation.Counter;
-    adderWidget: (entityKey: string, entities: ItemModelInterface[]) => WidgetOperation.Adder;
+    counterWidget = (entityKey: string, entities: ItemModelInterface[]) => WidgetOperation.Counter;
+    adderWidget = (entityKey: string, entities: ItemModelInterface[]) => WidgetOperation.Adder;
     categoriesService?: ItemServiceInterface;
     suppliersService?: ItemServiceInterface;
     paymentsService?: ItemServiceInterface;

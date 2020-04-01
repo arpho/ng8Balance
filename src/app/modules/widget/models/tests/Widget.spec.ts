@@ -37,14 +37,12 @@ describe("testing Widget", () => {
         expect(widget.order).toBe(3)
     })
      it('should call the rigth calculateWidget',()=>{
-       /*   if(widget.service){
+          if(widget.service){
          expect(widget.calculateWidget()).toBe(WidgetOperation.Counter)}
-       /*  widget.calculateWidget().then(v=>{
-            expect(v).toBe(WidgetOperation.Counter)
-        }) */
-      /*  widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: false, _order: 0,_key:12 })
+       
+        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: false, _order: 0,_key:12 })
         if(widget.service){
         expect(widget.calculateWidget()).toBe(WidgetOperation.Adder)}
-        */
+        
      })
 })
