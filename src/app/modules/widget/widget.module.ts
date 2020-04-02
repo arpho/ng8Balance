@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WidgetDrawerComponent } from './components/widget-drawer/widget-drawer.component';
-import { IonicStorageModule } from '@ionic/storage';
+// import { IonicStorageModule } from '@ionic/storage';
 
 
 
@@ -10,8 +10,8 @@ import { IonicStorageModule } from '@ionic/storage';
   imports: [
     CommonModule
   ],
-  providers:[Storage]
-  ,
+  //providers:[Storage],
+  
   exports:[WidgetDrawerComponent]
 })
 export class WidgetModule { }
