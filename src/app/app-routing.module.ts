@@ -18,6 +18,10 @@ const routes:  Routes = [
   // { path: 'graphs', loadChildren: './pages/graphs/graphs.module#GraphsPageModule', canActivate: [AuthGuard] },
  // { path: 'graphs/piechart', loadChildren: './pages/graphs/piechart/piechart.module#PiechartPageModule', canActivate: [AuthGuard] },
   { path: 'detail-payment', loadChildren: './pages/detail-payment/detail-payment.module#DetailPaymentPageModule' },
+  {
+    path: 'create-widget',
+    loadChildren: () => import('./modules/widget/pages/create-widget/create-widget.module').then( m => m.CreateWidgetPageModule)
+  },
 //   { path: 'graphs/sankey', loadChildren: './pages/graphs/sankey/sankey.module#SankeyPageModule', canActivate: [AuthGuard] },
   //{ path: 'graphs/pareto', loadChildren: './pages/graphs/pareto/pareto.module#ParetoPageModule',canActivate:[AuthGuard] },
 ];
