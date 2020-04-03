@@ -22,6 +22,10 @@ const routes:  Routes = [
     path: 'create-widget',
     loadChildren: () => import('./modules/widget/pages/create-widget/create-widget.module').then( m => m.CreateWidgetPageModule)
   },
+  {
+    path: 'edit-widget',
+    loadChildren: () => import('./modules/widget/pages/edit-widget/edit-widget.module').then( m => m.EditWidgetPageModule)
+  },
 //   { path: 'graphs/sankey', loadChildren: './pages/graphs/sankey/sankey.module#SankeyPageModule', canActivate: [AuthGuard] },
   //{ path: 'graphs/pareto', loadChildren: './pages/graphs/pareto/pareto.module#ParetoPageModule',canActivate:[AuthGuard] },
 ];
