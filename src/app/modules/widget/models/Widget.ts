@@ -58,6 +58,10 @@ export class Widget  {
         return this
     }
 
+    set key(key){
+        this._key = key
+    }
+
     serialize() {
         return {
             temporalWindow: this.temporalWindow || 0,

@@ -4,3 +4,14 @@
 <ion-fab-button (click)="createWidget()">
   <ion-icon name="add"></ion-icon>
 </ion-fab-button>
+<ion-list>
+
+  <ion-item-sliding
+    *ngFor="let widget of service?.Widgets |async "
+    #sliding_item
+  >
+  <app-widget [Widget]="widget" ></app-widget>
+
+
+  </ion-item-sliding>
+</ion-list>

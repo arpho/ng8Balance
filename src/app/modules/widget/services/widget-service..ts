@@ -19,11 +19,13 @@ export class WidgetService {
   public readonly _widgets: BehaviorSubject<Array<Widget>> = new BehaviorSubject([])
   public readonly Widgets: Observable<any> = this._widgets.asObservable()
   storeName = 'widgetsList';
+  widgets_list:Widget[]
 
   constructor(public service: WidgetService) {
 
     this.connectToIDB()
     this.initializeWidget()
+    this.widgets_list =[]
   }
 
   keys(next) {
@@ -51,11 +53,22 @@ export class WidgetService {
     this.keys((keys: Promise<any>) => {
       this.Keys = keys
       keys
-      keys.then(k => {
-        console.log('keys in service', k)
-        k.forEach(element => {
+      keys.then(Keys => {
+        console.log('keys in service', Keys)
+        Keys.forEach(element => {
           this.get(element,((item)=>{
             item.then((v)=>{
+              item.then((v)=>{
+                console.log(element,v)
+                if(v.key){
+                const widget = new Widget(v)
+               console.log('widget',widget)
+               this.widgets_list.push(widget)
+               console.log('widgets list',this.widgets_list)
+               this._widgets.next(this.widgets_list)
+              }
+                
+              })
             })
           }))
           
