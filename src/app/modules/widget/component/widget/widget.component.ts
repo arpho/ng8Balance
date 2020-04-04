@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input,  } from '@angular/core';
+import { Widget } from '../../models/Widget';
+
 
 @Component({
   selector: 'app-widget',
@@ -6,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./widget.component.scss'],
 })
 export class WidgetComponent implements OnInit {
+  @Input() Widget:Widget
 
   constructor() { }
 

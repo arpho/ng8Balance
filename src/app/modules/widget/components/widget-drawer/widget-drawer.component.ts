@@ -13,7 +13,7 @@ import { CreateWidgetPage } from '../../pages/create-widget/create-widget.page';
 })
 export class WidgetDrawerComponent implements OnInit {
   keys//: Promise<string[]>
-  widgets : Widget[]
+  Widgets : Widget[]
   items : ShoppingKartModel[] = []
 
   async createWidget(){
@@ -33,11 +33,14 @@ export class WidgetDrawerComponent implements OnInit {
       })
       this.karts._items.subscribe((karts:ShoppingKartModel[])=>{
         this.items = karts
-        console.log('items',this.items)
       })
       this.service._widgets.subscribe((items:Widget[])=>{
-        this.widgets = items
+        this.Widgets = items
         console.log('widgets',items)
+      })
+      this.service._widgets.subscribe((widgets)=>{
+        this.Widgets = widgets
+        console.log('got widgets',widgets)
       })
       
       /* 
