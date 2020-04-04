@@ -15,6 +15,6 @@ import { EditWidgetPage } from './edit-widget.page';
     IonicModule,
     EditWidgetPageRoutingModule
   ],
-  declarations: [EditWidgetPage]
+  // declarations: [EditWidgetPage]
 })
 export class EditWidgetPageModule {}

@@ -17,6 +17,6 @@ import { ItemModule } from 'src/app/modules/item/item.module';
     ItemModule,
     CreateWidgetPageRoutingModule
   ],
-  declarations: [CreateWidgetPage]
+  // declarations: [CreateWidgetPage]
 })
 export class CreateWidgetPageModule {}
