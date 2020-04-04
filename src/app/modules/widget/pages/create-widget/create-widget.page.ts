@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { QuestionBase } from 'src/app/modules/dynamic-form/models/question-base';
+import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
+import { Widget } from '../../models/Widget';
+import { SwitchQuestion } from 'src/app/modules/item/models/question-switch';
+import { ModalController } from '@ionic/angular';
+import { WidgetService } from '../../services/widget-service.';
 
 @Component({
   selector: 'app-create-widget',
@@ -6,8 +12,55 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-widget.page.scss'],
 })
 export class CreateWidgetPage implements OnInit {
+  title: string
+  widgetFields: any[]
+  widget: Widget
 
-  constructor() { }
+  dismiss(payment?) {
+    this.modalCtrl.dismiss(payment)
+  }
+
+  constructor(public modalCtrl: ModalController,public service:WidgetService) {
+    this.title = "crea un nuovo Widget"
+    this.widget = new Widget()
+    this.widgetFields = [
+      new TextboxQuestion({
+        key: 'title',
+        label: 'nome del widget',
+        value: this.widget.title,
+        order: 1
+      }),
+      new TextboxQuestion({
+        key: 'note',
+        label: 'note',
+        value: this.widget.note,
+        order: 2
+      }),
+
+      new SwitchQuestion({
+        key: 'widgetOperation',
+        label: 'contatore/sommatore',
+        labelTrue: 'widget contatore',
+        labelFalse: ' widget sommatore',
+        iconFalse: 'calculator',
+
+        iconTrue: 'stopwatch',
+        value: this.widget.counter,
+        required: false,
+        order: 4
+      }),
+    ];
+  }
+
+  filter(ev){
+  }
+
+  submit(ev) {
+    console.log('submitted', ev)
+    this.service.put(String(this.widget.key),this.widget.serialize(),(v)=>{
+      console.log('created widget',v)
+    })
+  }
 
   ngOnInit() {
   }

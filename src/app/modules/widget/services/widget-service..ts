@@ -4,27 +4,30 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Schedule } from '../../../app.component'
 import { promise } from 'protractor';
 import { values } from 'd3';
+import { Widget } from '../models/Widget';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class WidgetService {
+  Keys
   private _dataChange: Subject<Schedule> = new Subject<Schedule>();
   private _db
-  private _widgets: BehaviorSubject<Promise<any>> = new BehaviorSubject(new Promise((success, fail) => { success(undefined) }))
-  public readonly widgets: Observable<any> = this._widgets.asObservable()
+
+  // _items: BehaviorSubject<Array<ShoppingKartModel>> = new BehaviorSubject([])
+  public readonly _widgets: BehaviorSubject<Array<Widget>> = new BehaviorSubject([])
+  public readonly Widgets: Observable<any> = this._widgets.asObservable()
   storeName = 'widgetsList';
 
   constructor(public service: WidgetService) {
-    // this.storage.keys().then(keys=>keys.forEach(k=>this.get(k).then(v=>console.log('value for ',k,v))))
 
     this.connectToIDB()
+    this.initializeWidget()
   }
 
   keys(next) {
-    this.widgets.subscribe(db => {
-      console.log('db', db)
+    this.Widgets.subscribe(db => {
       if (db.getAllKeys) {
         if(next){
         next(db.getAllKeys(this.storeName))
@@ -33,9 +36,37 @@ export class WidgetService {
     })
 
   }
+  delete(key,next){
+    this.Widgets.subscribe((db:IDBPDatabase)=>{
+      console.log('subscription',db)
+      if(db.delete){
+        db.delete(key,next).then(v=>{
+          console.log('donno',v)
+        })
+      }
+    })
+  }
+
+  private initializeWidget(){
+    this.keys((keys: Promise<any>) => {
+      this.Keys = keys
+      keys
+      keys.then(k => {
+        console.log('keys in service', k)
+        k.forEach(element => {
+          this.get(element,((item)=>{
+            item.then((v)=>{
+            })
+          }))
+          
+        });
+      })
+    })
+
+  }
 
   put(key: string, value: any, next: (v) => void) {
-    this.widgets.subscribe((db: IDBPDatabase) => {
+    this.Widgets.subscribe((db: IDBPDatabase) => {
 
       if (db.put) {
         next(db.put(this.storeName, value, key))
@@ -43,8 +74,9 @@ export class WidgetService {
     })
   }
 
+
   get(key: string, next: (v: Promise<any>) => void) {
-    this.widgets.subscribe((db: IDBPDatabase) => {
+    this.Widgets.subscribe((db: IDBPDatabase) => {
       if (db.get) {
         next(db.get(this.storeName, key))
       }

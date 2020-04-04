@@ -6,7 +6,7 @@ import { WidgetOperation, WidgetTypes } from '../WidgetsTypes';
 describe("testing Widget", () => {
     let widget;
     beforeEach(() => {
-        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: true, _order: 0,_key:12 })
+        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: true, _order: 0,_key:12,note:'nota',title:'test',description:'descrizione' })
 
     })
     it('widget should instantiate', () => {
@@ -28,6 +28,8 @@ describe("testing Widget", () => {
         expect(serialized._order).toBe(2)
         expect(widget.serialize().key).toBeTruthy()
         expect(serialized.entityKey).toBe('testKey2')
+        expect(serialized.title).toBe('test')
+        expect(serialized.description).toBe('descrizione')
         expect(serialized.temporalWindow).toBe(2)
         expect(serialized.counter).toBeFalsy()
     })

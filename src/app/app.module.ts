@@ -35,12 +35,16 @@ import { GoogleChartsModule } from 'angular-google-chart';
 import { DetailCategoryPage } from './pages/detail-category/detail-category.page';
 import { DetailPaymentPage } from './pages/detail-payment/detail-payment.page';
 import { WidgetModule } from './modules/widget/widget.module';
+import { CreateWidgetPage } from './modules/widget/pages/create-widget/create-widget.page';
+import { EditWidgetPage } from './modules/widget/pages/edit-widget/edit-widget.page';
 @NgModule({
   entryComponents: [
     CreateSupplierPage,
     CreateShoppingKartPage,
     ViewSupplierPage,
     FilterPopupPage,
+    CreateWidgetPage,
+    EditWidgetPage,
     SelectorItemsPage,
     CreatePurchasePage,
     DetailPurchasePage,
@@ -52,7 +56,9 @@ import { WidgetModule } from './modules/widget/widget.module';
   ],
   declarations: [
     AppComponent,
-     FilterPopupPage,
+     // FilterPopupPage,
+     CreateWidgetPage,
+     EditWidgetPage,
      SelectorItemsPage,
     CreateSupplierPage,
     CreateShoppingKartPage,

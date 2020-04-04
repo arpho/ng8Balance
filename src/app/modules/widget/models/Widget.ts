@@ -5,17 +5,17 @@ import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { WidgetTypes } from './WidgetsTypes';
 
 export class Widget  {
-    constructor(args?: { service: EntityWidgetServiceInterface, entityKey: string, temporalWindow: number, counter: boolean, _order: number,_key?:number }) {
+    constructor(args?: { service: EntityWidgetServiceInterface, entityKey: string, temporalWindow: number, counter: boolean, _order: number,_key?:number,note?:string,title?:string,description?:string }) {
         this.value = new BehaviorSubject(new Value({ value: 0, label: this.service ? this.service.entitityLabel : 'testing' }))
         this.load(args)
-        console.log('service widget',this.service)
         this._key = this._key||new Date().getTime()
 
     }
     title: string;
+    note: string
+    description:string
    _key:number
     privatekey: string;
-    quickActions?: import("../../item/models/QuickAction").QuickAction[];
     archived?: boolean;
     getTitle(): Value {
         if (this.counter) {
@@ -28,8 +28,7 @@ export class Widget  {
     private temporalWindow: number
     private entityKey: string
     private _order: number
-    
-    private counter: boolean
+    counter: boolean
     private value: BehaviorSubject<Value> // = new BehaviorSubject
 
     set order(value: number) {
@@ -64,6 +63,9 @@ export class Widget  {
             temporalWindow: this.temporalWindow || 0,
             entityKey: this.entityKey || '',
             key: this._key,
+            description:this.description||'',
+            note:this.note||'',
+            title:this.title||'',
             counter: this.counter,
             _order: this._order || 0,
             widget: WidgetTypes.Regular // r'regular||by
