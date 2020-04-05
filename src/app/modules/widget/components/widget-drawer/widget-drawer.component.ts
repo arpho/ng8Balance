@@ -5,6 +5,7 @@ import { ShoppingKartsService } from 'src/app/services/shoppingKarts/shopping-ka
 import { Widget } from '../../models/Widget';
 import { ModalController } from '@ionic/angular';
 import { CreateWidgetPage } from '../../pages/create-widget/create-widget.page';
+import { EditWidgetPage } from '../../pages/edit-widget/edit-widget.page';
 
 @Component({
   selector: 'app-widget-drawer',
@@ -22,9 +23,11 @@ export class WidgetDrawerComponent implements OnInit {
     return await modal.present()
   }
 
-  updateWidget(widget,sliding_item){
+  async updateWidget(widget,sliding_item){
     console.log('updating',widget)
     sliding_item['close']()
+    const modal = await this.modalController.create({component:EditWidgetPage})
+    return await modal.present()
   }
 
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
