@@ -13,38 +13,37 @@ import { CreateWidgetPage } from '../../pages/create-widget/create-widget.page';
 })
 export class WidgetDrawerComponent implements OnInit {
   keys//: Promise<string[]>
-  Widgets : Widget[]
-  items : ShoppingKartModel[] = []
+  Widgets: Widget[]
+  items: ShoppingKartModel[] = []
 
-  async createWidget(){
+  async createWidget() {
     console.log('creating widget')
     const modal = await this.modalController.create({ component: CreateWidgetPage })
     return await modal.present()
   }
 
-  constructor(public service: WidgetService,public karts:ShoppingKartsService,
-    public modalController: ModalController,) {
+  constructor(public service: WidgetService, public karts: ShoppingKartsService,
+    public modalController: ModalController, ) {
     this.service.connectToIDB().then(() => {
       this.service.keys((keys: Promise<any>) => {
         this.keys = keys
         keys.then(k => {
-          console.log('keys', k)
         })
       })
-      this.karts._items.subscribe((karts:ShoppingKartModel[])=>{
+      this.karts._items.subscribe((karts: ShoppingKartModel[]) => {
         this.items = karts
       })
-      this.service._widgets.subscribe((items:Widget[])=>{
+      this.service._widgets.subscribe((items: Widget[]) => {
         this.Widgets = items
         // console.log('widgets',items)
       })
-      this.service._widgets.subscribe((widgets:Widget[])=>{
+      this.service._widgets.subscribe((widgets: Widget[]) => {
         this.Widgets = widgets
-        
+
         //console.log('got widgets',widgets)
       })
-      
-    
+
+
     })
   }
 
