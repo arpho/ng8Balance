@@ -31,7 +31,8 @@ export class WidgetDrawerComponent implements OnInit {
   async updateWidget(widget,sliding_item){
     console.log('updating',widget)
     sliding_item['close']()
-    const modal = await this.modalController.create({component:EditWidgetPage})
+    const modal = await this.modalController.create({component:EditWidgetPage,
+    componentProps:{widget}})
     return await modal.present()
   }
 

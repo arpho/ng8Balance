@@ -59,11 +59,12 @@ export class CreateWidgetPage implements OnInit {
     console.log('submitted', ev)
     const widget = new Widget(ev)
     console.log(' new widget', widget)
-    this.service.put(String(this.widget.key), this.widget.serialize(), (v) => {
+     this.service.put(String(this.widget.key), this.widget.serialize(), (v) => {
       v.then((wid => {
         console.log('created', wid)
+        this.dismiss()
       }))
-    })
+    }) 
   }
 
   ngOnInit() {
