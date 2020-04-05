@@ -6,7 +6,7 @@ import { WidgetOperation, WidgetTypes } from '../WidgetsTypes';
 describe("testing Widget", () => {
     let widget;
     beforeEach(() => {
-        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: true, _order: 0,_key:12,note:'nota',title:'test',description:'descrizione' })
+        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: true, _order: 0, _key: 12, note: 'nota', title: 'test', description: 'descrizione' })
 
     })
     it('widget should instantiate', () => {
@@ -22,8 +22,8 @@ describe("testing Widget", () => {
         expect(serialized.counter).toBeTruthy()
         expect(serialized.widget).toBe(WidgetTypes.Regular)
     })
-    it('widget should load',()=>{
-        widget = new Widget().load({entityKey:'testKey2',_order:2,temporalWindow:2})
+    it('widget should load', () => {
+        widget = new Widget().load({ service: new WidgetServiceMocker(), entityKey: 'testKey2', temporalWindow: 2, _order: 2, _key: 12, note: 'nota', title: 'test', description: 'descrizione' })
         const serialized = widget.serialize()
         expect(serialized._order).toBe(2)
         expect(widget.serialize().key).toBeTruthy()
@@ -33,18 +33,20 @@ describe("testing Widget", () => {
         expect(serialized.temporalWindow).toBe(2)
         expect(serialized.counter).toBeFalsy()
     })
-    it('order should be setted and getted',()=>{
+    it('order should be setted and getted', () => {
         expect(widget.order).toBe(0)
         widget.order = 3
         expect(widget.order).toBe(3)
     })
-     it('should call the rigth calculateWidget',()=>{
-          if(widget.service){
-         expect(widget.calculateWidget()).toBe(WidgetOperation.Counter)}
-       
-        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: false, _order: 0,_key:12 })
-        if(widget.service){
-        expect(widget.calculateWidget()).toBe(WidgetOperation.Adder)}
-        
-     })
+    it('should call the rigth calculateWidget', () => {
+        if (widget.service) {
+            expect(widget.calculateWidget()).toBe(WidgetOperation.Counter)
+        }
+
+        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: false, _order: 0, _key: 12 })
+        if (widget.service) {
+            expect(widget.calculateWidget()).toBe(WidgetOperation.Adder)
+        }
+
+    })
 })
