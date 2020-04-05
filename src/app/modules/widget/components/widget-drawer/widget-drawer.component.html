@@ -13,6 +13,26 @@
   <ion-item>
   <app-widget [Widget]="widget" ></app-widget>
 </ion-item>
+<ion-item-options side="start">
+  <ion-button
+  ion-button
+  danger
+  color="danger"
+    (click)="deleteItem(item, sliding_item)"
+  >
+    <ion-icon name="trash"></ion-icon>
+    Elimina
+  </ion-button>
+</ion-item-options>
+<ion-item-options side='end'>
+  <ion-button
+  ion-button
+  (click)="updateWidget(widget,sliding_item)"
+  >
+  <ion-icon name='eye'></ion-icon>
+  Modifica
+  </ion-button>
+</ion-item-options>
 
 
   </ion-item-sliding>

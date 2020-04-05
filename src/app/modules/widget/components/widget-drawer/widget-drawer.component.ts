@@ -22,6 +22,11 @@ export class WidgetDrawerComponent implements OnInit {
     return await modal.present()
   }
 
+  updateWidget(widget,sliding_item){
+    console.log('updating',widget)
+    sliding_item['close']()
+  }
+
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
     public modalController: ModalController, ) {
     this.service.connectToIDB().then(() => {
@@ -33,7 +38,7 @@ export class WidgetDrawerComponent implements OnInit {
       this.karts._items.subscribe((karts: ShoppingKartModel[]) => {
         this.items = karts
       })
-      this.service._widgets.subscribe((items: Widget[]) => {
+      /* this.service._widgets.subscribe((items: Widget[]) => {
         this.Widgets = items
         // console.log('widgets',items)
       })
@@ -41,7 +46,7 @@ export class WidgetDrawerComponent implements OnInit {
         this.Widgets = widgets
 
         //console.log('got widgets',widgets)
-      })
+      }) */
 
 
     })
