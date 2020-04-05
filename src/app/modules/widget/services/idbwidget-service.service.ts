@@ -38,10 +38,19 @@ async initializeWidget(){
 
 }
 
+delete(id,next){
+
+  this.db.subscribe((db:IDBPDatabase)=>{
+    console.log('deleting',id)
+    db.delete(this.storeName,id)
+  })
+}
+
   put(key: string, value: any, next: (v) => void) {
     this.db.subscribe((db: IDBPDatabase) => {
 
       if (db.put) {
+        console.log('putting',value)
         next(db.put(this.storeName, value))
       }
     })

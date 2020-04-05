@@ -13,7 +13,17 @@ export class Widget  {
     title: string;
     note: string
     description:string
-   _key:number
+   _key:number;
+   _id:number
+
+   set id ( id:number){
+       this._id = id
+   }
+
+   get id (){
+       return this._id
+   }
+
     privatekey: string;
     archived?: boolean;
     getTitle(): Value {
@@ -71,6 +81,7 @@ export class Widget  {
             note:this.note||'',
             title:this.title||'',
             counter: this.counter,
+            id:this._id||0,
             _order: this._order || 0,
             widget: WidgetTypes.Regular // r'regular||by
 

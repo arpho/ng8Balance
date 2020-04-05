@@ -23,9 +23,14 @@ export class WidgetDrawerComponent implements OnInit {
     return await modal.present()
   }
 
-  deleteItem(widget,sliding_item){
+  deleteWidget(widget,sliding_item){
     console.log('deleting widget',widget)
     sliding_item['close']()
+    this.service.delete(widget.id,(pr:Promise<any>)=>{
+      pr.then(res=>{
+        console.log('deleted',res)
+      })
+    })
   }
 
   async updateWidget(widget,sliding_item){
@@ -35,6 +40,8 @@ export class WidgetDrawerComponent implements OnInit {
     componentProps:{widget}})
     return await modal.present()
   }
+
+  
 
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
     public modalController: ModalController, ) {

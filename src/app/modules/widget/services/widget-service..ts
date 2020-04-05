@@ -39,20 +39,24 @@ export class WidgetService {
     this.idbService.keys(next, 'wrapping keys')
   }
 
+
+
   initializeWidget2() {
     console.log('loading widgets')
     this.WidgetList = []
     this.idbService.keys((keys: Promise<any>) => {
       console.log('waiting for keys')
       keys.then(keyring => {
-        console.log('got keys',keyring)
+        console.log('got keys', keyring)
         keyring.forEach(element => {
           this.idbService.get(element, (item => {
             item.then(value => {
+              console.log('value from db', value)
               const widget = new Widget(value)
+              widget.id = element
               if (value.key) // è un widget
                 this.WidgetList.push(widget)
-                console.log('widgetList',this.WidgetList)
+              console.log('widgetList', this.WidgetList)
               this._widgetsList.next(this.WidgetList)
             })
           }))
@@ -60,6 +64,9 @@ export class WidgetService {
       })
     }, 'new initializeing')
 
+  }
+  delete(id,next){
+    this.idbService.delete(id,next)
   }
 
 
