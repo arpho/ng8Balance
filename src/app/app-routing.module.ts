@@ -15,6 +15,7 @@ const routes:  Routes = [
   {
     path: 'shopping-karts', loadChildren: './pages/shoppingKarts/shopping-karts/shopping-karts.module#ShoppingKartsPageModule', canActivate: [AuthGuard]
   },
+  {path:'info/release', loadChildren:'./modules/info/pages/info/info.module#InfoPageModule'},
   // { path: 'graphs', loadChildren: './pages/graphs/graphs.module#GraphsPageModule', canActivate: [AuthGuard] },
  // { path: 'graphs/piechart', loadChildren: './pages/graphs/piechart/piechart.module#PiechartPageModule', canActivate: [AuthGuard] },
   { path: 'detail-payment', loadChildren: './pages/detail-payment/detail-payment.module#DetailPaymentPageModule' },

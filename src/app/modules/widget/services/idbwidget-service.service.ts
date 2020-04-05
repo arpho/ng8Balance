@@ -42,7 +42,7 @@ async initializeWidget(){
     this.db.subscribe((db: IDBPDatabase) => {
 
       if (db.put) {
-        next(db.put(this.storeName, value, key))
+        next(db.put(this.storeName, value))
       }
     })
   }

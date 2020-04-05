@@ -20,7 +20,7 @@ export class CreateWidgetPage implements OnInit {
     this.modalCtrl.dismiss(payment)
   }
 
-  constructor(public modalCtrl: ModalController,public service:WidgetService) {
+  constructor(public modalCtrl: ModalController, public service: WidgetService) {
     this.title = "crea un nuovo Widget"
     this.widget = new Widget()
     this.widgetFields = [
@@ -38,7 +38,7 @@ export class CreateWidgetPage implements OnInit {
       }),
 
       new SwitchQuestion({
-        key: 'widgetOperation',
+        key: 'counter',
         label: 'contatore/sommatore',
         labelTrue: 'widget contatore',
         labelFalse: ' widget sommatore',
@@ -52,13 +52,17 @@ export class CreateWidgetPage implements OnInit {
     ];
   }
 
-  filter(ev){
+  filter(ev) {
   }
 
   submit(ev) {
     console.log('submitted', ev)
-    this.service.put(String(this.widget.key),this.widget.serialize(),(v)=>{
-      console.log('created widget',v)
+    const widget = new Widget(ev)
+    console.log(' new widget', widget)
+    this.service.put(String(this.widget.key), this.widget.serialize(), (v) => {
+      v.then((wid => {
+        console.log('created', wid)
+      }))
     })
   }
 

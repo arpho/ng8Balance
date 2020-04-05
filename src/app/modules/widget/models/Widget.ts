@@ -6,7 +6,6 @@ import { WidgetTypes } from './WidgetsTypes';
 
 export class Widget  {
     constructor(args?: { service: EntityWidgetServiceInterface, entityKey: string, temporalWindow: number, counter: boolean, _order: number,_key?:number,note?:string,title?:string,description?:string }) {
-        this.value = new BehaviorSubject(new Value({ value: 0, label: this.service ? this.service.entitityLabel : 'testing' }))
         this.load(args)
         this._key = this._key||new Date().getTime()
 

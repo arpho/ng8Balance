@@ -23,6 +23,11 @@ export class WidgetDrawerComponent implements OnInit {
     return await modal.present()
   }
 
+  deleteItem(widget,sliding_item){
+    console.log('deleting widget',widget)
+    sliding_item['close']()
+  }
+
   async updateWidget(widget,sliding_item){
     console.log('updating',widget)
     sliding_item['close']()
@@ -37,6 +42,9 @@ export class WidgetDrawerComponent implements OnInit {
         this.keys = keys
         keys.then(k => {
         })
+      })
+      this.service.widgetsList.subscribe(widgets=>{
+        console.log('got widgets',widgets)
       })
       this.karts._items.subscribe((karts: ShoppingKartModel[]) => {
         this.items = karts
