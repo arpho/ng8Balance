@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
+import {DynamicFormModule} from '../../../dynamic-form/dynamic-form.module'
 import { CreateWidgetPage } from './create-widget.page';
 
 describe('CreateWidgetPage', () => {
@@ -10,7 +10,7 @@ describe('CreateWidgetPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CreateWidgetPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(),DynamicFormModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CreateWidgetPage);

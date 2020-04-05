@@ -36,25 +36,15 @@ export class WidgetDrawerComponent implements OnInit {
       })
       this.service._widgets.subscribe((items:Widget[])=>{
         this.Widgets = items
-        console.log('widgets',items)
+        // console.log('widgets',items)
       })
-      this.service._widgets.subscribe((widgets)=>{
+      this.service._widgets.subscribe((widgets:Widget[])=>{
         this.Widgets = widgets
-        console.log('got widgets',widgets)
+        
+        //console.log('got widgets',widgets)
       })
       
-      /* 
-      const test = { a: 1, b: 2, c: 3 ,d:4}
-      this.service.put('test1', test, (p: Promise<any>) => {
-        p.then(v => {
-          console.log('put', v)
-        })
-      })
-      this.service.get('test1', (p: Promise<any>) => {
-        p.then(v => {
-          console.log('got', v)
-        })
-      }) */
+    
     })
   }
 

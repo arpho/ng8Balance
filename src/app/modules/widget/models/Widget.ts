@@ -55,6 +55,7 @@ export class Widget  {
 
     load(args) {
         Object.assign(this, args)
+        this.key = this.key ||this._key
         return this
     }
 

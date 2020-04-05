@@ -7,10 +7,12 @@
 <ion-list>
 
   <ion-item-sliding
-    *ngFor="let widget of service?.Widgets |async "
+    *ngFor="let widget of service?.widgetsList |async "
     #sliding_item
   >
+  <ion-item>
   <app-widget [Widget]="widget" ></app-widget>
+</ion-item>
 
 
   </ion-item-sliding>
