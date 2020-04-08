@@ -4,18 +4,20 @@ import { Value } from '../../item/models/value';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { WidgetTypes } from './WidgetsTypes';
 
-export class Widget  {
-    constructor(args?: { service: EntityWidgetServiceInterface, entityKey: string, temporalWindow: number, counter: boolean, _order: number,_key?:number,note?:string,title?:string,description?:string }) {
-        this.load(args)
-        this._key = this._key||new Date().getTime()
+export interface Widgetparams{ service: EntityWidgetServiceInterface, entityKey: string, temporalWindow: number, counter: boolean, _order: number,_key?:number,note?:string,title?:string,description?:string }
 
-    }
+export class Widget  {
     _title: string;
     _note: string
     _description:string
    _key:number;
    _id:number
    _counter: boolean
+    constructor(args?: Widgetparams) {
+        this.load(args)
+        this._key = this._key||new Date().getTime()
+
+    }
 
    set counter (counter){
        this._counter = counter
@@ -63,9 +65,9 @@ export class Widget  {
         return new Value({ label: 'widget', value: 'totale' })
     }
     service: EntityWidgetServiceInterface
-    private temporalWindow: number
-    private entityKey: string
-    private _order: number
+    temporalWindow: number
+    entityKey: string
+    _order: number
 
     
     private value: BehaviorSubject<Value> // = new BehaviorSubject

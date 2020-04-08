@@ -1,6 +1,6 @@
 export enum WidgetTypes {
     Regular,
-    By
+    Since
 }
 export enum WidgetOperation {
     Adder,
