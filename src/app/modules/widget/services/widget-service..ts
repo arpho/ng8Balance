@@ -26,7 +26,7 @@ export class WidgetService {
 
     this.connectToIDB()
     // this.initializeWidget()
-    this.initializeWidget2()
+    this.loadWidget()
     this.widgets_list = []
     this.idbService.keys(keys => {
       keys.then(keysList => {
@@ -41,7 +41,7 @@ export class WidgetService {
 
 
 
-  initializeWidget2() {
+  loadWidget() {
     console.log('loading widgets')
     this.WidgetList = []
     this.idbService.keys((keys: Promise<any>) => {
@@ -65,8 +65,9 @@ export class WidgetService {
     }, 'new initializeing')
 
   }
-  delete(id,next){
-    this.idbService.delete(id,next)
+  async delete(id,next){
+    await this.idbService.delete(id,next)
+    this.loadWidget()
   }
 
 
@@ -81,6 +82,7 @@ export class WidgetService {
 
   async add(widget){
     console.log(await this.idbService.add(widget))
+    this.loadWidget()
   }
 
   async connectToIDB() {
