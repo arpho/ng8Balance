@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { WidgetDrawerComponent } from './widget-drawer.component';
 import { WidgetService } from '../../services/widget-service.';
-import { WidgetComponent } from '../../component/widget/widget.component';
+import { WidgetComponent } from '../widget/widget.component';
 //import { IonicStorageModule } from '@ionic/storage';
 
 describe('WidgetDrawerComponent', () => {
