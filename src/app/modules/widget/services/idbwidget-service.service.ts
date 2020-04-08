@@ -6,15 +6,15 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class IDBWidgetServiceService {
-  storeName= 'widgetsList'
+  storeName = 'widgetsList'
   private _db
   public readonly db: BehaviorSubject<IDBPDatabase> = new BehaviorSubject(undefined)
 
   async connectToIDB() {
-    this._db = await openDB('widgets', 2.7, {
+    this._db = await openDB('widgets', 3, {
       upgrade(db, oldVersion, newVersion, transaction) {
         console.log(`updating db:${db}, oldVersion:${oldVersion},newVersion:${newVersion},transaction:${transaction}`)
-        db.createObjectStore(this?this.storeName:'widgetsList', { keyPath: 'id', autoIncrement: true })
+        db.createObjectStore(this ? this.storeName : 'widgetsList', { keyPath: 'key',  })
 
       },
       blocked() {
@@ -30,27 +30,35 @@ export class IDBWidgetServiceService {
         // …
       },
     });
-     this.db.next(this._db)
+    this.db.next(this._db)
   }
 
-async initializeWidget(){
+  async initializeWidget() {
 
 
-}
+  }
+  async add(item) {
+    console.log('adding widget',item)
+    const db = await this.db.subscribe((db: IDBPDatabase) => {
+      if (db) {
+        db.add(this.storeName, item,item.key)
+      }
+    })
+  }
 
-delete(id,next){
+  delete(id, next) {
 
-  this.db.subscribe((db:IDBPDatabase)=>{
-    console.log('deleting',id)
-    db.delete(this.storeName,id)
-  })
-}
+    this.db.subscribe((db: IDBPDatabase) => {
+      console.log('deleting', id)
+      db.delete(this.storeName, id)
+    })
+  }
 
   put(key: string, value: any, next: (v) => void) {
     this.db.subscribe((db: IDBPDatabase) => {
 
       if (db.put) {
-        console.log('putting',value)
+        console.log('putting', value)
         next(db.put(this.storeName, value))
       }
     })
@@ -66,12 +74,12 @@ delete(id,next){
   }
 
 
-  keys(next,who) {
+  keys(next, who) {
     this.db.subscribe(db => {
       if (db) {
-        if(next){
-        next(db.getAllKeys(this.storeName))
-}        // return db.getAllKeys('widgetsList')
+        if (next) {
+          next(db.getAllKeys(this.storeName))
+        }        // return db.getAllKeys('widgetsList')
       }
     })
 
@@ -81,5 +89,5 @@ delete(id,next){
     this.connectToIDB()
 
 
-   }
+  }
 }

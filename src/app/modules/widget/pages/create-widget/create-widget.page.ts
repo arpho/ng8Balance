@@ -27,13 +27,13 @@ export class CreateWidgetPage implements OnInit {
       new TextboxQuestion({
         key: 'title',
         label: 'nome del widget',
-        value: this.widget.title,
+        value: this.widget._title,
         order: 1
       }),
       new TextboxQuestion({
         key: 'note',
         label: 'note',
-        value: this.widget.note,
+        value: this.widget._note,
         order: 2
       }),
 
@@ -55,16 +55,18 @@ export class CreateWidgetPage implements OnInit {
   filter(ev) {
   }
 
-  submit(ev) {
+  async submit(ev) {
     console.log('submitted', ev)
     const widget = new Widget(ev)
     console.log(' new widget', widget.serialize())
-      this.service.put(String(this.widget.key), this.widget.serialize(), (v) => {
+    const out = await this.service.add(widget.serialize())
+    this.dismiss()
+    /*   this.service.put(String(this.widget.key), this.widget.serialize(), (v) => {
       v.then((wid => {
         console.log('created', wid)
         this.dismiss()
       }))
-    })  
+    })   */
   }
 
   ngOnInit() {

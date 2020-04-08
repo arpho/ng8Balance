@@ -79,11 +79,15 @@ export class WidgetService {
     this.idbService.get(key, next)
   }
 
+  async add(widget){
+    console.log(await this.idbService.add(widget))
+  }
+
   async connectToIDB() {
-    this._db = await openDB('widgets', 2.7, {
+    this._db = await openDB('widgets', 3, {
       upgrade(db, oldVersion, newVersion, transaction) {
         console.log(`updating db:${db}, oldVersion:${oldVersion},newVersion:${newVersion},transaction:${transaction}`)
-        db.createObjectStore(this ? this.storeName : 'widgetsList', { keyPath: 'id', autoIncrement: true })
+        db.createObjectStore(this ? this.storeName : 'widgetsList', { keyPath: 'key', autoIncrement: true })
 
       },
       blocked() {

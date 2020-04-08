@@ -10,11 +10,20 @@ export class Widget  {
         this._key = this._key||new Date().getTime()
 
     }
-    title: string;
-    note: string
-    description:string
+    _title: string;
+    _note: string
+    _description:string
    _key:number;
    _id:number
+   _counter: boolean
+
+   set counter (counter){
+       this._counter = counter
+   }
+
+   get counter (){
+       return this._counter
+   }
 
    set id ( id:number){
        this._id = id
@@ -24,6 +33,26 @@ export class Widget  {
        return this._id
    }
 
+   set title (title:string){
+       this._title = title
+   }
+   get title (){
+       return this._title
+   }
+
+   set note (note:string){
+       this._note = note
+   }
+   get note (){
+       return this._note
+   }
+   set description (description:string){
+       this._description = description
+   }
+
+   get description (){
+       return this._description
+   }
     privatekey: string;
     archived?: boolean;
     getTitle(): Value {
@@ -37,7 +66,8 @@ export class Widget  {
     private temporalWindow: number
     private entityKey: string
     private _order: number
-    counter: boolean
+
+    
     private value: BehaviorSubject<Value> // = new BehaviorSubject
 
     set order(value: number) {
@@ -77,10 +107,10 @@ export class Widget  {
             temporalWindow: this.temporalWindow || 0,
             entityKey: this.entityKey || '',
             key: this._key,
-            description:this.description||'',
-            note:this.note||'',
-            title:this.title||'',
-            counter: this.counter,
+            description:this._description||'',
+            note:this._note||'',
+            title:this._title||'',
+            counter: this._counter,
             id:this._id||0,
             _order: this._order || 0,
             widget: WidgetTypes.Regular // r'regular||by
