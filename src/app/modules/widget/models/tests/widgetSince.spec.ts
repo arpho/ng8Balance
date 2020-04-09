@@ -7,7 +7,7 @@ import { WidgetSince } from '../WidegetSince';
 describe("testing Widget", () => {
     let widget;
     beforeEach(() => {
-        widget = new WidgetSince({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: true, _order: 0, _key: 12, note: 'nota', title: 'test', description: 'descrizione',sinceDate:'' })
+        widget = new WidgetSince({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: true, _order: 0, _key: 12, note: 'nota', title: 'test', description: 'descrizione',sinceDate:'' , serviceKey:'mock'})
 
     })
     it('widget should instantiate', () => {
@@ -44,7 +44,7 @@ describe("testing Widget", () => {
             expect(widget.calculateWidget()).toBe(WidgetOperation.Counter)
         }
 
-        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: false, _order: 0, _key: 12 })
+        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: false, _order: 0, _key: 12,serviceKey:'mock' })
         if (widget.service) {
             expect(widget.calculateWidget()).toBe(WidgetOperation.Adder)
         }

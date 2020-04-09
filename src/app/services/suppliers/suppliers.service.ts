@@ -4,11 +4,12 @@ import { SupplierModel } from '../../models/supplierModel';
 import { ItemServiceInterface } from '../../modules/item/models/ItemServiceInterface';
 import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterface';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { EntityWidgetServiceInterface } from 'src/app/modules/widget/models/EntityWidgetServiceInterface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SuppliersService implements ItemServiceInterface {
+export class SuppliersService implements ItemServiceInterface,EntityWidgetServiceInterface {
   public suppliersListRef: firebase.database.Reference;
   _items: BehaviorSubject<Array<SupplierModel>> = new BehaviorSubject([])
   readonly items: Observable<Array<SupplierModel>> = this._items.asObservable()
@@ -31,6 +32,13 @@ export class SuppliersService implements ItemServiceInterface {
       }
     });
   }
+  key='Fornitori';
+  entitityLabel: string;
+  counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
+  adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
+  categoriesService?: ItemServiceInterface;
+  suppliersService?: ItemServiceInterface;
+  paymentsService?: ItemServiceInterface;
 
 
   getDummyItem() {

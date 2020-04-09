@@ -5,11 +5,12 @@ import { PaymentsModel } from 'src/app/models/paymentModel';
 import * as firebase from 'firebase';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { EntityWidgetServiceInterface } from 'src/app/modules/widget/models/EntityWidgetServiceInterface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PaymentsService implements ItemServiceInterface {
+export class PaymentsService implements ItemServiceInterface,EntityWidgetServiceInterface {
 
   public paymentsListRef: firebase.database.Reference;
    _items:BehaviorSubject<Array<PaymentsModel>> = new BehaviorSubject([])
@@ -35,6 +36,15 @@ export class PaymentsService implements ItemServiceInterface {
       }
     });
   }
+  key=' Pagamenti';
+  entitityLabel='fornitori'
+  filterableField: string;
+  counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
+  adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
+  categoriesService?: ItemServiceInterface;
+  suppliersService?: ItemServiceInterface;
+  paymentsService?: ItemServiceInterface;
+  suppliersListRef?: any;
 
   getEntitiesList(): firebase.database.Reference {
     return this.paymentsListRef;

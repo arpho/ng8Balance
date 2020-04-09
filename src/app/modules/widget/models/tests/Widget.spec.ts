@@ -6,7 +6,7 @@ import { WidgetOperation, WidgetTypes } from '../WidgetsTypes';
 describe("testing Widget", () => {
     let widget;
     beforeEach(() => {
-        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: true, _order: 0, _key: 12, note: 'nota', title: 'test', description: 'descrizione' })
+        widget = new Widget({ service: new WidgetServiceMocker(), serviceKey:'serviceKey', entityKey: 'testKey', temporalWindow: 1, counter: true, _order: 0, _key: 12, note: 'nota', title: 'test', description: 'descrizione' })
 
     })
     it('widget should instantiate', () => {
@@ -16,6 +16,7 @@ describe("testing Widget", () => {
     it('widget should serialize correctly', () => {
         const serialized = widget.serialize()
         expect(serialized._order).toBe(0)
+        expect(serialized.serviceKey).toBe('serviceKey')
         expect(serialized.key).toBe(12)
         expect(serialized.entityKey).toBe('testKey')
         expect(serialized.temporalWindow).toBe(1)
@@ -23,13 +24,14 @@ describe("testing Widget", () => {
         expect(serialized.widget).toBe(WidgetTypes.Regular)
     })
     it('widget should load', () => {
-        widget = new Widget().load({ service: new WidgetServiceMocker(), entityKey: 'testKey2', temporalWindow: 2, _order: 2, _key: 12, note: 'nota', title: 'test', description: 'descrizione' })
+        widget = new Widget().load({ service: new WidgetServiceMocker(), entityKey: 'testKey2', temporalWindow: 2, _order: 2, _key: 12, note: 'nota', title: 'test', description: 'descrizione',serviceKey:'mock' })
         const serialized = widget.serialize()
         expect(serialized._order).toBe(2)
         expect(widget.serialize().key).toBeTruthy()
         expect(serialized.entityKey).toBe('testKey2')
         expect(serialized.title).toBe('test')
         expect(serialized.description).toBe('descrizione')
+        expect(serialized.serviceKey).toBe('mock')
         expect(serialized.temporalWindow).toBe(2)
         expect(serialized.counter).toBeFalsy()
     })
@@ -43,7 +45,7 @@ describe("testing Widget", () => {
             expect(widget.calculateWidget()).toBe(WidgetOperation.Counter)
         }
 
-        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: false, _order: 0, _key: 12 })
+        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: false, _order: 0, _key: 12 ,serviceKey:'mock'})
         if (widget.service) {
             expect(widget.calculateWidget()).toBe(WidgetOperation.Adder)
         }

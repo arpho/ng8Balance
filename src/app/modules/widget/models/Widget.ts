@@ -4,13 +4,14 @@ import { Value } from '../../item/models/value';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { WidgetTypes } from './WidgetsTypes';
 
-export interface Widgetparams { service: EntityWidgetServiceInterface, entityKey: string, temporalWindow: number, counter: boolean, _order: number, _key?: number, note?: string, title?: string, description?: string }
+export interface Widgetparams { service: EntityWidgetServiceInterface, serviceKey:string, entityKey: string, temporalWindow: number, counter: boolean, _order: number, _key?: number, note?: string, title?: string, description?: string }
 
 export class Widget {
     _title: string;
     _note: string
     _description: string
     _key: number;
+    _serviceKey:string
     
     _entityKey: string //identify the entityKey
     _id: number
@@ -19,6 +20,14 @@ export class Widget {
         this.load(args)
         this._key = this._key || new Date().getTime()
 
+    }
+
+    set serviceKey (serviceKey:string){
+        this._serviceKey = serviceKey
+    }
+
+    get serviceKey (){
+        return this._serviceKey
     }
 
     set counter(counter) {
@@ -117,6 +126,7 @@ export class Widget {
         return {
             temporalWindow: this.temporalWindow || 0,
             entityKey: this.entityKey || '',
+            serviceKey:this._serviceKey||'',
             key: this._key,
             description: this._description || '',
             note: this._note || '',

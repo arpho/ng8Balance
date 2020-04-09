@@ -5,6 +5,9 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { Widget } from '../../models/Widget';
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
 import { SwitchQuestion } from 'src/app/modules/item/models/question-switch';
+import { CategoriesService } from 'src/app/services/categories/categorie.service';
+import { SuppliersService } from 'src/app/services/suppliers/suppliers.service';
+import { PaymentsService } from 'src/app/services/payments/payments.service';
 
 @Component({
   selector: 'app-edit-widget',
@@ -14,8 +17,8 @@ import { SwitchQuestion } from 'src/app/modules/item/models/question-switch';
 export class EditWidgetPage  extends CreateWidgetPage implements OnInit {
   widget
 
-  constructor(public modalCtrl: ModalController,public service:WidgetService,public navParams:NavParams) {
-    super(modalCtrl,service);
+  constructor(public modalCtrl: ModalController,public service:WidgetService,public navParams:NavParams,public categories:CategoriesService,public suppliers:SuppliersService,public payments:PaymentsService) {
+    super(modalCtrl,service,categories,payments,suppliers);
   }
   widgetFieldsFactory(){
     return [

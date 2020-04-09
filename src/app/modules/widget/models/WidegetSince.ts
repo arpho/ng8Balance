@@ -44,6 +44,7 @@ sinceDate:string // campo data serializzato dal db
             counter: this._counter,
             id:this._id||0,
             _order: this.order || 0,
+            serviceKey:this.serviceKey||'',
             sincedate:this.MySinceDate.serialize(),
             widget: WidgetTypes.Since // r'regular||by
 

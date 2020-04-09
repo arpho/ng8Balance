@@ -7,6 +7,12 @@ import { ModalController } from '@ionic/angular';
 import { WidgetService } from '../../services/widget-service.';
 import { SelectorQuestion } from 'src/app/modules/dynamic-form/models/question-selector';
 import { DateQuestion } from 'src/app/modules/dynamic-form/models/question-date';
+import { DropdownQuestion } from 'src/app/modules/dynamic-form/models/question-dropdown';
+import { RoleModel } from 'src/app/modules/user/models/privilegesLevelModel';
+import { CategoriesService } from 'src/app/services/categories/categorie.service';
+import { PaymentsService } from 'src/app/services/payments/payments.service';
+import { SuppliersService } from 'src/app/services/suppliers/suppliers.service';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-create-widget',
@@ -22,7 +28,7 @@ export class CreateWidgetPage implements OnInit {
     this.modalCtrl.dismiss(payment)
   }
 
-  constructor(public modalCtrl: ModalController, public service: WidgetService) {
+  constructor(public modalCtrl: ModalController, public service: WidgetService,public categoriesService:CategoriesService,public paymentsService:PaymentsService,public suppliersService:SuppliersService) {
     this.title = "crea un nuovo Widget"
     this.widget = new Widget()
     this.widgetFields = this.FormFieldsFactory(this.widget)
@@ -31,6 +37,13 @@ export class CreateWidgetPage implements OnInit {
   filter(ev) {
   }
 
+  widgetsServices= {
+    services: [
+      new RoleModel({ key: this.categoriesService.entitityLabel, value: this.categoriesService.key }),
+      new RoleModel({ key: this.paymentsService.entitityLabel, value: this.paymentsService.key }),
+      new RoleModel({ key: this.suppliersService.entitityLabel, value: this.suppliersService.key })
+    ]
+  };
 
   FormFieldsFactory(widget: Widget) {
     return  [
@@ -46,7 +59,11 @@ export class CreateWidgetPage implements OnInit {
         value: this.widget._note,
         order: 2
       }),
-
+      new DropdownQuestion({
+        key:'entityKey',
+        label:'sorgente dati',
+        options: this.widgetsServices.services
+      }),
       new SwitchQuestion({
         key: 'counter',
         label: 'contatore/sommatore',
