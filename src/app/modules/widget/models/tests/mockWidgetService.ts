@@ -7,7 +7,8 @@ export class WidgetServiceMocker implements ItemServiceInterface, EntityWidgetSe
     constructor() {
         this.items_list = []
     }
-    entityKey: string;
+    // entityKey: string;
+    key = 'mockerService'
     entitityLabel: string;
     filterableField: string;
     counterWidget = (entityKey: string, entities: ItemModelInterface[]) => WidgetOperation.Counter;

@@ -13,6 +13,7 @@ import { ShoppingKartModel } from 'src/app/models/shoppingKartModel';
   providedIn: 'root'
 })
 export class CategoriesService implements ItemServiceInterface, EntityWidgetServiceInterface {
+  public readonly key = 'cateegories'
   public categoriesListRef: firebase.database.Reference;
   _items: BehaviorSubject<Array<CategoryModel>> = new BehaviorSubject([])
   readonly items: Observable<Array<CategoryModel>> = this._items.asObservable()

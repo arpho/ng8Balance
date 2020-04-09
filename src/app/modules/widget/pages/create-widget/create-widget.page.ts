@@ -5,6 +5,8 @@ import { Widget } from '../../models/Widget';
 import { SwitchQuestion } from 'src/app/modules/item/models/question-switch';
 import { ModalController } from '@ionic/angular';
 import { WidgetService } from '../../services/widget-service.';
+import { SelectorQuestion } from 'src/app/modules/dynamic-form/models/question-selector';
+import { DateQuestion } from 'src/app/modules/dynamic-form/models/question-date';
 
 @Component({
   selector: 'app-create-widget',
@@ -23,7 +25,15 @@ export class CreateWidgetPage implements OnInit {
   constructor(public modalCtrl: ModalController, public service: WidgetService) {
     this.title = "crea un nuovo Widget"
     this.widget = new Widget()
-    this.widgetFields = [
+    this.widgetFields = this.FormFieldsFactory(this.widget)
+  }
+
+  filter(ev) {
+  }
+
+
+  FormFieldsFactory(widget: Widget) {
+    return  [
       new TextboxQuestion({
         key: 'title',
         label: 'nome del widget',
@@ -49,10 +59,7 @@ export class CreateWidgetPage implements OnInit {
         required: false,
         order: 4
       }),
-    ];
-  }
-
-  filter(ev) {
+    ];;
   }
 
   async submit(ev) {
