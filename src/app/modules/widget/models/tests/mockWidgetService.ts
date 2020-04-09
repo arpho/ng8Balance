@@ -9,7 +9,7 @@ export class WidgetServiceMocker implements ItemServiceInterface, EntityWidgetSe
     }
     // entityKey: string;
     key = 'mockerService'
-    entitityLabel: string;
+    entityLabel: string;
     filterableField: string;
     counterWidget = (entityKey: string, entities: ItemModelInterface[]) => WidgetOperation.Counter;
     adderWidget = (entityKey: string, entities: ItemModelInterface[]) => WidgetOperation.Adder;

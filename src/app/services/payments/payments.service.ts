@@ -10,12 +10,12 @@ import { EntityWidgetServiceInterface } from 'src/app/modules/widget/models/Enti
 @Injectable({
   providedIn: 'root'
 })
-export class PaymentsService implements ItemServiceInterface,EntityWidgetServiceInterface {
+export class PaymentsService implements ItemServiceInterface, EntityWidgetServiceInterface {
 
   public paymentsListRef: firebase.database.Reference;
-   _items:BehaviorSubject<Array<PaymentsModel>> = new BehaviorSubject([])
-   readonly items:Observable<Array<PaymentsModel>> = this._items.asObservable()
-   items_list:Array<PaymentsModel> = []
+  _items: BehaviorSubject<Array<PaymentsModel>> = new BehaviorSubject([])
+  readonly items: Observable<Array<PaymentsModel>> = this._items.asObservable()
+  items_list: Array<PaymentsModel> = []
   getDummyItem() {
     return new PaymentsModel();
 
@@ -28,16 +28,16 @@ export class PaymentsService implements ItemServiceInterface,EntityWidgetService
         this.getEntitiesList().on('value', eventCategoriesListSnapshot => {
           this.items_list = [];
           eventCategoriesListSnapshot.forEach(snap => {
-            const payment =  new PaymentsModel().initialize(snap.val())
-            this.items_list.push(payment );
+            const payment = new PaymentsModel().initialize(snap.val())
+            this.items_list.push(payment);
           });
-        this._items.next(this.items_list)
+          this._items.next(this.items_list)
         });
       }
     });
   }
-  key=' Pagamenti';
-  entitityLabel='fornitori'
+  key = 'Pagamenti';
+  entityLabel = 'pagamenti'
   filterableField: string;
   counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;

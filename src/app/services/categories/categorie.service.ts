@@ -13,7 +13,7 @@ import { ShoppingKartModel } from 'src/app/models/shoppingKartModel';
   providedIn: 'root'
 })
 export class CategoriesService implements ItemServiceInterface, EntityWidgetServiceInterface {
-  public readonly key = 'cateegories'
+  public readonly key = 'categories'
   public categoriesListRef: firebase.database.Reference;
   _items: BehaviorSubject<Array<CategoryModel>> = new BehaviorSubject([])
   readonly items: Observable<Array<CategoryModel>> = this._items.asObservable()
@@ -32,9 +32,8 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
 
   counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
-  entityKey = "categories";
   filterableField = 'purchaseDate' // we filter shoppingkart's entities by purchase date
-  entitityLabel = "Categoria";
+  entityLabel = "Categoria";
 
 
   categoriesService?: ItemServiceInterface;

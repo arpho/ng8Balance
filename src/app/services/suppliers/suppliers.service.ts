@@ -9,7 +9,7 @@ import { EntityWidgetServiceInterface } from 'src/app/modules/widget/models/Enti
 @Injectable({
   providedIn: 'root'
 })
-export class SuppliersService implements ItemServiceInterface,EntityWidgetServiceInterface {
+export class SuppliersService implements ItemServiceInterface, EntityWidgetServiceInterface {
   public suppliersListRef: firebase.database.Reference;
   _items: BehaviorSubject<Array<SupplierModel>> = new BehaviorSubject([])
   readonly items: Observable<Array<SupplierModel>> = this._items.asObservable()
@@ -32,8 +32,8 @@ export class SuppliersService implements ItemServiceInterface,EntityWidgetServic
       }
     });
   }
-  key='Fornitori';
-  entitityLabel: string;
+  key = 'fornitori';
+  entityLabel = 'Fornitori'
   counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   categoriesService?: ItemServiceInterface;

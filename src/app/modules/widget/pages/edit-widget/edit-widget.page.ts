@@ -20,41 +20,12 @@ export class EditWidgetPage  extends CreateWidgetPage implements OnInit {
   constructor(public modalCtrl: ModalController,public service:WidgetService,public navParams:NavParams,public categories:CategoriesService,public suppliers:SuppliersService,public payments:PaymentsService) {
     super(modalCtrl,service,categories,payments,suppliers);
   }
-  widgetFieldsFactory(){
-    return [
-      new TextboxQuestion({
-        key: 'title',
-        label: 'nome del widget',
-        value: this.widget.title,
-        order: 1
-      }),
-      new TextboxQuestion({
-        key: 'note',
-        label: 'note',
-        value: this.widget.note,
-        order: 2
-      }),
-
-      new SwitchQuestion({
-        key: 'counter',
-        label: 'contatore/sommatore',
-        labelTrue: 'widget contatore',
-        labelFalse: ' widget sommatore',
-        iconFalse: 'calculator',
-
-        iconTrue: 'stopwatch',
-        value: this.widget.counter,
-        required: false,
-        order: 4
-      }),
-    ];
-  }
 
   ngOnInit() {
     this.widget = new Widget( this.navParams.get('widget'))
-    this.title = 'modifica widget'
+    this.title = `modifica widget ${this.widget.title}`
     console.log(`updating`,this.widget)
-    this.widgetFields = this.widgetFieldsFactory()
+    this.widgetFields = super.FormFieldsFactory()
   }
 
 }

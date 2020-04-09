@@ -31,7 +31,7 @@ export class CreateWidgetPage implements OnInit {
   constructor(public modalCtrl: ModalController, public service: WidgetService,public categoriesService:CategoriesService,public paymentsService:PaymentsService,public suppliersService:SuppliersService) {
     this.title = "crea un nuovo Widget"
     this.widget = new Widget()
-    this.widgetFields = this.FormFieldsFactory(this.widget)
+    this.widgetFields = this.FormFieldsFactory()
   }
 
   filter(ev) {
@@ -39,30 +39,31 @@ export class CreateWidgetPage implements OnInit {
 
   widgetsServices= {
     services: [
-      new RoleModel({ key: this.categoriesService.entitityLabel, value: this.categoriesService.key }),
-      new RoleModel({ key: this.paymentsService.entitityLabel, value: this.paymentsService.key }),
-      new RoleModel({ key: this.suppliersService.entitityLabel, value: this.suppliersService.key })
+      new RoleModel({ key: this.categoriesService.entityLabel, value: this.categoriesService.key }),
+      new RoleModel({ key: this.paymentsService.entityLabel, value: this.paymentsService.key }),
+      new RoleModel({ key: this.suppliersService.entityLabel, value: this.suppliersService.key })
     ]
   };
 
-  FormFieldsFactory(widget: Widget) {
+  protected FormFieldsFactory() {
     return  [
       new TextboxQuestion({
         key: 'title',
         label: 'nome del widget',
-        value: this.widget._title,
+        value: this.widget.title,
         order: 1
       }),
       new TextboxQuestion({
         key: 'note',
         label: 'note',
-        value: this.widget._note,
+        value: this.widget.note,
         order: 2
       }),
       new DropdownQuestion({
-        key:'entityKey',
+        key:'serviceKey',
         label:'sorgente dati',
-        options: this.widgetsServices.services
+        options: this.widgetsServices.services,
+        value:this.widget.serviceKey
       }),
       new SwitchQuestion({
         key: 'counter',
