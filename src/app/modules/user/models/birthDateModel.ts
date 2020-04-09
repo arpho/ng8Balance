@@ -1,10 +1,11 @@
 // tslint:disable:semicolon
-export class DateModel {
+export class DateModel extends Date {
   day: number;
   month: number;
   year: number;
   fullDate: Date
   constructor(d?: any) {
+    super(d)
     // tslint:disable: quotemark
     // tslint:disable: no-string-literal
     if (d["day"] && d["year"] && d["month"]) {

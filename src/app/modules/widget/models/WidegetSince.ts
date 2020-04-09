@@ -4,13 +4,15 @@ import { BehaviorSubject } from 'rxjs';
 import { Value } from '../../item/models/value';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { WidgetTypes } from './WidgetsTypes';
+import { DateModel } from '../../user/models/birthDateModel';
 
 export interface WidgetSinceParams extends Widgetparams{
     sinceDate:string
 }
 
 export class WidgetSince extends Widget{
-
+MySinceDate: DateModel
+sinceDate:string // campo data serializzato dal db
     constructor(args?: WidgetSinceParams){
         super(args)
     }
@@ -25,6 +27,12 @@ export class WidgetSince extends Widget{
         }
     }
 
+    load(args){
+        Object.assign(this,args)
+        this.MySinceDate = new DateModel(this.sinceDate)
+        return this
+    }
+
     serialize() {
         return {
             temporalWindow: this.temporalWindow || 0,
@@ -36,6 +44,7 @@ export class WidgetSince extends Widget{
             counter: this._counter,
             id:this._id||0,
             _order: this.order || 0,
+            sincedate:this.MySinceDate.serialize(),
             widget: WidgetTypes.Since // r'regular||by
 
         }

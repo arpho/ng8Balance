@@ -32,7 +32,11 @@ export class InfoService {
     return this.storage.set("version", version);
   }
   async areThereNews() {
-    const previous_version = await this.storage.get("version");
+    var previous_version
+    if(this.storage){ previous_version = await this.storage.get("version");}
+    else{
+      const previous_version= '0.0'
+    }
     if (!previous_version) {
       return 1; // first installation
     }
