@@ -7,14 +7,17 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 })
 export class IDBWidgetServiceService {
   storeName = 'widgetsList'
-  private _db
+  dbName ='widgets'
+  private _db:IDBPDatabase
   public readonly db: BehaviorSubject<IDBPDatabase> = new BehaviorSubject(undefined)
+
+  
 
   async connectToIDB() {
     this._db = await openDB('widgets', 3, {
       upgrade(db, oldVersion, newVersion, transaction) {
         console.log(`updating db:${db}, oldVersion:${oldVersion},newVersion:${newVersion},transaction:${transaction}`)
-        db.createObjectStore(this ? this.storeName : 'widgetsList', { keyPath: 'key',  })
+        db.createObjectStore( this.storeName , { keyPath: 'key',  })
 
       },
       blocked() {
@@ -41,9 +44,12 @@ export class IDBWidgetServiceService {
     console.log('adding widget',item)
     const db = await this.db.subscribe((db: IDBPDatabase) => {
       if (db) {
-        db.add(this.storeName, item,item.key)
+        console.log('creating widget',item)
+        db.add(this.storeName, item,item.key).catch((err)=>{console.log('error on asdding',err)})
       }
     })
+
+    
   }
 
   delete(id, next) {

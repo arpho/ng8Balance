@@ -81,7 +81,8 @@ export class WidgetService {
   }
 
   async add(widget){
-    console.log(await this.idbService.add(widget))
+    console.log('adding ',widget)
+     this.idbService.add(widget)
     this.loadWidget()
   }
 

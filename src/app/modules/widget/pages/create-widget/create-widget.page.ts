@@ -13,6 +13,8 @@ import { CategoriesService } from 'src/app/services/categories/categorie.service
 import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { SuppliersService } from 'src/app/services/suppliers/suppliers.service';
 import { runInThisContext } from 'vm';
+import { ItemServiceInterface } from 'src/app/modules/item/models/ItemServiceInterface';
+import { thresholdFreedmanDiaconis } from 'd3';
 
 @Component({
   selector: 'app-create-widget',
@@ -28,25 +30,31 @@ export class CreateWidgetPage implements OnInit {
     this.modalCtrl.dismiss(payment)
   }
 
-  constructor(public modalCtrl: ModalController, public service: WidgetService,public categoriesService:CategoriesService,public paymentsService:PaymentsService,public suppliersService:SuppliersService) {
+  constructor(public modalCtrl: ModalController, public service: WidgetService, public categoriesService: CategoriesService, public paymentsService: PaymentsService, public suppliersService: SuppliersService) {
     this.title = "crea un nuovo Widget"
     this.widget = new Widget()
     this.widgetFields = this.FormFieldsFactory()
   }
 
   filter(ev) {
+    if (ev.serviceKey) {
+      console.log('entity', ev.serviceKey)
+      this.widgetFields = this.FormFieldsFactory(ev)
+    }
   }
 
-  widgetsServices= {
-    services: [
+
+  widgetsServices: { options: RoleModel[], services: {} } = {
+    options: [
       new RoleModel({ key: this.categoriesService.entityLabel, value: this.categoriesService.key }),
       new RoleModel({ key: this.paymentsService.entityLabel, value: this.paymentsService.key }),
       new RoleModel({ key: this.suppliersService.entityLabel, value: this.suppliersService.key })
-    ]
+    ],
+    services: {}
   };
 
-  protected FormFieldsFactory() {
-    return  [
+  protected FormFieldsFactory(ev?) {
+    const out: QuestionBase<unknown>[] = [
       new TextboxQuestion({
         key: 'title',
         label: 'nome del widget',
@@ -60,10 +68,10 @@ export class CreateWidgetPage implements OnInit {
         order: 2
       }),
       new DropdownQuestion({
-        key:'serviceKey',
-        label:'sorgente dati',
-        options: this.widgetsServices.services,
-        value:this.widget.serviceKey
+        key: 'serviceKey',
+        label: 'sorgente dati',
+        options: this.widgetsServices.options,
+        value: this.widget.serviceKey
       }),
       new SwitchQuestion({
         key: 'counter',
@@ -77,7 +85,23 @@ export class CreateWidgetPage implements OnInit {
         required: false,
         order: 4
       }),
-    ];;
+      new SelectorQuestion({
+        key: 'entityKey',
+        service: this.widgetsServices.services['categories'],
+        label: 'seleziona  qualcosa',
+        text: 'non so che scrivere',
+        createPopup: undefined
+      })
+    ];
+    if (ev && ev.serviceKey)
+      out.push(new SelectorQuestion({
+        key: 'entityKey',
+        service: this.widgetsServices.services[ev.serviceKey],
+        label: 'seleziona ' + this.widgetsServices.services[ev.serviceKey].title,
+        text: 'non so che scrivere',
+        createPopup: undefined
+      }))
+    return out
   }
 
   async submit(ev) {
@@ -95,6 +119,9 @@ export class CreateWidgetPage implements OnInit {
   }
 
   ngOnInit() {
+    this.widgetsServices.services[this.categoriesService.key] = this.categoriesService
+    this.widgetsServices.services[this.suppliersService.key] = this.suppliersService
+    this.widgetsServices.services[this.paymentsService.key] = this.paymentsService
   }
 
 }
