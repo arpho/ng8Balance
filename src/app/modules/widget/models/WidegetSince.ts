@@ -33,6 +33,15 @@ sinceDate:string // campo data serializzato dal db
         return this
     }
 
+
+    getText() {
+        if (!this.counter) {
+            return ` totale spese ${this.item['widgetText']} dal ${this.MySinceDate.serialize()}:`
+        }
+        return ` totale spese ${this.item['widgetText']} negli ultimi ${this.MySinceDate.serialize()}:`
+
+    }
+
     serialize() {
         return {
             temporalWindow: this.temporalWindow || 0,

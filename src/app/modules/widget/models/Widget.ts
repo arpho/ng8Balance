@@ -102,6 +102,13 @@ export class Widget {
     set order(value: number) {
         this._order = value
     }
+    getText() {
+        if (!this.counter) {
+            return ` totale spese ${this.item['widgetText']} negli ultimi ${this.temporalWindow}:`
+        }
+        return ` totale spese ${this.item['widgetText']} negli ultimi ${this.temporalWindow}:`
+
+    }
 
     filterFactory() {
         return () => {
