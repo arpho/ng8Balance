@@ -8,7 +8,8 @@ import { ItemServiceInterface } from '../modules/item/models/ItemServiceInterfac
 import { ItemFilterOPtions } from '../modules/item/models/ItemFIlterOptions';
 import { GeneratedFile } from '@angular/compiler';
 import { CategoriesService } from '../services/categories/categorie.service';
-export class CategoryModel implements FirebaseObject, ItemModelInterface {
+import { WidgetitemInteface } from '../modules/widget/models/widgetItemIterface';
+export class CategoryModel implements FirebaseObject, ItemModelInterface,WidgetitemInteface {
     key: string;
     title: string;
     service: ItemServiceInterface;
@@ -20,6 +21,7 @@ export class CategoryModel implements FirebaseObject, ItemModelInterface {
         this.key = key
         // this.service = service
     }
+    widgetText= 'per la categoria';
     build(obj: { title: string, key: string, service?: CategoriesService }) {
         this.title = obj.title;
         this.key = this.key || obj.key; if (obj.service) {
