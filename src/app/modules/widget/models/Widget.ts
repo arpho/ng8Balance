@@ -103,10 +103,13 @@ export class Widget {
         this._order = value
     }
     getText() {
+        let out: string
         if (!this.counter) {
-            return ` totale spese ${this.item['widgetText']} negli ultimi ${this.temporalWindow}:`
+            out = this.item ? ` totale spese ${this.item['widgetText']} negli ultimi ${this.temporalWindow}:` : ' no item'
         }
-        return ` totale spese ${this.item['widgetText']} negli ultimi ${this.temporalWindow}:`
+        out = this.item ? ` totale spese ${this.item['widgetText']} negli ultimi ${this.temporalWindow}:` : ' no item'
+        console.log('text', out)
+        return out
 
     }
 
