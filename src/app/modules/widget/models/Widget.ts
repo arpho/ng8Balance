@@ -4,15 +4,15 @@ import { Value } from '../../item/models/value';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { WidgetTypes } from './WidgetsTypes';
 
-export interface Widgetparams { service: EntityWidgetServiceInterface, serviceKey:string, entityKey: string, temporalWindow: number, counter: boolean, _order: number, _key?: number, note?: string, title?: string, description?: string }
+export interface Widgetparams { service: EntityWidgetServiceInterface, serviceKey: string, entityKey: string, temporalWindow: number, counter: boolean, _order: number, _key?: number, note?: string, title?: string, description?: string }
 
 export class Widget {
     _title: string;
     _note: string
     _description: string
     _key: number;
-    _serviceKey:string
-    
+    _serviceKey: string
+    _item: ItemModelInterface
     _entityKey: string //identify the entityKey
     _id: number
     _counter: boolean
@@ -22,11 +22,19 @@ export class Widget {
 
     }
 
-    set serviceKey (serviceKey:string){
+    set item(item: ItemModelInterface) {
+        this._item = item
+    }
+
+    get item() {
+        return this._item
+    }
+
+    set serviceKey(serviceKey: string) {
         this._serviceKey = serviceKey
     }
 
-    get serviceKey (){
+    get serviceKey() {
         return this._serviceKey
     }
 
@@ -122,11 +130,19 @@ export class Widget {
         this._key = key
     }
 
+    getEntityKey() {
+        if (this._item) {
+            return this._item.key
+        }
+        return this.entityKey
+
+    }
+
     serialize() {
         return {
             temporalWindow: this.temporalWindow || 0,
-            entityKey: this.entityKey || '',
-            serviceKey:this._serviceKey||'',
+            entityKey: this.getEntityKey() || this._entityKey,
+            serviceKey: this._serviceKey || '',
             key: this._key,
             description: this._description || '',
             note: this._note || '',

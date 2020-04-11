@@ -97,7 +97,7 @@ export class CreateWidgetPage implements OnInit {
       out.push(new SelectorQuestion({
         key: 'entityKey',
         service: this.widgetsServices.services[ev.serviceKey],
-        label: 'seleziona ' + this.widgetsServices.services[ev.serviceKey].title,
+        label: 'seleziona  ' + this.widgetsServices.services[ev.serviceKey].title,
         text: 'non so che scrivere',
         createPopup: undefined
       }))
@@ -107,6 +107,10 @@ export class CreateWidgetPage implements OnInit {
   async submit(ev) {
     console.log('submitted', ev)
     const widget = new Widget(ev)
+    if (ev.entityKey) {
+
+      widget.entityKey = ev.entityKey.key
+    }
     console.log(' new widget', widget.serialize())
     const out = await this.service.add(widget.serialize())
     this.dismiss()

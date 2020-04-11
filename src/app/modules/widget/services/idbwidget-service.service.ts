@@ -11,6 +11,13 @@ export class IDBWidgetServiceService {
   private _db:IDBPDatabase
   public readonly db: BehaviorSubject<IDBPDatabase> = new BehaviorSubject(undefined)
 
+
+  constructor() {
+    this.connectToIDB()
+
+
+  }
+
   
 
   async connectToIDB() {
@@ -91,9 +98,4 @@ export class IDBWidgetServiceService {
 
   }
 
-  constructor() {
-    this.connectToIDB()
-
-
-  }
 }

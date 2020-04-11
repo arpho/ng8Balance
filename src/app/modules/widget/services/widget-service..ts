@@ -42,7 +42,6 @@ export class WidgetService {
 
 
   loadWidget() {
-    console.log('loading widgets')
     this.WidgetList = []
     this.idbService.keys((keys: Promise<any>) => {
       console.log('waiting for keys')

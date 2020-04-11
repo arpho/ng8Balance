@@ -27,7 +27,7 @@ describe("testing Widget", () => {
         widget = new Widget().load({ service: new WidgetServiceMocker(), entityKey: 'testKey2', temporalWindow: 2, _order: 2, _key: 12, note: 'nota', title: 'test', description: 'descrizione' })
         const serialized = widget.serialize()
         expect(serialized._order).toBe(2)
-        expect(widget.serialize().key).toBeTruthy()
+        expect(serialized.key).toBeTruthy()
         expect(serialized.entityKey).toBe('testKey2')
         expect(serialized.title).toBe('test')
         expect(serialized.description).toBe('descrizione')
