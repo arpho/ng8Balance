@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { WidgetService } from '../../services/widget-service.';
 import { ShoppingKartModel } from 'src/app/models/shoppingKartModel';
 import { ShoppingKartsService } from 'src/app/services/shoppingKarts/shopping-karts.service';
@@ -11,6 +11,7 @@ import { EditWidgetPage } from '../../pages/edit-widget/edit-widget.page';
   selector: 'app-widget-drawer',
   templateUrl: './widget-drawer.component.html',
   styleUrls: ['./widget-drawer.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class WidgetDrawerComponent implements OnInit {
   keys//: Promise<string[]>
