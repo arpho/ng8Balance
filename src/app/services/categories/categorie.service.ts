@@ -98,6 +98,9 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
   }
 
   constructor() {
+    this.instatiateItem = (args:{})=>{
+      return new CategoryModel().load(args)
+    }
     this.counterWidget = (entityKey: string, entities: ShoppingKartModel[]) => { return this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => 1).reduce((pv, cv) => { return pv += cv }, 0) }
     this.adderWidget = (entityKey: string, entities: ShoppingKartModel[]) => { return this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => item.price).reduce((pv, cv) => { return pv += cv }, 0); }
     firebase.auth().onAuthStateChanged(user => {
@@ -117,5 +120,6 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
 
 
   }
+  instatiateItem: (args: {}) => ItemModelInterface;
 
 }

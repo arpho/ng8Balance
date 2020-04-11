@@ -15,6 +15,9 @@ export class SuppliersService implements ItemServiceInterface, EntityWidgetServi
   readonly items: Observable<Array<SupplierModel>> = this._items.asObservable()
   items_list: Array<SupplierModel> = []
   constructor() {
+    this.instatiateItem = (args:{})=>{
+      return new SupplierModel().build(args)
+    }
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.suppliersListRef = firebase.database().ref(`/fornitori/${user.uid}/`);
@@ -32,6 +35,7 @@ export class SuppliersService implements ItemServiceInterface, EntityWidgetServi
       }
     });
   }
+  instatiateItem: (args: {}) => ItemModelInterface;
   key = 'fornitori';
   entityLabel = 'Fornitori'
   counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;

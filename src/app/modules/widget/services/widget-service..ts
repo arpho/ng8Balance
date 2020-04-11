@@ -7,6 +7,12 @@ import { values } from 'd3';
 import { Widget } from '../models/Widget';
 import { IDBWidgetServiceService } from './idbwidget-service.service';
 import { ConnectionServiceModule } from 'ng-connection-service';
+import { CategoriesService } from 'src/app/services/categories/categorie.service';
+import { SuppliersService } from 'src/app/services/suppliers/suppliers.service';
+import { PaymentsService } from 'src/app/services/payments/payments.service';
+import { ItemServiceInterface } from '../../item/models/ItemServiceInterface';
+import { EntityWidgetServiceInterface } from '../models/EntityWidgetServiceInterface';
+import { ItemModelInterface } from '../../item/models/itemModelInterface';
 
 
 @Injectable({
@@ -21,8 +27,9 @@ export class WidgetService {
   private _db
   storeName = 'widgetsList';
   widgets_list: Array<Widget>
+  widgetsServices: EntityWidgetServiceInterface[] = [this.categoriesService, this.paymentsService, this.SuppliersService]
 
-  constructor(public service: WidgetService, public idbService: IDBWidgetServiceService) {
+  constructor(public service: WidgetService, public idbService: IDBWidgetServiceService, public categoriesService: CategoriesService, public SuppliersService: SuppliersService, public paymentsService: PaymentsService) {
 
     this.connectToIDB()
     // this.initializeWidget()
@@ -54,8 +61,26 @@ export class WidgetService {
               const widget = new Widget(value)
               widget.id = element
               if (value.key) // è un widget
-                this.WidgetList.push(widget)
-              console.log('widgetList', this.WidgetList)
+                if (widget.entityKey) {
+                  console.log('ha entity', widget)
+                  const service = this.widgetsServices.filter((item: EntityWidgetServiceInterface) => {
+                    return item.key === widget.serviceKey
+                  })[0]
+                  console.log('got service:', service)
+                  if (service) {
+                    console.log('getting', service.key, widget.entityKey)
+                    service.getItem(widget.entityKey).on('value', (item) => {
+                      console.log('got item', item, item.val())
+                      const entity = service.instatiateItem(item.val())
+                      entity.key = item.key
+                      widget.item = entity
+                      console.log('loaded item', widget.item)
+
+                    })
+                  }
+                }
+              this.WidgetList.push(widget)
+              //console.log('widgetList', this.WidgetList)
               this._widgetsList.next(this.WidgetList)
             })
           }))
@@ -64,8 +89,8 @@ export class WidgetService {
     }, 'new initializeing')
 
   }
-  async delete(id,next){
-    await this.idbService.delete(id,next)
+  async delete(id, next) {
+    await this.idbService.delete(id, next)
     this.loadWidget()
   }
 
@@ -79,9 +104,9 @@ export class WidgetService {
     this.idbService.get(key, next)
   }
 
-  async add(widget){
-    console.log('adding ',widget)
-     this.idbService.add(widget)
+  async add(widget) {
+    console.log('adding ', widget)
+    this.idbService.add(widget)
     this.loadWidget()
   }
 

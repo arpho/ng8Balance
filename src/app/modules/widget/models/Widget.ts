@@ -24,6 +24,7 @@ export class Widget {
 
     set item(item: ItemModelInterface) {
         this._item = item
+        this._entityKey = item.key
     }
 
     get item() {

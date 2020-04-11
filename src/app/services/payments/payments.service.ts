@@ -22,6 +22,9 @@ export class PaymentsService implements ItemServiceInterface, EntityWidgetServic
   }
 
   constructor() {
+    this.instatiateItem=  function(args:{}){
+      return new PaymentsModel().clone(args)
+    }
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.paymentsListRef = firebase.database().ref(`/pagamenti/${user.uid}/`);
@@ -36,9 +39,16 @@ export class PaymentsService implements ItemServiceInterface, EntityWidgetServic
       }
     });
   }
+  instatiateItem: (args: {}) => any;
+
+
+  
+  
+  ItemModelInterface: any;
   key = 'Pagamenti';
   entityLabel = 'pagamenti'
   filterableField: string;
+  instantiateItem:(args:{})=>ItemModelInterface
   counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   categoriesService?: ItemServiceInterface;

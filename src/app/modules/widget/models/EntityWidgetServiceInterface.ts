@@ -7,6 +7,7 @@ export interface EntityWidgetServiceInterface extends ItemServiceInterface {
     key:string // service identifier
     entityLabel: string
     // filterableField: string // is the field to be filtered for  in the main entities 
+    instatiateItem: (args:{})=> ItemModelInterface
     counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number
     adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number
 }
