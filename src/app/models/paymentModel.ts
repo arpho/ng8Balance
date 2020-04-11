@@ -33,7 +33,7 @@ export class PaymentsModel implements ItemModelInterface,WidgetitemInteface {
 
 
     }
-    widgetText = 'pagati tramite'
+    widgetText = `pagate tramite ${this.title}`
 
     build(item) {
         this.key = item.key

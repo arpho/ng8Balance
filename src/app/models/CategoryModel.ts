@@ -21,7 +21,7 @@ export class CategoryModel implements FirebaseObject, ItemModelInterface,Widgeti
         this.key = key
         // this.service = service
     }
-    widgetText= 'per la categoria';
+    widgetText= `per la categoria ${this.title}`
     build(obj: { title: string, key: string, service?: CategoriesService }) {
         this.title = obj.title;
         this.key = this.key || obj.key; if (obj.service) {

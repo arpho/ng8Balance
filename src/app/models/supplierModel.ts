@@ -12,7 +12,8 @@ import { Coordinates } from '../modules/geo-location/models/coordinates';
 import { QuickAction } from '../modules/item/models/QuickAction';
 import { ModalController, AlertController } from '@ionic/angular';
 import { Geolocatated } from '../modules/geo-location/models/geolocationInterface';
-export class SupplierModel implements ItemModelInterface, FirebaseObject,Geolocatated {
+import { WidgetitemInteface } from '../modules/widget/models/widgetItemIterface';
+export class SupplierModel implements ItemModelInterface,WidgetitemInteface, FirebaseObject,Geolocatated {
     nome: string;
     note: string;
     indirizzo: string;
@@ -79,6 +80,7 @@ export class SupplierModel implements ItemModelInterface, FirebaseObject,Geoloca
         }
 
     }
+    widgetText = `pagato con ${this.title}`
     initialize(supplier) {
         Object.assign(this, supplier)
         this.title = this.title || this.nome
