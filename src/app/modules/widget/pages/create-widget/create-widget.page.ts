@@ -86,16 +86,17 @@ export class CreateWidgetPage implements OnInit {
         order: 4
       }),
       new SelectorQuestion({
-        key: 'entityKey',
+        key: 'item',
         service: this.widgetsServices.services['categories'],
         label: 'seleziona  qualcosa',
         text: 'non so che scrivere',
         createPopup: undefined
       })
     ];
-    if (ev && ev.serviceKey)
+    if ((ev && ev.serviceKey)||this.widget.item)
       out.push(new SelectorQuestion({
-        key: 'entityKey',
+        key: 'item',
+        value:this.widget.item,
         service: this.widgetsServices.services[ev.serviceKey],
         label: 'seleziona  ' + this.widgetsServices.services[ev.serviceKey].title,
         text: 'non so che scrivere',

@@ -52,7 +52,7 @@ export class IDBWidgetServiceService {
     const db = await this.db.subscribe((db: IDBPDatabase) => {
       if (db) {
         console.log('creating widget',item)
-        db.add(this.storeName, item,item.key).catch((err)=>{console.log('error on asdding',err)})
+        db.add(this.storeName, item).catch((err)=>{console.log('error on asdding',err)})
       }
     })
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy,  } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges,  } from '@angular/core';
 import { Widget } from '../../models/Widget';
 import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterface';
 
@@ -9,11 +9,13 @@ import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterfa
   styleUrls: ['./widget.component.scss'],
   changeDetection:ChangeDetectionStrategy.OnPush
 })
-export class WidgetComponent implements OnInit {
+export class WidgetComponent implements OnInit, OnChanges {
   @Input() Widget:Widget
   @Input() items:ItemModelInterface[]
 
   constructor() { }
+  ngOnChanges(changes: SimpleChanges): void {
+  }
 
   ngOnInit() {}
 

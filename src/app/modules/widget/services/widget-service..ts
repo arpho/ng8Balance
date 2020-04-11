@@ -51,30 +51,22 @@ export class WidgetService {
   loadWidget() {
     this.WidgetList = []
     this.idbService.keys((keys: Promise<any>) => {
-      console.log('waiting for keys')
       keys.then(keyring => {
-        console.log('got keys', keyring)
         keyring.forEach(element => {
           this.idbService.get(element, (item => {
             item.then(value => {
-              console.log('value from db', value)
               const widget = new Widget(value)
               widget.id = element
               if (value.key) // è un widget
                 if (widget.entityKey) {
-                  console.log('ha entity', widget)
                   const service = this.widgetsServices.filter((item: EntityWidgetServiceInterface) => {
                     return item.key === widget.serviceKey
                   })[0]
-                  console.log('got service:', service)
                   if (service) {
-                    console.log('getting', service.key, widget.entityKey)
                     service.getItem(widget.entityKey).on('value', (item) => {
-                      console.log('got item', item, item.val())
                       const entity = service.instatiateItem(item.val())
                       entity.key = item.key
                       widget.item = entity
-                      console.log('loaded item', widget.item)
 
                     })
                   }
