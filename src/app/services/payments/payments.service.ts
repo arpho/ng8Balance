@@ -23,7 +23,7 @@ export class PaymentsService implements ItemServiceInterface, EntityWidgetServic
 
   constructor() {
     this.instatiateItem=  function(args:{}){
-      return new PaymentsModel().clone(args)
+      return new PaymentsModel().initialize(args)
     }
     firebase.auth().onAuthStateChanged(user => {
       if (user) {

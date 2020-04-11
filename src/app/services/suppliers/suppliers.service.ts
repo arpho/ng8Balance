@@ -15,8 +15,8 @@ export class SuppliersService implements ItemServiceInterface, EntityWidgetServi
   readonly items: Observable<Array<SupplierModel>> = this._items.asObservable()
   items_list: Array<SupplierModel> = []
   constructor() {
-    this.instatiateItem = (args:{})=>{
-      return new SupplierModel().build(args)
+    this.instatiateItem = (args: {}) => {
+      return new SupplierModel().initialize(args)
     }
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
