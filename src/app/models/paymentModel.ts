@@ -5,7 +5,8 @@ import { ItemServiceInterface } from '../modules/item/models/ItemServiceInterfac
 import { Value } from '../modules/item/models/value';
 import { ItemFilterOPtions } from '../modules/item/models/ItemFIlterOptions';
 import { QuickAction } from '../modules/item/models/QuickAction';
-export class PaymentsModel implements ItemModelInterface {
+import { WidgetitemInteface } from '../modules/widget/models/widgetItemIterface';
+export class PaymentsModel implements ItemModelInterface,WidgetitemInteface {
     nome: string; // retro compatibilità
     title: string;
     note: string;
@@ -32,6 +33,7 @@ export class PaymentsModel implements ItemModelInterface {
 
 
     }
+    widgetText = 'pagati tramite'
 
     build(item) {
         this.key = item.key
