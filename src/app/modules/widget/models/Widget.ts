@@ -15,7 +15,7 @@ export class Widget {
     _item: ItemModelInterface
     _entityKey: string //identify the entityKey
     _id: number
-    _text: BehaviorSubject<string> = new BehaviorSubject('')
+    _text: BehaviorSubject<string> = new BehaviorSubject('') // show the widget's text
     readonly text: Observable<string> = this._text.asObservable()
     _counter: boolean
     constructor(args?: Widgetparams) {
