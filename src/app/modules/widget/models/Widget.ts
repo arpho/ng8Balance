@@ -26,7 +26,6 @@ export class Widget {
 
     set item(item: ItemModelInterface) {
         this._item = item
-        console.log('set item', item)
         this._entityKey = item.key
         this._text.next(`${item['widgetText']}`)
     }

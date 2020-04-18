@@ -80,9 +80,10 @@ export class SupplierModel implements ItemModelInterface,WidgetitemInteface, Fir
         }
 
     }
-    widgetText = `pagato con ${this.title}`
+    widgetText = `..`
     initialize(supplier) {
         Object.assign(this, supplier)
+        this.widgetText = ` comprato presso ${this.title}`
         this.title = this.title || this.nome
         this.address = new  Coordinates(this.address)
         return this

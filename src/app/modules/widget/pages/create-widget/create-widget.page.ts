@@ -15,6 +15,7 @@ import { SuppliersService } from 'src/app/services/suppliers/suppliers.service';
 import { runInThisContext } from 'vm';
 import { ItemServiceInterface } from 'src/app/modules/item/models/ItemServiceInterface';
 import { thresholdFreedmanDiaconis } from 'd3';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-create-widget',
@@ -25,6 +26,7 @@ export class CreateWidgetPage implements OnInit {
   title: string
   widgetFields: any[]
   widget: Widget
+  Form: FormGroup
 
   dismiss(payment?) {
     this.modalCtrl.dismiss(payment)
@@ -93,11 +95,11 @@ export class CreateWidgetPage implements OnInit {
         createPopup: undefined
       })
     ];
-    if ((ev && ev.serviceKey)||this.widget.item)
+    if ((ev && ev.serviceKey) || this.widget.item)
       out.push(new SelectorQuestion({
         key: 'item',
-        value:this.widget.item,
-        service: ev.serviceKey?this.widgetsServices.services[ev.serviceKey]:this.widget.serviceKey,
+        value: this.widget.item,
+        service: ev.serviceKey ? this.widgetsServices.services[ev.serviceKey] : this.widget.serviceKey,
         label: 'seleziona  ' + this.widgetsServices.services[ev.serviceKey].title,
         text: 'non so che scrivere',
         createPopup: undefined
@@ -105,10 +107,21 @@ export class CreateWidgetPage implements OnInit {
     return out
   }
 
+  setForm(form: FormGroup) {
+    this.Form = form
+    // tslint:disable-next-line: no-string-literal
+    this.Form.controls['serviceKey'].valueChanges.subscribe(ev => {
+      console.log('changes', ev)
+      this.widgetFields = this.FormFieldsFactory({ serviceKey: ev })
+      // this.kartFields = this.setFormFields(this.kart, this.supplierFilterFunction)
+    })
+  }
+
   async submit(ev) {
     console.log('submitted', ev)
     const widget = new Widget(ev)
     if (ev.entityKey) {
+      console.log('ev', ev)
 
       widget.entityKey = ev.entityKey.key
     }
