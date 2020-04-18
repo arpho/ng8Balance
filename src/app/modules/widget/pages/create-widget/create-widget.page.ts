@@ -26,7 +26,7 @@ export class CreateWidgetPage implements OnInit {
   title: string
   widgetFields: any[]
   widget: Widget
-  Form: FormGroup
+  Form: FormGroup // listener to the form
 
   dismiss(payment?) {
     this.modalCtrl.dismiss(payment)
@@ -95,7 +95,8 @@ export class CreateWidgetPage implements OnInit {
         createPopup: undefined
       })
     ];
-    if ((ev && ev.serviceKey) || this.widget.item)
+    if ((ev && ev.serviceKey) || this.widget.item){
+      out.splice(-1,1) // remove the dummy field
       out.push(new SelectorQuestion({
         key: 'item',
         value: this.widget.item,
@@ -103,7 +104,7 @@ export class CreateWidgetPage implements OnInit {
         label: 'seleziona  ' + this.widgetsServices.services[ev.serviceKey].title,
         text: 'non so che scrivere',
         createPopup: undefined
-      }))
+      }))}
     return out
   }
 
