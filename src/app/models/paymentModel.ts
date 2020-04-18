@@ -6,7 +6,7 @@ import { Value } from '../modules/item/models/value';
 import { ItemFilterOPtions } from '../modules/item/models/ItemFIlterOptions';
 import { QuickAction } from '../modules/item/models/QuickAction';
 import { WidgetitemInteface } from '../modules/widget/models/widgetItemIterface';
-export class PaymentsModel implements ItemModelInterface,WidgetitemInteface {
+export class PaymentsModel implements ItemModelInterface, WidgetitemInteface {
     nome: string; // retro compatibilità
     title: string;
     note: string;
@@ -33,7 +33,7 @@ export class PaymentsModel implements ItemModelInterface,WidgetitemInteface {
 
 
     }
-    widgetText = `pagate tramite ${this.title}`
+    widgetText = `..`
 
     build(item) {
         this.key = item.key
@@ -59,13 +59,14 @@ export class PaymentsModel implements ItemModelInterface,WidgetitemInteface {
         return [out];
     }
 
-    initialize(payment){
-        Object.assign(this,payment)
+    initialize(payment) {
+        Object.assign(this, payment)
+        this.widgetText = `pagate tramite ${this.title}`
         this.title = this.title || this.nome
         return this
     }
     async load() {
-       
+
         return this
     }
 
@@ -98,7 +99,7 @@ export class PaymentsModel implements ItemModelInterface,WidgetitemInteface {
 
 
 
-    getEditPopup(item: ItemModelInterface,) {
+    getEditPopup(item: ItemModelInterface, ) {
 
         return {
             subHeader: 'modifica pagamento',
@@ -146,7 +147,7 @@ export class PaymentsModel implements ItemModelInterface,WidgetitemInteface {
     getTitle() {
         const value = new Value();
         value.label = 'pagamento';
-        value.value = this.title||this.nome;
+        value.value = this.title || this.nome;
         return value;
     }
 
