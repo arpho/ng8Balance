@@ -9,19 +9,20 @@ import { ItemFilterOPtions } from '../modules/item/models/ItemFIlterOptions';
 import { GeneratedFile } from '@angular/compiler';
 import { CategoriesService } from '../services/categories/categorie.service';
 import { WidgetitemInteface } from '../modules/widget/models/widgetItemIterface';
-export class CategoryModel implements FirebaseObject, ItemModelInterface,WidgetitemInteface {
+export class CategoryModel implements FirebaseObject, ItemModelInterface, WidgetitemInteface {
+
     key: string;
     title: string;
     service: ItemServiceInterface;
     note: string;
     fatherKey: string;
     father: CategoryModel;
+    widgetText = '..'
 
     constructor(key?: string, ) {
         this.key = key
         // this.service = service
     }
-    widgetText= `per la categoria ${this.title}`
     build(obj: { title: string, key: string, service?: CategoriesService }) {
         this.title = obj.title;
         this.key = this.key || obj.key; if (obj.service) {
@@ -57,24 +58,25 @@ export class CategoryModel implements FirebaseObject, ItemModelInterface,Widgeti
     }
     initialize(cat: any) {
         Object.assign(this, cat)
+        this.widgetText = ` per la categoria ${this.title}`
         this.title = this.title || 'deleted'
 
 
 
-    /*     if (this.service) {
-            this.service.getItem(this.key).on('value', cat => {
-                if (cat.val()) {
-                    this.title = cat.val().title;
-                    this.fatherKey = cat.val().fatherKey
-                    if (this.fatherKey) {
-                        // this.father = new CategoryModel(this.fatherKey)
-                        // this.father.initialize()
+        /*     if (this.service) {
+                this.service.getItem(this.key).on('value', cat => {
+                    if (cat.val()) {
+                        this.title = cat.val().title;
+                        this.fatherKey = cat.val().fatherKey
+                        if (this.fatherKey) {
+                            // this.father = new CategoryModel(this.fatherKey)
+                            // this.father.initialize()
+                        }
+                    } else {
+                        this.title = 'deleted'
                     }
-                } else {
-                    this.title = 'deleted'
-                }
-            });
-        } */
+                });
+            } */
         return this
     }
     getCountingText() { return ' categorie'; }
@@ -213,7 +215,7 @@ export class CategoryModel implements FirebaseObject, ItemModelInterface,Widgeti
 
 
     getKey() {
-        return this.key||'';
+        return this.key || '';
     }
 
     serialize() {
