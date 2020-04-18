@@ -97,7 +97,7 @@ export class CreateWidgetPage implements OnInit {
       out.push(new SelectorQuestion({
         key: 'item',
         value:this.widget.item,
-        service: this.widgetsServices.services[ev.serviceKey],
+        service: ev.serviceKey?this.widgetsServices.services[ev.serviceKey]:this.widget.serviceKey,
         label: 'seleziona  ' + this.widgetsServices.services[ev.serviceKey].title,
         text: 'non so che scrivere',
         createPopup: undefined

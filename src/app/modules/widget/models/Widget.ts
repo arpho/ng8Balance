@@ -1,5 +1,5 @@
 import { EntityWidgetServiceInterface } from './EntityWidgetServiceInterface';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Value } from '../../item/models/value';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { WidgetTypes } from './WidgetsTypes';
@@ -15,6 +15,8 @@ export class Widget {
     _item: ItemModelInterface
     _entityKey: string //identify the entityKey
     _id: number
+    _text: BehaviorSubject<string> = new BehaviorSubject('')
+    readonly text: Observable<string> = this._text.asObservable()
     _counter: boolean
     constructor(args?: Widgetparams) {
         this.load(args)
@@ -102,14 +104,14 @@ export class Widget {
     set order(value: number) {
         this._order = value
     }
-    getText() {
-        let out: string
+    async getText() {
+        let out: Promise<string>
         if (!this.counter) {
-            out = this.item ? ` totale spese ${this.item['widgetText']} negli ultimi ${this.temporalWindow}:` : ' no item'
+            return new Promise((resolve, reject) => {
+
+                resolve(` totale spese ${this.item['widgetText']} negli ultimi ${this.temporalWindow} giorni:`)
+            })
         }
-        out = this.item ? ` totale spese ${this.item['widgetText']} negli ultimi ${this.temporalWindow}:` : ' no item'
-        console.log('text', out)
-        return out
 
     }
 
