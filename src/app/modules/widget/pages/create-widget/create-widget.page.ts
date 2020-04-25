@@ -109,6 +109,7 @@ export class CreateWidgetPage implements OnInit {
         key: 'widget',
         label: 'widget type',
         options: widgetTypes,
+        enabled:true,
         value:this.widget.widget
 
 
