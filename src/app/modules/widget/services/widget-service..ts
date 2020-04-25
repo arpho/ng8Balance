@@ -13,6 +13,8 @@ import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { ItemServiceInterface } from '../../item/models/ItemServiceInterface';
 import { EntityWidgetServiceInterface } from '../models/EntityWidgetServiceInterface';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
+import { WidgetTypes } from '../models/WidgetsTypes';
+import { WidgetSince } from '../models/WidegetSince';
 
 
 @Injectable({
@@ -46,6 +48,12 @@ export class WidgetService {
     this.idbService.keys(next, 'wrapping keys')
   }
 
+  widgetFactory(type: number) {
+    const widgets = {}
+    widgets[WidgetTypes.Regular] = new Widget()
+    widgets[WidgetTypes.Since] = new WidgetSince()
+    return widgets[type]
+  }
 
 
   loadWidget() {
@@ -55,7 +63,8 @@ export class WidgetService {
         keyring.forEach(element => {
           this.idbService.get(element, (item => {
             item.then(value => {
-              const widget = new Widget(value)
+              console.log('widget data', value)
+              const widget = this.widgetFactory(value.widget).load(value)
               widget.id = element
               if (value.key) // è un widget
                 if (widget.entityKey) {
