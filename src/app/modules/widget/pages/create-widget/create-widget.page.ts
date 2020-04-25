@@ -55,8 +55,9 @@ export class CreateWidgetPage implements OnInit {
     services: {}
   };
 
+
   protected FormFieldsFactory(ev?) {
-    const out: QuestionBase<unknown>[] = [
+    let out: QuestionBase<unknown>[] = [
       new TextboxQuestion({
         key: 'title',
         label: 'nome del widget',
@@ -96,7 +97,9 @@ export class CreateWidgetPage implements OnInit {
       })
     ];
     if ((ev && ev.serviceKey) || this.widget.item){
-      out.splice(-1,1) // remove the dummy field
+      //out.filter(item=>item.key=='item') =
+      //out.splice(-1,1) // remove the dummy field
+      out = out.filter(widget=>widget.key!='item')
       out.push(new SelectorQuestion({
         key: 'item',
         value: this.widget.item,
