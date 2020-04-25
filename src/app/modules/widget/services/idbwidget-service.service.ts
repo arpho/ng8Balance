@@ -24,7 +24,8 @@ export class IDBWidgetServiceService {
     this._db = await openDB('widgets', 3, {
       upgrade(db, oldVersion, newVersion, transaction) {
         console.log(`updating db:${db}, oldVersion:${oldVersion},newVersion:${newVersion},transaction:${transaction}`)
-        db.createObjectStore( this.storeName , { keyPath: 'key',  })
+        if(this && this.storeName){
+        db.createObjectStore( this.storeName , { keyPath: 'key',  })}
 
       },
       blocked() {
