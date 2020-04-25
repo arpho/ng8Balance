@@ -116,7 +116,7 @@ export class CreateWidgetPage implements OnInit {
     ];
     if( ev && ev.widget){
       console.log('change widget',ev)
-      this.widget = (ev.widget == WidgetTypes.Regular)? new Widget().load(this.widget):  new WidgetSince().load(this.widget)
+      this.widget = this.service.widgetFactory(ev.widget).load(this.widget)
 
     }
     if ((ev && ev.serviceKey) || this.widget.item) {
