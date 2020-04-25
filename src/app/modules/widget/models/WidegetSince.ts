@@ -6,29 +6,31 @@ import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { WidgetTypes } from './WidgetsTypes';
 import { DateModel } from '../../user/models/birthDateModel';
 
-export interface WidgetSinceParams extends Widgetparams{
-    sinceDate:string
+export interface WidgetSinceParams extends Widgetparams {
+    sinceDate: string
 }
 
-export class WidgetSince extends Widget{
-MySinceDate: DateModel
-sinceDate:string // campo data serializzato dal db
-    constructor(args?: WidgetSinceParams){
+export class WidgetSince extends Widget {
+    MySinceDate: DateModel
+    widget : WidgetTypes.Since
+    sinceDate: string // campo data serializzato dal db
+    constructor(args?: WidgetSinceParams) {
         super(args)
+        
     }
 
-    filterFactory(){
-        return  ()=>{
-            const out = (item:ItemModelInterface)=>{
+    filterFactory() {
+        return () => {
+            const out = (item: ItemModelInterface) => {
                 const date = new Date()
-                date.setDate(date.getDate()- this.temporalWindow)
-                return item['purchaseDate'] >=  date
+                date.setDate(date.getDate() - this.temporalWindow)
+                return item['purchaseDate'] >= date
             }
         }
     }
 
-    load(args){
-        Object.assign(this,args)
+    load(args) {
+        Object.assign(this, args)
         this.MySinceDate = new DateModel(this.sinceDate)
         return this
     }
@@ -47,15 +49,15 @@ sinceDate:string // campo data serializzato dal db
             temporalWindow: this.temporalWindow || 0,
             entityKey: this.entityKey || '',
             key: this._key,
-            description:this._description||'',
-            note:this._note||'',
-            title:this._title||'',
+            description: this._description || '',
+            note: this._note || '',
+            title: this._title || '',
             counter: this._counter,
-            id:this._id||0,
+            id: this._id || 0,
             _order: this.order || 0,
-            serviceKey:this.serviceKey||'',
-            sincedate:this.MySinceDate.serialize(),
-            widget: WidgetTypes.Since // r'regular||by
+            serviceKey: this.serviceKey || '',
+            sincedate: this.MySinceDate.serialize(),
+            widget: this.widget // r'regular||by
 
         }
     }

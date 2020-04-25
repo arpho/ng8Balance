@@ -18,6 +18,7 @@ import { thresholdFreedmanDiaconis } from 'd3';
 import { FormGroup } from '@angular/forms';
 import { ComboValue } from 'src/app/modules/dynamic-form/models/ComboValueinterface';
 import { WidgetTypes } from '../../models/WidgetsTypes';
+import { WidgetSince } from '../../models/WidegetSince';
 
 @Component({
   selector: 'app-create-widget',
@@ -59,6 +60,10 @@ export class CreateWidgetPage implements OnInit {
 
 
   protected FormFieldsFactory(ev?) {
+    console.log('update',ev)
+    if(ev && ev.widget){
+      console.log('widgetType',ev.widget)
+    }
 
     const widgetTypes = [new RoleModel({ key: 'sinceWidget', value: WidgetTypes.Since }),
     new RoleModel({ key: 'regular', value: WidgetTypes.Regular })]
@@ -104,10 +109,16 @@ export class CreateWidgetPage implements OnInit {
         key: 'widget',
         label: 'widget type',
         options: widgetTypes,
+        value:this.widget.widget
 
 
       })
     ];
+    if( ev && ev.widget){
+      console.log('change widget',ev)
+      this.widget = (ev.widget == WidgetTypes.Regular)? new Widget().load(this.widget):  new WidgetSince().load(this.widget)
+
+    }
     if ((ev && ev.serviceKey) || this.widget.item) {
       out = out.filter(widget => widget.key != 'item') // remove the dummy question field
       out.push(new SelectorQuestion({
@@ -129,6 +140,10 @@ export class CreateWidgetPage implements OnInit {
       console.log('changes', ev)
       this.widgetFields = this.FormFieldsFactory({ serviceKey: ev })
       // this.kartFields = this.setFormFields(this.kart, this.supplierFilterFunction)
+    })
+    this.Form.controls['widget'].valueChanges.subscribe(ev=>{
+      console.log('widget change',ev)
+      this.widgetFields = this.FormFieldsFactory({widget:ev})
     })
   }
 

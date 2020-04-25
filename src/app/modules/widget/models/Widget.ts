@@ -6,7 +6,7 @@ import { WidgetTypes } from './WidgetsTypes';
 
 export interface Widgetparams { service: EntityWidgetServiceInterface, serviceKey: string, entityKey: string, temporalWindow: number, counter: boolean, _order: number, _key?: number, note?: string, title?: string, description?: string }
 
-export class Widget  {
+export class Widget {
     _title: string;
     _note: string
     _description: string
@@ -15,12 +15,15 @@ export class Widget  {
     _item: ItemModelInterface
     _entityKey: string //identify the entityKey
     _id: number
+    widget = WidgetTypes.Regular
+
     _text: BehaviorSubject<string> = new BehaviorSubject('') // show the widget's text
     readonly text: Observable<string> = this._text.asObservable()
     _counter: boolean
     constructor(args?: Widgetparams) {
         this.load(args)
         this._key = this._key || new Date().getTime()
+
 
     }
 
@@ -164,7 +167,7 @@ export class Widget  {
             counter: this._counter,
             id: this._id || 0,
             _order: this._order || 0,
-            widget: WidgetTypes.Regular // r'regular||by
+            widget: this.widget // r'regular||by
 
         }
     }
