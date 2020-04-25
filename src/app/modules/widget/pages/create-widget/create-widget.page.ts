@@ -16,6 +16,8 @@ import { runInThisContext } from 'vm';
 import { ItemServiceInterface } from 'src/app/modules/item/models/ItemServiceInterface';
 import { thresholdFreedmanDiaconis } from 'd3';
 import { FormGroup } from '@angular/forms';
+import { ComboValue } from 'src/app/modules/dynamic-form/models/ComboValueinterface';
+import { WidgetTypes } from '../../models/WidgetsTypes';
 
 @Component({
   selector: 'app-create-widget',
@@ -46,7 +48,7 @@ export class CreateWidgetPage implements OnInit {
   }
 
 
-  widgetsServices: { options: RoleModel[], services: {} } = {
+  widgetsServices: { options: ComboValue[], services: {} } = {
     options: [
       new RoleModel({ key: this.categoriesService.entityLabel, value: this.categoriesService.key }),
       new RoleModel({ key: this.paymentsService.entityLabel, value: this.paymentsService.key }),
@@ -57,6 +59,9 @@ export class CreateWidgetPage implements OnInit {
 
 
   protected FormFieldsFactory(ev?) {
+
+    const widgetTypes = [new RoleModel({ key: 'sinceWidget', value: WidgetTypes.Since }),
+    new RoleModel({ key: 'regular', value: WidgetTypes.Regular })]
     let out: QuestionBase<unknown>[] = [
       new TextboxQuestion({
         key: 'title',
@@ -94,12 +99,17 @@ export class CreateWidgetPage implements OnInit {
         label: 'seleziona  qualcosa',
         text: 'non so che scrivere',
         createPopup: undefined
+      }),
+      new DropdownQuestion({
+        key: 'widget',
+        label: 'widget type',
+        options: widgetTypes,
+
+
       })
     ];
-    if ((ev && ev.serviceKey) || this.widget.item){
-      //out.filter(item=>item.key=='item') =
-      //out.splice(-1,1) // remove the dummy field
-      out = out.filter(widget=>widget.key!='item')
+    if ((ev && ev.serviceKey) || this.widget.item) {
+      out = out.filter(widget => widget.key != 'item') // remove the dummy question field
       out.push(new SelectorQuestion({
         key: 'item',
         value: this.widget.item,
@@ -107,7 +117,8 @@ export class CreateWidgetPage implements OnInit {
         label: 'seleziona  ' + this.widgetsServices.services[ev.serviceKey].title,
         text: 'non so che scrivere',
         createPopup: undefined
-      }))}
+      }))
+    }
     return out
   }
 

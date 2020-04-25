@@ -6,7 +6,7 @@ import { WidgetTypes } from './WidgetsTypes';
 
 export interface Widgetparams { service: EntityWidgetServiceInterface, serviceKey: string, entityKey: string, temporalWindow: number, counter: boolean, _order: number, _key?: number, note?: string, title?: string, description?: string }
 
-export class Widget {
+export class Widget  {
     _title: string;
     _note: string
     _description: string
