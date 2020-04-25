@@ -8,7 +8,7 @@ export class DateModel extends Date {
     super(d)
     // tslint:disable: quotemark
     // tslint:disable: no-string-literal
-    if (d["day"] && d["year"] && d["month"]) {
+    if (d && d["day"] && d["year"] && d["month"]) {
       this.day = d["day"];
       this.month = d["month"];
       this.year = d["year"];
