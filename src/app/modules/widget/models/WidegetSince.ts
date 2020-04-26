@@ -12,10 +12,11 @@ export interface WidgetSinceParams extends Widgetparams {
 
 export class WidgetSince extends Widget {
     MySinceDate: DateModel
-    widget : WidgetTypes.Since
+    widget = WidgetTypes.Since
     sinceDate: string // campo data serializzato dal db
     constructor(args?: WidgetSinceParams) {
         super(args)
+        this.widget = WidgetTypes.Since
         
     }
 
@@ -32,6 +33,7 @@ export class WidgetSince extends Widget {
     load(args) {
         Object.assign(this, args)
         this.MySinceDate = new DateModel(this.sinceDate)
+        this.widget = WidgetTypes.Since
         return this
     }
 
@@ -57,7 +59,7 @@ export class WidgetSince extends Widget {
             _order: this.order || 0,
             serviceKey: this.serviceKey || '',
             sincedate: this.MySinceDate.serialize(),
-            widget: this.widget // r'regular||by
+            widget: WidgetTypes.Since // r'regular||by
 
         }
     }

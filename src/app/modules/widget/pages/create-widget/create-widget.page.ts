@@ -109,15 +109,13 @@ export class CreateWidgetPage implements OnInit {
         key: 'widget',
         label: 'widget type',
         options: widgetTypes,
-        disabled:true,
         value:this.widget.widget
 
 
       })
     ];
     if( ev && ev.widget){
-      console.log('change widget',ev)
-      this.widget = this.service.widgetFactory(ev.widget).load(this.widget)
+      this.widget = this.service.widgetFactory(Number(ev.widget)).load(this.widget)
 
     }
     if ((ev && ev.serviceKey) || this.widget.item) {
@@ -125,7 +123,7 @@ export class CreateWidgetPage implements OnInit {
       out.push(new SelectorQuestion({
         key: 'item',
         value: this.widget.item,
-        service: ev.serviceKey ? this.widgetsServices.services[ev.serviceKey] : this.widget.serviceKey,
+        service: (ev&& ev.serviceKey) ? this.widgetsServices.services[ev.serviceKey] : this.widget.serviceKey,
         label: 'seleziona  ' + this.widgetsServices.services[ev.serviceKey].title,
         text: 'non so che scrivere',
         createPopup: undefined
@@ -144,6 +142,8 @@ export class CreateWidgetPage implements OnInit {
     })
     this.Form.controls['widget'].valueChanges.subscribe(ev=>{
       console.log('widget change',ev)
+      this.widget = this.service.widgetFactory(ev).load(this.widget)
+      console.log('new widget',this.widget)
       this.widgetFields = this.FormFieldsFactory({widget:ev})
     })
   }

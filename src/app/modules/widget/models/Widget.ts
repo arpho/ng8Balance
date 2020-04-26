@@ -140,6 +140,7 @@ export class Widget {
     load(args) {
         Object.assign(this, args)
         this.key = this.key || this._key
+        this.widget = WidgetTypes.Regular
         return this
     }
 
@@ -167,7 +168,7 @@ export class Widget {
             counter: this._counter,
             id: this._id || 0,
             _order: this._order || 0,
-            widget: this.widget // r'regular||by
+            widget: WidgetTypes.Regular // r'regular||by
 
         }
     }
