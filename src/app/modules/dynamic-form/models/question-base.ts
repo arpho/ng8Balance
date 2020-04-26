@@ -21,7 +21,7 @@ export class QuestionBase<T> {
   service: ItemServiceInterface
   labelFalse: string;
   text: string;
-  enabled:boolean
+  disabled:boolean
   options: ComboValue[]
   neutralFilter: (item: ItemModelInterface) => true
   // any solo per testing TOBE refactored
