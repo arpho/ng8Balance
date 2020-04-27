@@ -3,6 +3,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Value } from '../../item/models/value';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { WidgetTypes } from './WidgetsTypes';
+import { TextboxQuestion } from '../../dynamic-form/models/question-textbox';
+import { QuestionBase } from '../../dynamic-form/models/question-base';
+import { SwitchQuestion } from '../../item/models/question-switch';
+import { SelectorQuestion } from '../../dynamic-form/models/question-selector';
 
 export interface Widgetparams { service: EntityWidgetServiceInterface, serviceKey: string, entityKey: string, temporalWindow: number, counter: boolean, _order: number, _key?: number, note?: string, title?: string, description?: string }
 
@@ -25,6 +29,18 @@ export class Widget {
         this._key = this._key || new Date().getTime()
 
 
+    }
+
+    extraField4Form():QuestionBase<unknown>[] {
+        return   [
+            
+            new TextboxQuestion({
+                type:'number',
+                key:'temporalWindow',
+                label:'giorni di osservazione',
+                required:true
+            })
+        ]
     }
 
     set item(item: ItemModelInterface) {

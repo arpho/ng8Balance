@@ -114,6 +114,7 @@ export class CreateWidgetPage implements OnInit {
 
       })
     ];
+    out = [...out,...this.widget.extraField4Form()]
     if( ev && ev.widget){
       this.widget = this.service.widgetFactory(Number(ev.widget)).load(this.widget)
 
