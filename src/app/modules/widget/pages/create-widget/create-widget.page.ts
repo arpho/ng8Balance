@@ -152,7 +152,7 @@ export class CreateWidgetPage implements OnInit {
 
   async submit(ev) {
     console.log('submitted', ev)
-    const widget = new Widget(ev)
+    const widget = this.widget.load(ev)
     if (ev.entityKey) {
       console.log('ev', ev)
 
