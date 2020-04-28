@@ -5,6 +5,8 @@ import { Value } from '../../item/models/value';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { WidgetTypes } from './WidgetsTypes';
 import { DateModel } from '../../user/models/birthDateModel';
+import { QuestionBase } from '../../dynamic-form/models/question-base';
+import { DateQuestion } from '../../dynamic-form/models/question-date';
 
 export interface WidgetSinceParams extends Widgetparams {
     sinceDate: string
@@ -18,6 +20,19 @@ export class WidgetSince extends Widget {
         super(args)
         this.widget = WidgetTypes.Since
         
+    }
+
+
+    extraField4Form():QuestionBase<unknown>[] {
+        return   [
+            
+            new DateQuestion({
+                key:'temporalWindow',
+                label:'inizio periodo di osservazione',
+                value: this.MySinceDate.formatDate(),
+                required: true
+              }),
+        ]
     }
 
     filterFactory() {
