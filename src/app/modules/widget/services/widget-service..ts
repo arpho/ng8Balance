@@ -63,6 +63,7 @@ export class WidgetService {
         keyring.forEach(element => {
           this.idbService.get(element, (item => {
             item.then(value => {
+              console.log('loading',value)
               const widget = this.widgetFactory(value.widget).load(value)
               widget.id = element
               if (value.key) // è un widget

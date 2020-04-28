@@ -47,7 +47,8 @@ export class WidgetSince extends Widget {
 
     load(args) {
         Object.assign(this, args)
-        this.MySinceDate = new DateModel(this.sinceDate)
+        this.MySinceDate = new DateModel(this.temporalWindow)
+        console.log('my sinceDate',this.MySinceDate)
         this.widget = WidgetTypes.Since
         return this
     }
