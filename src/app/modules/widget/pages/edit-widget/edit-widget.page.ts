@@ -14,15 +14,15 @@ import { PaymentsService } from 'src/app/services/payments/payments.service';
   templateUrl: '../create-widget/create-widget.page.html',
   styleUrls: ['./edit-widget.page.scss'],
 })
-export class EditWidgetPage  extends CreateWidgetPage implements OnInit {
+export class EditWidgetPage extends CreateWidgetPage implements OnInit {
   widget
 
-  constructor(public modalCtrl: ModalController,public service:WidgetService,public navParams:NavParams,public categories:CategoriesService,public suppliers:SuppliersService,public payments:PaymentsService) {
-    super(modalCtrl,service,categories,payments,suppliers);
+  constructor(public modalCtrl: ModalController, public service: WidgetService, public navParams: NavParams, public categories: CategoriesService, public suppliers: SuppliersService, public payments: PaymentsService) {
+    super(modalCtrl, service, categories, payments, suppliers);
   }
 
   ngOnInit() {
-    this.widget = new Widget( this.navParams.get('widget'))
+    this.widget = this.service.widgetFactory(this.navParams.get('widget').widget).load(this.navParams.get('widget'))
     this.title = `modifica widget ${this.widget.title}`
     this.widgetFields = super.FormFieldsFactory()
   }

@@ -60,8 +60,8 @@ export class CreateWidgetPage implements OnInit {
 
 
   protected FormFieldsFactory(ev?) {
-    if(ev && ev.widget){
-      console.log('widgetType',ev.widget)
+    if (ev && ev.widget) {
+      console.log('widgetType', ev.widget)
     }
     const widgetTypes = [new RoleModel({ key: 'sinceWidget', value: WidgetTypes.Since }),
     new RoleModel({ key: 'regular', value: WidgetTypes.Regular })]
@@ -107,26 +107,26 @@ export class CreateWidgetPage implements OnInit {
         key: 'widget',
         label: 'widget type',
         options: widgetTypes,
-        value:this.widget.widget
+        value: this.widget.widget
 
 
       })
     ];
-    out = [...out,...this.widget.extraField4Form()]
-    if( ev && ev.widget){
+    out = [...out, ...this.widget.extraField4Form()]
+    if (ev && ev.widget) {
       this.widget = this.service.widgetFactory(Number(ev.widget)).load(this.widget)
-      console.log('loaded widget',this.widget)
+      console.log('loaded widget', this.widget)
 
     }
     if ((ev && ev.serviceKey) || this.widget.item) {
-      console.log('this',this)
-      this.widget.serviceKey =(ev&& ev.serviceKey)? ev.serviceKeythis.widget.serviceKey: this.widget.serviceKey // spaghetti code @TODO change it from does not update this field
+      console.log('this', this)
+      this.widget.serviceKey = (ev && ev.serviceKey) ? ev.serviceKeythis.widget.serviceKey : this.widget.serviceKey // spaghetti code @TODO change it from does not update this field
       out = out.filter(widget => widget.key != 'item') // remove the dummy question field
       out.push(new SelectorQuestion({
         key: 'item',
         value: this.widget.item,
-        service: (ev&& ev.serviceKey) ? this.widgetsServices.services[ev.serviceKey] : this.widget.serviceKey,
-        label: 'seleziona  ' +(ev&& ev.serviceKey)? this.widgetsServices.services[ev.serviceKey].title:'una sorgente dati',
+        service: (ev && ev.serviceKey) ? this.widgetsServices.services[ev.serviceKey] : this.widget.serviceKey,
+        label: 'seleziona  ' + (ev && ev.serviceKey) ? this.widgetsServices.services[ev.serviceKey].title : 'una sorgente dati',
         text: 'non so che scrivere',
         createPopup: undefined
       }))
@@ -142,11 +142,11 @@ export class CreateWidgetPage implements OnInit {
       this.widgetFields = this.FormFieldsFactory({ serviceKey: ev })
       // this.kartFields = this.setFormFields(this.kart, this.supplierFilterFunction)
     })
-    this.Form.controls['widget'].valueChanges.subscribe(ev=>{
-      console.log('widget change',ev)
+    this.Form.controls['widget'].valueChanges.subscribe(ev => {
+      console.log('widget change', ev)
       this.widget = this.service.widgetFactory(ev).load(this.widget)
-      console.log('new widget',this.widget)
-      this.widgetFields = this.FormFieldsFactory({widget:ev})
+      console.log('new widget', this.widget)
+      this.widgetFields = this.FormFieldsFactory({ widget: ev })
     })
   }
 

@@ -11,7 +11,7 @@ import { EditWidgetPage } from '../../pages/edit-widget/edit-widget.page';
   selector: 'app-widget-drawer',
   templateUrl: './widget-drawer.component.html',
   styleUrls: ['./widget-drawer.component.scss'],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetDrawerComponent implements OnInit {
   keys//: Promise<string[]>
@@ -23,23 +23,25 @@ export class WidgetDrawerComponent implements OnInit {
     return await modal.present()
   }
 
-  deleteWidget(widget,sliding_item){
+  deleteWidget(widget, sliding_item) {
     sliding_item['close']()
-    this.service.delete(widget.id,(pr:Promise<any>)=>{
-      pr.then(res=>{
+    this.service.delete(widget.id, (pr: Promise<any>) => {
+      pr.then(res => {
       })
     })
   }
 
-  async updateWidget(widget,sliding_item){
-    console.log('updating',widget)
+  async updateWidget(widget, sliding_item) {
+    console.log('updating', widget)
     sliding_item['close']()
-    const modal = await this.modalController.create({component:EditWidgetPage,
-    componentProps:{widget}})
+    const modal = await this.modalController.create({
+      component: EditWidgetPage,
+      componentProps: { widget }
+    })
     return await modal.present()
   }
 
-  
+
 
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
     public modalController: ModalController, ) {
@@ -49,7 +51,7 @@ export class WidgetDrawerComponent implements OnInit {
         keys.then(k => {
         })
       })
-      this.service.widgetsList.subscribe(widgets=>{
+      this.service.widgetsList.subscribe(widgets => {
       })
       this.karts._items.subscribe((karts: ShoppingKartModel[]) => {
         this.items = karts

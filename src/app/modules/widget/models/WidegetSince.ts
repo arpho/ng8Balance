@@ -19,19 +19,19 @@ export class WidgetSince extends Widget {
     constructor(args?: WidgetSinceParams) {
         super(args)
         this.widget = WidgetTypes.Since
-        
+
     }
 
 
-    extraField4Form():QuestionBase<unknown>[] {
-        return   [
-            
+    extraField4Form(): QuestionBase<unknown>[] {
+        return [
+
             new DateQuestion({
-                key:'temporalWindow',
-                label:'inizio periodo di osservazione',
+                key: 'temporalWindow',
+                label: 'inizio periodo di osservazione',
                 value: this.MySinceDate.formatDate(),
                 required: true
-              }),
+            }),
         ]
     }
 
@@ -48,7 +48,7 @@ export class WidgetSince extends Widget {
     load(args) {
         Object.assign(this, args)
         this.MySinceDate = new DateModel(this.temporalWindow)
-        console.log('my sinceDate',this.MySinceDate)
+        console.log('my sinceDate', this.MySinceDate)
         this.widget = WidgetTypes.Since
         return this
     }
