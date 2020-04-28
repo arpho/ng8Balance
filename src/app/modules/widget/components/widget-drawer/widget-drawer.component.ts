@@ -19,17 +19,14 @@ export class WidgetDrawerComponent implements OnInit {
   items: ShoppingKartModel[] = []
 
   async createWidget() {
-    console.log('creating widget')
     const modal = await this.modalController.create({ component: CreateWidgetPage })
     return await modal.present()
   }
 
   deleteWidget(widget,sliding_item){
-    console.log('deleting widget',widget)
     sliding_item['close']()
     this.service.delete(widget.id,(pr:Promise<any>)=>{
       pr.then(res=>{
-        console.log('deleted',res)
       })
     })
   }

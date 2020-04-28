@@ -38,7 +38,8 @@ export class Widget {
                 type:'number',
                 key:'temporalWindow',
                 label:'giorni di osservazione',
-                required:true
+                required:true,
+                value:this.temporalWindow
             })
         ]
     }
@@ -157,6 +158,7 @@ export class Widget {
         Object.assign(this, args)
         this.key = this.key || this._key
         this.widget = WidgetTypes.Regular
+        this.temporalWindow = Number(this.temporalWindow)
         return this
     }
 

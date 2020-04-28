@@ -24,7 +24,6 @@ export class EditWidgetPage  extends CreateWidgetPage implements OnInit {
   ngOnInit() {
     this.widget = new Widget( this.navParams.get('widget'))
     this.title = `modifica widget ${this.widget.title}`
-    console.log(`updating`,this.widget)
     this.widgetFields = super.FormFieldsFactory()
   }
 

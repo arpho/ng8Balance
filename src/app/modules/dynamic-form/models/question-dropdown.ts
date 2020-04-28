@@ -12,7 +12,6 @@ export class DropdownQuestion extends QuestionBase<any> {
 
     constructor(options: DropdownProperties | { key: string, label: string }) {
         super(options);
-        console.log('value',options['value'])
         // tslint:disable-next-line: no-string-literal
         this.options = options['options'] || [];
     }
