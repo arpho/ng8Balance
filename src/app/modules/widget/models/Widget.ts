@@ -7,6 +7,7 @@ import { TextboxQuestion } from '../../dynamic-form/models/question-textbox';
 import { QuestionBase } from '../../dynamic-form/models/question-base';
 import { SwitchQuestion } from '../../item/models/question-switch';
 import { SelectorQuestion } from '../../dynamic-form/models/question-selector';
+import { ItemServiceInterface } from '../../item/models/ItemServiceInterface';
 
 export interface Widgetparams { service: EntityWidgetServiceInterface, serviceKey: string, entityKey: string, temporalWindow: number, counter: boolean, _order: number, _key?: number, note?: string, title?: string, description?: string }
 
@@ -16,26 +17,36 @@ export class Widget {
     _description: string
     _key: number;
     _serviceKey: string
+    _service:ItemServiceInterface
     _item: ItemModelInterface
     _entityKey: string //identify the entityKey
     _id: number
     widget = WidgetTypes.Regular
-    _items_list:ItemModelInterface[]
+    _items_list: ItemModelInterface[]
 
-    set items_list(items:ItemModelInterface[]){
+    set items_list(items: ItemModelInterface[]) {
         this._items_list = items
-        console.log('items set',items)
-    
-        this.Item.subscribe(item=>{
-            console.log('widget got item',item)
+        this.Item.subscribe(item => { // both items and item are ready i can calculate Value
+            
+            this.Service.subscribe(service=>{
+                if(item && items && service){
+                    console.log('ready to start')
+                }
+            })
+
         })
     }
 
-    get items_list (){
+    get items_list() {
         return this._items_list
     }
-    __item:BehaviorSubject<ItemModelInterface> = new BehaviorSubject(undefined)
-    readonly Item:Observable<ItemModelInterface>= this.__item.asObservable()
+
+    _Service:BehaviorSubject<EntityWidgetServiceInterface> = new BehaviorSubject(undefined)
+    readonly Service:Observable<EntityWidgetServiceInterface> = this._Service.asObservable()
+    _Value: BehaviorSubject<number> = new BehaviorSubject(0)
+    readonly Value: Observable<number> = this._Value.asObservable()
+    __item: BehaviorSubject<ItemModelInterface> = new BehaviorSubject(undefined)
+    readonly Item: Observable<ItemModelInterface> = this.__item.asObservable()
     _text: BehaviorSubject<string> = new BehaviorSubject('') // show the widget's text
     readonly text: Observable<string> = this._text.asObservable()
     _counter: boolean
@@ -46,15 +57,15 @@ export class Widget {
 
     }
 
-    extraField4Form():QuestionBase<unknown>[] {
-        return   [
-            
+    extraField4Form(): QuestionBase<unknown>[] {
+        return [
+
             new TextboxQuestion({
-                type:'number',
-                key:'temporalWindow',
-                label:'giorni di osservazione',
-                required:true,
-                value:this.temporalWindow
+                type: 'number',
+                key: 'temporalWindow',
+                label: 'giorni di osservazione',
+                required: true,
+                value: this.temporalWindow
             })
         ]
     }
@@ -131,7 +142,7 @@ export class Widget {
         }
         return new Value({ label: 'widget', value: 'totale' })
     }
-    service: EntityWidgetServiceInterface
+    // service: EntityWidgetServiceInterface
     temporalWindow: number
     _order: number
 
@@ -182,6 +193,12 @@ export class Widget {
         this._key = key
     }
 
+    set service(service:EntityWidgetServiceInterface){
+        this._service = service
+        this._Service.next(service)
+
+    }
+
     getEntityKey() {
         if (this._item) {
             return this._item.key
@@ -206,6 +223,8 @@ export class Widget {
 
         }
     }
+
+
 
 
     calculateWidget(key: string) {

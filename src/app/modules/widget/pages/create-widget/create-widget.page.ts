@@ -59,9 +59,6 @@ export class CreateWidgetPage implements OnInit {
 
 
   protected FormFieldsFactory(ev?) {
-    if (ev && ev.widget) {
-      console.log('widgetType', ev.widget)
-    }
     const widgetTypes = [new RoleModel({ key: 'sinceWidget', value: WidgetTypes.Since }),
     new RoleModel({ key: 'regular', value: WidgetTypes.Regular })]
     let out: QuestionBase<unknown>[] = [

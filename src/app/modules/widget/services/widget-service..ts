@@ -75,6 +75,7 @@ export class WidgetService {
                       const entity = service.instatiateItem(item.val())
                       entity.key = item.key
                       widget.item = entity
+                      widget.service = service
 
                     })
                   }
