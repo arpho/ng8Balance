@@ -43,7 +43,6 @@ export class CreateWidgetPage implements OnInit {
 
   filter(ev) {
     if (ev.serviceKey) {
-      console.log('entity', ev.serviceKey)
       this.widgetFields = this.FormFieldsFactory(ev)
     }
   }
@@ -119,8 +118,7 @@ export class CreateWidgetPage implements OnInit {
 
     }
     if ((ev && ev.serviceKey) || this.widget.item) {
-      console.log('this', this)
-      this.widget.serviceKey = (ev && ev.serviceKey) ? ev.serviceKeythis.widget.serviceKey : this.widget.serviceKey // spaghetti code @TODO change it from does not update this field
+      this.widget.serviceKey = (ev && ev.serviceKey) ? ev.serviceKey : this.widget.serviceKey // spaghetti code @TODO change it from does not update this field
       out = out.filter(widget => widget.key != 'item') // remove the dummy question field
       out.push(new SelectorQuestion({
         key: 'item',
@@ -138,14 +136,11 @@ export class CreateWidgetPage implements OnInit {
     this.Form = form
     // tslint:disable-next-line: no-string-literal
     this.Form.controls['serviceKey'].valueChanges.subscribe(ev => {
-      console.log('changes', ev)
       this.widgetFields = this.FormFieldsFactory({ serviceKey: ev })
       // this.kartFields = this.setFormFields(this.kart, this.supplierFilterFunction)
     })
     this.Form.controls['widget'].valueChanges.subscribe(ev => {
-      console.log('widget change', ev)
       this.widget = this.service.widgetFactory(ev).load(this.widget)
-      console.log('new widget', this.widget)
       this.widgetFields = this.FormFieldsFactory({ widget: ev })
     })
   }
