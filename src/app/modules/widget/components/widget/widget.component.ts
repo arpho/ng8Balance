@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges,  } from '@angular/core';
 import { Widget } from '../../models/Widget';
 import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterface';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -11,10 +12,15 @@ import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterfa
 })
 export class WidgetComponent implements OnInit, OnChanges {
   @Input() Widget:Widget
-  @Input() items:ItemModelInterface[]
+  @Input() items:BehaviorSubject<ItemModelInterface[]>
 
-  constructor() { }
+  constructor() {
+   }
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes on widget',changes)
+    this.items.subscribe(karts=>{
+      console.log('widget got karts',karts)
+    })
   }
 
   ngOnInit() {}

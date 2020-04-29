@@ -6,6 +6,7 @@ import { Widget } from '../../models/Widget';
 import { ModalController } from '@ionic/angular';
 import { CreateWidgetPage } from '../../pages/create-widget/create-widget.page';
 import { EditWidgetPage } from '../../pages/edit-widget/edit-widget.page';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-widget-drawer',
@@ -16,7 +17,7 @@ import { EditWidgetPage } from '../../pages/edit-widget/edit-widget.page';
 export class WidgetDrawerComponent implements OnInit {
   keys//: Promise<string[]>
   Widgets: Widget[]
-  items: ShoppingKartModel[] = []
+  items:BehaviorSubject<ShoppingKartModel[]> // = []
 
   async createWidget() {
     const modal = await this.modalController.create({ component: CreateWidgetPage })
@@ -44,6 +45,7 @@ export class WidgetDrawerComponent implements OnInit {
 
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
     public modalController: ModalController, ) {
+      this.items = this.karts._items
     this.service.connectToIDB().then(() => {
       this.service.keys((keys: Promise<any>) => {
         this.keys = keys
@@ -53,7 +55,9 @@ export class WidgetDrawerComponent implements OnInit {
       this.service.widgetsList.subscribe(widgets => {
       })
       this.karts._items.subscribe((karts: ShoppingKartModel[]) => {
-        this.items = karts
+        // this.items =[... karts]
+        console.log('karts',karts)
+        
       })
       /* this.service._widgets.subscribe((items: Widget[]) => {
         this.Widgets = items
