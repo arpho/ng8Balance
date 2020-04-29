@@ -7,8 +7,8 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 })
 export class IDBWidgetServiceService {
   storeName = 'widgetsList'
-  dbName ='widgets'
-  private _db:IDBPDatabase
+  dbName = 'widgets'
+  private _db: IDBPDatabase
   public readonly db: BehaviorSubject<IDBPDatabase> = new BehaviorSubject(undefined)
 
 
@@ -18,14 +18,15 @@ export class IDBWidgetServiceService {
 
   }
 
-  
+
 
   async connectToIDB() {
     this._db = await openDB('widgets', 3, {
       upgrade(db, oldVersion, newVersion, transaction) {
         console.log(`updating db:${db}, oldVersion:${oldVersion},newVersion:${newVersion},transaction:${transaction}`)
-        if(this && this.storeName){
-        db.createObjectStore( this.storeName , { keyPath: 'key',  })}
+        if (this && this.storeName) {
+          db.createObjectStore(this.storeName, { keyPath: 'key', })
+        }
 
       },
       blocked() {
@@ -49,21 +50,20 @@ export class IDBWidgetServiceService {
 
   }
   async add(item) {
-    console.log('adding widget',item)
+    console.log('adding widget', item)
     const db = await this.db.subscribe((db: IDBPDatabase) => {
       if (db) {
-        console.log('creating widget',item)
-        db.add(this.storeName, item,item.key).catch((err)=>{console.log('error on asdding',err)})
+        console.log('creating widget', item)
+        db.add(this.storeName, item, item.key).catch((err) => { console.log('error on asdding', err) })
       }
     })
 
-    
+
   }
 
   delete(id, next) {
 
     this.db.subscribe((db: IDBPDatabase) => {
-      console.log('deleting', id)
       db.delete(this.storeName, id)
     })
   }
@@ -72,8 +72,7 @@ export class IDBWidgetServiceService {
     this.db.subscribe((db: IDBPDatabase) => {
 
       if (db.put) {
-        console.log('putting', value)
-        next(db.put(this.storeName, value,key))
+        next(db.put(this.storeName, value, key))
       }
     })
   }

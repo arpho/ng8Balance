@@ -35,9 +35,7 @@ export class EditWidgetPage extends CreateWidgetPage implements OnInit {
 
       widget.entityKey = ev.entityKey.key
     }
-    console.log(' new widget', widget.serialize())
-    const out = await this.service.put(widget.key,widget.serialize(),v=>{
-      console.log('updated',v)
+    const out = await this.service.put(widget.key, widget.serialize(), v => {
     })
     this.dismiss()
   }
