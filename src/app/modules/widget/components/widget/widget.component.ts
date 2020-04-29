@@ -17,9 +17,8 @@ export class WidgetComponent implements OnInit, OnChanges {
   constructor() {
    }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes on widget',changes)
     this.items.subscribe(karts=>{
-      console.log('widget got karts',karts)
+      this.Widget.items_list = karts
     })
   }
 

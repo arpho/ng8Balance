@@ -20,7 +20,22 @@ export class Widget {
     _entityKey: string //identify the entityKey
     _id: number
     widget = WidgetTypes.Regular
+    _items_list:ItemModelInterface[]
 
+    set items_list(items:ItemModelInterface[]){
+        this._items_list = items
+        console.log('items set',items)
+    
+        this.Item.subscribe(item=>{
+            console.log('widget got item',item)
+        })
+    }
+
+    get items_list (){
+        return this._items_list
+    }
+    __item:BehaviorSubject<ItemModelInterface> = new BehaviorSubject(undefined)
+    readonly Item:Observable<ItemModelInterface>= this.__item.asObservable()
     _text: BehaviorSubject<string> = new BehaviorSubject('') // show the widget's text
     readonly text: Observable<string> = this._text.asObservable()
     _counter: boolean
@@ -48,6 +63,7 @@ export class Widget {
         this._item = item
         this._entityKey = item.key
         this._text.next(`${item['widgetText']}`)
+        this.__item.next(item)
     }
 
     get item() {
