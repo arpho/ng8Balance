@@ -17,7 +17,7 @@ export class Widget {
     _description: string
     _key: number;
     _serviceKey: string
-    _service:ItemServiceInterface
+    _service: EntityWidgetServiceInterface
     _item: ItemModelInterface
     _entityKey: string //identify the entityKey
     _id: number
@@ -27,10 +27,11 @@ export class Widget {
     set items_list(items: ItemModelInterface[]) {
         this._items_list = items
         this.Item.subscribe(item => { // both items and item are ready i can calculate Value
-            
-            this.Service.subscribe(service=>{
-                if(item && items && service){
-                    console.log('ready to start')
+
+            this.Service.subscribe(service => {
+                if (item && items && service) {
+                    console.log('ready to start', item, items.length, service)
+                    this._Value.next(this.calculateWidget(item.key))
                 }
             })
 
@@ -41,8 +42,8 @@ export class Widget {
         return this._items_list
     }
 
-    _Service:BehaviorSubject<EntityWidgetServiceInterface> = new BehaviorSubject(undefined)
-    readonly Service:Observable<EntityWidgetServiceInterface> = this._Service.asObservable()
+    _Service: BehaviorSubject<EntityWidgetServiceInterface> = new BehaviorSubject(undefined)
+    readonly Service: Observable<EntityWidgetServiceInterface> = this._Service.asObservable()
     _Value: BehaviorSubject<number> = new BehaviorSubject(0)
     readonly Value: Observable<number> = this._Value.asObservable()
     __item: BehaviorSubject<ItemModelInterface> = new BehaviorSubject(undefined)
@@ -193,10 +194,14 @@ export class Widget {
         this._key = key
     }
 
-    set service(service:EntityWidgetServiceInterface){
+    set service(service: EntityWidgetServiceInterface) {
         this._service = service
         this._Service.next(service)
 
+    }
+
+    get service(){
+        return this._service
     }
 
     getEntityKey() {
@@ -228,9 +233,9 @@ export class Widget {
 
 
     calculateWidget(key: string) {
-        // this.service.items.subscribe()
         if (this.counter)
-            return this.service.counterWidget(this.entityKey, this.service.items_list.filter(this.filterFactory()))
-        return this.service.adderWidget(this.entityKey, this.service.items_list.filter(this.filterFactory()))
+            return this.service.counterWidget(this.entityKey, this._items_list.filter(this.filterFactory()))
+
+        return this.service.adderWidget(this.entityKey, this._items_list.filter(this.filterFactory()))
     }
 }
