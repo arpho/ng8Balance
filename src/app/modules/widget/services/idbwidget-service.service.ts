@@ -73,7 +73,7 @@ export class IDBWidgetServiceService {
 
       if (db.put) {
         console.log('putting', value)
-        next(db.put(this.storeName, value))
+        next(db.put(this.storeName, value,key))
       }
     })
   }

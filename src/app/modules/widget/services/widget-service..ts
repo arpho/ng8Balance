@@ -63,7 +63,6 @@ export class WidgetService {
         keyring.forEach(element => {
           this.idbService.get(element, (item => {
             item.then(value => {
-              console.log('loading',value)
               const widget = this.widgetFactory(value.widget).load(value)
               widget.id = element
               if (value.key) // è un widget
@@ -115,7 +114,7 @@ export class WidgetService {
     this._db = await openDB('widgets', 3, {
       upgrade(db, oldVersion, newVersion, transaction) {
         console.log(`updating db:${db}, oldVersion:${oldVersion},newVersion:${newVersion},transaction:${transaction}`)
-        db.createObjectStore(this ? this.storeName : 'widgetsList', { keyPath: 'key', autoIncrement: true })
+        db.createObjectStore(this ? this.storeName : 'widgetsList', { keyPath: 'key' })
 
       },
       blocked() {

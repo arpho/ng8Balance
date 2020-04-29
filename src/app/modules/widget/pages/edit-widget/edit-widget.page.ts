@@ -27,4 +27,19 @@ export class EditWidgetPage extends CreateWidgetPage implements OnInit {
     this.widgetFields = super.FormFieldsFactory()
   }
 
+  async submit(ev) {
+    console.log('submitted', ev)
+    const widget = this.widget.load(ev)
+    if (ev.entityKey) {
+      console.log('ev', ev)
+
+      widget.entityKey = ev.entityKey.key
+    }
+    console.log(' new widget', widget.serialize())
+    const out = await this.service.put(widget.key,widget.serialize(),v=>{
+      console.log('updated',v)
+    })
+    this.dismiss()
+  }
+
 }
