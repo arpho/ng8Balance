@@ -36,13 +36,12 @@ export class WidgetSince extends Widget {
     }
 
     filterFactory() {
-        return () => {
-            const out = (item: ItemModelInterface) => {
-                const date = new Date()
-                date.setDate(date.getDate() - this.temporalWindow)
-                return item['purchaseDate'] >= date
-            }
+        return (item: ItemModelInterface) => {
+            const date = new Date()
+            date.setDate(date.getDate() - this.temporalWindow)
+            return item['purchaseDate'] <= date
         }
+
     }
 
     load(args) {
