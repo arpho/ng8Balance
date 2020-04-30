@@ -31,7 +31,7 @@ export class Widget {
             this.Service.subscribe(service => {
                 if (item && items && service) {
                     console.log('ready to start', item, items.length, service)
-                    this._Value.next(this.calculateWidget(item.key))
+                    this._Value.next(Math.round(this.calculateWidget(item.key)/100)*100)
                 }
             })
 
