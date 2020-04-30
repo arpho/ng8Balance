@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import { OnlineStatusModule } from '../modules/online-status/online-status.module';
 import { WidgetModule } from '../modules/widget/widget.module';
+import { BarcodeModule } from '../modules/barcode/barcode.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,6 +15,7 @@ import { WidgetModule } from '../modules/widget/widget.module';
     IonicModule,
     OnlineStatusModule,
     WidgetModule,
+    BarcodeModule,
     RouterModule.forChild([
       {
         path: '',

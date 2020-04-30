@@ -37,6 +37,8 @@ import { DetailPaymentPage } from './pages/detail-payment/detail-payment.page';
 import { WidgetModule } from './modules/widget/widget.module';
 import { CreateWidgetPage } from './modules/widget/pages/create-widget/create-widget.page';
 import { EditWidgetPage } from './modules/widget/pages/edit-widget/edit-widget.page';
+import { BarcodeModule } from './modules/barcode/barcode.module';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 @NgModule({
   entryComponents: [
     CreateSupplierPage,
@@ -79,6 +81,7 @@ import { EditWidgetPage } from './modules/widget/pages/edit-widget/edit-widget.p
     CategoriesViewerComponent],
 
   imports: [
+    BarcodeModule,
     ItemModule,
     WidgetModule,
     DynamicFormModule,
@@ -95,6 +98,7 @@ import { EditWidgetPage } from './modules/widget/pages/edit-widget/edit-widget.p
   ],
   providers: [
     StatusBar,
+    BarcodeScanner,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
