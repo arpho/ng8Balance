@@ -165,14 +165,13 @@ export class Widget {
     }
 
     filterFactory() {
-        console.log('temporal window',this.temporalWindow)
-        return   (item: ItemModelInterface) => {
-                const date = new Date()
-                date.setDate(date.getDate() - this.temporalWindow)
-                console.log('purchase date',item['purchaseDate'],date)
-                return  item['purchaseDate'] >= date
-            }
-        
+        console.log('temporal window', this.temporalWindow)
+        return (item: ItemModelInterface) => {
+            const date = new Date()
+            date.setDate(date.getDate() - this.temporalWindow)
+            return item['purchaseDate'] <= date
+        }
+
     }
 
 
@@ -201,7 +200,7 @@ export class Widget {
 
     }
 
-    get service(){
+    get service() {
         return this._service
     }
 
@@ -236,9 +235,6 @@ export class Widget {
     calculateWidget(key: string) {
         if (this.counter)
             return this.service.counterWidget(this.entityKey, this._items_list.filter(this.filterFactory()))
-
-            console.log('calculating on ',this._items_list.filter(this.filterFactory()).length,this.filterFactory())
-
 
         return this.service.adderWidget(this.entityKey, this._items_list.filter(this.filterFactory()))
     }
