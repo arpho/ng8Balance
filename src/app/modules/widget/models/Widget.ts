@@ -165,11 +165,12 @@ export class Widget {
     }
 
     filterFactory() {
-        console.log('temporal window', this.temporalWindow)
+        // console.log('temporal window', this.temporalWindow)
         return (item: ItemModelInterface) => {
             const date = new Date()
             date.setDate(date.getDate() - this.temporalWindow)
-            return item['purchaseDate'] <= date
+            // console.log('ciao',date,item['purchaseDate'],item['purchaseDate']>=date)
+            return item['purchaseDate'] >= date
         }
 
     }
@@ -233,6 +234,7 @@ export class Widget {
 
 
     calculateWidget(key: string) {
+        console.log('filterFactory',this.filterFactory())
         if (this.counter)
             return this.service.counterWidget(this.entityKey, this._items_list.filter(this.filterFactory()))
 

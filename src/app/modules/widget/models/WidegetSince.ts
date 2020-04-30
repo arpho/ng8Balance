@@ -39,7 +39,7 @@ export class WidgetSince extends Widget {
         return (item: ItemModelInterface) => {
             const date = new Date()
             date.setDate(date.getDate() - this.temporalWindow)
-            return item['purchaseDate'] <= date
+            return item['purchaseDate'] >= date
         }
 
     }
