@@ -56,7 +56,6 @@ export class WidgetDrawerComponent implements OnInit {
       })
       this.karts._items.subscribe((karts: ShoppingKartModel[]) => {
         // this.items =[... karts]
-        console.log('karts',karts)
         
       })
       /* this.service._widgets.subscribe((items: Widget[]) => {
