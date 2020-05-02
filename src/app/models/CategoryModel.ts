@@ -58,7 +58,7 @@ export class CategoryModel implements FirebaseObject, ItemModelInterface, Widget
     }
     initialize(cat: any) {
         Object.assign(this, cat)
-        this.widgetText = ` per la categoria ${this.title}`
+        this.widgetText = ` per  ${this.title}`
         this.title = this.title || 'deleted'
 
 

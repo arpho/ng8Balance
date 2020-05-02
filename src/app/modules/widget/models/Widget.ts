@@ -73,7 +73,7 @@ export class Widget {
     set item(item: ItemModelInterface) {
         this._item = item
         this._entityKey = item.key
-        this._text.next(`${item['widgetText']}`)
+        this._text.next(`Spesa ${item['widgetText']} negli ultimi ${this.temporalWindow} giorni: `)
         this.__item.next(item)
     }
 
