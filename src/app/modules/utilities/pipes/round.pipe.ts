@@ -11,7 +11,7 @@ export class RoundPipe implements PipeTransform {
      * @param value  il valore da arrottondare
      * @param precision il numero di cifre dopo la virgola
      */
-    return Math.round(value*10^precision)/10^precision
+    return Math.round(value*Math.pow(10,precision))/Math.pow(10,precision)
   }
 
 }
