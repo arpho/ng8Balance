@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { WidgetComponent } from './components/widget/widget.component';
 import { UtilitiesModule } from '../utilities/utilities.module';
+import { RoundPipe } from '../utilities/pipes/round.pipe';
 // import { IonicStorageModule } from '@ionic/storage';
 
 
@@ -15,6 +16,7 @@ import { UtilitiesModule } from '../utilities/utilities.module';
   //providers:[Storage],
 
   
-  exports:[WidgetDrawerComponent,WidgetComponent]
+  exports:[WidgetDrawerComponent,WidgetComponent],
+  providers:[RoundPipe]
 })
 export class WidgetModule { }

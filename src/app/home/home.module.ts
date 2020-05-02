@@ -8,6 +8,7 @@ import { HomePage } from './home.page';
 import { OnlineStatusModule } from '../modules/online-status/online-status.module';
 import { WidgetModule } from '../modules/widget/widget.module';
 import { BarcodeModule } from '../modules/barcode/barcode.module';
+import { UtilitiesModule } from '../modules/utilities/utilities.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +16,7 @@ import { BarcodeModule } from '../modules/barcode/barcode.module';
     IonicModule,
     OnlineStatusModule,
     WidgetModule,
+    UtilitiesModule,
     BarcodeModule,
     RouterModule.forChild([
       {

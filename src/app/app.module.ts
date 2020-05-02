@@ -40,6 +40,7 @@ import { EditWidgetPage } from './modules/widget/pages/edit-widget/edit-widget.p
 import { BarcodeModule } from './modules/barcode/barcode.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { UtilitiesModule } from './modules/utilities/utilities.module';
+import { RoundPipe } from './modules/utilities/pipes/round.pipe';
 @NgModule({
   entryComponents: [
     CreateSupplierPage,
@@ -59,7 +60,6 @@ import { UtilitiesModule } from './modules/utilities/utilities.module';
   ],
   declarations: [
     AppComponent,
-     // FilterPopupPage,
      CreateWidgetPage,
      EditWidgetPage,
      SelectorItemsPage,
@@ -101,6 +101,7 @@ import { UtilitiesModule } from './modules/utilities/utilities.module';
   providers: [
     StatusBar,
     BarcodeScanner,
+    RoundPipe,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
