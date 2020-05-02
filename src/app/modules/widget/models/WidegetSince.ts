@@ -39,7 +39,7 @@ export class WidgetSince extends Widget {
         return (item: ItemModelInterface) => {
             const date = new Date()
             date.setDate(date.getDate() - this.temporalWindow)
-            return item['purchaseDate'] >= date
+            return item['purchaseDate'] >= this.MySinceDate.fullDate
         }
 
     }
@@ -49,7 +49,7 @@ export class WidgetSince extends Widget {
     set item(item: ItemModelInterface) {
         this._item = item
         this._entityKey = item.key
-        this._text.next(`Occorrenze ${item['widgetText']} negli ultimi ${this.temporalWindow} giorni: `)
+        this._text.next(`${this.getFirstWord()} ${item['widgetText']} dal ${this.MySinceDate.formatDate()} : `)
         this.__item.next(item)
     }
 

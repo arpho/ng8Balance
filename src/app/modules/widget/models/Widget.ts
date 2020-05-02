@@ -40,6 +40,7 @@ export class Widget {
     get items_list() {
         return this._items_list
     }
+    
 
     _Service: BehaviorSubject<EntityWidgetServiceInterface> = new BehaviorSubject(undefined)
     readonly Service: Observable<EntityWidgetServiceInterface> = this._Service.asObservable()
@@ -70,10 +71,11 @@ export class Widget {
         ]
     }
 
+
     set item(item: ItemModelInterface) {
         this._item = item
         this._entityKey = item.key
-        this._text.next(`Spesa ${item['widgetText']} negli ultimi ${this.temporalWindow} giorni: `)
+        this._text.next(`${this.getFirstWord()} ${item['widgetText']} negli ultimi ${this.temporalWindow} giorni: `)
         this.__item.next(item)
     }
 
@@ -161,6 +163,10 @@ export class Widget {
             })
         }
 
+    }
+    getFirstWord(){
+
+        return this.counter? 'Occorrenze' :'Spesa'
     }
 
     filterFactory() {
