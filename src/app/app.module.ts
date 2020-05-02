@@ -39,6 +39,7 @@ import { CreateWidgetPage } from './modules/widget/pages/create-widget/create-wi
 import { EditWidgetPage } from './modules/widget/pages/edit-widget/edit-widget.page';
 import { BarcodeModule } from './modules/barcode/barcode.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { UtilitiesModule } from './modules/utilities/utilities.module';
 @NgModule({
   entryComponents: [
     CreateSupplierPage,
@@ -84,6 +85,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     BarcodeModule,
     ItemModule,
     WidgetModule,
+    UtilitiesModule,
     DynamicFormModule,
     GeoLocationModule,
     BrowserModule,

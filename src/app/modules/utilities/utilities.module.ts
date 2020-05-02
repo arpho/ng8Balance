@@ -6,8 +6,7 @@ import { RoundPipe } from './pipes/round.pipe';
 
 @NgModule({
   declarations: [RoundPipe],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule],
+  exports: [RoundPipe]
 })
 export class UtilitiesModule { }
