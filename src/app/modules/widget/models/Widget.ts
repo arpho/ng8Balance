@@ -30,8 +30,7 @@ export class Widget {
 
             this.Service.subscribe(service => {
                 if (item && items && service) {
-                    console.log('ready to start', item, items.length, service)
-                    this._Value.next(Math.round(this.calculateWidget(item.key)/100)*100)
+                    this._Value.next(this.calculateWidget(item.key))
                 }
             })
 
@@ -234,7 +233,6 @@ export class Widget {
 
 
     calculateWidget(key: string) {
-        console.log('filterFactory',this.filterFactory())
         if (this.counter)
             return this.service.counterWidget(this.entityKey, this._items_list.filter(this.filterFactory()))
 

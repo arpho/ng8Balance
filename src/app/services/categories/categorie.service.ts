@@ -102,7 +102,11 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
       return this.initializeCategory(args)
     }
     this.counterWidget = (entityKey: string, entities: ShoppingKartModel[]) => { return this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => 1).reduce((pv, cv) => { return pv += cv }, 0) }
-    this.adderWidget = (entityKey: string, entities: ShoppingKartModel[]) => { return this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => item.price).reduce((pv, cv) => { return pv += cv }, 0); }
+    this.adderWidget = (entityKey: string, entities: ShoppingKartModel[]) => {
+      console.log('calculating', entityKey,entities)
+      console.log('mapped', this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => item.price))
+      console.log('mapped and reduced',this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => item.price).reduce((pv, cv) => { return pv += cv }, 0))
+      return this.blowCategoriesUp(entities).filter((item: PricedCategory) => item.category.key == entityKey).map((item: PricedCategory) => item.price).reduce((pv, cv) => { return pv += cv }, 0); }
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.categoriesListRef = firebase.database().ref(`/categorie/${user.uid}/`); this.getEntitiesList().on('value', eventCategoriesListSnapshot => {
