@@ -4,13 +4,14 @@ import { WidgetDrawerComponent } from './components/widget-drawer/widget-drawer.
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { WidgetComponent } from './components/widget/widget.component';
+import { UtilitiesModule } from '../utilities/utilities.module';
 // import { IonicStorageModule } from '@ionic/storage';
 
 
 
 @NgModule({
   declarations: [WidgetDrawerComponent,WidgetComponent],
-  imports:[CommonModule, IonicModule.forRoot(), ReactiveFormsModule],
+  imports:[CommonModule, IonicModule.forRoot(), ReactiveFormsModule,UtilitiesModule],
   //providers:[Storage],
 
   
