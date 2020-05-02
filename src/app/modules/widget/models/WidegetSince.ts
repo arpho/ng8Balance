@@ -44,6 +44,15 @@ export class WidgetSince extends Widget {
 
     }
 
+
+
+    set item(item: ItemModelInterface) {
+        this._item = item
+        this._entityKey = item.key
+        this._text.next(`Occorrenze ${item['widgetText']} negli ultimi ${this.temporalWindow} giorni: `)
+        this.__item.next(item)
+    }
+
     load(args) {
         Object.assign(this, args)
         this.MySinceDate = new DateModel(this.temporalWindow)
