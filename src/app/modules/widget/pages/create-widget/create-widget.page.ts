@@ -111,7 +111,6 @@ export class CreateWidgetPage implements OnInit {
     out = [...out, ...this.widget.extraField4Form()]
     if (ev && ev.widget) {
       this.widget = this.service.widgetFactory(Number(ev.widget)).load(this.widget)
-      console.log('loaded widget', this.widget)
 
     }
     if ((ev && ev.serviceKey) || this.widget.item) {
@@ -134,7 +133,6 @@ export class CreateWidgetPage implements OnInit {
     // tslint:disable-next-line: no-string-literal
     this.Form.controls['serviceKey'].valueChanges.subscribe(ev => {
       this.widgetFields = this.FormFieldsFactory({ serviceKey: ev })
-      // this.kartFields = this.setFormFields(this.kart, this.supplierFilterFunction)
     })
     this.Form.controls['widget'].valueChanges.subscribe(ev => {
       this.widget = this.service.widgetFactory(ev).load(this.widget)
@@ -143,10 +141,8 @@ export class CreateWidgetPage implements OnInit {
   }
 
   async submit(ev) {
-    console.log('submitted', ev)
     const widget = this.widget.load(ev)
     if (ev.entityKey) {
-      console.log('ev', ev)
 
       widget.entityKey = ev.entityKey.key
     }
