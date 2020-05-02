@@ -9,4 +9,12 @@ import { RoundPipe } from './pipes/round.pipe';
   imports: [CommonModule],
   exports: [RoundPipe]
 })
-export class UtilitiesModule { }
+export class UtilitiesModule {
+
+  static forRoot() {
+    return {
+      ngModule: UtilitiesModule,
+      providers: [],
+    };
+  }
+ }
