@@ -27,8 +27,12 @@ export class PaymentsService implements ItemServiceInterface, EntityWidgetServic
       return entities.filter((item: ShoppingKartModel) => { item.pagamentoId == entityKey }).map((item: ShoppingKartModel) => 1).reduce((pv: number, cv: number) => { return pv += cv }, 0)
 
     }
-    this.adderWidget = (entityKey:string,entities:ShoppingKartModel[])=>{
-      return  entities.filter((item: ShoppingKartModel) => { item.pagamentoId == entityKey }).map((item: ShoppingKartModel) => item.totale).reduce((pv: number, cv: number) => { return pv += cv }, 0)
+    this.adderWidget = (entityKey: string, entities: ShoppingKartModel[]) => {
+      return entities.filter((item: ShoppingKartModel) => {
+        return item.pagamentoId == entityKey
+      }).map((item: ShoppingKartModel) => item.totale).reduce((pv: number, cv: number) => {
+        return pv += cv
+      }, 0)
     }
     this.instatiateItem = function (args: {}) {
 
