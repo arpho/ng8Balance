@@ -11,8 +11,8 @@ export class ScannerComponent implements OnInit {
   constructor(private barcodeScanner:BarcodeScanner) { }
 
   ngOnInit() {}
-  scann(ev){
-    console.log('scanning',ev)
+  scann(){
+    console.log('scanning')
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data', barcodeData);
      }).catch(err => {

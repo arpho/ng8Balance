@@ -18,7 +18,7 @@ import { thresholdFreedmanDiaconis } from 'd3';
 import { FormGroup } from '@angular/forms';
 import { ComboValue } from 'src/app/modules/dynamic-form/models/ComboValueinterface';
 import { WidgetTypes } from '../../models/WidgetsTypes';
-import { WidgetSince } from '../../models/WidegetSince';
+import { WidgetSince } from '../../models/WidgetSince';
 
 @Component({
   selector: 'app-create-widget',

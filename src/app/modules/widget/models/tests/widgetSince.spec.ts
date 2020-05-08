@@ -3,7 +3,7 @@ import { Widget } from '../Widget';
 import { stringify } from 'querystring';
 import { WidgetServiceMocker } from './mockWidgetService';
 import { WidgetOperation, WidgetTypes } from '../WidgetsTypes';
-import { WidgetSince } from '../WidegetSince';
+import { WidgetSince } from '../WidgetSince';
 describe("testing Widget", () => {
     let widget;
     beforeEach(() => {

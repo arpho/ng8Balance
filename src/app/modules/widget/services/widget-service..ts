@@ -14,7 +14,7 @@ import { ItemServiceInterface } from '../../item/models/ItemServiceInterface';
 import { EntityWidgetServiceInterface } from '../models/EntityWidgetServiceInterface';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { WidgetTypes } from '../models/WidgetsTypes';
-import { WidgetSince } from '../models/WidegetSince';
+import { WidgetSince } from '../models/WidgetSince';
 
 
 @Injectable({

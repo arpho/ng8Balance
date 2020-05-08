@@ -22,6 +22,7 @@ export class WidgetComponent implements OnInit, OnChanges {
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+}
 
 }
