@@ -61,7 +61,7 @@ export class PaymentsModel implements ItemModelInterface, WidgetitemInteface {
 
     initialize(payment) {
         Object.assign(this, payment)
-        this.widgetText = `pagate tramite ${this.title}`
+        this.widgetText = `pagata tramite ${this.title}`
         this.title = this.title || this.nome
         return this
     }
