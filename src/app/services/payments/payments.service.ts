@@ -24,7 +24,11 @@ export class PaymentsService implements ItemServiceInterface, EntityWidgetServic
 
   constructor() {
     this.counterWidget = (entityKey: string, entities: ShoppingKartModel[]) => {
-      return entities.filter((item: ShoppingKartModel) => { item.pagamentoId == entityKey }).map((item: ShoppingKartModel) => 1).reduce((pv: number, cv: number) => { return pv += cv }, 0)
+      return entities.filter((item: ShoppingKartModel) => {
+        return item.pagamentoId == entityKey
+      }).map((item: ShoppingKartModel) => 1).reduce((pv: number, cv: number) => {
+        return pv += cv
+      }, 0)
 
     }
     this.adderWidget = (entityKey: string, entities: ShoppingKartModel[]) => {
