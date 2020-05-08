@@ -6,6 +6,7 @@ import * as firebase from 'firebase';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { EntityWidgetServiceInterface } from 'src/app/modules/widget/models/EntityWidgetServiceInterface';
+import { ShoppingKartModel } from 'src/app/models/shoppingKartModel';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,15 @@ export class PaymentsService implements ItemServiceInterface, EntityWidgetServic
   }
 
   constructor() {
-    this.instatiateItem=  function(args:{}){
+    this.counterWidget = (entityKey: string, entities: ShoppingKartModel[]) => {
+      return entities.filter((item: ShoppingKartModel) => { item.pagamentoId == entityKey }).map((item: ShoppingKartModel) => 1).reduce((pv: number, cv: number) => { return pv += cv }, 0)
+
+    }
+    this.adderWidget = (entityKey:string,entities:ShoppingKartModel[])=>{
+      return  entities.filter((item: ShoppingKartModel) => { item.pagamentoId == entityKey }).map((item: ShoppingKartModel) => item.totale).reduce((pv: number, cv: number) => { return pv += cv }, 0)
+    }
+    this.instatiateItem = function (args: {}) {
+
       return new PaymentsModel().initialize(args)
     }
     firebase.auth().onAuthStateChanged(user => {
@@ -42,13 +51,13 @@ export class PaymentsService implements ItemServiceInterface, EntityWidgetServic
   instatiateItem: (args: {}) => any;
 
 
-  
-  
+
+
   ItemModelInterface: any;
   key = 'Pagamenti';
   entityLabel = 'pagamenti'
   filterableField: string;
-  instantiateItem:(args:{})=>ItemModelInterface
+  instantiateItem: (args: {}) => ItemModelInterface
   counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   categoriesService?: ItemServiceInterface;
