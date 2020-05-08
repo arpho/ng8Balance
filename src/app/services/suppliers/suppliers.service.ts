@@ -5,6 +5,8 @@ import { ItemServiceInterface } from '../../modules/item/models/ItemServiceInter
 import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { EntityWidgetServiceInterface } from 'src/app/modules/widget/models/EntityWidgetServiceInterface';
+import { ShoppingKartModel } from 'src/app/models/shoppingKartModel';
+import { entries } from 'd3';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,18 @@ export class SuppliersService implements ItemServiceInterface, EntityWidgetServi
   readonly items: Observable<Array<SupplierModel>> = this._items.asObservable()
   items_list: Array<SupplierModel> = []
   constructor() {
+    this.counterWidget = (entityKey: string, entities: ShoppingKartModel[]) => {
+      return entities.map((item: ShoppingKartModel) => {
+
+        return (item.fornitoreId == entityKey) ? 1 : 0
+      }).reduce((pv, cv) => { return pv += cv }, 0)
+    }
+    this.adderWidget = (entityKey: string, entities: ShoppingKartModel[]) => {
+      return entities.map((item: ShoppingKartModel) => {
+
+        return (item.fornitoreId == entityKey) ? item.totale : 0
+      }).reduce((pv, cv) => { return pv += cv }, 0)
+    }
     this.instatiateItem = (args: {}) => {
       return new SupplierModel().initialize(args)
     }
