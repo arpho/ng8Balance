@@ -40,7 +40,9 @@
     "firebase-admin": "^8.10.0",
     "idb": "^5.0.1",
     "ng-connection-service": "^1.0.4",
+    "ngx-barcode-scanner": "0.0.7",
     "phonegap-plugin-barcodescanner": "^8.1.0",
+    "quagga": "^0.12.1",
     "rxjs": "~6.5.1",
     "tslib": "^1.11.1",
     "zone.js": "~0.9.1"
