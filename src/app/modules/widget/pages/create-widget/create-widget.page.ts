@@ -39,6 +39,9 @@ export class CreateWidgetPage implements OnInit {
     this.title = "crea un nuovo Widget"
     this.widget = new Widget()
     this.widgetFields = this.FormFieldsFactory(this.widget)
+    this.widgetsServices.services[this.categoriesService.key] = this.categoriesService
+    this.widgetsServices.services[this.suppliersService.key] = this.suppliersService
+    this.widgetsServices.services[this.paymentsService.key] = this.paymentsService
   }
 
   filter(ev) {
@@ -78,7 +81,7 @@ export class CreateWidgetPage implements OnInit {
         key: 'serviceKey',
         label: 'sorgente dati',
         options: this.widgetsServices.options,
-        value: this.widget.serviceKey
+        value: this.widget._serviceKey
       }),
       new SwitchQuestion({
         key: 'counter',
@@ -86,17 +89,17 @@ export class CreateWidgetPage implements OnInit {
         labelTrue: 'widget contatore',
         labelFalse: ' widget sommatore',
         iconFalse: 'calculator',
-
         iconTrue: 'stopwatch',
-        value: this.widget.counter,
+        value: this.widget._counter,
         required: false,
         order: 4
       }),
       new SelectorQuestion({
         key: 'item',
-        service: this.widgetsServices.services['categories'],
+        service: this.widgetsServices.services[this.widget._serviceKey],
         label: 'seleziona  qualcosa',
         text: 'non so che scrivere',
+        value: this.widget._item,
         createPopup: undefined
       }),
       new DropdownQuestion({
@@ -114,13 +117,13 @@ export class CreateWidgetPage implements OnInit {
 
     }
     if ((ev && ev.serviceKey) || this.widget.item) {
-      this.widget.serviceKey = (ev && ev.serviceKey) ? ev.serviceKey : this.widget.serviceKey // spaghetti code @TODO change it from does not update this field
+      this.widget.serviceKey = (ev && ev.serviceKey) ? ev.serviceKey : this.widget._serviceKey // spaghetti code @TODO change it from does not update this field
       out = out.filter(widget => widget.key != 'item') // remove the dummy question field
       out.push(new SelectorQuestion({
         key: 'item',
         value: this.widget.item,
-        service: (ev && ev.serviceKey) ? this.widgetsServices.services[ev.serviceKey] : this.widget.serviceKey,
-        label: 'seleziona  ' + (ev && ev.serviceKey) ? this.widgetsServices.services[ev.serviceKey].title : 'una sorgente dati',
+        service: (ev && ev.serviceKey) ? this.widgetsServices.services[ev._serviceKey || ev.serviceKey] : this.widget.serviceKey,
+        label: 'seleziona  ' + (ev && ev.serviceKey) ? this.widgetsServices.services[ev._serviceKey || ev.serviceKey].title : 'una sorgente dati',
         text: 'non so che scrivere',
         createPopup: undefined
       }))
@@ -158,9 +161,6 @@ export class CreateWidgetPage implements OnInit {
   }
 
   ngOnInit() {
-    this.widgetsServices.services[this.categoriesService.key] = this.categoriesService
-    this.widgetsServices.services[this.suppliersService.key] = this.suppliersService
-    this.widgetsServices.services[this.paymentsService.key] = this.paymentsService
   }
 
 }

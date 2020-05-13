@@ -50,7 +50,7 @@ export class SuppliersService implements ItemServiceInterface, EntityWidgetServi
     });
   }
   instatiateItem: (args: {}) => ItemModelInterface;
-  key = 'fornitori';
+  key = 'suppliers';
   entityLabel = 'Fornitori'
   counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;
   adderWidget: (entityKey: string, entities: ItemModelInterface[]) => number;

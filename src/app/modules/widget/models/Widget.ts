@@ -40,7 +40,7 @@ export class Widget {
     get items_list() {
         return this._items_list
     }
-    
+
 
     _Service: BehaviorSubject<EntityWidgetServiceInterface> = new BehaviorSubject(undefined)
     readonly Service: Observable<EntityWidgetServiceInterface> = this._Service.asObservable()
@@ -164,9 +164,9 @@ export class Widget {
         }
 
     }
-    getFirstWord(){
+    getFirstWord() {
 
-        return this.counter? 'Occorrenze' :'Spesa'
+        return this.counter ? 'Occorrenze' : 'Spesa'
     }
 
     filterFactory() {
@@ -190,6 +190,9 @@ export class Widget {
 
     load(args) {
         Object.assign(this, args)
+        this.Item.subscribe(value => {
+            this._item = value
+        })
         this.key = this.key || this._key
         this.widget = WidgetTypes.Regular
         this.temporalWindow = Number(this.temporalWindow)

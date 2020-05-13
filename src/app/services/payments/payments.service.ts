@@ -62,8 +62,8 @@ export class PaymentsService implements ItemServiceInterface, EntityWidgetServic
 
 
   ItemModelInterface: any;
-  key = 'Pagamenti';
-  entityLabel = 'pagamenti'
+  key = 'payments';
+  entityLabel = 'Pagamenti'
   filterableField: string;
   instantiateItem: (args: {}) => ItemModelInterface
   counterWidget: (entityKey: string, entities: ItemModelInterface[]) => number;

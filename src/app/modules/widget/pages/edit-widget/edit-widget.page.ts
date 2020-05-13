@@ -24,19 +24,16 @@ export class EditWidgetPage extends CreateWidgetPage implements OnInit {
   ngOnInit() {
     this.widget = this.service.widgetFactory(this.navParams.get('widget').widget).load(this.navParams.get('widget'))
     this.title = `modifica widget ${this.widget.title}`
-    this.widgetFields = super.FormFieldsFactory()
+    this.widgetFields = super.FormFieldsFactory(this.widget)
   }
 
   async submit(ev) {
-    console.log('submitted', ev)
     const widget = this.widget.load(ev)
     if (ev.entityKey) {
-      console.log('ev', ev)
 
       widget.entityKey = ev.entityKey.key
     }
-    const out = await this.service.put(widget.key, widget.serialize(), v => {
-    })
+    // const out = await this.service.put(widget.key, widget.serialize(), v => {    })
     this.dismiss()
   }
 
