@@ -242,9 +242,11 @@ export class Widget {
 
 
     calculateWidget(key: string) {
-        if (this.counter)
-            return this.service.counterWidget(this.entityKey, this._items_list.filter(this.filterFactory()))
+        if (this._items_list) {
+            if (this.counter)
+                return this.service.counterWidget(this.entityKey, this._items_list.filter(this.filterFactory()))
 
-        return this.service.adderWidget(this.entityKey, this._items_list.filter(this.filterFactory()))
+            return this.service.adderWidget(this.entityKey, this._items_list.filter(this.filterFactory()))
+        }
     }
 }

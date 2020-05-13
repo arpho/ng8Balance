@@ -22,9 +22,11 @@ export class EditWidgetPage extends CreateWidgetPage implements OnInit {
   }
 
   ngOnInit() {
-    this.widget = this.service.widgetFactory(this.navParams.get('widget').widget).load(this.navParams.get('widget'))
-    this.title = `modifica widget ${this.widget.title}`
-    this.widgetFields = super.FormFieldsFactory(this.widget)
+    if (this.navParams.get('widget')) {
+      this.widget = this.service.widgetFactory(this.navParams.get('widget').widget).load(this.navParams.get('widget'))
+      this.title = `modifica widget ${this.widget.title}`
+      this.widgetFields = super.FormFieldsFactory(this.widget)
+    }
   }
 
   async submit(ev) {

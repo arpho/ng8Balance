@@ -5,6 +5,7 @@ import { WidgetDrawerComponent } from './widget-drawer.component';
 import { WidgetService } from '../../services/widget-service.';
 import { WidgetComponent } from '../widget/widget.component';
 import { ShoppingKartsService } from 'src/app/services/shoppingKarts/shopping-karts.service';
+import { UtilitiesModule } from 'src/app/modules/utilities/utilities.module';
 //import { IonicStorageModule } from '@ionic/storage';
 
 describe('WidgetDrawerComponent', () => {
@@ -14,7 +15,7 @@ describe('WidgetDrawerComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [WidgetDrawerComponent,WidgetComponent],
-      imports: [IonicModule.forRoot()],
+      imports: [IonicModule.forRoot(),UtilitiesModule],
       providers: [WidgetService, ShoppingKartsService]
     }).compileComponents();
 
