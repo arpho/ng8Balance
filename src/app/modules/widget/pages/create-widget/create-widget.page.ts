@@ -97,7 +97,7 @@ export class CreateWidgetPage implements OnInit {
       new SelectorQuestion({
         key: 'item',
         service: this.widgetsServices.services[this.widget._serviceKey],
-        label: 'seleziona  qualcosa',
+        label: 'seleziona  item',
         text: 'non so che scrivere',
         value: this.widget._item,
         createPopup: undefined
@@ -135,9 +135,11 @@ export class CreateWidgetPage implements OnInit {
     this.Form = form
     // tslint:disable-next-line: no-string-literal
     this.Form.controls['serviceKey'].valueChanges.subscribe(ev => {
+      console.log('touch servicekey',ev)
       this.widgetFields = this.FormFieldsFactory({ serviceKey: ev })
     })
     this.Form.controls['widget'].valueChanges.subscribe(ev => {
+      console.log('touch,widget',ev)
       this.widget = this.service.widgetFactory(ev).load(this.widget)
       this.widgetFields = this.FormFieldsFactory({ widget: ev })
     })
