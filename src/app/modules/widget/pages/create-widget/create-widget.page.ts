@@ -133,13 +133,13 @@ export class CreateWidgetPage implements OnInit {
 
   setForm(form: FormGroup) {
     this.Form = form
+    this.Form.controls['title'].valueChanges.subscribe(v => {
+    })
     // tslint:disable-next-line: no-string-literal
     this.Form.controls['serviceKey'].valueChanges.subscribe(ev => {
-      console.log('touch servicekey',ev)
       this.widgetFields = this.FormFieldsFactory({ serviceKey: ev })
     })
     this.Form.controls['widget'].valueChanges.subscribe(ev => {
-      console.log('touch,widget',ev)
       this.widget = this.service.widgetFactory(ev).load(this.widget)
       this.widgetFields = this.FormFieldsFactory({ widget: ev })
     })
@@ -151,7 +151,6 @@ export class CreateWidgetPage implements OnInit {
 
       widget.entityKey = ev.entityKey.key
     }
-    console.log(' new widget', widget.serialize())
     const out = await this.service.add(widget.serialize())
     this.dismiss()
     /*   this.service.put(String(this.widget.key), this.widget.serialize(), (v) => {

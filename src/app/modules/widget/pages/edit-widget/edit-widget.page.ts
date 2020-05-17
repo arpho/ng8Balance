@@ -9,6 +9,7 @@ import { CategoriesService } from 'src/app/services/categories/categorie.service
 import { SuppliersService } from 'src/app/services/suppliers/suppliers.service';
 import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-widget',
@@ -28,6 +29,10 @@ export class EditWidgetPage extends CreateWidgetPage implements OnInit {
       this.title = `modifica widget ${this.widget.title}`
       this.widgetFields = super.FormFieldsFactory(this.widget)
     }
+  }
+
+  filter(ev) {
+    // we have to avoid to call the super's functionto not loose focus on the form
   }
 
   async submit(ev) {
