@@ -17,6 +17,7 @@ const routes:  Routes = [
   },
   {path:'info/release', loadChildren:'./modules/info/pages/info/info.module#InfoPageModule'},
   {path:'user/profile',loadChildren:'./modules/user/pages/profile/profile.module#ProfilePageModule',canActivate:[AuthGuard]},
+  {path:'user/users',loadChildren:'./modules/user/pages/users/users.module#UsersPageModule',canActivate:[AuthGuard]},
   // { path: 'graphs', loadChildren: './pages/graphs/graphs.module#GraphsPageModule', canActivate: [AuthGuard] },
  // { path: 'graphs/piechart', loadChildren: './pages/graphs/piechart/piechart.module#PiechartPageModule', canActivate: [AuthGuard] },
   { path: 'detail-payment', loadChildren: './pages/detail-payment/detail-payment.module#DetailPaymentPageModule' },

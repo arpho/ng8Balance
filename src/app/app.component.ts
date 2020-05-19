@@ -33,6 +33,11 @@ export class AppComponent {
       icon: 'person'
     },
     {
+      title: 'Utenti',
+      url: '/user/users',
+      icon: 'people'
+    },
+    {
       title: 'Categorie',
       url: '/categorie',
       icon: 'pricetags'
