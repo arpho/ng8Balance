@@ -28,6 +28,11 @@ export class AppComponent {
       icon: 'home'
     },
     {
+      title: 'profilo',
+      url: '/user/profile',
+      icon: 'person'
+    },
+    {
       title: 'Categorie',
       url: '/categorie',
       icon: 'pricetags'
@@ -47,11 +52,11 @@ export class AppComponent {
       url: '/shopping-karts',
       icon: 'cart'
     },
-     {
-       title: 'Grafici',
-       url: '/graphs',
-       icon: 'stats'
-     }, 
+    {
+      title: 'Grafici',
+      url: '/graphs',
+      icon: 'stats'
+    },
     {
       title: 'info',
       url: '/info/release',
