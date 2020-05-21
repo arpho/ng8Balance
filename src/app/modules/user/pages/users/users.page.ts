@@ -10,7 +10,7 @@ import { UserModel } from "../../models/userModel";
 })
 export class UsersPage implements OnInit {
   public usersList: Array<ItemModelInterface>;
-  constructor(public service: UsersService) {}
+  constructor(public service: UsersService) { }
 
   ngOnInit() {
     if (this.service.getEntitiesList()) {
@@ -18,9 +18,7 @@ export class UsersPage implements OnInit {
         // console.log("distribuzioni", snapshot);
         this.usersList = [];
         snapshot.forEach(snap => {
-          const user = new UserModel(undefined,snap.key);
-          user.load();
-
+          const user = new UserModel(undefined, snap.key).load({ key: snap.key });
           this.usersList.push(user);
         });
       });
