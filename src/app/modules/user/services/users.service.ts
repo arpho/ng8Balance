@@ -21,7 +21,7 @@ export class UsersService implements ItemServiceInterface {
     this.usersRef = firebase.database().ref("/userProfile");
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.usersRef = firebase.database().ref(`/fornitori/${user.uid}/`);
+        this.usersRef = firebase.database().ref(`/userProfile/`);
         this.getEntitiesList().on('value', eventSuppliersListSnapshot => {
           this.items_list = [];
           eventSuppliersListSnapshot.forEach(snap => {
