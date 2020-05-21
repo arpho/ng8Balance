@@ -100,13 +100,13 @@ export class EditUserPage implements OnInit {
     ev.email = this.currentUser.email; // non modifico email
     const user = new UserModel(ev);
     user.key = this.currentUser.key;
-    user.privileges = configs.accessLevel.filter((r: RoleModel) => {
+    user.role = configs.accessLevel.filter((r: RoleModel) => {
       // tslint:disable: triple-equals
       // tslint:disable-next-line: no-unused-expression
       r.value == this.currentUser.level;
     })[0];
     console.log('updating user', user);
-    user.privileges = configs.accessLevel.filter(
+    user.role = configs.accessLevel.filter(
       (v: RoleModel) => v.value == ev.level
     )[0];
     /*admin.auth().setCustomUserClaims(this.currentUser.key, {

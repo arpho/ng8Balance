@@ -19,7 +19,7 @@ export class UserModel implements ItemModelInterface {
   level: number;
   quickActions: Array<QuickAction>;
   enabled: boolean;
-  privileges: RoleModel;
+  role: RoleModel;
   service: ItemServiceInterface;
 
   constructor(item?: {}, key?: string, ) {
@@ -35,11 +35,11 @@ export class UserModel implements ItemModelInterface {
       })
     ];
   }
-  initialize(user:any){
-    Object.assign(this,user)
-      return this
-    }
-  
+  initialize(user: any) {
+    Object.assign(this, user)
+    return this
+  }
+
 
   getNote() {
     return new Value({
@@ -62,7 +62,7 @@ export class UserModel implements ItemModelInterface {
       // tslint:disable-next-line: no-string-literal
       this.birthDate = new DateModel(item['birthDate']);
     }
-    this.privileges = configs.accessLevel.filter(
+    this.role = configs.accessLevel.filter(
       (access: RoleModel) => access.value === this.level
     )[0];
   }
@@ -85,25 +85,28 @@ export class UserModel implements ItemModelInterface {
       firstName: this.firstName,
       lastName: this.lastName,
       enabled: this.enabled,
-      level: this.privileges.value
+      level: this.role.value
     };
   }
 
-  async load() {
-    /* if (this.service.getItem(this.key)) {
-      this.service.getItem(this.key).on('value', value => {
-        this.build(value.val());
-        return this;
-      });
-    } */
+  roleFactory(level) {
+
+    const out = configs.accessLevel.filter(
+      (access: RoleModel) => access.value === this.level
+    )[0]
+    return out ? out : configs.accessLevel[2] //utente standard
+
+  }
+
+  load(args) {
+    Object.assign(this, args)
+    this.role = this.roleFactory(this.level)
     return this;
+
   }
 
   getValue3() {
-    const ruolo: RoleModel = configs.accessLevel.filter(
-      (v: RoleModel) => v.value === this.level
-    )[0];
-    const value = new Value({ value: 'ruolo.key', label: 'ruolo ' });
+    const value = new Value({ value: this.role.key, label: 'ruolo ' });
     return value;
   }
 
@@ -141,6 +144,6 @@ export class UserModel implements ItemModelInterface {
 
   getElement() {
     const genere: Genere = 'o';
-    return { element: 'volantinaggio',  genere };
+    return { element: 'volantinaggio', genere };
   }
 }

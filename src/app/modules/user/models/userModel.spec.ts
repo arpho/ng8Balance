@@ -33,9 +33,9 @@ describe("test build function", () => {
     expect(user.level).toBe(1);
     expect(user.birthDate instanceof DateModel).toBeTruthy();
     // checkingf privileges level
-    expect(user.privileges instanceof RoleModel).toBeTruthy();
-    expect(user.privileges.key).toBe("Sviluppatore");
-    expect(user.privileges.value).toBe(1);
+    expect(user.role instanceof RoleModel).toBeTruthy();
+    expect(user.role.key).toBe("Sviluppatore");
+    expect(user.role.value).toBe(1);
   });
 });
 describe("serialize should work", () => {
