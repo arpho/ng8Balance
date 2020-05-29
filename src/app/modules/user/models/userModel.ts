@@ -24,16 +24,7 @@ export class UserModel implements ItemModelInterface {
 
   constructor(item?: {}, key?: string, ) {
     this.key = key;
-    this.quickActions = [
-      new QuickAction({
-        icon: 'create',
-        title: 'modifica',
-        description: '',
-        action: (args: { alertCtrl: any; router: any }) => {
-          // args.router.navigate([this.getEditPopup(), this.key]);
-        }
-      })
-    ];
+    this.load(item)
   }
   initialize(user: any) {
     Object.assign(this, user)
@@ -67,7 +58,7 @@ export class UserModel implements ItemModelInterface {
     )[0];
   }
   hasQuickActions() {
-    return true;
+    return false;
   }
   getQuickActions() {
     return this.quickActions;

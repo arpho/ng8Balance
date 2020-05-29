@@ -11,6 +11,7 @@ import { DropdownQuestion } from 'src/app/modules/dynamic-form/models/question-d
 import { configs } from 'src/app/configs/configs';
 import { RoleModel } from '../../models/privilegesLevelModel';
 import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterface';
+import { NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-user',
@@ -28,14 +29,13 @@ export class EditUserPage implements OnInit {
   constructor(
     public router: Router,
     public route: ActivatedRoute,
-    public service: UsersService
+    public service: UsersService,
+    public navParams: NavParams
   ) { }
 
   ngOnInit() {
-    const userKey = this.route.snapshot.paramMap.get('user');
-    this.currentUser = new UserModel(undefined, userKey);
-    this.currentUser.key = userKey;
-    
+    this.currentUser = new UserModel(this.navParams.get('item'),this.navParams.get('item').key);
+    console.log('got user',this.currentUser)
     if (!this.currentUser.birthDate) {
       this.currentUser.birthDate = new DateModel({
         year: 1977,
