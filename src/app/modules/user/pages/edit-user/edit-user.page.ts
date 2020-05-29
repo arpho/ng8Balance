@@ -11,7 +11,7 @@ import { DropdownQuestion } from 'src/app/modules/dynamic-form/models/question-d
 import { configs } from 'src/app/configs/configs';
 import { RoleModel } from '../../models/privilegesLevelModel';
 import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterface';
-import { NavParams } from '@ionic/angular';
+import { NavParams, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-user',
@@ -30,8 +30,15 @@ export class EditUserPage implements OnInit {
     public router: Router,
     public route: ActivatedRoute,
     public service: UsersService,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public modalCtrl:ModalController
   ) { }
+
+
+
+  dismiss() {
+    this.modalCtrl.dismiss()
+  }
 
   ngOnInit() {
     this.currentUser = new UserModel(this.navParams.get('item'), this.navParams.get('item').key);
