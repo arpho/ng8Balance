@@ -41,6 +41,7 @@ import { BarcodeModule } from './modules/barcode/barcode.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { UtilitiesModule } from './modules/utilities/utilities.module';
 import { RoundPipe } from './modules/utilities/pipes/round.pipe';
+import { EditUserPage } from './modules/user/pages/edit-user/edit-user.page';
 @NgModule({
   entryComponents: [
     CreateSupplierPage,
@@ -52,6 +53,7 @@ import { RoundPipe } from './modules/utilities/pipes/round.pipe';
     SelectorItemsPage,
     CreatePurchasePage,
     DetailPurchasePage,
+    EditUserPage,
     DetailShoppingKartPage,
     DetailPaymentPage,
     DetailCategoryPage,
@@ -71,6 +73,7 @@ import { RoundPipe } from './modules/utilities/pipes/round.pipe';
     CreatePurchasePage,
     DetailPurchasePage,
     DetailCategoryPage,
+    EditUserPage,
     DetailPaymentPage,
     DetailShoppingKartPage,
     CreatePaymentPage,
