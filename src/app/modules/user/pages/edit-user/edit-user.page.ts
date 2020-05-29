@@ -34,8 +34,7 @@ export class EditUserPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.currentUser = new UserModel(this.navParams.get('item'),this.navParams.get('item').key);
-    console.log('got user',this.currentUser)
+    this.currentUser = new UserModel(this.navParams.get('item'), this.navParams.get('item').key);
     if (!this.currentUser.birthDate) {
       this.currentUser.birthDate = new DateModel({
         year: 1977,

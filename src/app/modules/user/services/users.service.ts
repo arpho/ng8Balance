@@ -25,7 +25,6 @@ export class UsersService implements ItemServiceInterface {
         this.getEntitiesList().on('value', eventSuppliersListSnapshot => {
           this.items_list = [];
           eventSuppliersListSnapshot.forEach(snap => {
-            console.log('loaded user',snap.val())
             const supplier = new UserModel(undefined, snap.key).load(snap.val())
             supplier.key = snap.key // alcuni item non hanno il campo key
             this.items_list.push(supplier);
@@ -50,8 +49,8 @@ export class UsersService implements ItemServiceInterface {
 
   setLoggedUser(key: string) {
     this.loggedUser = new UserModel(undefined, key);
-    this.loggedUser.build({key});
-     return this.loggedUser;
+    this.loggedUser.build({ key });
+    return this.loggedUser;
   }
 
   deleteItem(key: string) {
