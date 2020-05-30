@@ -73,7 +73,7 @@ export class ShoppingKartModel implements ItemModelInterface {
         return this.items.map(mapper).reduce(reducer, false)// checs if at least one of the purchases' description conatains the required description
     }
 
-    
+
 
     getSupplier() {
         return this.fornitore
@@ -133,7 +133,7 @@ export class ShoppingKartModel implements ItemModelInterface {
     }
 
     removeItem(purchase: PurchaseModel) {
-        console.log('removing item',purchase,'from',this.items)
+        console.log('removing item', purchase, 'from', this.items)
         this.items = this.items.filter((v: PurchaseModel) => v.key !== purchase.key)
     }
 
@@ -161,10 +161,10 @@ export class ShoppingKartModel implements ItemModelInterface {
     getAggregate(): Value {
         return new Value({ value: undefined, label: 'aggregate to be defined' })
     }
-/* 
-    aggregateAction?() {
-        throw new Error('Method not implemented.');
-    } */
+    /* 
+        aggregateAction?() {
+            throw new Error('Method not implemented.');
+        } */
 
     hasQuickActions?(): boolean {
         return false;
@@ -175,6 +175,7 @@ export class ShoppingKartModel implements ItemModelInterface {
             fornitoreId: this.fornitore.key || '',
             pagamentoId: this.pagamento.key || '',
             key: this.key || '',
+            note: this.note || '',
             archived: Boolean(this.archived),
             online: Boolean(this.online),
             dataAcquisto: this.purchaseDate ? this.purchaseDate.formatFullDate() : '',
