@@ -41,6 +41,7 @@
     "idb": "^5.0.1",
     "ng-connection-service": "^1.0.4",
     "phonegap-plugin-barcodescanner": "^8.1.0",
+    "quagga": "^0.12.1",
     "rxjs": "~6.5.1",
     "tslib": "^1.11.1",
     "zone.js": "~0.9.1"
@@ -59,6 +60,7 @@
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "angular-ide": "^0.9.74",
     "codelyzer": "^5.2.2",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
