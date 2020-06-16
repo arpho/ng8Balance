@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import Quagga from 'quagga'
 
 @Component({
   selector: 'app-scanner',
@@ -7,8 +8,13 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
   styleUrls: ['./scanner.component.scss'],
 })
 export class ScannerComponent implements OnInit {
+  quagga
 
-  constructor(private barcodeScanner:BarcodeScanner) { }
+  constructor(private barcodeScanner:BarcodeScanner) { 
+    const Quagga = require('quagga').default;
+    
+    console.log('quagga',Quagga)
+  }
 
   ngOnInit() {}
   scann(){

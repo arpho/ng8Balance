@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 
 
 
+
+
 @NgModule({
   declarations: [ScannerComponent],
   imports: [

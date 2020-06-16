@@ -81,7 +81,6 @@ import { EditUserPage } from './modules/user/pages/edit-user/edit-user.page';
     CategoriesSelectorComponent,
     CategoriesSelectorPage,
     CategoryComponent,
-    
     CategoriesViewerComponent],
 
   imports: [
