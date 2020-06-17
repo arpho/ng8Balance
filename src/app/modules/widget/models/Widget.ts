@@ -36,6 +36,10 @@ export class Widget {
 
         })
     }
+    setItem(item:ItemModelInterface){
+        this._item = item
+        this.__item.next(item)
+    }
 
     get items_list() {
         return this._items_list

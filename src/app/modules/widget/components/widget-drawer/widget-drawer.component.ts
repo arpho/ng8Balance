@@ -46,7 +46,6 @@ export class WidgetDrawerComponent implements OnInit {
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
     public modalController: ModalController, ) {
       this.items = this.karts._items
-    this.service.connectToIDB().then(() => {
       this.service.keys((keys: Promise<any>) => {
         this.keys = keys
         keys.then(k => {
@@ -69,7 +68,7 @@ export class WidgetDrawerComponent implements OnInit {
       }) */
 
 
-    })
+    
   }
 
   ngOnInit() { }

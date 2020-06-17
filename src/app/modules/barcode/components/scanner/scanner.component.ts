@@ -13,7 +13,6 @@ export class ScannerComponent implements OnInit {
   constructor(private barcodeScanner:BarcodeScanner) { 
     const Quagga = require('quagga').default;
     
-    console.log('quagga',Quagga)
   }
 
   ngOnInit() {}

@@ -16,23 +16,27 @@ import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { WidgetTypes } from '../models/WidgetsTypes';
 import { WidgetSince } from '../models/WidgetSince';
 import * as firebase from 'firebase';
+import { SelectorItemsComponent } from '../../item/components/selector-items/selector-items.component';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class WidgetService {
+  
   Keys: string[]
   public readonly _widgetsList: BehaviorSubject<Array<Widget>> = new BehaviorSubject([])
   widgetsList: Observable<Array<Widget>> = this._widgetsList.asObservable()
   WidgetList: Widget[] = []
 
-  private _db
+  private _dbgetItem
   storeName = 'widgetsList';
   widgets_list: Array<Widget>
   widgetsServices: EntityWidgetServiceInterface[] = [this.categoriesService, this.paymentsService, this.SuppliersService]
   widgetListRef: firebase.database.Reference;
   items_list: any[];
+
+  
 
   constructor(public service: WidgetService, public idbService: IDBWidgetServiceService, public categoriesService: CategoriesService, public SuppliersService: SuppliersService, public paymentsService: PaymentsService) {
 
@@ -44,8 +48,22 @@ export class WidgetService {
         this.getEntitiesList().on('value', eventCategoriesListSnapshot => {
           this.items_list = [];
           eventCategoriesListSnapshot.forEach(snap => {
-            const payment = this.widgetFactory(snap.val())
-            this.items_list.push(payment);
+            const widget = this.widgetFactory(snap.val().widget).load(snap.val())
+            // widget loaded it still miss item
+            const service = this.getWidgetService(widget.serviceKey)
+            service && this.setItem(service,widget)
+
+            if (service) {
+              service.getItem(widget.entityKey).on('value', (item) => {
+                const entity = service.instatiateItem(item.val())
+                entity.key = item.key
+                widget.item = entity
+                widget.service = service
+
+              })
+
+            console.log('widget',widget)
+            this.items_list.push(widget);
           });
           this._widgetsList.next(this.items_list)
         });
@@ -59,6 +77,20 @@ export class WidgetService {
     }, 'widget-service')
   }
 
+
+  setItem(service: EntityWidgetServiceInterface, widget: Widget) {
+    service.getItem(widget.entityKey).on('value', (item) => {
+      const entity = service.instatiateItem(item.val())
+      entity.key = item.key
+      widget.item = entity
+      widget.service = service
+  }
+}
+
+  getWidgetService(serviceKey){
+    return this.widgetsServices.filter(service=>{service.key== serviceKey})[0]
+  }
+
   getEntitiesList(): firebase.database.Reference {
     return this.widgetListRef;
   }
@@ -68,7 +100,7 @@ export class WidgetService {
     this.idbService.keys(next, 'wrapping keys')
   }
 
-  widgetFactory(type: number) {
+  widgetFactory(type: number):Widget {
     const widgets = {}
     widgets[WidgetTypes.Regular] = new Widget()
     widgets[WidgetTypes.Since] = new WidgetSince()
@@ -111,7 +143,7 @@ export class WidgetService {
 
   }
   async delete(key, next) {
-   this.widgetListRef.child(key).remove()
+    this.widgetListRef.child(key).remove()
   }
 
 
@@ -124,33 +156,12 @@ export class WidgetService {
     return this.widgetListRef.child(key)
   }
 
-  async add(widget:Widget) {
+  async add(widget) {
     console.log('adding ', widget)
-    this.widgetListRef.push(widget.serialize())
-   
+    this.widgetListRef.push(widget)
+
   }
 
-  async connectToIDB() {
-    this._db = await openDB('widgets', 3, {
-      upgrade(db, oldVersion, newVersion, transaction) {
-        console.log(`updating db:${db}, oldVersion:${oldVersion},newVersion:${newVersion},transaction:${transaction}`)
-        db.createObjectStore(this ? this.storeName : 'widgetsList', { keyPath: 'key' })
-
-      },
-      blocked() {
-        console.log('blocked')
-        // …
-      },
-      blocking() {
-        console.log('blocking')
-        // …
-      },
-      terminated() {
-        console.log('terminated')
-        // …
-      },
-    });
-  }
-
+  
 
 }
