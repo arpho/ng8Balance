@@ -15,6 +15,7 @@ import { EntityWidgetServiceInterface } from '../models/EntityWidgetServiceInter
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
 import { WidgetTypes } from '../models/WidgetsTypes';
 import { WidgetSince } from '../models/WidgetSince';
+import * as firebase from 'firebase';
 
 
 @Injectable({
@@ -30,17 +31,36 @@ export class WidgetService {
   storeName = 'widgetsList';
   widgets_list: Array<Widget>
   widgetsServices: EntityWidgetServiceInterface[] = [this.categoriesService, this.paymentsService, this.SuppliersService]
+  widgetListRef: firebase.database.Reference;
+  items_list: any[];
 
   constructor(public service: WidgetService, public idbService: IDBWidgetServiceService, public categoriesService: CategoriesService, public SuppliersService: SuppliersService, public paymentsService: PaymentsService) {
 
-    this.connectToIDB()
     // this.initializeWidget()
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.widgetListRef = firebase.database().ref(`/widgets/${user.uid}/`);
+        this.getEntitiesList().on('value', eventCategoriesListSnapshot => {
+          this.items_list = [];
+          eventCategoriesListSnapshot.forEach(snap => {
+            const payment = this.widgetFactory(snap.val())
+            this.items_list.push(payment);
+          });
+          this._widgetsList.next(this.items_list)
+        });
+      }
+    });
     this.loadWidget()
     this.widgets_list = []
     this.idbService.keys(keys => {
       keys.then(keysList => {
       })
     }, 'widget-service')
+  }
+
+  getEntitiesList(): firebase.database.Reference {
+    return this.widgetListRef;
   }
 
 
@@ -90,25 +110,24 @@ export class WidgetService {
     }, 'new initializeing')
 
   }
-  async delete(id, next) {
-    await this.idbService.delete(id, next)
-    this.loadWidget()
+  async delete(key, next) {
+   this.widgetListRef.child(key).remove()
   }
 
 
-  put(key: string, value: any, next: (v) => void) {
+  put(key: string, value: any, next?: (v) => void) {
     this.idbService.put(key, value, next)
   }
 
 
-  get(key: string, next: (v: Promise<any>) => void) {
-    this.idbService.get(key, next)
+  get(key: string, next?: (v: Promise<any>) => void) {
+    return this.widgetListRef.child(key)
   }
 
-  async add(widget) {
+  async add(widget:Widget) {
     console.log('adding ', widget)
-    this.idbService.add(widget)
-    this.loadWidget()
+    this.widgetListRef.push(widget.serialize())
+   
   }
 
   async connectToIDB() {
