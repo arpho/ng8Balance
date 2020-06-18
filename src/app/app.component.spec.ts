@@ -52,12 +52,12 @@ describe('AppComponent', () => {
     await fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-label');
-    expect(menuItems.length).toEqual(8);
+    expect(menuItems.length).toEqual(9);
     expect(menuItems[0].textContent).toContain('Home');
     expect(menuItems[1].textContent).toContain('profilo');
-    expect(menuItems[2].textContent).toContain('Categorie');
-    expect(menuItems[3].textContent).toContain('Pagamenti');
-    expect(menuItems[4].textContent).toContain('Fornitori');
+    expect(menuItems[2].textContent).toContain('Utenti');
+    expect(menuItems[3].textContent).toContain('Categorie');
+    expect(menuItems[4].textContent).toContain('Pagamenti');
   });
 
   it('should have urls', async () => {
@@ -65,9 +65,9 @@ describe('AppComponent', () => {
     await fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-item');
-    expect(menuItems.length).toEqual(7);
+    expect(menuItems.length).toEqual(9);
     expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/home');
-    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/categorie');
+    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/user/profile');
   });
 
 });

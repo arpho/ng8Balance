@@ -64,7 +64,7 @@ export class WidgetService {
 
 
 
-  constructor(public service: WidgetService,  public categoriesService: CategoriesService, public SuppliersService: SuppliersService, public paymentsService: PaymentsService) {
+  constructor(public service: WidgetService, public categoriesService: CategoriesService, public SuppliersService: SuppliersService, public paymentsService: PaymentsService) {
 
     // this.initializeWidget()
 
@@ -98,7 +98,7 @@ export class WidgetService {
   }
 
 
-  
+
 
   widgetFactory(type: number): Widget {
     const widgets = {}
@@ -112,9 +112,7 @@ export class WidgetService {
   }
 
 
-  put(key: string, value: any, next?: (v) => void) {
-    this.idbService.put(key, value, next)
-  }
+
 
 
   get(key: string, next?: (v: Promise<any>) => void) {
