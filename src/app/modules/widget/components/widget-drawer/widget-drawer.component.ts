@@ -46,26 +46,12 @@ export class WidgetDrawerComponent implements OnInit {
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
     public modalController: ModalController, ) {
       this.items = this.karts._items
-      this.service.keys((keys: Promise<any>) => {
-        this.keys = keys
-        keys.then(k => {
-        })
-      })
       this.service.widgetsList.subscribe(widgets => {
       })
       this.karts._items.subscribe((karts: ShoppingKartModel[]) => {
         // this.items =[... karts]
         
       })
-      /* this.service._widgets.subscribe((items: Widget[]) => {
-        this.Widgets = items
-        // console.log('widgets',items)
-      })
-      this.service._widgets.subscribe((widgets: Widget[]) => {
-        this.Widgets = widgets
-
-        //console.log('got widgets',widgets)
-      }) */
 
 
     
