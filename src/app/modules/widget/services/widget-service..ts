@@ -23,7 +23,7 @@ import { SelectorItemsComponent } from '../../item/components/selector-items/sel
   providedIn: 'root'
 })
 export class WidgetService {
-  
+
   Keys: string[]
   public readonly _widgetsList: BehaviorSubject<Array<Widget>> = new BehaviorSubject([])
   widgetsList: Observable<Array<Widget>> = this._widgetsList.asObservable()
@@ -36,7 +36,7 @@ export class WidgetService {
   widgetListRef: firebase.database.Reference;
   items_list: any[];
 
-  
+
 
   constructor(public service: WidgetService, public idbService: IDBWidgetServiceService, public categoriesService: CategoriesService, public SuppliersService: SuppliersService, public paymentsService: PaymentsService) {
 
@@ -49,9 +49,11 @@ export class WidgetService {
           this.items_list = [];
           eventCategoriesListSnapshot.forEach(snap => {
             const widget = this.widgetFactory(snap.val().widget).load(snap.val())
+            console.log('loaded widget',widget)
             // widget loaded it still miss item
             const service = this.getWidgetService(widget.serviceKey)
-            service && this.setItem(service,widget)
+            console.log('service',service)
+            service && this.setItem(service, widget)
 
             if (service) {
               service.getItem(widget.entityKey).on('value', (item) => {
@@ -63,7 +65,7 @@ export class WidgetService {
               })
             }
 
-            console.log('widget',widget)
+            console.log('widget', widget)
             this.items_list.push(widget);
           });
           this._widgetsList.next(this.items_list)
@@ -85,11 +87,15 @@ export class WidgetService {
       entity.key = item.key
       widget.item = entity
       widget.service = service
-  })
-}
+      console.log('widget', widget)
+    })
+  }
 
-  getWidgetService(serviceKey){
-    return this.widgetsServices.filter(service=>{service.key== serviceKey})[0]
+  getWidgetService(serviceKey) {
+    return this.widgetsServices.filter(service => { 
+      return service.key == serviceKey })[0]
+      console.log('service',this.widgetsServices.filter(service => { 
+        return service.key == serviceKey })[0])
   }
 
   getEntitiesList(): firebase.database.Reference {
@@ -101,7 +107,7 @@ export class WidgetService {
     this.idbService.keys(next, 'wrapping keys')
   }
 
-  widgetFactory(type: number):Widget {
+  widgetFactory(type: number): Widget {
     const widgets = {}
     widgets[WidgetTypes.Regular] = new Widget()
     widgets[WidgetTypes.Since] = new WidgetSince()
@@ -163,6 +169,6 @@ export class WidgetService {
 
   }
 
-  
+
 
 }
