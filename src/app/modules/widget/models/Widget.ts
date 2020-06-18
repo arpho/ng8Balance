@@ -76,7 +76,6 @@ export class Widget {
         this._item = item
         this._entityKey = item.key
         this._text.next(`${this.getFirstWord()} ${item['widgetText']} negli ultimi ${this.temporalWindow} giorni: `)
-        console.log('setting item',item, this)
         this.__item.next(item)
     }
 
@@ -190,7 +189,6 @@ export class Widget {
     }
 
     load(args) {
-        console.log('value of widget',args)
         Object.assign(this, args)
         this.Item.subscribe(value => {
             this._item = value

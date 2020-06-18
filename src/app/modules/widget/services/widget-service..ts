@@ -49,10 +49,8 @@ export class WidgetService {
           this.items_list = [];
           eventCategoriesListSnapshot.forEach(snap => {
             const widget = this.widgetFactory(snap.val().widget).load(snap.val())
-            console.log('loaded widget',widget)
             // widget loaded it still miss item
             const service = this.getWidgetService(widget.serviceKey)
-            console.log('service',service)
             service && this.setItem(service, widget)
 
             if (service) {
@@ -65,7 +63,6 @@ export class WidgetService {
               })
             }
 
-            console.log('widget', widget)
             this.items_list.push(widget);
           });
           this._widgetsList.next(this.items_list)
@@ -87,15 +84,12 @@ export class WidgetService {
       entity.key = item.key
       widget.item = entity
       widget.service = service
-      console.log('widget', widget)
     })
   }
 
   getWidgetService(serviceKey) {
     return this.widgetsServices.filter(service => { 
       return service.key == serviceKey })[0]
-      console.log('service',this.widgetsServices.filter(service => { 
-        return service.key == serviceKey })[0])
   }
 
   getEntitiesList(): firebase.database.Reference {
