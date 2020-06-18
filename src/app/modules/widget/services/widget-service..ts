@@ -61,6 +61,7 @@ export class WidgetService {
                 widget.service = service
 
               })
+            }
 
             console.log('widget',widget)
             this.items_list.push(widget);
@@ -84,7 +85,7 @@ export class WidgetService {
       entity.key = item.key
       widget.item = entity
       widget.service = service
-  }
+  })
 }
 
   getWidgetService(serviceKey){
