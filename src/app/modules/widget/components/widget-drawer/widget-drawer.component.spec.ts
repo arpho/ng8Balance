@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { WidgetDrawerComponent } from './widget-drawer.component';
-import { WidgetService } from '../../services/widget-service.';
+import { WidgetService } from '../../services/widget-service';
 import { WidgetComponent } from '../widget/widget.component';
 import { ShoppingKartsService } from 'src/app/services/shoppingKarts/shopping-karts.service';
 import { UtilitiesModule } from 'src/app/modules/utilities/utilities.module';

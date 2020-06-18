@@ -4,7 +4,7 @@ import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-te
 import { Widget } from '../../models/Widget';
 import { SwitchQuestion } from 'src/app/modules/item/models/question-switch';
 import { ModalController } from '@ionic/angular';
-import { WidgetService } from '../../services/widget-service.';
+import { WidgetService } from '../../services/widget-service';
 import { SelectorQuestion } from 'src/app/modules/dynamic-form/models/question-selector';
 import { DateQuestion } from 'src/app/modules/dynamic-form/models/question-date';
 import { DropdownQuestion } from 'src/app/modules/dynamic-form/models/question-dropdown';

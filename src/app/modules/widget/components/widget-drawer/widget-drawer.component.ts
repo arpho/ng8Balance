@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { WidgetService } from '../../services/widget-service.';
+import { WidgetService } from '../../services/widget-service';
 import { ShoppingKartModel } from 'src/app/models/shoppingKartModel';
 import { ShoppingKartsService } from 'src/app/services/shoppingKarts/shopping-karts.service';
 import { Widget } from '../../models/Widget';

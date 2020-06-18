@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { WidgetService } from './widget-service.';
+import { WidgetService } from './widget-service';
 import { WidgetSince } from '../models/WidgetSince';
 import { WidgetTypes } from '../models/WidgetsTypes';
 // import { Storage, IonicStorageModule } from '@ionic/storage';

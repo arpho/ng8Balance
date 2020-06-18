@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateWidgetPage } from '../create-widget/create-widget.page';
-import { WidgetService } from '../../services/widget-service.';
+import { WidgetService } from '../../services/widget-service';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Widget } from '../../models/Widget';
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
