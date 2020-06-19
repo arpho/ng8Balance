@@ -16,7 +16,7 @@ describe('WidgetDrawerComponent', () => {
     TestBed.configureTestingModule({
       declarations: [WidgetDrawerComponent,WidgetComponent],
       imports: [IonicModule.forRoot(),UtilitiesModule],
-      providers: [WidgetService, ShoppingKartsService]
+      providers: [ ShoppingKartsService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(WidgetDrawerComponent);
