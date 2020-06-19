@@ -40,8 +40,7 @@ export class EditUserPage implements OnInit {
     this.modalCtrl.dismiss()
   }
 
-  ngOnInit() {
-    if (this.navParams.get('item')) { this.currentUser = new UserModel(this.navParams.get('item'), this.navParams.get('item').key); }
+  setBirthDate() {
     if (!this.currentUser.birthDate) {
       this.currentUser.birthDate = new DateModel({
         year: 1977,
@@ -50,29 +49,38 @@ export class EditUserPage implements OnInit {
       });
       this.currentUser.birthDate.loadFromDate(new Date());
     }
-    this.submitText = 'modifica';
+  }
+
+  setTitle() {
     this.title =
       this.currentUser.firstName && this.currentUser.lastName
         ? `${this.currentUser.firstName} ${this.currentUser.lastName}`
         : this.currentUser.email;
+  }
+
+  ngOnInit() {
+    if (this.navParams.get('item')) { this.currentUser = new UserModel(this.navParams.get('item'), this.navParams.get('item').key); }
+    this.currentUser && this.setBirthDate()
+    this.submitText = 'modifica';
+    this.currentUser && this.setTitle()
     const questions: any[] = [
       new TextboxQuestion({
         key: 'firstName',
         label: 'nome',
-        value: this.currentUser.firstName,
+        value: this.currentUser ? this.currentUser.firstName : 'nome',
         order: 1,
         required: true
       }),
       new TextboxQuestion({
         key: 'lastName',
         label: 'cognome',
-        value: this.currentUser.lastName,
+        value: this.currentUser ? this.currentUser.lastName : 'cognome',
         order: 2
       }),
       new SwitchQuestion({
         key: 'enabled',
         label: 'abilitato',
-        value: this.currentUser.enabled,
+        value: this.currentUser ? this.currentUser.enabled : false,
         labelTrue: 'utente  abilitato',
         labelFalse: ' utente non abilitato ',
         iconTrue: 'happy',
@@ -83,14 +91,14 @@ export class EditUserPage implements OnInit {
         key: 'birthDate',
         label: 'Data di nascita',
         required: true,
-        value: new DateModel(this.currentUser.birthDate).formatDate(), // "1977-03-16",
+        value: this.currentUser ? new DateModel(this.currentUser.birthDate).formatDate() : new DateModel(new Date()), // "1977-03-16",
         order: 4
       }),
       new DropdownQuestion({
         key: 'level',
         label: 'Ruolo utente',
         options: configs.accessLevel,
-        value: this.currentUser.level
+        value:this.currentUser? this.currentUser.level:3
       })
     ];
     this.questions = questions;
