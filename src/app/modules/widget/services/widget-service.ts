@@ -22,6 +22,18 @@ import { SelectorItemsComponent } from '../../item/components/selector-items/sel
 })
 export class WidgetService {
 
+  constructor(public service: WidgetService, public categoriesService: CategoriesService, public SuppliersService: SuppliersService, public paymentsService: PaymentsService) {
+
+
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.widgetListRef = firebase.database().ref(`/widgets/${user.uid}/`);
+        this.loadAllWidgets()
+      }
+    });
+  }
+
   populateWidgetsList = snap => {
     const widget = this.widgetFactory(snap.val().widget).load(snap.val())
     // widget loaded it still miss item
@@ -61,21 +73,6 @@ export class WidgetService {
   widgetsServices: EntityWidgetServiceInterface[] = [this.categoriesService, this.paymentsService, this.SuppliersService]
   widgetListRef: firebase.database.Reference;
   items_list: any[];
-
-
-
-  constructor(public service: WidgetService, public categoriesService: CategoriesService, public SuppliersService: SuppliersService, public paymentsService: PaymentsService) {
-
-    // this.initializeWidget()
-
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.widgetListRef = firebase.database().ref(`/widgets/${user.uid}/`);
-        this.loadAllWidgets()
-      }
-    });
-    this.widgets_list = []
-  }
 
 
   setItem(service: EntityWidgetServiceInterface, widget: Widget) {
