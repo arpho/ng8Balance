@@ -37,7 +37,6 @@ import { DetailPaymentPage } from './pages/detail-payment/detail-payment.page';
 import { WidgetModule } from './modules/widget/widget.module';
 import { CreateWidgetPage } from './modules/widget/pages/create-widget/create-widget.page';
 import { EditWidgetPage } from './modules/widget/pages/edit-widget/edit-widget.page';
-import { BarcodeModule } from './modules/barcode/barcode.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { UtilitiesModule } from './modules/utilities/utilities.module';
 import { RoundPipe } from './modules/utilities/pipes/round.pipe';
@@ -84,7 +83,6 @@ import { EditUserPage } from './modules/user/pages/edit-user/edit-user.page';
     CategoriesViewerComponent],
 
   imports: [
-    BarcodeModule,
     ItemModule,
     WidgetModule,
     UtilitiesModule,

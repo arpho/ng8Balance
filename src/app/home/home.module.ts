@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import { OnlineStatusModule } from '../modules/online-status/online-status.module';
 import { WidgetModule } from '../modules/widget/widget.module';
-import { BarcodeModule } from '../modules/barcode/barcode.module';
 import { UtilitiesModule } from '../modules/utilities/utilities.module';
 @NgModule({
   imports: [
@@ -17,7 +16,6 @@ import { UtilitiesModule } from '../modules/utilities/utilities.module';
     OnlineStatusModule,
     WidgetModule,
     UtilitiesModule,
-    BarcodeModule,
     RouterModule.forChild([
       {
         path: '',
