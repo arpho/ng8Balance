@@ -31,7 +31,7 @@ export class EditUserPage implements OnInit {
     public route: ActivatedRoute,
     public service: UsersService,
     public navParams: NavParams,
-    public modalCtrl:ModalController
+    public modalCtrl: ModalController
   ) { }
 
 
@@ -41,7 +41,7 @@ export class EditUserPage implements OnInit {
   }
 
   ngOnInit() {
-    this.currentUser = new UserModel(this.navParams.get('item'), this.navParams.get('item').key);
+    if (this.navParams.get('item')) { this.currentUser = new UserModel(this.navParams.get('item'), this.navParams.get('item').key); }
     if (!this.currentUser.birthDate) {
       this.currentUser.birthDate = new DateModel({
         year: 1977,

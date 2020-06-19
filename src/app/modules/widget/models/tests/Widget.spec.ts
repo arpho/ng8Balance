@@ -40,15 +40,4 @@ describe("testing Widget", () => {
         widget.order = 3
         expect(widget.order).toBe(3)
     })
-    it('should call the rigth calculateWidget', () => {
-        if (widget.service) {
-            expect(widget.calculateWidget()).toBe(WidgetOperation.Counter)
-        }
-
-        widget = new Widget({ service: new WidgetServiceMocker(), entityKey: 'testKey', temporalWindow: 1, counter: false, _order: 0, _key: 12 ,serviceKey:'mock'})
-        if (widget.service) {
-            expect(widget.calculateWidget()).toBe(WidgetOperation.Adder)
-        }
-
-    })
 })

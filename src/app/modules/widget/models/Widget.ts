@@ -2,7 +2,7 @@ import { EntityWidgetServiceInterface } from './EntityWidgetServiceInterface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Value } from '../../item/models/value';
 import { ItemModelInterface } from '../../item/models/itemModelInterface';
-import { WidgetTypes } from './WidgetsTypes';
+import { WidgetTypes, WidgetOperation } from './WidgetsTypes';
 import { TextboxQuestion } from '../../dynamic-form/models/question-textbox';
 import { QuestionBase } from '../../dynamic-form/models/question-base';
 import { SwitchQuestion } from '../../item/models/question-switch';
@@ -236,6 +236,10 @@ export class Widget {
             widget: WidgetTypes.Regular // r'regular||by
 
         }
+    }
+
+    mockCalculateWidget(){
+        return this.counter?WidgetOperation.Counter:WidgetOperation.Adder
     }
 
 
