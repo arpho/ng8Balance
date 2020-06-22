@@ -184,10 +184,13 @@ export class Widget {
     get order() {
         return this._order
     }
+
+
     get key() {
         return this._key
     }
 
+    
     load(args) {
         Object.assign(this, args)
         this.Item.subscribe(value => {
@@ -200,7 +203,6 @@ export class Widget {
     }
 
     set key(key) {
-        console.log('setting key',key)
         key && (this._key = key)
     }
 
@@ -239,8 +241,8 @@ export class Widget {
         }
     }
 
-    mockCalculateWidget(){
-        return this.counter?WidgetOperation.Counter:WidgetOperation.Adder
+    mockCalculateWidget() {
+        return this.counter ? WidgetOperation.Counter : WidgetOperation.Adder
     }
 
 

@@ -17,7 +17,7 @@ import { BehaviorSubject } from 'rxjs';
 export class WidgetDrawerComponent implements OnInit {
   keys//: Promise<string[]>
   Widgets: Widget[]
-  items:BehaviorSubject<ShoppingKartModel[]> // = []
+  items: BehaviorSubject<ShoppingKartModel[]> // = []
 
   async createWidget() {
     const modal = await this.modalController.create({ component: CreateWidgetPage })
@@ -44,17 +44,17 @@ export class WidgetDrawerComponent implements OnInit {
 
 
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
-    public modalController: ModalController, ) {
-      this.items = this.karts._items
-      this.service.widgetsList.subscribe(widgets => {
-      })
-      this.karts._items.subscribe((karts: ShoppingKartModel[]) => {
-        // this.items =[... karts]
-        
-      })
+    public modalController: ModalController,) {
+    this.items = this.karts._items
+    this.service.widgetsList.subscribe(widgets => {
+    })
+    this.karts._items.subscribe((karts: ShoppingKartModel[]) => {
+      // this.items =[... karts]
+
+    })
 
 
-    
+
   }
 
   ngOnInit() { }

@@ -27,7 +27,7 @@ export class WidgetService {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.widgetListRef = firebase.database().ref(`/widgets/${user.uid}/`);
-        
+
         this.loadAllWidgets()
       }
     });
@@ -115,7 +115,6 @@ export class WidgetService {
   }
 
   async delete(key, next) {
-    console.log('removing',key)
     this.widgetListRef.child(key).remove()
   }
 
