@@ -90,6 +90,7 @@ export class PaymentsService implements ItemServiceInterface, EntityWidgetServic
   updateItem(item: ItemModelInterface) {
     return this.paymentsListRef.child(item.key).update(item.serialize());
   }
+  
   deleteItem(key: string) {
     return this.paymentsListRef.child(key).remove();
   }

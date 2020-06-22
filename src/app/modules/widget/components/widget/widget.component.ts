@@ -23,6 +23,7 @@ export class WidgetComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    console.log('app widget',this.Widget.key,this.Widget)
 }
 
 }

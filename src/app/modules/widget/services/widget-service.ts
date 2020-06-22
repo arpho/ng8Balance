@@ -35,6 +35,7 @@ export class WidgetService {
 
   populateWidgetsList = snap => {
     const widget = this.widgetFactory(snap.val().widget).load(snap.val())
+    widget.key = snap.key
     // widget loaded it still miss item
     const service = this.getWidgetService(widget.serviceKey)
     service && this.setItem(service, widget)
@@ -50,6 +51,12 @@ export class WidgetService {
 
 
     this.items_list.push(widget);
+  }
+
+
+
+  deleteItem(key: string) {
+    return this.widgetListRef.child(key).remove();
   }
 
 
@@ -108,6 +115,7 @@ export class WidgetService {
   }
 
   async delete(key, next) {
+    console.log('removing',key)
     this.widgetListRef.child(key).remove()
   }
 

@@ -53,7 +53,7 @@ export class Widget {
     _counter: boolean
     constructor(args?: Widgetparams) {
         this.load(args)
-        this._key = this._key || new Date().getTime()
+        // this._key = this._key || new Date().getTime()
 
 
     }
@@ -200,7 +200,8 @@ export class Widget {
     }
 
     set key(key) {
-        this._key = key
+        console.log('setting key',key)
+        key && (this._key = key)
     }
 
     set service(service: EntityWidgetServiceInterface) {

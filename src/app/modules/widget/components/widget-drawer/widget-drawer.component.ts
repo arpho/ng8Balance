@@ -26,7 +26,7 @@ export class WidgetDrawerComponent implements OnInit {
 
   deleteWidget(widget, sliding_item) {
     sliding_item['close']()
-    this.service.delete(widget.id, (pr: Promise<any>) => {
+    this.service.delete(widget.key, (pr: Promise<any>) => {
       pr.then(res => {
       })
     })
