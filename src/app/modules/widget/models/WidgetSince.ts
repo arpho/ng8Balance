@@ -77,7 +77,7 @@ export class WidgetSince extends Widget {
             description: this._description || '',
             note: this._note || '',
             title: this._title || '',
-            counter: this._counter,
+            counter: this._counter||false,
             id: this._id || 0,
             _order: this.order || 0,
             serviceKey: this.serviceKey || '',

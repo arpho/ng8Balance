@@ -15,7 +15,7 @@ export class Widget {
     _title: string;
     _note: string
     _description: string
-    _key: number;
+    _key: string;
     _serviceKey: string
     _service: EntityWidgetServiceInterface
     _item: ItemModelInterface
@@ -229,11 +229,11 @@ export class Widget {
             temporalWindow: this.temporalWindow || 0,
             entityKey: this.getEntityKey() || this._entityKey,
             serviceKey: this._serviceKey || '',
-            key: this._key,
+            key: this._key||'',
             description: this._description || '',
             note: this._note || '',
             title: this._title || '',
-            counter: this._counter,
+            counter: this._counter||false,
             id: this._id || 0,
             _order: this._order || 0,
             widget: WidgetTypes.Regular // r'regular||by
