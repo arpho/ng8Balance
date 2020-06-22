@@ -104,9 +104,6 @@ export class WidgetService {
     return this.widgetListRef;
   }
 
-
-
-
   widgetFactory(type: number): Widget {
     const widgets = {}
     widgets[WidgetTypes.Regular] = new Widget()
@@ -118,29 +115,20 @@ export class WidgetService {
     this.widgetListRef.child(key).remove()
   }
 
-
-
-
-
   get(key: string, next?: (v: Promise<any>) => void) {
     return this.widgetListRef.child(key)
   }
 
   async add(widget) {
-    console.log('adding ', widget)
     this.widgetListRef.push(widget).then(item => {
       // item è solo un refereence, non ha dati, tranne la key
-      console.log('pushed', item)
+
       // il widget non ha key
       const Widget = this.widgetFactory(widget.widget).load(widget)
       Widget.key = item.key
       // Widget.entityKey = widget.entityKey // load è asincrono , non riesce a caricare il dato in tempo
-      console.log('created widget', Widget, Widget.serialize())
       this.updateWidget(Widget.serialize())
     })
 
   }
-
-
-
 }

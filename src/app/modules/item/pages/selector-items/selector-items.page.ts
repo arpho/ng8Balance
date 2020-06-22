@@ -75,14 +75,12 @@ export class SelectorItemsPage implements OnInit, OnChanges {
   }
 
   selected(item: ItemModelInterface) {
-    console.log('slected', item)
     this.selectedItem = item
     this.dismiss(item)
   }
 
 
   dismiss(item?: ItemModelInterface) {
-    console.log('dismissing', item)
     this.selectedItem = item
     this.modalCtrl.dismiss(item)
   }
