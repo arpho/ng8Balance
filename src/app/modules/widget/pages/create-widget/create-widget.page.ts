@@ -31,9 +31,6 @@ export class CreateWidgetPage implements OnInit {
   widget: Widget
   Form: FormGroup // listener to the form
 
-  dismiss(payment?) {
-    this.modalCtrl.dismiss(payment)
-  }
 
   constructor(public modalCtrl: ModalController, public service: WidgetService, public categoriesService: CategoriesService, public paymentsService: PaymentsService, public suppliersService: SuppliersService) {
     this.title = "crea un nuovo Widget"
@@ -44,10 +41,11 @@ export class CreateWidgetPage implements OnInit {
     this.widgetsServices.services[this.paymentsService.key] = this.paymentsService
   }
 
+  dismiss(payment?) {
+    this.modalCtrl.dismiss(payment)
+  }
+
   filter(ev) {
-    if (ev.serviceKey) {
-      this.widgetFields = this.FormFieldsFactory(ev)
-    }
   }
 
 
@@ -133,8 +131,6 @@ export class CreateWidgetPage implements OnInit {
 
   setForm(form: FormGroup) {
     this.Form = form
-    this.Form.controls['title'].valueChanges.subscribe(v => {
-    })
     // tslint:disable-next-line: no-string-literal
     this.Form.controls['serviceKey'].valueChanges.subscribe(ev => {
       this.widgetFields = this.FormFieldsFactory({ serviceKey: ev })

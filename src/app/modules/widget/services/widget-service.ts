@@ -24,11 +24,10 @@ export class WidgetService {
 
   constructor(public service: WidgetService, public categoriesService: CategoriesService, public SuppliersService: SuppliersService, public paymentsService: PaymentsService) {
 
-
-
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.widgetListRef = firebase.database().ref(`/widgets/${user.uid}/`);
+        
         this.loadAllWidgets()
       }
     });
@@ -73,6 +72,10 @@ export class WidgetService {
   widgetsServices: EntityWidgetServiceInterface[] = [this.categoriesService, this.paymentsService, this.SuppliersService]
   widgetListRef: firebase.database.Reference;
   items_list: any[];
+
+  updateWidget(item: any) {
+    return this.widgetListRef.child(item.key).update(item);
+  }
 
 
   setItem(service: EntityWidgetServiceInterface, widget: Widget) {

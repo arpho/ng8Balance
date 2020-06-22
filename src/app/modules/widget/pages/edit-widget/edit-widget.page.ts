@@ -17,7 +17,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./edit-widget.page.scss'],
 })
 export class EditWidgetPage extends CreateWidgetPage implements OnInit {
-  widget
+  widget: Widget
 
   constructor(public modalCtrl: ModalController, public service: WidgetService, public navParams: NavParams, public categories: CategoriesService, public suppliers: SuppliersService, public payments: PaymentsService) {
     super(modalCtrl, service, categories, payments, suppliers);
@@ -41,6 +41,7 @@ export class EditWidgetPage extends CreateWidgetPage implements OnInit {
 
       widget.entityKey = ev.entityKey.key
     }
+    this.service.updateWidget(widget.serialize())
     // const out = await this.service.put(widget.key, widget.serialize(), v => {    })
     this.dismiss()
   }

@@ -35,3 +35,5 @@ src/app/configs/credentials.ts
 package-lock.json
 
 diagrams/
+
+*.cache
