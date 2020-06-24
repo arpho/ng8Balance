@@ -47,7 +47,7 @@ export class WidgetDrawerComponent implements OnInit {
 
   doReorder(ev) {
     console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to)
-    ev['complete']()
+    ev.detail.complete()
   }
 
 
