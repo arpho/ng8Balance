@@ -5,13 +5,14 @@
   <ion-icon name="add"></ion-icon>
 </ion-fab-button>
 <ion-list>
-
+<ion-reorder-group disabled="false">
   <ion-item-sliding
     *ngFor="let widget of service?.widgetsList |async "
     #sliding_item
   >
   <ion-item>
   <app-widget [Widget]="widget" [items]="items" ></app-widget>
+  <ion-reorder slot="end"></ion-reorder>
 </ion-item>
 <ion-item-options side="start">
   <ion-button
@@ -36,4 +37,5 @@
 
 
   </ion-item-sliding>
+</ion-reorder-group>
 </ion-list>
