@@ -7,7 +7,7 @@
 <ion-list>
 <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
   <ion-item-sliding
-    *ngFor="let widget of service?.widgetsList |async "
+    *ngFor="let widget of service?.widgetsList  |async "
     #sliding_item
   >
   <ion-item>

@@ -18,6 +18,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class EditWidgetPage extends CreateWidgetPage implements OnInit {
   widget: Widget
+  order:number
 
   constructor(public modalCtrl: ModalController, public service: WidgetService, public navParams: NavParams, public categories: CategoriesService, public suppliers: SuppliersService, public payments: PaymentsService) {
     super(modalCtrl, service, categories, payments, suppliers);

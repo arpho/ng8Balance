@@ -15,12 +15,16 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetDrawerComponent implements OnInit {
-  keys//: Promise<string[]>
+  keys
+  widgetsCount = 0
   Widgets: Widget[]
   items: BehaviorSubject<ShoppingKartModel[]> // = []
 
   async createWidget() {
-    const modal = await this.modalController.create({ component: CreateWidgetPage })
+    const modal = await this.modalController.create({
+      component: CreateWidgetPage,
+      componentProps: { order: this.widgetsCount }
+    })
     return await modal.present()
   }
 
@@ -41,7 +45,7 @@ export class WidgetDrawerComponent implements OnInit {
     return await modal.present()
   }
 
-  doReorder(ev){
+  doReorder(ev) {
     console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to)
     ev['complete']()
   }
@@ -52,6 +56,7 @@ export class WidgetDrawerComponent implements OnInit {
     public modalController: ModalController,) {
     this.items = this.karts._items
     this.service.widgetsList.subscribe(widgets => {
+      this.widgetsCount = widgets.length
     })
     this.karts._items.subscribe((karts: ShoppingKartModel[]) => {
       // this.items =[... karts]

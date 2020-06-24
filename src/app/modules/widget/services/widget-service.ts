@@ -64,7 +64,7 @@ export class WidgetService {
     this.getEntitiesList().on('value', eventCategoriesListSnapshot => {
       this.items_list = [];
       eventCategoriesListSnapshot.forEach(this.populateWidgetsList);
-      this._widgetsList.next(this.items_list)
+      this._widgetsList.next(this.items_list.sort((a:Widget,b:Widget)=> {return a.order-b.order}))
     });
   }
 

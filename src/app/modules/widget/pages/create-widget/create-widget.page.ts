@@ -3,7 +3,7 @@ import { QuestionBase } from 'src/app/modules/dynamic-form/models/question-base'
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
 import { Widget } from '../../models/Widget';
 import { SwitchQuestion } from 'src/app/modules/item/models/question-switch';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { WidgetService } from '../../services/widget-service';
 import { SelectorQuestion } from 'src/app/modules/dynamic-form/models/question-selector';
 import { DateQuestion } from 'src/app/modules/dynamic-form/models/question-date';
@@ -29,10 +29,11 @@ export class CreateWidgetPage implements OnInit {
   title: string
   widgetFields: any[]
   widget: Widget
+  order=0
   Form: FormGroup // listener to the form
 
 
-  constructor(public modalCtrl: ModalController, public service: WidgetService, public categoriesService: CategoriesService, public paymentsService: PaymentsService, public suppliersService: SuppliersService) {
+  constructor(public modalCtrl: ModalController, public navParams: NavParams, public service: WidgetService, public categoriesService: CategoriesService, public paymentsService: PaymentsService, public suppliersService: SuppliersService) {
     this.title = "crea un nuovo Widget"
     this.widget = new Widget()
     this.widgetFields = this.FormFieldsFactory(this.widget)
@@ -147,6 +148,7 @@ export class CreateWidgetPage implements OnInit {
 
       widget.entityKey = ev.entityKey.key
     }
+    widget.order  = this.order
     const out = await this.service.add(widget.serialize())
     this.dismiss()
     /*   this.service.put(String(this.widget.key), this.widget.serialize(), (v) => {
@@ -158,6 +160,9 @@ export class CreateWidgetPage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.order = this.navParams.get('order')
+    console.log('order',this.order)
   }
 
 }
