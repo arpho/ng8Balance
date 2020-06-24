@@ -5,7 +5,7 @@
   <ion-icon name="add"></ion-icon>
 </ion-fab-button>
 <ion-list>
-<ion-reorder-group disabled="false">
+<ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
   <ion-item-sliding
     *ngFor="let widget of service?.widgetsList |async "
     #sliding_item

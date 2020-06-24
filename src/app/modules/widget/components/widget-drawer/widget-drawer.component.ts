@@ -41,6 +41,11 @@ export class WidgetDrawerComponent implements OnInit {
     return await modal.present()
   }
 
+  doReorder(ev){
+    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to)
+    ev['complete']()
+  }
+
 
 
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
