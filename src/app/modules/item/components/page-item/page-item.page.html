@@ -3,8 +3,8 @@
     <h1 slot="start" class="itemTitle">{{ title }}</h1>
     <app-show-value [value]="note"></app-show-value>
     <p class="value3">
-      {{ value3.label }}
-      {{ value3.value }}
+      {{ value3?.label }}
+      {{ value3?.value }}
     </p>
     <div>
       <!--span [ngSwitch]="Item?.getNote().value">

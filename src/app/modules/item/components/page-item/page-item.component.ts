@@ -23,6 +23,7 @@ export class PageItemComponent extends MyItemComponent implements OnInit {
   @Input() Item: ItemModelInterface;
   title:string
   note :string
+  value2:Value
   value3:Value
   value4:Value
 
@@ -34,6 +35,7 @@ export class PageItemComponent extends MyItemComponent implements OnInit {
     if (this.Item) {
       this.title = String(this.Item.getTitle().value)
       this.note = String(this.Item.getNote().value)
+      this.value2 = this.Item.getValue2()
       this.value3 = this.Item.getValue3()
       this.value4 = this.Item.getValue4()
       const next = () => {
