@@ -6,7 +6,7 @@ import {
   ChangeDetectorRef
 } from "@angular/core";
 import { MyItemComponent } from "../item/item.component";
-import { AlertController, ModalController } from "@ionic/angular";
+import { AlertController, ModalController, SelectValueAccessor } from "@ionic/angular";
 import { ItemModelInterface } from "../../models/itemModelInterface";
 import { ItemServiceInterface } from "../../models/ItemServiceInterface";
 import { QuickAction } from "../../models/QuickAction";
@@ -21,28 +21,28 @@ import { Value } from '../../models/value';
 })
 export class PageItemComponent extends MyItemComponent implements OnInit {
   @Input() Item: ItemModelInterface;
-  title:string
-  note :string
-  value2:Value
-  value3:Value
-  value4:Value
+  title: string
+  note: string
+  value2: Value
+  value3: Value
+  value4: Value
 
   constructor(public alertCtrl: AlertController, public router: Router, public ref: ChangeDetectorRef, public modal: ModalController) {
     super(alertCtrl);
   }
 
+
   ngOnInit() {
     if (this.Item) {
-      this.title = String(this.Item.getTitle().value)
-      this.note = String(this.Item.getNote().value)
-      this.value2 = this.Item.getValue2()
-      this.value3 = this.Item.getValue3()
-      this.value4 = this.Item.getValue4()
-      const next = () => {
-        this.ref.markForCheck()
-      }
-      // this.Item.load(next)
+      this.setValue()
     }
+  }
+  setValue() {
+    this.title = String(this.Item.getTitle().value)
+    this.note = String(this.Item.getNote().value)
+    this.value2 = this.Item.getValue2()
+    this.value3 = this.Item.getValue3()
+    this.value4 = this.Item.getValue4()
   }
   doAction(action: QuickAction) {
     action.getAction()({
