@@ -9,6 +9,8 @@ import { EditWidgetPage } from '../../pages/edit-widget/edit-widget.page';
 import { BehaviorSubject } from 'rxjs';
 import { ComponentsPageModule } from 'src/app/modules/item/components/components.module';
 
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-widget-drawer',
   templateUrl: './widget-drawer.component.html',
@@ -59,14 +61,16 @@ export class WidgetDrawerComponent implements OnInit {
 
   doReorder(ev) {
     console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to) 
-    this.service.widgetsList.subscribe(widgets=>{
+    // widgetService push a new list every time a widget is modified, then we get only the first emission
+    this.service.widgetsList.pipe(take(1)).toPromise().then(widgets=>{
      const Widgets = widgets
+     // move widget in array 
     const reordered  = Widgets['move'](ev.detail.from,ev.detail.to)
-     console.log('reordered')
+     //*assigns new order to the widgets
     const reassigned = reordered.map(this.setOrder)
-    console.log('setting')
-    // reassigned.forEach(this.updateOrder);
-  });
+    // update widgets on the db 
+     reassigned.forEach(this.updateOrder);
+  })
     ev.detail.complete()
   
   }
