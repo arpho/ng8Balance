@@ -7,6 +7,7 @@ import { ModalController } from '@ionic/angular';
 import { CreateWidgetPage } from '../../pages/create-widget/create-widget.page';
 import { EditWidgetPage } from '../../pages/edit-widget/edit-widget.page';
 import { BehaviorSubject } from 'rxjs';
+import { ComponentsPageModule } from 'src/app/modules/item/components/components.module';
 
 @Component({
   selector: 'app-widget-drawer',
@@ -45,15 +46,63 @@ export class WidgetDrawerComponent implements OnInit {
     return await modal.present()
   }
 
+  setOrder= (widget:Widget,index:number)=>{
+     widget.order = index
+     return widget
+
+  }
+
+  updateOrder = ((widget:Widget)=>{
+    console.log('updating',widget)
+  this.service.updateWidget(widget.serialize())
+  })
+
   doReorder(ev) {
-    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to)
+    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to) 
+    this.service.widgetsList.subscribe(widgets=>{
+     const Widgets = widgets
+    const reordered  = Widgets['move'](ev.detail.from,ev.detail.to)
+     console.log('reordered')
+    const reassigned = reordered.map(this.setOrder)
+    console.log('setting')
+    // reassigned.forEach(this.updateOrder);
+  });
     ev.detail.complete()
+  
   }
 
 
 
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
     public modalController: ModalController,) {
+      Array.prototype['move'] = function(pos1, pos2) {
+        // local variables
+        var i, tmp;
+        // cast input parameters to integers
+        pos1 = parseInt(pos1, 10);
+        pos2 = parseInt(pos2, 10);
+        // if positions are different and inside array
+        if (pos1 !== pos2 && 0 <= pos1 && pos1 <= this.length && 0 <= pos2 && pos2 <= this.length) {
+          // save element from position 1
+          tmp = this[pos1];
+          // move element down and shift other elements up
+          if (pos1 < pos2) {
+            for (i = pos1; i < pos2; i++) {
+              this[i] = this[i + 1];
+            }
+          }
+          // move element up and shift other elements down
+          else {
+            for (i = pos1; i > pos2; i--) {
+              this[i] = this[i - 1];
+            }
+          }
+          // put element from position 1 to destination
+          this[pos2] = tmp;
+        }
+        return this
+      }
+  
     this.items = this.karts._items
     this.service.widgetsList.subscribe(widgets => {
       this.widgetsCount = widgets.length
