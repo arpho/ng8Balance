@@ -63,13 +63,15 @@ export class WidgetDrawerComponent implements OnInit {
     console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to) 
     // widgetService push a new list every time a widget is modified, then we get only the first emission
     this.service.widgetsList.pipe(take(1)).toPromise().then(widgets=>{
-     const Widgets = widgets
+     /* const Widgets = widgets
      // move widget in array 
     const reordered  = Widgets['move'](ev.detail.from,ev.detail.to)
      //*assigns new order to the widgets
     const reassigned = reordered.map(this.setOrder)
     // update widgets on the db 
-     reassigned.forEach(this.updateOrder);
+     reassigned.forEach(this.updateOrder); */
+
+     widgets['move'](ev.detail.from,ev.detail.to).map(this.setOrder).forEach(this.updateOrder);
   })
     ev.detail.complete()
   
