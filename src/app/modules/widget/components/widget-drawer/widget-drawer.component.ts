@@ -48,67 +48,60 @@ export class WidgetDrawerComponent implements OnInit {
     return await modal.present()
   }
 
-  setOrder= (widget:Widget,index:number)=>{
-     widget.order = index
-     return widget
+  setOrder = (widget: Widget, index: number) => {
+    widget.order = index
+    return widget
 
   }
 
-  updateOrder = ((widget:Widget)=>{
-    console.log('updating',widget)
-  this.service.updateWidget(widget.serialize())
+  updateOrder = ((widget: Widget) => {
+    console.log('updating', widget)
+    this.service.updateWidget(widget.serialize())
   })
 
   doReorder(ev) {
-    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to) 
+    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to)
     // widgetService push a new list every time a widget is modified, then we get only the first emission
-    this.service.widgetsList.pipe(take(1)).toPromise().then(widgets=>{
-     /* const Widgets = widgets
-     // move widget in array 
-    const reordered  = Widgets['move'](ev.detail.from,ev.detail.to)
-     //*assigns new order to the widgets
-    const reassigned = reordered.map(this.setOrder)
-    // update widgets on the db 
-     reassigned.forEach(this.updateOrder); */
+    this.service.widgetsList.pipe(take(1)).toPromise().then(widgets => {
 
-     widgets['move'](ev.detail.from,ev.detail.to).map(this.setOrder).forEach(this.updateOrder);
-  })
+      widgets['move'](ev.detail.from, ev.detail.to).map(this.setOrder).forEach(this.updateOrder);
+    })
     ev.detail.complete()
-  
+
   }
 
 
 
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
     public modalController: ModalController,) {
-      Array.prototype['move'] = function(pos1, pos2) {
-        // local variables
-        var i, tmp;
-        // cast input parameters to integers
-        pos1 = parseInt(pos1, 10);
-        pos2 = parseInt(pos2, 10);
-        // if positions are different and inside array
-        if (pos1 !== pos2 && 0 <= pos1 && pos1 <= this.length && 0 <= pos2 && pos2 <= this.length) {
-          // save element from position 1
-          tmp = this[pos1];
-          // move element down and shift other elements up
-          if (pos1 < pos2) {
-            for (i = pos1; i < pos2; i++) {
-              this[i] = this[i + 1];
-            }
+    Array.prototype['move'] = function (pos1, pos2) {
+      // local variables
+      var i, tmp;
+      // cast input parameters to integers
+      pos1 = parseInt(pos1, 10);
+      pos2 = parseInt(pos2, 10);
+      // if positions are different and inside array
+      if (pos1 !== pos2 && 0 <= pos1 && pos1 <= this.length && 0 <= pos2 && pos2 <= this.length) {
+        // save element from position 1
+        tmp = this[pos1];
+        // move element down and shift other elements up
+        if (pos1 < pos2) {
+          for (i = pos1; i < pos2; i++) {
+            this[i] = this[i + 1];
           }
-          // move element up and shift other elements down
-          else {
-            for (i = pos1; i > pos2; i--) {
-              this[i] = this[i - 1];
-            }
-          }
-          // put element from position 1 to destination
-          this[pos2] = tmp;
         }
-        return this
+        // move element up and shift other elements down
+        else {
+          for (i = pos1; i > pos2; i--) {
+            this[i] = this[i - 1];
+          }
+        }
+        // put element from position 1 to destination
+        this[pos2] = tmp;
       }
-  
+      return this
+    }
+
     this.items = this.karts._items
     this.service.widgetsList.subscribe(widgets => {
       this.widgetsCount = widgets.length

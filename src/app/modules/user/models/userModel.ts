@@ -16,6 +16,7 @@ export class UserModel implements ItemModelInterface {
   lastName: string;
   title: string;
   key: string;
+  uid: string;
   level: number;
   quickActions: Array<QuickAction>;
   enabled: boolean;
@@ -24,6 +25,7 @@ export class UserModel implements ItemModelInterface {
 
   constructor(item?: {}, key?: string, ) {
     this.key = key;
+    this.uid = key
     this.load(item)
   }
   initialize(user: any) {
@@ -71,6 +73,7 @@ export class UserModel implements ItemModelInterface {
   serialize() {
     return {
       key: this.key,
+      uid: this.uid||this.key,
       birthDate: this.birthDate.serialize(),
       email: this.email,
       firstName: this.firstName,

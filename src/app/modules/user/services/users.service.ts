@@ -1,5 +1,5 @@
 // tslint:disable: quotemark
-import { Injectable } from "@angular/core";
+import { Injectable, OnInit } from "@angular/core";
 import * as firebase from "firebase";
 import { ItemServiceInterface } from "../../item/models/ItemServiceInterface";
 import { UserModel } from "../models/userModel";
@@ -10,7 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: "root"
 })
-export class UsersService implements ItemServiceInterface {
+export class UsersService implements ItemServiceInterface,OnInit {
   public usersRef: firebase.database.Reference;
   private loggedUser: UserModel;
   items_list: Array<UserModel> = []
@@ -19,20 +19,24 @@ export class UsersService implements ItemServiceInterface {
 
   constructor() {
     this.usersRef = firebase.database().ref("/userProfile");
+    
+  }
+  populateItems = (UsersListSnapshot) => {
+    this.items_list = [];
+    UsersListSnapshot.forEach(snap => {
+      const supplier = new UserModel(undefined, snap.key).load(snap.val())
+      supplier.key = snap.key // alcuni item non hanno il campo key
+      this.items_list.push(supplier);
+      if (supplier.key === '') {
+      }
+    });
+    this._items.next(this.items_list)
+  }
+  ngOnInit(): void {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.usersRef = firebase.database().ref(`/userProfile/`);
-        this.getEntitiesList().on('value', eventSuppliersListSnapshot => {
-          this.items_list = [];
-          eventSuppliersListSnapshot.forEach(snap => {
-            const supplier = new UserModel(undefined, snap.key).load(snap.val())
-            supplier.key = snap.key // alcuni item non hanno il campo key
-            this.items_list.push(supplier);
-            if (supplier.key === '') {
-            }
-          });
-          this._items.next(this.items_list)
-        });
+        this.getEntitiesList().on('value', this.populateItems );
       }
     });
   }
