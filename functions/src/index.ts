@@ -11,6 +11,7 @@ const getUpdatedUser = (event: any) => {
     key => !compare(event.after.val()[key], event.before.val()[key])
   );
 };
+
 const setClaims = async (data: {
   email: string;
   level: number;
@@ -24,7 +25,7 @@ const setClaims = async (data: {
     enabled: data.enabled
   });
 };
-
+// set user's role
 exports.triggerUsers = functions.database.ref("/userProfile").onWrite(event => {
   getUpdatedUser(event).forEach(user => {
     const userData = event.after.val()[user];
@@ -46,3 +47,9 @@ exports.triggerUsers = functions.database.ref("/userProfile").onWrite(event => {
 
   // console.log('snapshot',event.after[event.after.key])
 });
+// add a updatedAt field with the server timestamp to categories
+exports.generateUpdaterdAtCategory = functions.database.ref("/categotie/{uid}").onWrite((data, context) =>{
+
+  const uid = context.params.uid
+  const timestamp = context.timestamp
+})
