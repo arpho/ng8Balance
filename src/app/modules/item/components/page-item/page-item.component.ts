@@ -38,8 +38,8 @@ export class PageItemComponent extends MyItemComponent implements OnInit {
     }
   }
   setValue() {
-    this.title = String(this.Item.getTitle().value)
-    this.note = String(this.Item.getNote().value)
+    this.title = String(this.Item?this.Item.getTitle().value:'')
+    this.note = String(this.Item?this.Item.getNote().value:'')
     this.value2 = this.Item.getValue2()
     this.value3 = this.Item.getValue3()
     this.value4 = this.Item.getValue4()
