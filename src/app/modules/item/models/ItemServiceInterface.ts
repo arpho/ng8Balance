@@ -35,7 +35,7 @@ suppliersListRef?
     /**crea un item in firebase
      *
      */
-    createItem(item: ItemModelInterface): firebase.database.ThenableReference;
+    createItem(item: ItemModelInterface);
 
     getEntitiesList(): firebase.database.Reference;
 }

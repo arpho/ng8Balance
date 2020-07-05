@@ -14,6 +14,7 @@ import { PaymentsModel } from 'src/app/models/paymentModel';
 import { PurchaseModel } from 'src/app/models/purchasesModel';
 import { CategoryModel } from 'src/app/models/CategoryModel';
 import { PricedCategory } from 'src/app/models/pricedCategory';
+import { ConnectionServiceModule } from 'ng-connection-service';
 // tslint:disable:semicolon
 
 @Injectable({
@@ -41,8 +42,11 @@ export class ShoppingKartsService implements ItemServiceInterface {
   getDummyItem(): import('../../modules/item/models/itemModelInterface').ItemModelInterface {
     return new ShoppingKartModel()
   }
-  createItem(item: ItemModelInterface): import('firebase').database.ThenableReference {
-    return this.shoppingKartsListRef.push(item.serialize());
+  async createItem(item: ItemModelInterface) {
+    this.shoppingKartsListRef.push(item.serialize()).then(kart=> {
+      console.log('new kart',kart)
+    })
+     return this.shoppingKartsListRef.push(item.serialize());
   }
   getEntitiesList(): import('firebase').database.Reference {
     // tslint:disable-next-line: semicolon
@@ -55,7 +59,8 @@ export class ShoppingKartsService implements ItemServiceInterface {
 
   }
 
-  private initializeItems() {
+  initializeSingleKart (snap){
+
     const purchaseInitializer = (purchase2initialize) => {
       const Purchase = new PurchaseModel().initialize(purchase2initialize)
 
@@ -72,24 +77,35 @@ export class ShoppingKartsService implements ItemServiceInterface {
       Purchase.categorie = Purchase.categorieId ? Purchase.categorieId.map(initiateCategory) : []
       return Purchase
     }
-
-
-
+    const kart = new ShoppingKartModel({ key: snap.val() }).initialize(snap.val())
+    kart.key = snap.key
+    kart.items = kart.items.map(purchaseInitializer)
+    return kart
+  }
+// initialize all the karts
+  private initializeItems() {
+    const purchaseInitializer = (purchase2initialize) => {
+      const Purchase = new PurchaseModel().initialize(purchase2initialize)
+      const initiateCategory = (catKey2Beinirtialized) => {
+        const Category = new CategoryModel(catKey2Beinirtialized)
+        if (catKey2Beinirtialized != '') {
+          this.categoriesService.getItem(catKey2Beinirtialized).on('value', (category) => {
+            Category.initialize(category.val())
+          })
+        }
+        return Category
+      }
+      Purchase.categorie = Purchase.categorieId ? Purchase.categorieId.map(initiateCategory) : []
+      return Purchase
+    }
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.shoppingKartsListRef = firebase.database().ref(`/acquisti/${user.uid}/`);
         this.getEntitiesList().on('value', eventSuppliersListSnapshot => {
           this.items_list = [];
           eventSuppliersListSnapshot.forEach(snap => {
-            const kart = new ShoppingKartModel({ key: snap.val() }).initialize(snap.val())
-            kart.key = snap.key
-            kart.items = kart.items.map(purchaseInitializer)
-
-
-
-
+            const kart = this.initializeSingleKart(snap)
             this.items_list.push(kart);
-
           });
           this._items.next(this.items_list)
         });
