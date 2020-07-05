@@ -50,6 +50,6 @@ exports.triggerUsers = functions.database.ref("/userProfile").onWrite(event => {
 // add a updatedAt field with the server timestamp to categories
 exports.generateUpdaterdAtCategory = functions.database.ref("/categotie/{uid}").onWrite((data, context) =>{
 
-  const uid = context.params.uid
-  const timestamp = context.timestamp
+  // const uid = context.params.uid
+  // const timestamp = context.timestamp
 })

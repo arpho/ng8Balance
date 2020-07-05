@@ -157,7 +157,7 @@ export class ShoppingKartModel implements ItemModelInterface {
         if (this.title) {
             out = new Value({ value: this.title, label: ' titolo ' })
         }
-        
+
         return out
 
     }
@@ -175,15 +175,24 @@ export class ShoppingKartModel implements ItemModelInterface {
 
     serialize() {
         return {
-            fornitoreId: this.fornitore.key || '',
-            pagamentoId: this.pagamento.key || '',
+            fornitoreId: this.fornitore ? this.fornitore.key : this.fornitoreId,
+
+            pagamentoId: this.pagamento ? this.pagamento.key : this.pagamentoId,
+
             key: this.key || '',
+
             note: this.note || '',
+
             archived: Boolean(this.archived),
+
             online: Boolean(this.online),
+
             dataAcquisto: this.purchaseDate ? this.purchaseDate.formatFullDate() : '',
+
             title: this.title || '',
+
             totale: this.totale || 0,
+
             items: this.items.map((item: PurchaseModel) => item.serialize())
         }
     }

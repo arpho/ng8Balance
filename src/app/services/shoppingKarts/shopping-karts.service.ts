@@ -45,13 +45,13 @@ export class ShoppingKartsService implements ItemServiceInterface {
   async createItem(item: ItemModelInterface) {
     var Kart
     const kart = await this.shoppingKartsListRef.push(item.serialize())
-      console.log('atteso',kart)
-      kart.on('value',value=>{
-        console.log('pushed kart',value.val())
+    kart.on('value', value => {
+
       Kart = this.initializeSingleKart(value)
-      console.log('new kart',kart,Kart)
-      })
-     return Kart;
+
+      this.updateItem(Kart) // add the key to the firebase's node
+    })
+    return Kart;
   }
   getEntitiesList(): import('firebase').database.Reference {
     // tslint:disable-next-line: semicolon
@@ -59,35 +59,45 @@ export class ShoppingKartsService implements ItemServiceInterface {
   }
 
   constructor(categories: CategoriesService, public payments: PaymentsService, public suppliers: SuppliersService) {
+
     this.categoriesService = categories
+
     this.initializeItems()
 
   }
 
-  initializeSingleKart (snap){
+  initializeSingleKart(snap) {
 
     const purchaseInitializer = (purchase2initialize) => {
+
       const Purchase = new PurchaseModel().initialize(purchase2initialize)
 
-
       const initiateCategory = (catKey2Beinirtialized) => {
+
         const Category = new CategoryModel(catKey2Beinirtialized)
+
         if (catKey2Beinirtialized != '') {
+
           this.categoriesService.getItem(catKey2Beinirtialized).on('value', (category) => {
+
             Category.initialize(category.val())
           })
         }
         return Category
       }
       Purchase.categorie = Purchase.categorieId ? Purchase.categorieId.map(initiateCategory) : []
+
       return Purchase
     }
     const kart = new ShoppingKartModel({ key: snap.val() }).initialize(snap.val())
+
     kart.key = snap.key
+
     kart.items = kart.items.map(purchaseInitializer)
+
     return kart
   }
-// initialize all the karts
+  // initialize all the karts
   private initializeItems() {
     const purchaseInitializer = (purchase2initialize) => {
       const Purchase = new PurchaseModel().initialize(purchase2initialize)
