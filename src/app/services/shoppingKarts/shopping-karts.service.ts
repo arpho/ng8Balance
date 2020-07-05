@@ -43,10 +43,15 @@ export class ShoppingKartsService implements ItemServiceInterface {
     return new ShoppingKartModel()
   }
   async createItem(item: ItemModelInterface) {
-    this.shoppingKartsListRef.push(item.serialize()).then(kart=> {
-      console.log('new kart',kart)
-    })
-     return this.shoppingKartsListRef.push(item.serialize());
+    var Kart
+    const kart = await this.shoppingKartsListRef.push(item.serialize())
+      console.log('atteso',kart)
+      kart.on('value',value=>{
+        console.log('pushed kart',value.val())
+      Kart = this.initializeSingleKart(value)
+      console.log('new kart',kart,Kart)
+      })
+     return Kart;
   }
   getEntitiesList(): import('firebase').database.Reference {
     // tslint:disable-next-line: semicolon

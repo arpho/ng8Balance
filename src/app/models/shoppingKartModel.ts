@@ -148,11 +148,18 @@ export class ShoppingKartModel implements ItemModelInterface {
     }
 
     getValue4(): Value {
-        const out = !this.title ? new Value({
-            value: ' ' + (this.fornitore && this.fornitore) ? this.fornitore.getTitle().value : '' || this.fornitore.nome, label: ' titolo '
-        }) :
-            new Value({ value: this.title, label: ' titolo ' })
+        var out = new Value({ value: '', label: 'titolo spesa' }) //  senza fornitore, nè titolo, potrebbero esserci vecchi carrelli senza fornitore
+
+        if (this.fornitore) {
+            out = new Value({ value: this.fornitore.getTitle().value, label: ' titolo ' })
+        }
+
+        if (this.title) {
+            out = new Value({ value: this.title, label: ' titolo ' })
+        }
+        
         return out
+
     }
     getEditPopup(item?: ItemModelInterface, service?: ItemServiceInterface) {
         throw new Error('Method not implemented.');
@@ -161,10 +168,6 @@ export class ShoppingKartModel implements ItemModelInterface {
     getAggregate(): Value {
         return new Value({ value: undefined, label: 'aggregate to be defined' })
     }
-    /* 
-        aggregateAction?() {
-            throw new Error('Method not implemented.');
-        } */
 
     hasQuickActions?(): boolean {
         return false;
