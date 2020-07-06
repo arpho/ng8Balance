@@ -64,9 +64,16 @@ export class SuppliersService implements ItemServiceInterface, EntityWidgetServi
     return new SupplierModel();
   }
 
-  createItem(item: ItemModelInterface) {
-    return this.suppliersListRef.push(item.serialize());
-
+  async createItem(item: ItemModelInterface) {
+    var Supplier
+    this.suppliersListRef.push(item.serialize());
+    const supplier = await this.suppliersListRef.push(item.serialize())
+    supplier.on('value', sup => {
+      Supplier = this.instatiateItem(sup.val())
+      Supplier.key = sup.key
+      this.updateItem(Supplier)
+    })
+    return Supplier
   }
 
   getEntitiesList(): firebase.database.Reference {
