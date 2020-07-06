@@ -82,8 +82,21 @@ export class PaymentsService implements ItemServiceInterface, EntityWidgetServic
     return this.paymentsListRef.child(prId);
   }
 
-  createItem(item: ItemModelInterface) {
-    return this.paymentsListRef.push(item.serialize());
+  async createItem(item: ItemModelInterface) {
+
+    var Payment
+
+    const payment= await this.paymentsListRef.push(item.serialize());
+    payment.on('value',pay=>{
+      Payment = new PaymentsModel().initialize(pay.val())
+
+      Payment.key  = pay.key
+
+      this.updateItem(Payment)
+
+    })
+    return Payment
+
 
   }
 
