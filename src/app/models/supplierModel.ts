@@ -208,7 +208,7 @@ export class SupplierModel implements ItemModelInterface,WidgetitemInteface, Fir
             ecommerce: Boolean(this.ecommerce),
             cliente: Boolean(this.cliente),
             personaFisica: Boolean(this.personaFisica),
-
+            key:this.key||'',
             fidelity_card: this.fidelity_card || '',
             note: this.note || ''
 

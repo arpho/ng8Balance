@@ -68,10 +68,15 @@ export class SuppliersService implements ItemServiceInterface, EntityWidgetServi
     var Supplier
     this.suppliersListRef.push(item.serialize());
     const supplier = await this.suppliersListRef.push(item.serialize())
+
     supplier.on('value', sup => {
+
       Supplier = this.instatiateItem(sup.val())
+
       Supplier.key = sup.key
+
       this.updateItem(Supplier)
+
     })
     return Supplier
   }

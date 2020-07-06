@@ -25,48 +25,67 @@ export class CreateSupplierPage implements OnInit {
   }
 
   submit(supplier) {
+
     this.showSpinner = true
+
     this.supplier = new SupplierModel(supplier)
+
     this.supplier.build(supplier)
-    this.service.createItem(this.supplier).on('value', (res => {
-      const supplier = new SupplierModel().initialize(res.val())
-      supplier.key = res.key
-      this.service.updateItem(supplier).then(() => {
-        this.dismiss(supplier)
-      })
 
-    }))
+    this.service.createItem(this.supplier).then(supplier => {
 
+      this.dismiss(supplier)
+    })
   }
 
   constructor(
     // public suppliers: SuppliersService,
     public geo: GeoService,
+
     public router: Router,
+
     public service: SuppliersService,
+
     public modalCtrl: ModalController) {
+
     this.supplier = new SupplierModel()
+
     this.filterFields = [
+
       new TextboxQuestion({
         key: 'title',
+
         label: 'Nome del Fornitore',
+
         value: this.supplier.title || this.supplier.nome,
+
         order: 1
       }),
       new TextboxQuestion({
+
         key: 'note',
+
         label: 'note',
+
         value: this.supplier.note,
+
         order: 2
       }),
       new SwitchQuestion({
         key: 'ecommerce',
+
         label: 'venditore online',
+
         labelTrue: 'venditore fa ecommerce',
+
         labelFalse: ' venditore tradizionale',
+
         iconTrue: 'wifi',
+
         iconFalse: 'cash',
+
         value: this.supplier.onLine,
+
         required: false,
         order: 4
       }),
