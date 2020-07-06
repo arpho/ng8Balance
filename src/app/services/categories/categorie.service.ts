@@ -8,6 +8,7 @@ import { EntityWidgetServiceInterface } from 'src/app/modules/widget/models/Enti
 import { PricedCategory } from 'src/app/models/pricedCategory';
 import { PurchaseModel } from 'src/app/models/purchasesModel';
 import { ShoppingKartModel } from 'src/app/models/shoppingKartModel';
+import { values } from 'd3';
 
 @Injectable({
   providedIn: 'root'
@@ -76,8 +77,15 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
   }
 
 
-  createItem(item: CategoryModel) {
-    return this.categoriesListRef.push(item.serialize());
+  async createItem(item: CategoryModel) {
+    var Category
+    const category = await this.categoriesListRef.push(item.serialize())
+    category.on('value',(cat)=>{
+      Category = this.initializeCategory(cat.val())
+      Category.key = cat.key
+      this.updateItem(Category)
+    })
+    return Category;
 
   }
 

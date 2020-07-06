@@ -80,9 +80,9 @@ export class CategoriesSelectorPage implements OnInit {
 
     this.service.createItem(newCategory).then(category => {
       console.log('created', category)
-      category.on('value', cat => {
+     /*  category.on('value', cat => {
         console.log('created', cat)
-      })
+      }) */
       newCategory.key = category.key
       this.selectedCategoriesList = [...this.selectedCategoriesList, newCategory]
     })
