@@ -27,16 +27,7 @@ export class ItemModel implements FirebaseObject {
     }
 
     load(key: string) { }
-    build(item: any/* {prezzo:number,
-                 barcode:string,
-                descrizione:string,
-                picture:string,
-                categorieId:string[],
-                key:string,
-                id:string,
-                moneta:string,
-                quantita:string,
-    tassoConversione:number}*/) {
+    build(item: any) {
         this.prezzo = item && item.prezzo || 0;
         this.barcode = item && item.barcode || '';
         this.categorieId = item && item.categorieId || [];

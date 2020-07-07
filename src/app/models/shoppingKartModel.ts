@@ -87,12 +87,7 @@ export class ShoppingKartModel implements ItemModelInterface {
         return this.quickActions
     }
     build(item: {}) {
-        const loader = ([Key, value]) => {
-            if (Key !== 'key') { // evito di sovrascrivere la chiave
-                this[Key] = value;
-            }
-        }
-        Object.entries(item).forEach(loader)
+        Object.assign(this, item)
         this.fornitore = new SupplierModel()
         this.pagamento = new PaymentsModel()
         this.fornitore.key = this.fornitore.key || this.fornitoreId
@@ -133,7 +128,6 @@ export class ShoppingKartModel implements ItemModelInterface {
     }
 
     removeItem(purchase: PurchaseModel) {
-        console.log('removing item', purchase, 'from', this.items)
         this.items = this.items.filter((v: PurchaseModel) => v.key !== purchase.key)
     }
 
@@ -172,12 +166,37 @@ export class ShoppingKartModel implements ItemModelInterface {
     hasQuickActions?(): boolean {
         return false;
     }
+    private getFornitoreId() {
+        var out = this.fornitoreId
+
+        if (this.fornitore) {
+            out = this.fornitore.key
+
+
+            if (!out) { out = '' }
+
+            return out
+
+        }
+    }
+
+    private getPagamentoId() {
+        var out = this.pagamentoId
+
+        if (this.pagamento) {
+            out = this.pagamento.key
+
+            if (!out) { out = '' }
+        }
+
+        return out
+    }
 
     serialize() {
         return {
-            fornitoreId: this.fornitore ? this.fornitore.key : this.fornitoreId,
+            fornitoreId: this.getFornitoreId(),
 
-            pagamentoId: this.pagamento ? this.pagamento.key : this.pagamentoId,
+            pagamentoId: this.getPagamentoId(),
 
             key: this.key || '',
 
