@@ -8,7 +8,7 @@ const routes:  Routes = [
     path: 'home', loadChildren:()=>import( './home/home.module').then(m=>m.HomePageModule),
     canActivate: [AuthGuard]
   },
-  { path: 'list', loadChildren:()=>import( './list/list.module' ).then(m=>m.ListPageModule)
+  { path: 'list', loadChildren:()=>import( './list/list.module' ).then(m=>m.ListPageModule)},
   { path: 'categorie', loadChildren:()=>import( './pages/categorie/categorie.module').then(m=>m.CategoriePageModule), canActivate: [AuthGuard] },
   { path: 'pagamenti', loadChildren:()=>import( './pages/pagamenti/payments.module').then(m=>m.PaymentsPageModule), canActivate: [AuthGuard] },
   { path: 'fornitori', loadChildren:()=>import( './pages/fornitori/fornitori.module').then(m=>m.FornitoriPageModule), canActivate: [AuthGuard] },
