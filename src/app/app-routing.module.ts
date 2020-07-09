@@ -15,7 +15,7 @@ const routes:  Routes = [
   {
     path: 'shopping-karts', loadChildren:()=>import( './pages/shoppingKarts/shopping-karts/shopping-karts.module').then(m=>m.ShoppingKartsPageModule), canActivate: [AuthGuard]
   },
-  {path:'fidelitryCards',loadChildren:()=>import('./pages/fidelity-cards/fidelity-cards.module').then(m=>m.FidelityCardsPageModule),canActivate:[AuthGuard]},
+  {path:'fidelityCards',loadChildren:()=>import('./pages/fidelity-cards/fidelity-cards.module').then(m=>m.FidelityCardsPageModule),canActivate:[AuthGuard]},
   {path:'info/release', loadChildren:()=>import('./modules/info/pages/info/info.module').then(m=>m.InfoPageModule)},
   {path:'user/profile',loadChildren:()=>import('./modules/user/pages/profile/profile.module').then(m=>m.ProfilePageModule),canActivate:[AuthGuard]},
   {path:'user/users',loadChildren:()=>import('./modules/user/pages/users/users.module').then(m=>m.UsersPageModule),canActivate:[AuthGuard]},
