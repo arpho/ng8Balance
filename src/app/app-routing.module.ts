@@ -29,6 +29,10 @@ const routes:  Routes = [
     path: 'edit-widget',
     loadChildren: () => import('./modules/widget/pages/edit-widget/edit-widget.module').then( m => m.EditWidgetPageModule)
   },
+  {
+    path: 'fidelity-cards',
+    loadChildren: () => import('./pages/fidelity-cards/fidelity-cards.module').then( m => m.FidelityCardsPageModule)
+  },
 //   { path: 'graphs/sankey', loadChildren: './pages/graphs/sankey/sankey.module#SankeyPageModule', canActivate: [AuthGuard] },
   //{ path: 'graphs/pareto', loadChildren: './pages/graphs/pareto/pareto.module#ParetoPageModule',canActivate:[AuthGuard] },
 ];
