@@ -19,8 +19,6 @@ const routes:  Routes = [
   {path:'info/release', loadChildren:()=>import('./modules/info/pages/info/info.module').then(m=>m.InfoPageModule)},
   {path:'user/profile',loadChildren:()=>import('./modules/user/pages/profile/profile.module').then(m=>m.ProfilePageModule),canActivate:[AuthGuard]},
   {path:'user/users',loadChildren:()=>import('./modules/user/pages/users/users.module').then(m=>m.UsersPageModule),canActivate:[AuthGuard]},
-  // { path: 'graphs', loadChildren: './pages/graphs/graphs.module#GraphsPageModule', canActivate: [AuthGuard] },
- // { path: 'graphs/piechart', loadChildren: './pages/graphs/piechart/piechart.module#PiechartPageModule', canActivate: [AuthGuard] },
   { path: 'detail-payment', loadChildren:()=>import( './pages/detail-payment/detail-payment.module').then(m=>m.DetailPaymentPageModule) },
   {
     path: 'create-widget',
@@ -34,8 +32,6 @@ const routes:  Routes = [
     path: 'fidelity-cards',
     loadChildren: () => import('./pages/fidelity-cards/fidelity-cards.module').then( m => m.FidelityCardsPageModule)
   },
-//   { path: 'graphs/sankey', loadChildren: './pages/graphs/sankey/sankey.module#SankeyPageModule', canActivate: [AuthGuard] },
-  //{ path: 'graphs/pareto', loadChildren: './pages/graphs/pareto/pareto.module#ParetoPageModule',canActivate:[AuthGuard] },
 ];
 
 @NgModule({
