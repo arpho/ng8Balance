@@ -44,7 +44,7 @@ export class FidelityCardService implements ItemServiceInterface,OnInit {
   paymentsService?: ItemServiceInterface;
   suppliersListRef?: any;
   getItem(key: string): firebase.database.Reference {
-    throw new Error("Method not implemented.");
+    return this.fidelityCardsListRef.child(key)
   }
   updateItem(item: ItemModelInterface) {
     return this.fidelityCardsListRef.child(item.key).update(item.serialize())
