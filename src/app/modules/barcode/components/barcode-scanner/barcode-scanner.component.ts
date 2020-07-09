@@ -5,6 +5,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewCh
 import Quagga from 'quagga';
 import { DECODER_LIVE_CONFIG } from '../../config/decoder-config';
 import { scan } from 'rxjs/operators';
+import { AudioService } from '../../services/audio.service';
 
 @Component({
   selector: 'app-barcode-scanner',
@@ -15,11 +16,13 @@ export class BarcodeScannerComponent implements OnInit {
 
   errorMessage:string
 
-  constructor() { }
+  constructor(private audio:AudioService) {
+    this.audio.preload('detected','../assets/audio/barcode.wav')
+   }
 
   ngOnInit() {
 
-    
+
   }
 scanCode(){
 
@@ -46,6 +49,7 @@ scanCode(){
     } else {
        Quagga.start();
        Quagga.onDetected((res) => {
+         this.audio.play('detected')
         window.alert(`code: ${res.codeResult.code}`);
       }) 
     }

@@ -42,6 +42,7 @@ import { UtilitiesModule } from './modules/utilities/utilities.module';
 import { RoundPipe } from './modules/utilities/pipes/round.pipe';
 import { EditUserPage } from './modules/user/pages/edit-user/edit-user.page';
 import { BarcodeModule } from './modules/barcode/barcode.module';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 @NgModule({
   entryComponents: [
     CreateSupplierPage,
@@ -101,6 +102,7 @@ import { BarcodeModule } from './modules/barcode/barcode.module';
     StoreModule.forRoot(reducers, { metaReducers }),
   ],
   providers: [
+    NativeAudio,
     StatusBar,
     BarcodeScanner,
     RoundPipe,
