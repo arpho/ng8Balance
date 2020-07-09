@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FidelityCardModel } from 'src/app/models/fidelityCardModel';
 import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterface';
 import { FidelityCardService } from 'src/app/services/fidelity-card.service';
+import { CreateFidelityCardPage } from '../create-fidelity-card/create-fidelity-card.page';
 
 @Component({
   selector: 'app-fidelity-cards',
@@ -11,6 +12,7 @@ import { FidelityCardService } from 'src/app/services/fidelity-card.service';
 export class FidelityCardsPage implements OnInit {
   public ItemsList: [FidelityCardModel]
   public fidelityCards:FidelityCardService
+  public createMOdalPage=CreateFidelityCardPage
 
   constructor() { }
 
