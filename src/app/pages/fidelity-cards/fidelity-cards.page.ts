@@ -23,9 +23,7 @@ export class FidelityCardsPage implements OnInit {
         (item: ItemModelInterface) => (item.title)? item.title.toLocaleLowerCase().includes(filterParams.title.toLowerCase()):false;
       const filterNote = (!filterParams.note) ? (item: ItemModelInterface) => true :
         (item: ItemModelInterface) => item.note.toLocaleLowerCase().indexOf(filterParams.note.toLowerCase()) > -1;
-      this.filterFunction = (item: ItemModelInterface) => filterNote(item) && filterTitle(item);
       // combina le funzioni filtro elementari
-      this.filterFunction = (item: ItemModelInterface) => filterEcommerce(item) && filterNote(item) && filterTitle(item);
     }
 
   }

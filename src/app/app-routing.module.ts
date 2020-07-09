@@ -32,6 +32,10 @@ const routes:  Routes = [
     path: 'fidelity-cards',
     loadChildren: () => import('./pages/fidelity-cards/fidelity-cards.module').then( m => m.FidelityCardsPageModule)
   },
+  {
+    path: 'create-fidelity-card',
+    loadChildren: () => import('./pages/create-fidelity-card/create-fidelity-card.module').then( m => m.CreateFidelityCardPageModule)
+  },
 ];
 
 @NgModule({
