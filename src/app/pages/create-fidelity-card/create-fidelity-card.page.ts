@@ -3,6 +3,7 @@ import { FidelityCardsPageModule } from '../fidelity-cards/fidelity-cards.module
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
 import { FidelityCardModel } from 'src/app/models/fidelityCardModel';
 import { ModalController } from '@ionic/angular';
+import { QuestionBarcode } from 'src/app/modules/dynamic-form/models/question-barcode';
 
 @Component({
   selector: 'app-create-fidelity-card',
@@ -25,6 +26,12 @@ export class CreateFidelityCardPage implements OnInit {
       label: 'note',
       value: this.card.note,
       order: 1
+    }),
+    new QuestionBarcode({
+      key:'barcode',
+      label:'codice',
+      value:this.card.barcode,
+      order:2
     })
   ]
 

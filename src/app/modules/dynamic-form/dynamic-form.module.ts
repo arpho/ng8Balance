@@ -7,6 +7,7 @@ import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.com
 import { QuestionControlService } from './services/question-control.service';
 import { GeoLocationModule } from '../geo-location/geo-location.module';
 import { ItemModule } from '../item/item.module';
+import { BarcodeModule } from '../barcode/barcode.module';
 
 @NgModule({
   declarations: [QuestionFormComponent, DynamicFormComponent],
@@ -15,7 +16,8 @@ import { ItemModule } from '../item/item.module';
     IonicModule.forRoot(),
     ReactiveFormsModule,
     GeoLocationModule,
-    ItemModule
+    ItemModule,
+    BarcodeModule
   ],
   exports: [QuestionFormComponent, DynamicFormComponent],
   providers: [QuestionControlService]

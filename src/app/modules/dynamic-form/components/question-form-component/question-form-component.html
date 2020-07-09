@@ -24,6 +24,11 @@
         [id]="question?.key"
       ></ion-toggle>
     </div>
+    <div *ngSwitchCase="'barcodeScanner'"
+    [formControlName]="question?.key"
+    [id]="question?.key">
+  <app-barcode-scanner></app-barcode-scanner>
+  </div>
     <div *ngSwitchCase="'itemSelector'"
     [formControlName]="question?.key"
     [id]="question?.key"
