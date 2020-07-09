@@ -3,7 +3,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 // import { BeepService } from './beep.service';
 import Quagga from 'quagga';
-import { DECODER_LIVE_CONFIG } from '../../config/decoder-config';
+// import { DECODER_LIVE_CONFIG } from '../../config/decoder-config';
 import { scan } from 'rxjs/operators';
 import { AudioService } from '../../services/audio.service';
 
@@ -16,10 +16,12 @@ export class BarcodeScannerComponent implements OnInit {
 
   errorMessage:string
   barcode:string
+  show=true
 
   constructor(private audio:AudioService) {
     this.audio.preload('detected','../assets/audio/barcode.wav')
     this.audio.preload('wrong','../assets/audio/wrong.mp3')
+
    }
 
   ngOnInit() {
@@ -27,6 +29,7 @@ export class BarcodeScannerComponent implements OnInit {
 
   }
 scanCode(){
+  this.show= true
 
 
   Quagga.init({
@@ -52,10 +55,12 @@ scanCode(){
     } else {
        Quagga.start();
        Quagga.onDetected((res) => {
+         Quagga.stop()
          this.audio.play('detected')
          this.barcode= res.codeResult.code
          console.log('barcode',this.barcode)
-         Quagga.stop()
+         this.show = false
+         
         // window.alert(`code: ${res.codeResult.code}`);
       }) 
     }
