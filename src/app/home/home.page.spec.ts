@@ -4,6 +4,8 @@ import { IonicModule } from '@ionic/angular';
 import { HomePage } from './home.page';
 import { OnlineStatusModule } from '../modules/online-status/online-status.module';
 import { WidgetModule } from '../modules/widget/widget.module';
+import { BarcodeModule } from '../modules/barcode/barcode.module';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 // import { IonicStorageModule, Storage } from '@ionic/storage';
 
 describe('HomePage', () => {
@@ -13,7 +15,8 @@ describe('HomePage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HomePage],
-      imports: [IonicModule.forRoot(),OnlineStatusModule,WidgetModule,/* IonicStorageModule.forRoot() */]
+      providers:[NativeAudio],
+      imports: [IonicModule.forRoot(),OnlineStatusModule,WidgetModule,BarcodeModule/* IonicStorageModule.forRoot() */]
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomePage);
