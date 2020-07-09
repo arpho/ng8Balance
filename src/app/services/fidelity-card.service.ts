@@ -50,7 +50,7 @@ export class FidelityCardService implements ItemServiceInterface,OnInit {
     return this.fidelityCardsListRef.child(item.key).update(item.serialize())
   }
   deleteItem(key: string) {
-    throw new Error("Method not implemented.");
+    return this.fidelityCardsListRef.child(key).remove()
   }
   getDummyItem(): ItemModelInterface {
     throw new Error("Method not implemented.");
