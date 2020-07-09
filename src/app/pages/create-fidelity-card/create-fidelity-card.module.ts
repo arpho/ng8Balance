@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { CreateFidelityCardPageRoutingModule } from './create-fidelity-card-routing.module';
 
 import { CreateFidelityCardPage } from './create-fidelity-card.page';
+import { DynamicFormModule } from 'src/app/modules/dynamic-form/dynamic-form.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    DynamicFormModule,
     CreateFidelityCardPageRoutingModule
   ],
   declarations: [CreateFidelityCardPage]

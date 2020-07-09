@@ -19,7 +19,7 @@ export class CreatePaymentPage implements OnInit {
 
   constructor(public modalCtrl: ModalController, private service: PaymentsService) {
     this.payment = this.service.getDummyItem()
-    this.paymentFields = [
+    this.cardFields = [
       new TextboxQuestion({
         key: 'title',
         label: 'Nome del pagamento',
