@@ -14,7 +14,7 @@ export class FidelityCardsPage implements OnInit {
   public ItemsList: [FidelityCardModel]
   public fidelityCards: FidelityCardService
   public createModalPage = CreateFidelityCardPage
-  public updateModalPage = UpdateFidelityCardPage
+  public editModalPage = UpdateFidelityCardPage
 
   constructor() { }
 

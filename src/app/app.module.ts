@@ -43,6 +43,8 @@ import { RoundPipe } from './modules/utilities/pipes/round.pipe';
 import { EditUserPage } from './modules/user/pages/edit-user/edit-user.page';
 import { BarcodeModule } from './modules/barcode/barcode.module';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { UpdateFidelityCardPage } from './pages/update-fidelity-card/update-fidelity-card.page';
+import { CreateFidelityCardPage } from './pages/create-fidelity-card/create-fidelity-card.page';
 @NgModule({
   entryComponents: [
     CreateSupplierPage,
@@ -56,6 +58,8 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
     DetailPurchasePage,
     EditUserPage,
     DetailShoppingKartPage,
+    UpdateFidelityCardPage,
+    CreateFidelityCardPage,
     DetailPaymentPage,
     DetailCategoryPage,
     CreatePaymentPage,
@@ -76,6 +80,8 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
     DetailCategoryPage,
     EditUserPage,
     DetailPaymentPage,
+    UpdateFidelityCardPage,
+    CreateFidelityCardPage,
     DetailShoppingKartPage,
     CreatePaymentPage,
     TotalComponent,
