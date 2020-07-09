@@ -8,8 +8,10 @@ import { HomePage } from './home.page';
 import { OnlineStatusModule } from '../modules/online-status/online-status.module';
 import { WidgetModule } from '../modules/widget/widget.module';
 import { UtilitiesModule } from '../modules/utilities/utilities.module';
+import { BarcodeModule } from '../modules/barcode/barcode.module';
 @NgModule({
   imports: [
+    BarcodeModule,
     CommonModule,
     FormsModule,
     IonicModule,
