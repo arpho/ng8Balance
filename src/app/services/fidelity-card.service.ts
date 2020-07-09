@@ -53,7 +53,7 @@ export class FidelityCardService implements ItemServiceInterface,OnInit {
     return this.fidelityCardsListRef.child(key).remove()
   }
   getDummyItem(): ItemModelInterface {
-    throw new Error("Method not implemented.");
+    return new FidelityCardModel()
   }
   async createItem(item: ItemModelInterface) {
     var FidelityCard
@@ -66,6 +66,6 @@ export class FidelityCardService implements ItemServiceInterface,OnInit {
     return FidelityCard;
   }
   getEntitiesList(): firebase.database.Reference {
-    throw new Error("Method not implemented.");
+    return this.fidelityCardsListRef
   }
 }
