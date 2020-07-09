@@ -55,8 +55,15 @@ export class FidelityCardService implements ItemServiceInterface,OnInit {
   getDummyItem(): ItemModelInterface {
     throw new Error("Method not implemented.");
   }
-  createItem(item: ItemModelInterface) {
-    throw new Error("Method not implemented.");
+  async createItem(item: ItemModelInterface) {
+    var FidelityCard
+    const category = await this.fidelityCardsListRef.push(item.serialize())
+    category.on('value',(cat)=>{
+      FidelityCard =  new FidelityCardModel(cat.val())
+      FidelityCard.key = cat.key
+      this.updateItem(FidelityCard)
+    })
+    return FidelityCard;
   }
   getEntitiesList(): firebase.database.Reference {
     throw new Error("Method not implemented.");
