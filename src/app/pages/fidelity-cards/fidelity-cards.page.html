@@ -1,9 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>fidelityCards</ion-title>
+
+    <ion-buttons slot="start">
+
+        <ion-back-button
+        class="button-clear ion-chevron-left"
+        defaultHref="/home"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Fidelity Cards</ion-title>
+    <div slot='end'>
+    <app-items-filter [filterFields]="filterFields"(filterSet)="filter($event)"></app-items-filter>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content>  <app-page-items-list [items_list]="ItemsList" [service]="fidelityCards" [filterFunction]="filterFunction" [sorterFunction]="sorterFunction" [createModalPage]="createModalPage" [editModalPage]="editModalPage"></app-page-items-list>
+
 
 </ion-content>
