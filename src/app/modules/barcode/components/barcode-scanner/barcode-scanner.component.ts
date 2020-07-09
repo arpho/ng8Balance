@@ -4,6 +4,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewCh
 // import { BeepService } from './beep.service';
 import Quagga from 'quagga';
 import { DECODER_LIVE_CONFIG } from '../../config/decoder-config';
+import { scan } from 'rxjs/operators';
 
 @Component({
   selector: 'app-barcode-scanner',
@@ -18,32 +19,45 @@ export class BarcodeScannerComponent implements OnInit {
 
   ngOnInit() {
 
-    Quagga.init({
-      inputStream: {
-        constraints: {
-          facingMode: 'environment' // restrict camera type
-        },
-        area: { // defines rectangle of the detection
-          top: '40%',    // top offset
-          right: '0%',  // right offset
-          left: '0%',   // left offset
-          bottom: '40%'  // bottom offset
-        },
+    
+  }
+scanCode(){
+
+  console.log('fired')
+
+  Quagga.init({
+    inputStream: {
+      constraints: {
+        facingMode: 'environment' // restrict camera type
       },
-      decoder: {
-        readers: ['ean_reader'] // restrict code types
+      area: { // defines rectangle of the detection
+        top: '40%',    // top offset
+        right: '0%',  // right offset
+        left: '0%',   // left offset
+        bottom: '40%'  // bottom offset
       },
     },
-    (err) => {
-      if (err) {
-        this.errorMessage = `QuaggaJS could not be initialized, err: ${err}`;
-      } else {
-        Quagga.start();
-        Quagga.onDetected((res) => {
+    decoder: {
+      readers: ['ean_reader'] // restrict code types
+    },
+  },
+  (err) => {
+    if (err) {
+      this.errorMessage = `QuaggaJS could not be initialized, err: ${err}`;
+    } else {
+      // Quagga.start();
+      /* Quagga.onDetected((res) => {
+        window.alert(`code: ${res.codeResult.code}`);
+      }) */
+    }
+  });
+    Quagga.start();
+         Quagga.onDetected((res) => {
           window.alert(`code: ${res.codeResult.code}`);
-        })
-      }
-    });
-  }
+        }) 
 
 }
+
+}
+
+
