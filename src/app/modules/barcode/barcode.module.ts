@@ -9,6 +9,7 @@ import { BarcodeScannerComponent } from './components/barcode-scanner/barcode-sc
   declarations: [BarcodeScannerComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports:[BarcodeScannerComponent]
 })
 export class BarcodeModule { }

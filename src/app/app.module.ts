@@ -41,6 +41,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { UtilitiesModule } from './modules/utilities/utilities.module';
 import { RoundPipe } from './modules/utilities/pipes/round.pipe';
 import { EditUserPage } from './modules/user/pages/edit-user/edit-user.page';
+import { BarcodeModule } from './modules/barcode/barcode.module';
 @NgModule({
   entryComponents: [
     CreateSupplierPage,
@@ -83,6 +84,7 @@ import { EditUserPage } from './modules/user/pages/edit-user/edit-user.page';
     CategoriesViewerComponent],
 
   imports: [
+    BarcodeModule,
     ItemModule,
     WidgetModule,
     UtilitiesModule,
