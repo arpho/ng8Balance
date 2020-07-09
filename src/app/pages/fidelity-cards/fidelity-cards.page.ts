@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FidelityCardModel } from 'src/app/models/fidelityCardModel';
 import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterface';
+import { FidelityCardService } from 'src/app/services/fidelity-card.service';
 
 @Component({
   selector: 'app-fidelity-cards',
@@ -9,6 +10,7 @@ import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterfa
 })
 export class FidelityCardsPage implements OnInit {
   public ItemsList: [FidelityCardModel]
+  public fidelityCards:FidelityCardService
 
   constructor() { }
 
@@ -22,8 +24,6 @@ export class FidelityCardsPage implements OnInit {
       const filterNote = (!filterParams.note) ? (item: ItemModelInterface) => true :
         (item: ItemModelInterface) => item.note.toLocaleLowerCase().indexOf(filterParams.note.toLowerCase()) > -1;
       this.filterFunction = (item: ItemModelInterface) => filterNote(item) && filterTitle(item);
-      const filterEcommerce: (item: ItemModelInterface) => boolean = (!filterParams.ecommerce) ? (item: ItemModelInterface) => true :
-        (item: SupplierModel) => item.ecommerce;
       // combina le funzioni filtro elementari
       this.filterFunction = (item: ItemModelInterface) => filterEcommerce(item) && filterNote(item) && filterTitle(item);
     }
