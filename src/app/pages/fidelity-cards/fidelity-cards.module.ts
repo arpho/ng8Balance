@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FidelityCardsPageRoutingModule } from './fidelity-cards-routing.module';
 
 import { FidelityCardsPage } from './fidelity-cards.page';
+import { ItemModule } from 'src/app/modules/item/item.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FidelityCardsPageRoutingModule
+    FidelityCardsPageRoutingModule,
+    ItemModule
   ],
   declarations: [FidelityCardsPage]
 })
