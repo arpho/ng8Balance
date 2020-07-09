@@ -23,7 +23,6 @@ export class BarcodeScannerComponent implements OnInit {
   }
 scanCode(){
 
-  console.log('fired')
 
   Quagga.init({
     inputStream: {
@@ -45,16 +44,13 @@ scanCode(){
     if (err) {
       this.errorMessage = `QuaggaJS could not be initialized, err: ${err}`;
     } else {
-      // Quagga.start();
-      /* Quagga.onDetected((res) => {
+       Quagga.start();
+       Quagga.onDetected((res) => {
         window.alert(`code: ${res.codeResult.code}`);
-      }) */
+      }) 
     }
   });
-    Quagga.start();
-         Quagga.onDetected((res) => {
-          window.alert(`code: ${res.codeResult.code}`);
-        }) 
+    
 
 }
 
