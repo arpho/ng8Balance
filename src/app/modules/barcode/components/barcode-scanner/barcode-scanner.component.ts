@@ -13,74 +13,79 @@ import { ControlValueAccessor } from '@angular/forms';
   templateUrl: './barcode-scanner.component.html',
   styleUrls: ['./barcode-scanner.component.scss'],
 })
-export class BarcodeScannerComponent implements OnInit,ControlValueAccessor {
+export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
 
-  errorMessage:string
-  barcode:string
-  show=true
+  errorMessage: string
+  barcode: string
+  show = true
+  private disabled = false
+  onChange: any = () => { };
+  // tslint:disable-next-line: ban-types
+  onTouched: any = () => { };
 
-  constructor(private audio:AudioService) {
-    this.audio.preload('detected','../assets/audio/barcode.wav')
-    this.audio.preload('wrong','../assets/audio/wrong.mp3')
+  constructor(private audio: AudioService) {
+    this.audio.preload('detected', '../assets/audio/barcode.wav')
+    this.audio.preload('wrong', '../assets/audio/wrong.mp3')
 
-   }
-  writeValue(obj: any): void {
-    throw new Error("Method not implemented.");
+  }
+  writeValue(barcode: string): void {
+    this.barcode = barcode
+
   }
   registerOnChange(fn: any): void {
-    throw new Error("Method not implemented.");
+    this.onChange = fn
   }
   registerOnTouched(fn: any): void {
-    throw new Error("Method not implemented.");
+    this.onTouched = fn
   }
   setDisabledState?(isDisabled: boolean): void {
-    throw new Error("Method not implemented.");
+    this.disabled = isDisabled
   }
 
   ngOnInit() {
 
 
   }
-scanCode(){
-  this.show= true
+  scanCode() {
+    this.show = true
 
 
-  Quagga.init({
-    inputStream: {
-      constraints: {
-        facingMode: 'environment' // restrict camera type
+    Quagga.init({
+      inputStream: {
+        constraints: {
+          facingMode: 'environment' // restrict camera type
+        },
+        area: { // defines rectangle of the detection
+          top: '40%',    // top offset
+          right: '0%',  // right offset
+          left: '0%',   // left offset
+          bottom: '40%'  // bottom offset
+        },
       },
-      area: { // defines rectangle of the detection
-        top: '40%',    // top offset
-        right: '0%',  // right offset
-        left: '0%',   // left offset
-        bottom: '40%'  // bottom offset
+      decoder: {
+        readers: ['ean_reader'] // restrict code types
       },
     },
-    decoder: {
-      readers: ['ean_reader'] // restrict code types
-    },
-  },
-  (err) => {
-    if (err) {
-      this.errorMessage = `QuaggaJS could not be initialized, err: ${err}`;
-      this.audio.play('wrong')
-    } else {
-       Quagga.start();
-       Quagga.onDetected((res) => {
-         Quagga.stop()
-         this.audio.play('detected')
-         this.barcode= res.codeResult.code
-         console.log('barcode',this.barcode)
-         this.show = false
-         
-        // window.alert(`code: ${res.codeResult.code}`);
-      }) 
-    }
-  });
-    
+      (err) => {
+        if (err) {
+          this.errorMessage = `QuaggaJS could not be initialized, err: ${err}`;
+          this.audio.play('wrong')
+        } else {
+          Quagga.start();
+          Quagga.onDetected((res) => {
+            Quagga.stop()
+            this.audio.play('detected')
+            this.barcode = res.codeResult.code
+            console.log('barcode', this.barcode)
+            this.show = false
 
-}
+            // window.alert(`code: ${res.codeResult.code}`);
+          })
+        }
+      });
+
+
+  }
 
 }
 
