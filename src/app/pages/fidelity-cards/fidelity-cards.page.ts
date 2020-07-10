@@ -17,7 +17,12 @@ export class FidelityCardsPage implements OnInit {
   public editModalPage = UpdateFidelityCardPage
 
   constructor() { }
+ 
+  public filterFields: any;
 
+  public filterFunction: (item: FidelityCardModel) => boolean;
+
+  public sorterFunction: (a: any, b: any) => number
   ngOnInit() {
   }
 

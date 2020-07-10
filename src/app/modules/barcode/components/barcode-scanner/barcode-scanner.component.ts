@@ -6,13 +6,14 @@ import Quagga from 'quagga';
 // import { DECODER_LIVE_CONFIG } from '../../config/decoder-config';
 import { scan } from 'rxjs/operators';
 import { AudioService } from '../../services/audio.service';
+import { ControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-barcode-scanner',
   templateUrl: './barcode-scanner.component.html',
   styleUrls: ['./barcode-scanner.component.scss'],
 })
-export class BarcodeScannerComponent implements OnInit {
+export class BarcodeScannerComponent implements OnInit,ControlValueAccessor {
 
   errorMessage:string
   barcode:string
@@ -23,6 +24,18 @@ export class BarcodeScannerComponent implements OnInit {
     this.audio.preload('wrong','../assets/audio/wrong.mp3')
 
    }
+  writeValue(obj: any): void {
+    throw new Error("Method not implemented.");
+  }
+  registerOnChange(fn: any): void {
+    throw new Error("Method not implemented.");
+  }
+  registerOnTouched(fn: any): void {
+    throw new Error("Method not implemented.");
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    throw new Error("Method not implemented.");
+  }
 
   ngOnInit() {
 

@@ -15,6 +15,6 @@ import { UpdateFidelityCardPage } from './update-fidelity-card.page';
     IonicModule,
     UpdateFidelityCardPageRoutingModule
   ],
-  declarations: [UpdateFidelityCardPage]
+  // declarations: [UpdateFidelityCardPage]
 })
 export class UpdateFidelityCardPageModule {}

@@ -14,10 +14,16 @@ export class CreateFidelityCardPage implements OnInit {
   card= new FidelityCardModel()
   title = ' aggiungi fidelity card'
   cardFields = [
+    new QuestionBarcode({
+      key:'barcode',
+      label:'codice',
+      value:this.card.barcode,
+      order:2
+    }),
     new TextboxQuestion({
       key: 'title',
       label: 'titolo',
-      order: 0,
+      order: 3,
       required: true,
       value: this.card.title
     }),
@@ -27,12 +33,7 @@ export class CreateFidelityCardPage implements OnInit {
       value: this.card.note,
       order: 1
     }),
-    new QuestionBarcode({
-      key:'barcode',
-      label:'codice',
-      value:this.card.barcode,
-      order:2
-    })
+   
   ]
 
   filter(v) {
