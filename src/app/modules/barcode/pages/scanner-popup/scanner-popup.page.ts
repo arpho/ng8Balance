@@ -47,8 +47,7 @@ barcode:string
             Quagga.stop()
             this.audio.play('detected')
             this.barcode = res.codeResult.code
-            console.log('barcode', this.barcode)
-            this.modalCtrl.dismiss({barcode:this.barcode})
+            this.modalCtrl.dismiss(this.barcode)
             
 
             // window.alert(`code: ${res.codeResult.code}`);

@@ -25,7 +25,7 @@ import {ScannerPopupPage} from '../../pages/scanner-popup/scanner-popup.page'
 export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
 
   errorMessage: string
-  barcode='74865'
+  barcode:string
   @Input() formControlName
   @Input() value:string
   show = true
@@ -77,6 +77,12 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
   }
   async scanCode() {
     const modal = await this.modalCtrl.create({component:ScannerPopupPage})
+
+    
+    modal.onDidDismiss().then(data=>{
+      console.log('got bardode',data.data)
+      this.barcode = data.data
+    })
     return await modal.present()
     
 
