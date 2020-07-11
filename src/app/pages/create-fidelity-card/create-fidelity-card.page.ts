@@ -4,6 +4,7 @@ import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-te
 import { FidelityCardModel } from 'src/app/models/fidelityCardModel';
 import { ModalController } from '@ionic/angular';
 import { QuestionBarcode } from 'src/app/modules/dynamic-form/models/question-barcode';
+import { FidelityCardService } from 'src/app/services/fidelity-card.service';
 
 @Component({
   selector: 'app-create-fidelity-card',
@@ -36,19 +37,24 @@ export class CreateFidelityCardPage implements OnInit {
    
   ]
 
+
+  constructor(public modalCtrl:ModalController,public service: FidelityCardService) {
+  }
+
+ ngOnInit() {
+   
+ }
+
   filter(v) {
     console.log('filter', v)
   }
   submit(v) {
     console.log('submit', v)
+    this.card = new FidelityCardModel(v)
+    console.log('creating',this.card)
+    this.service.createItem(this.card).then(v=>{console.log('created',v)})
   }
 
-  constructor(public modalCtrl:ModalController) {
-   }
-
-  ngOnInit() {
-    
-  }
 
 
   dismiss(card?) {
