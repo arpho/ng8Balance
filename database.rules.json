@@ -1,10 +1,48 @@
-{
+{ 
   "rules": {
   
-        // grants write access to the owner of this user account
-        // whose uid must exactly match the key ($user_id)
-        ".write": "true",
-        ".read": "true"
+        "categorie":{
+          "$uid":{
+            ".read":"$uid===auth.uid",
+              ".write":"$uid===auth.uid"
+          }
+        },
+          "fornitori":{
+          "$uid":{
+							".read":"$uid===auth.uid",
+              ".write":"$uid===auth.uid"
+          }
+        },
+          "acquisti":{
+          "$uid":{
+							".read":"$uid===auth.uid",
+              ".write":"$uid===auth.uid"
+          }
+        },
+          "userProfile":{
+          "$uid":{
+							".read":"$uid===auth.uid",
+              ".write":"$uid===auth.uid"
+          }
+        },
+          "widgets":{
+          "$uid":{
+							".read":"$uid===auth.uid",
+              ".write":"$uid===auth.uid"
+          }
+        },
+        "pagamenti":{
+        "$uid":{
+            ".read":"$uid===auth.uid",
+            ".write":"$uid===auth.uid"
+        }
+      },
+      "fidelityCards":{
+      "$uid":{
+          ".read":"$uid===auth.uid",
+          ".write":"$uid===auth.uid"
+      }
+    }
 
 }
 }
