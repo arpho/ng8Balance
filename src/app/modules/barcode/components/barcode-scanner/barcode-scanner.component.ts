@@ -56,7 +56,6 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
 
   }
   writeValue(barcode: string): void {
-    console.log('writing value',barcode)
     this.barcode = barcode
 
   }
@@ -79,10 +78,8 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
 
     
     modal.onDidDismiss().then(data=>{
-      console.log('got barcode',data.data)
       this.barcode = data.data
       this.onChange(this.barcode)
-      console.log('set barcode',this.barcode)
     })
     return await modal.present()
     
