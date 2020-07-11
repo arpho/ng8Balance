@@ -15,6 +15,6 @@ import { ScannerPopupPage } from './scanner-popup.page';
     IonicModule,
     ScannerPopupPageRoutingModule
   ],
-  declarations: [ScannerPopupPage]
+  declarations: []
 })
 export class ScannerPopupPageModule {}

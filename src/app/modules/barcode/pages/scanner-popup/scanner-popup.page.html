@@ -5,5 +5,11 @@
 </ion-header>
 
 <ion-content>
+  <div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+  <div  id="interactive" class="viewport">
+    <!-- QuaggaJS will populate this element -->
+  </div> 
 
 </ion-content>

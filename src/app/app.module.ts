@@ -45,6 +45,7 @@ import { BarcodeModule } from './modules/barcode/barcode.module';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { UpdateFidelityCardPage } from './pages/update-fidelity-card/update-fidelity-card.page';
 import { CreateFidelityCardPage } from './pages/create-fidelity-card/create-fidelity-card.page';
+import { ScannerPopupPage } from './modules/barcode/pages/scanner-popup/scanner-popup.page';
 @NgModule({
   entryComponents: [
     CreateSupplierPage,
@@ -58,6 +59,7 @@ import { CreateFidelityCardPage } from './pages/create-fidelity-card/create-fide
     DetailPurchasePage,
     EditUserPage,
     DetailShoppingKartPage,
+    ScannerPopupPage,
     UpdateFidelityCardPage,
     CreateFidelityCardPage,
     DetailPaymentPage,
@@ -83,6 +85,7 @@ import { CreateFidelityCardPage } from './pages/create-fidelity-card/create-fide
     UpdateFidelityCardPage,
     CreateFidelityCardPage,
     DetailShoppingKartPage,
+    ScannerPopupPage,
     CreatePaymentPage,
     TotalComponent,
     CategoriesSelectorComponent,

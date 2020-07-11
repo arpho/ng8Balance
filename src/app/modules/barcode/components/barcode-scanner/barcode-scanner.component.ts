@@ -8,6 +8,8 @@ import { scan } from 'rxjs/operators';
 import { AudioService } from '../../services/audio.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { ModalController } from '@ionic/angular';
+import {ScannerPopupPage} from '../../pages/scanner-popup/scanner-popup.page'
 
 @Component({
   selector: 'app-barcode-scanner',
@@ -50,7 +52,7 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
   // tslint:disable-next-line: ban-types
   onTouched: any = () => { };
 
-  constructor(private audio: AudioService) {
+  constructor(private audio: AudioService,public modalCtrl: ModalController) {
     this.audio.preload('detected', '../assets/audio/barcode.wav')
     this.audio.preload('wrong', '../assets/audio/wrong.mp3')
 
@@ -73,43 +75,12 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
 
 
   }
-  scanCode() {
-    this.show = true
+  async scanCode() {
+    const modal = await this.modalCtrl.create({component:ScannerPopupPage})
+    return await modal.present()
+    
 
-
-    Quagga.init({
-      inputStream: {
-        constraints: {
-          facingMode: 'environment' // restrict camera type
-        },
-        area: { // defines rectangle of the detection
-          top: '40%',    // top offset
-          right: '0%',  // right offset
-          left: '0%',   // left offset
-          bottom: '40%'  // bottom offset
-        },
-      },
-      decoder: {
-        readers: ['ean_reader'] // restrict code types
-      },
-    },
-      (err) => {
-        if (err) {
-          this.errorMessage = `QuaggaJS could not be initialized, err: ${err}`;
-          this.audio.play('wrong')
-        } else {
-          Quagga.start();
-          Quagga.onDetected((res) => {
-            Quagga.stop()
-            this.audio.play('detected')
-            this.barcode = res.codeResult.code
-            console.log('barcode', this.barcode)
-            this.show = false
-
-            // window.alert(`code: ${res.codeResult.code}`);
-          })
-        }
-      });
+    
 
 
   }
