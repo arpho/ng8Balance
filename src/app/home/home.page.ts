@@ -6,6 +6,7 @@ import { SuppliersService } from '../services/suppliers/suppliers.service';
 import { PaymentsService } from '../services/payments/payments.service';
 import { ShoppingKartsService } from '../services/shoppingKarts/shopping-karts.service';
 import { CreateShoppingKartPage } from '../pages/create-shopping-kart/create-shopping-kart.page';
+import { FidelityCardService } from '../services/fidelity-card.service';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,8 @@ export class HomePage {
     public categories: CategoriesService,
     public suppliers: SuppliersService,
     public payments: PaymentsService,
-    public shoppingkarts: ShoppingKartsService
+    public shoppingkarts: ShoppingKartsService,
+    public FidelityCards: FidelityCardService
   ) { }
 
   async addShoppingKart() {

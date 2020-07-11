@@ -8,25 +8,28 @@ import { ItemModelInterface } from '../modules/item/models/itemModelInterface';
 @Injectable({
   providedIn: 'root'
 })
-export class FidelityCardService implements ItemServiceInterface,OnInit {
+export class FidelityCardService implements ItemServiceInterface {
 
   public fidelityCardsListRef: firebase.database.Reference;
   _items: BehaviorSubject<Array<FidelityCardModel>> = new BehaviorSubject([])
   readonly items: Observable<Array<FidelityCardModel>> = this._items.asObservable()
   items_list: Array<FidelityCardModel> = []
 
-  constructor() { }
-  ngOnInit(): void {
+  constructor() {
+
+    console.log('constructor fidelity')
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-
+console.log('initializing fidelity service')
     this.fidelityCardsListRef = firebase.database().ref(`/fidelityCards/${user.uid}/`)
-
+console.log('ref',this.fidelityCardsListRef)
     this.fetchItems()
    
   }
 })
+   }
+  ngOnInit(): void {
   }
   fetchItems() {
     this.fidelityCardsListRef.on('value',snapshot=>{
@@ -57,6 +60,7 @@ export class FidelityCardService implements ItemServiceInterface,OnInit {
   }
   async createItem(item: ItemModelInterface) {
     var FidelityCard
+    console.log('pushing',item,item.serialize())
     const category = await this.fidelityCardsListRef.push(item.serialize())
     category.on('value',(cat)=>{
       FidelityCard =  new FidelityCardModel(cat.val())

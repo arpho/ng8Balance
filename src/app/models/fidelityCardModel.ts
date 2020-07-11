@@ -68,7 +68,7 @@ export class FidelityCardModel implements ItemModelInterface {
             title: this.title || '',
         barcode:this.barcode||'',
     note:this.note||'',
-archived:this.archived,
+archived:!!this.archived,
 key:this.key||''}
     }
     getElement(): { element: string; genere: Genere; } {

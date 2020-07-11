@@ -117,7 +117,8 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
     }
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.categoriesListRef = firebase.database().ref(`/categorie/${user.uid}/`); this.getEntitiesList().on('value', eventCategoriesListSnapshot => {
+        this.categoriesListRef = firebase.database().ref(`/categorie/${user.uid}/`);
+         this.getEntitiesList().on('value', eventCategoriesListSnapshot => {
           this.items_list = [];
           eventCategoriesListSnapshot.forEach(snap => {
             const cat = this.initializeCategory(snap.val())
