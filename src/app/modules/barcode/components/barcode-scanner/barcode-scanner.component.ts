@@ -27,16 +27,14 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
   errorMessage: string
   barcode:string
   @Input() formControlName
-  @Input() value:string
-  show = true
+  @Input() value
+ 
   private _id: string
   @Input() set id(value: string) {
     this._id = value
   }
 
-  get Value(){
-    return this.barcode
-  }
+  
 
   /* set value(v:string){
     this.barcode = v 
@@ -49,7 +47,7 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
   }
   private disabled = false
   onChange: any = () => { };
-  // tslint:disable-next-line: ban-types
+  onTouch:any = ()=>{}
   onTouched: any = () => { };
 
   constructor(private audio: AudioService,public modalCtrl: ModalController) {
@@ -58,6 +56,7 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
 
   }
   writeValue(barcode: string): void {
+    console.log('writing value',barcode)
     this.barcode = barcode
 
   }
@@ -80,8 +79,10 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
 
     
     modal.onDidDismiss().then(data=>{
-      console.log('got bardode',data.data)
+      console.log('got barcode',data.data)
       this.barcode = data.data
+      this.onChange(this.barcode)
+      console.log('set barcode',this.barcode)
     })
     return await modal.present()
     
