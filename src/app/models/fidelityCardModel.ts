@@ -10,7 +10,7 @@ export class FidelityCardModel implements ItemModelInterface {
     quickActions?: import("../modules/item/models/QuickAction").QuickAction[];
     archived?: boolean;
     service?: ItemServiceInterface;
-    constructor(card?:{}){
+    constructor(card?: {}) {
         this.load(card)
     }
 
@@ -66,10 +66,11 @@ export class FidelityCardModel implements ItemModelInterface {
     serialize() {
         return {
             title: this.title || '',
-        barcode:this.barcode||'',
-    note:this.note||'',
-archived:!!this.archived,
-key:this.key||''}
+            barcode: this.barcode || '',
+            note: this.note || '',
+            archived: !!this.archived,
+            key: this.key || ''
+        }
     }
     getElement(): { element: string; genere: Genere; } {
         const genere: Genere = 'a';

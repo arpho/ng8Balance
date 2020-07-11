@@ -21,20 +21,18 @@ export class FidelityCardService implements ItemServiceInterface {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-console.log('initializing fidelity service')
-    this.fidelityCardsListRef = firebase.database().ref(`/fidelityCards/${user.uid}/`)
-console.log('ref',this.fidelityCardsListRef)
-    this.fetchItems()
-   
+        this.fidelityCardsListRef = firebase.database().ref(`/fidelityCards/${user.uid}/`)
+        this.fetchItems()
+
+      }
+    })
   }
-})
-   }
   ngOnInit(): void {
   }
   fetchItems() {
-    this.fidelityCardsListRef.on('value',snapshot=>{
+    this.fidelityCardsListRef.on('value', snapshot => {
       this.items_list = []
-      snapshot.forEach(snap=>{
+      snapshot.forEach(snap => {
         this.items_list.push(new FidelityCardModel(snap.val()))
       })
       this._items.next(this.items_list)
@@ -60,10 +58,9 @@ console.log('ref',this.fidelityCardsListRef)
   }
   async createItem(item: ItemModelInterface) {
     var FidelityCard
-    console.log('pushing',item,item.serialize())
     const category = await this.fidelityCardsListRef.push(item.serialize())
-    category.on('value',(cat)=>{
-      FidelityCard =  new FidelityCardModel(cat.val())
+    category.on('value', (cat) => {
+      FidelityCard = new FidelityCardModel(cat.val())
       FidelityCard.key = cat.key
       this.updateItem(FidelityCard)
     })
