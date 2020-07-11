@@ -4,9 +4,7 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy,
-  OnChanges,
-  SimpleChanges
+  ChangeDetectionStrategy
   // tslint:disable: semicolon
   // tslint:disable: quotemark
 } from "@angular/core";
@@ -27,7 +25,7 @@ import { QuestionControlService } from "../../services/question-control.service"
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [QuestionControlService]
 })
-export class DynamicFormComponent implements OnInit,OnChanges {
+export class DynamicFormComponent implements OnInit {
   @Output() interactiveSubmit: EventEmitter<{}> = new EventEmitter();
   @Output() singleSubmit: EventEmitter<{}> = new EventEmitter();
   // the page could need to observe the form
@@ -39,9 +37,6 @@ export class DynamicFormComponent implements OnInit,OnChanges {
   payLoad
 
   constructor(private qcs: QuestionControlService) { }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes',changes)
-  }
 
   ngOnInit() {
     this.form = this.qcs.toFormGroup(this.questions);
