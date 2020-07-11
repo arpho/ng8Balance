@@ -16,7 +16,7 @@ export class CreateFidelityCardPage implements OnInit {
   cardFields = [
     new QuestionBarcode({
       key:'barcode',
-      label:'codice',
+      label:'codice a barre',
       value:this.card.barcode,
       order:2
     }),

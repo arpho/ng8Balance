@@ -1,10 +1,9 @@
 <div class="error-message" *ngIf="errorMessage">
   {{ errorMessage }}
 </div>
-fdfgfgggg
 <div *ngIf='show' id="interactive" class="viewport">
   <!-- QuaggaJS will populate this element -->
 </div> 
-<button ion-button (click)="scanCode()"><ion-icon name="barcode" ></ion-icon></button>
-<ion-input></ion-input>
+<ion-button ion-button (click)="scanCode()"><ion-icon name="barcode" ></ion-icon></ion-button>
+<input [value]="barcode">
 <p>{{barcode}}</p>

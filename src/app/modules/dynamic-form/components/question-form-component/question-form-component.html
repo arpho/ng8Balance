@@ -8,10 +8,21 @@
       [id]="question?.key"
       [type]="question?.type"
     />
+
+
+    <div *ngSwitchCase="'barcodeScanner'">
+      <app-barcode-scanner  
+      [formControlName]="question?.key"
+      [id]="question?.key"
+      [value]="question?.value"
+      ></app-barcode-scanner>
+      </div>
+
     <div *ngSwitchCase="'datebox'">
       <ion-datetime [formControlName]="question?.key" [id]="question?.key">
       </ion-datetime>
     </div>
+
     <div *ngSwitchCase="'switchBox'">
       <p class="switchText">
         {{ getValue ? question.labelTrue : question.labelFalse }}
@@ -24,12 +35,11 @@
         [id]="question?.key"
       ></ion-toggle>
     </div>
-    <div *ngSwitchCase="'barcodeScanner'"
-    >
-  <app-barcode-scanner [formControlName]="question?.key"
+    
+    <div 
+      [formControlName]="question?.key"
   [id]="question?.key"
-  ></app-barcode-scanner>
-  </div>
+    >
     <div *ngSwitchCase="'itemSelector'"
     [formControlName]="question?.key"
     [id]="question?.key"
