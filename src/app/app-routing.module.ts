@@ -40,6 +40,10 @@ const routes:  Routes = [
     path: 'update-fidelity-card',
     loadChildren: () => import('./pages/update-fidelity-card/update-fidelity-card.module').then( m => m.UpdateFidelityCardPageModule)
   },
+  {
+    path: 'scanner-popup',
+    loadChildren: () => import('./modules/barcode/pages/scanner-popup/scanner-popup.module').then( m => m.ScannerPopupPageModule)
+  },
 ];
 
 @NgModule({
