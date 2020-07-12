@@ -12,25 +12,25 @@ import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-te
 })
 export class UpdateFidelityCardPage extends CreateFidelityCardPage implements OnInit {
 
-  
 
-  constructor(public modalCtrl:ModalController,public service: FidelityCardService,public navParams:NavParams) {
-    super(modalCtrl,service)
 
-    
+  constructor(public modalCtrl: ModalController, public service: FidelityCardService, public navParams: NavParams) {
+    super(modalCtrl, service)
 
-   }
+
+
+  }
 
   ngOnInit() {
     this.card = this.navParams.get('item')
-    console.log('updating card',this.card)
+    console.log('updating card', this.card)
     this.title = `modifica carta ${this.card.title}`
-    this.cardFields  = [
+    this.cardFields = [
       new QuestionBarcode({
-        key:'barcode',
-        label:'codice a barre',
-        value:this.card.barcode,
-        order:2
+        key: 'barcode',
+        label: 'codice a barre',
+        value: this.card.barcode,
+        order: 2
       }),
       new TextboxQuestion({
         key: 'title',
@@ -45,15 +45,14 @@ export class UpdateFidelityCardPage extends CreateFidelityCardPage implements On
         value: this.card.note,
         order: 1
       }),
-     
+
     ]
   }
 
 
-  submit(card){
-    console.log('submitting',card)
+  submit(card) {
     this.card.load(card)
-    console.log('new casrd',this.card)
+    this.service.updateItem(this.card)
   }
 
 }
