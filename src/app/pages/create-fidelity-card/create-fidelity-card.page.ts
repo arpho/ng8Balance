@@ -39,7 +39,6 @@ export class CreateFidelityCardPage implements OnInit {
 
 
   constructor(public modalCtrl:ModalController,public service: FidelityCardService) {
-    console.log('fidelity',this.service)
   }
 
  ngOnInit() {
