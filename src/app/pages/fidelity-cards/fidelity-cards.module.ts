@@ -8,6 +8,7 @@ import { FidelityCardsPageRoutingModule } from './fidelity-cards-routing.module'
 
 import { FidelityCardsPage } from './fidelity-cards.page';
 import { ItemModule } from 'src/app/modules/item/item.module';
+import { DynamicFormModule } from 'src/app/modules/dynamic-form/dynamic-form.module';
 
 @NgModule({
   imports: [
@@ -15,8 +16,9 @@ import { ItemModule } from 'src/app/modules/item/item.module';
     FormsModule,
     IonicModule,
     FidelityCardsPageRoutingModule,
-    ItemModule
+    ItemModule,
+    DynamicFormModule
   ],
   declarations: [FidelityCardsPage]
 })
-export class FidelityCardsPageModule {}
+export class FidelityCardsPageModule { }

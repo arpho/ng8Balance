@@ -27,7 +27,7 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
   errorMessage: string
   barcode:string
   @Input() formControlName
-  @Input() value
+  @Input() value:string
  
   private _id: string
   @Input() set id(value: string) {

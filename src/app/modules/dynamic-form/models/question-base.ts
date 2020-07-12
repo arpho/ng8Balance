@@ -23,6 +23,7 @@ export class QuestionBase<T> {
   text: string;
   disabled:boolean
   options: ComboValue[]
+  onChange: any = () => { };
   neutralFilter: (item: ItemModelInterface) => true
   // any solo per testing TOBE refactored
   public filterFunction: (item: ItemModelInterface, arg: ItemModelInterface | any) => boolean
