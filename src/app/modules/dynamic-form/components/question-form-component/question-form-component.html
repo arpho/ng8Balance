@@ -14,7 +14,7 @@
     <div *ngSwitchCase="'barcodeScanner'">
       <app-barcode-scanner  
       [formControlName]="question?.key"
-      (ngModelChange)="onChange($event)"
+      (ngModelChange)="question?.onChange($event)"
       [id]="question?.key"
       [value]="question?.value"
       ></app-barcode-scanner>
