@@ -52,6 +52,8 @@ export class UpdateFidelityCardPage extends CreateFidelityCardPage implements On
 
   submit(card){
     console.log('submitting',card)
+    this.card.load(card)
+    console.log('new casrd',this.card)
   }
 
 }
