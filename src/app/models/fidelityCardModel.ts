@@ -25,7 +25,8 @@ export class FidelityCardModel implements ItemModelInterface {
         return new Value({ value: this.barcode, label: 'codice' })
     }
     getValue4(): Value {
-        throw new Error("Method not implemented.");
+        const value = new Value();
+        return value;
     }
     getEditPopup(item?: ItemModelInterface, service?: ItemServiceInterface) {
         throw new Error("Method not implemented.");
@@ -41,16 +42,20 @@ export class FidelityCardModel implements ItemModelInterface {
     }
 
     getTitle(): Value {
-        throw new Error("Method not implemented.");
+        return new Value({label:'carta',value:this.title})
     }
     getCountingText(): string {
-        throw new Error("Method not implemented.");
+        return " carte fedeltà "
     }
     getNote(): Value {
-        throw new Error("Method not implemented.");
+        
+        const value = new Value();
+        value.label = 'note';
+        value.value = this.note;
+        return value;
     }
     build?(item: {}) {
-        throw new Error("Method not implemented.");
+        return this.load(item)
     }
     load(item) {
         Object.assign(this, item)

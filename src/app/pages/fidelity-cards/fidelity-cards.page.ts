@@ -16,7 +16,7 @@ export class FidelityCardsPage implements OnInit {
   public createModalPage = CreateFidelityCardPage
   public editModalPage = UpdateFidelityCardPage
 
-  constructor() { }
+  constructor(public service:FidelityCardService) { }
  
   public filterFields: any;
 

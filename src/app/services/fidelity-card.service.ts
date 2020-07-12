@@ -27,9 +27,8 @@ export class FidelityCardService implements ItemServiceInterface {
       }
     })
   }
-  ngOnInit(): void {
-  }
   fetchItems() {
+    console.log('fetching cards')
     this.fidelityCardsListRef.on('value', snapshot => {
       this.items_list = []
       snapshot.forEach(snap => {
