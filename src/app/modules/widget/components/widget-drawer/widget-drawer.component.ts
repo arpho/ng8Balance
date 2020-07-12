@@ -76,7 +76,6 @@ export class WidgetDrawerComponent implements OnInit {
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
     public modalController: ModalController,) {
       this.service.widgetsList.subscribe(v=>{
-        console.log('hyding')
         if(v.length!=0){
         this.showSpinner = false}
       })

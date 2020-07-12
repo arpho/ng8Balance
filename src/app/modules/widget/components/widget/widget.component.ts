@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, SimpleCha
 import { Widget } from '../../models/Widget';
 import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterface';
 import { BehaviorSubject } from 'rxjs';
+import { thresholdFreedmanDiaconis } from 'd3';
 
 
 @Component({
@@ -13,8 +14,15 @@ import { BehaviorSubject } from 'rxjs';
 export class WidgetComponent implements OnInit, OnChanges {
   @Input() Widget: Widget
   @Input() items: BehaviorSubject<ItemModelInterface[]>
+  showSpinner = true
 
   constructor() {
+    this.Widget && this.Widget.Value.subscribe(v => {
+      console.log('v', v)
+      if (v != -1) {
+        this.showSpinner = false
+      }
+    })
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.items.subscribe(karts => {

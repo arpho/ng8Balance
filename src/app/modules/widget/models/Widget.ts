@@ -44,7 +44,7 @@ export class Widget {
 
     _Service: BehaviorSubject<EntityWidgetServiceInterface> = new BehaviorSubject(undefined)
     readonly Service: Observable<EntityWidgetServiceInterface> = this._Service.asObservable()
-    _Value: BehaviorSubject<number> = new BehaviorSubject(0)
+    _Value: BehaviorSubject<number> = new BehaviorSubject(-1) // per distinguere se primo valore  dal reale valore calcolato
     readonly Value: Observable<number> = this._Value.asObservable()
     __item: BehaviorSubject<ItemModelInterface> = new BehaviorSubject(undefined)
     readonly Item: Observable<ItemModelInterface> = this.__item.asObservable()
