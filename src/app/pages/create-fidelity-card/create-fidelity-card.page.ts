@@ -5,6 +5,7 @@ import { FidelityCardModel } from 'src/app/models/fidelityCardModel';
 import { ModalController } from '@ionic/angular';
 import { QuestionBarcode } from 'src/app/modules/dynamic-form/models/question-barcode';
 import { FidelityCardService } from 'src/app/services/fidelity-card.service';
+import { TextAreaBox } from 'src/app/modules/dynamic-form/models/question-textArea';
 
 @Component({
   selector: 'app-create-fidelity-card',
@@ -28,9 +29,10 @@ export class CreateFidelityCardPage implements OnInit {
       required: true,
       value: this.card.title
     }),
-    new TextboxQuestion({
+    new TextAreaBox({
       key: 'note',
       label: 'note',
+      autoGrow:true,
       value: this.card.note,
       order: 1
     }),

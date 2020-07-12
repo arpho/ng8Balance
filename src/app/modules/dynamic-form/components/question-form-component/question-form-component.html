@@ -9,6 +9,17 @@
       [id]="question?.key"
       [type]="question?.type"
     />
+    
+    <div [ngSwitch]="question?.controlType">
+      <ion-textarea
+      ngDefaultControl
+        *ngSwitchCase="'textArea'"
+        [formControlName]="question?.key"
+        [id]="question?.key"
+        autoGrow="question?.autoGrow"
+
+      ></ion-textarea>
+      </div>
 
 
     <div *ngSwitchCase="'barcodeScanner'">
