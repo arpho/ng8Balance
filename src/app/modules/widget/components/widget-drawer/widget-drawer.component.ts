@@ -19,6 +19,7 @@ import { take } from 'rxjs/operators';
 })
 export class WidgetDrawerComponent implements OnInit {
   keys
+  showSpinner = true
   widgetsCount = 0
   Widgets: Widget[]
   items: BehaviorSubject<ShoppingKartModel[]> // = []
@@ -74,6 +75,11 @@ export class WidgetDrawerComponent implements OnInit {
 
   constructor(public service: WidgetService, public karts: ShoppingKartsService,
     public modalController: ModalController,) {
+      this.service.widgetsList.subscribe(v=>{
+        console.log('hyding')
+        if(v.length!=0){
+        this.showSpinner = false}
+      })
     Array.prototype['move'] = function (pos1, pos2) {
       // local variables
       var i, tmp;
