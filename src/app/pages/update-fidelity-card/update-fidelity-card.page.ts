@@ -4,6 +4,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { FidelityCardService } from 'src/app/services/fidelity-card.service';
 import { QuestionBarcode } from 'src/app/modules/dynamic-form/models/question-barcode';
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
+import { TextAreaBox } from 'src/app/modules/dynamic-form/models/question-textArea';
 
 @Component({
   selector: 'app-update-fidelity-card',
@@ -39,10 +40,11 @@ export class UpdateFidelityCardPage extends CreateFidelityCardPage implements On
         required: true,
         value: this.card.title
       }),
-      new TextboxQuestion({
+      new TextAreaBox({
         key: 'note',
         label: 'note',
         value: this.card.note,
+        autoGrow:true,
         order: 1
       }),
 
