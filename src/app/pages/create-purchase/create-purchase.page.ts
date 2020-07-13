@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { PurchaseModel } from 'src/app/models/purchasesModel';
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
 import { CategoryModel } from 'src/app/models/CategoryModel';
+import { TextAreaBox } from 'src/app/modules/dynamic-form/models/question-textArea';
 
 @Component({
   selector: 'app-create-purchase',
@@ -26,8 +27,9 @@ export class CreatePurchasePage implements OnInit {
         value: this.purchase ? this.purchase.descrizione : '',
         order: 1
       }),
-      new TextboxQuestion({
+      new TextAreaBox({
         key: 'note',
+        autoGrow:true,
         label: 'note',
         value: this.purchase ? this.purchase.note : '',
         order: 2
