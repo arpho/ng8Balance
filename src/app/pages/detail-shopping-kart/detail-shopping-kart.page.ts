@@ -21,6 +21,7 @@ import { QuestionBase } from '../../modules/dynamic-form/models/question-base';
 import { SelectorQuestion } from 'src/app/modules/dynamic-form/models/question-selector';
 import { CreatePaymentPage } from '../create-payment/create-payment.page';
 import { CreateSupplierPage } from '../create-supplier/create-supplier.page'
+import { TextAreaBox } from 'src/app/modules/dynamic-form/models/question-textArea';
 
 @Component({
   selector: 'app-detail-shopping-kart',
@@ -59,10 +60,11 @@ export class DetailShoppingKartPage implements OnInit {
         value: this.kart ? this.kart.title : '',
         order: 1
       }),
-      new TextboxQuestion({
+      new TextAreaBox({
         key: 'note',
         label: 'note',
         value: this.kart ? this.kart.note : '',
+        autoGrow:true,
         order: 2
       }),
       new SwitchQuestion({
