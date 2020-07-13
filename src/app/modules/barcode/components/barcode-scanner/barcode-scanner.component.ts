@@ -26,6 +26,7 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
 
   errorMessage: string
   barcode:string
+  format:string
   @Input() formControlName
   @Input() value:string
  
@@ -78,7 +79,9 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
 
     
     modal.onDidDismiss().then(data=>{
-      this.barcode = data.data
+      this.barcode = data.data.code
+      this.format = data.data.format
+      console.log('data',data.data)
       this.onChange(this.barcode)
     })
     return await modal.present()
