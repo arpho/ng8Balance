@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
 import { PaymentsModel } from 'src/app/models/paymentModel';
 import { PaymentsService } from 'src/app/services/payments/payments.service';
+import { TextAreaBox } from 'src/app/modules/dynamic-form/models/question-textArea';
 
 
 @Component({
@@ -26,11 +27,12 @@ export class CreatePaymentPage implements OnInit {
         value: this.payment.title,
         order: 1
       }),
-      new TextboxQuestion({
+      new TextAreaBox({
         key: 'note',
         label: 'note',
         value: this.payment.note,
-        order: 2
+        order: 2,
+        autoGrow:true
       }),
     ];
 
