@@ -5,6 +5,7 @@ import { QuestionBase } from 'src/app/modules/dynamic-form/models/question-base'
 import { TextboxQuestion } from 'src/app/modules/item/models/question-textbox';
 import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { timingSafeEqual } from 'crypto';
+import { TextAreaBox } from 'src/app/modules/dynamic-form/models/question-textArea';
 
 @Component({
   selector: 'app-detail-payment',
@@ -22,7 +23,7 @@ export class DetailPaymentPage implements OnInit {
 
       this.paymentsFields = [
         new TextboxQuestion({ key: 'title', label: 'nome del pagamento', value: this.payment.title, required: true }),
-        new TextboxQuestion({ key: 'note', label: 'note', value: this.payment.note }),
+        new TextAreaBox({autoGrow:true, key: 'note', label: 'note', value: this.payment.note }),
         new TextboxQuestion({ key: 'addebito', label: 'codice addebito', value: this.payment.addebito })
       ]
     }

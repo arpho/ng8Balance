@@ -10,6 +10,7 @@ import { ViewController } from '@ionic/core';
 // import { filterQueryId } from '@angular/core/src/view/util';
 import { GeoLocateQuestion } from 'src/app/modules/dynamic-form/models/question-geolocate';
 import { SupplierModel } from 'src/app/models/supplierModel';
+import { TextAreaBox } from 'src/app/modules/dynamic-form/models/question-textArea';
 
 @Component({
   selector: 'app-create-supplier',
@@ -61,7 +62,8 @@ export class CreateSupplierPage implements OnInit {
 
         order: 1
       }),
-      new TextboxQuestion({
+      new TextAreaBox({
+        autoGrow:true,
 
         key: 'note',
 

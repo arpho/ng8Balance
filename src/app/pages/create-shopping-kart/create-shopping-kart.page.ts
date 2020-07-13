@@ -20,6 +20,7 @@ import { SelectorQuestion } from 'src/app/modules/dynamic-form/models/question-s
 import { FormGroup } from '@angular/forms';
 import { CreateSupplierPage } from '../create-supplier/create-supplier.page';
 import { CreatePaymentPage } from '../create-payment/create-payment.page'
+import { TextAreaBox } from 'src/app/modules/dynamic-form/models/question-textArea';
 // tslint:disable: semicolon
 @Component({
   selector: 'app-create-shopping-kart',
@@ -78,7 +79,8 @@ export class CreateShoppingKartPage implements OnInit {
         value: kart.title,
         order: 1
       }),
-      new TextboxQuestion({
+      new TextAreaBox({
+        autoGrow:true,
         key: 'note',
         label: 'note',
         value: kart.note,
