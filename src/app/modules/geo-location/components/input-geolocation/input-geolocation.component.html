@@ -1,3 +1,12 @@
 <ion-button (click)="geolocalize()">
     <ion-icon name="locate"></ion-icon>
 </ion-button>
+<form
+[formGroup]="barcodeForm"
+>
+
+  <label for="barcode">Barcode</label>
+  <input type="text" class="form-control" id="barcode"
+  formControlName="barcode"
+  [(ngModel)]="barcode" name="barcode">
+</form>
