@@ -9,6 +9,7 @@ import { GeoService } from './services/geo-service';
 import { configs } from '../../configs/credentials';
 import { InputGeolocationComponent } from './components/input-geolocation/input-geolocation.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     DistanceSorterPipe,
     InputGeolocationComponent],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
 
 

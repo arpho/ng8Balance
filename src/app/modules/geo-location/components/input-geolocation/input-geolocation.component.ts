@@ -1,5 +1,5 @@
 import { Component, OnInit, forwardRef, Input, ChangeDetectionStrategy } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from '@angular/forms';
 import { Plugins, GeolocationOptions, GeolocationPosition } from '@capacitor/core';
 const { Geolocation } = Plugins;
 import { Coordinates } from '../../models/coordinates';
@@ -22,7 +22,12 @@ import { AlertPromise } from 'selenium-webdriver';
 })
 export class InputGeolocationComponent implements OnInit, ControlValueAccessor {
   public location: Coordinates;
+
+
+  barcodeForm:FormGroup
+
   private disabled = false;
+  
   @Input() address: string;
   selectedAddress: any;
   testRadioOpen = false;
