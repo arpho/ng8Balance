@@ -83,6 +83,7 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
 this.barcodeForm = this.formBuilder.group({barcode:this.barcode})
 this.barcodeForm.valueChanges.subscribe(val=>{
   console.log('edited barcode',val.barcode)
+  this.onChange(val.barcode)
 })
 
   }
