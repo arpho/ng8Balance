@@ -17,7 +17,6 @@ export class FidelityCardService implements ItemServiceInterface {
 
   constructor() {
 
-    console.log('constructor fidelity')
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -28,7 +27,6 @@ export class FidelityCardService implements ItemServiceInterface {
     })
   }
   fetchItems() {
-    console.log('fetching cards')
     this.fidelityCardsListRef.on('value', snapshot => {
       this.items_list = []
       snapshot.forEach(snap => {

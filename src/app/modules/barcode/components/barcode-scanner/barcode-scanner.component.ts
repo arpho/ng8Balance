@@ -6,7 +6,7 @@ import Quagga from 'quagga';
 // import { DECODER_LIVE_CONFIG } from '../../config/decoder-config';
 import { scan } from 'rxjs/operators';
 import { AudioService } from '../../services/audio.service';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ModalController } from '@ionic/angular';
 import {ScannerPopupPage} from '../../pages/scanner-popup/scanner-popup.page'
@@ -57,8 +57,9 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
   onChange: any = () => { };
   onTouch:any = ()=>{}
   onTouched: any = () => { };
+  barcodeForm:FormGroup
 
-  constructor(private audio: AudioService,public modalCtrl: ModalController) {
+  constructor(private audio: AudioService,public modalCtrl: ModalController,private formBuilder:FormBuilder) {
     this.audio.preload('detected', '../assets/audio/barcode.wav')
     this.audio.preload('wrong', '../assets/audio/wrong.mp3')
 
@@ -79,12 +80,15 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit() {
-
+this.barcodeForm = this.formBuilder.group({barcode:this.barcode})
+this.barcodeForm.valueChanges.subscribe(val=>{
+  console.log('edited barcode',val.barcode)
+})
 
   }
 
   typed(ev){
-    
+
     console.log('typed',ev,this.barcode)
   }
   async scanCode() {
