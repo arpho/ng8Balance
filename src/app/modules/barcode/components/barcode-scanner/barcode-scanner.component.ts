@@ -10,6 +10,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ModalController } from '@ionic/angular';
 import {ScannerPopupPage} from '../../pages/scanner-popup/scanner-popup.page'
+import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
 
 @Component({
   selector: 'app-barcode-scanner',
@@ -29,6 +30,12 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
   format:string
   @Input() formControlName
   @Input() value:string
+  inputField=[new TextboxQuestion({
+    key:'barcode',
+    label:'',
+    type:'',
+    value:this.barcode
+  })]
  
   private _id: string
   @Input() set id(value: string) {
@@ -55,6 +62,7 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
     this.audio.preload('detected', '../assets/audio/barcode.wav')
     this.audio.preload('wrong', '../assets/audio/wrong.mp3')
 
+
   }
   writeValue(barcode: string): void {
     this.barcode = barcode
@@ -74,23 +82,29 @@ export class BarcodeScannerComponent implements OnInit, ControlValueAccessor {
 
 
   }
+
+  typed(ev){
+    
+    console.log('typed',ev,this.barcode)
+  }
   async scanCode() {
-    const modal = await this.modalCtrl.create({component:ScannerPopupPage})
+    const modal = await this.modalCtrl.create({component:ScannerPopupPage}
+      )
 
     
     modal.onDidDismiss().then(data=>{
+
       this.barcode = data.data.code
+
       this.format = data.data.format
+
       console.log('data',data.data)
+
       this.onChange(this.barcode)
     })
     return await modal.present()
-    
-
-    
-
-
   }
+  e
 
 }
 

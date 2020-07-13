@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { BarcodeScannerComponent } from './components/barcode-scanner/barcode-scanner.component';
 import { IonicModule } from '@ionic/angular';
+import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -10,7 +12,8 @@ import { IonicModule } from '@ionic/angular';
   declarations: [BarcodeScannerComponent],
   imports: [
     CommonModule,
-    IonicModule.forRoot()
+    IonicModule.forRoot(),
+    FormsModule
   ],
   exports:[BarcodeScannerComponent]
 })

@@ -3,5 +3,10 @@
 </div>
 
 <ion-button ion-button (click)="scanCode()"><ion-icon name="barcode" ></ion-icon></ion-button>
-<input [value]="barcode">
-<p>{{barcode}}</p>
+
+<div class="form-group">
+
+  <label for="barcode">Barcode</label>
+  <input type="text" class="form-control" id="barcode"
+  [(ngModel)]="barcode" name="barcode">
+</div>
