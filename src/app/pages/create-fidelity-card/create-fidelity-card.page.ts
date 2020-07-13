@@ -54,7 +54,10 @@ export class CreateFidelityCardPage implements OnInit {
     console.log('submit', v)
     this.card = new FidelityCardModel(v)
     console.log('creating',this.card)
-    this.service.createItem(this.card).then(v=>{console.log('created',v)})
+    this.service.createItem(this.card).then(v=>{
+      this.dismiss(v)
+    
+  })
   }
 
 
