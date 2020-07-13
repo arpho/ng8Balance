@@ -52,7 +52,9 @@ export class UpdateFidelityCardPage extends CreateFidelityCardPage implements On
 
   submit(card) {
     this.card.load(card)
-    this.service.updateItem(this.card)
+    this.service.updateItem(this.card).then(v=>{
+      this.dismiss(v)
+    })
   }
 
 }
