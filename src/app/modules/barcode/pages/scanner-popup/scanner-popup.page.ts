@@ -56,4 +56,8 @@ barcode:string
       });
   }
 
+  dismiss() {
+    this.modalCtrl.dismiss()
+  }
+
 }
