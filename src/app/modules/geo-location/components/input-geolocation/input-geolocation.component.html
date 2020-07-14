@@ -8,7 +8,13 @@
   <label for="address">indirizzo</label>
   <input type="text" class="form-control" id="address"
   formControlName="address"
-  [(ngModel)]="address"
+latitude  [(ngModel)]="location.address"
   name="address">
+  <label for="latitude">latitudine</label>
+  <input type="number" class="form-control" id="latitude"
+  formControlName="latitude"
+  [(ngModel)]="location.latitude"
+  name="latitude">
 </form>
-address{{address}}
+address{{location.address}}
+latitudine{{location.latitude}}
