@@ -7,7 +7,6 @@ import { PaymentsService } from '../services/payments/payments.service';
 import { ShoppingKartsService } from '../services/shoppingKarts/shopping-karts.service';
 import { CreateShoppingKartPage } from '../pages/create-shopping-kart/create-shopping-kart.page';
 import { FidelityCardService } from '../services/fidelity-card.service';
-import { NgxBarcode6Module } from 'ngx-barcode6'
 
 @Component({
   selector: 'app-home',

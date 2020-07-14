@@ -42,7 +42,6 @@
     "jsbarcode": "^3.11.0",
     "ng-connection-service": "^1.0.4",
     "ngx-barcode-scanner": "0.0.7",
-    "ngx-barcode6": "^1.0.10",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "quagga": "^0.12.1",
     "rxjs": "~6.6.0",
