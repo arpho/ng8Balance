@@ -124,7 +124,6 @@ export class InputGeolocationComponent implements OnInit, ControlValueAccessor {
     },
     )
     this.addressForm.valueChanges.subscribe(v=>{
-      console.log('change',v)
     })
   }
 
