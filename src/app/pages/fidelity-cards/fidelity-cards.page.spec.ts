@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { FidelityCardsPage } from './fidelity-cards.page';
+import { ItemModule } from 'src/app/modules/item/item.module';
 
 describe('FidelityCardsPage', () => {
   let component: FidelityCardsPage;
@@ -10,7 +11,7 @@ describe('FidelityCardsPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ FidelityCardsPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(),ItemModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(FidelityCardsPage);
