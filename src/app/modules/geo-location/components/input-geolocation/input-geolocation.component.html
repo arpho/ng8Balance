@@ -5,21 +5,10 @@
 [formGroup]="addressForm"
 >
 
-  <label for="barcode">indirizzo</label>
+  <label for="address">indirizzo</label>
   <input type="text" class="form-control" id="address"
   formControlName="address"
-  [(ngModel)]="location.address"
+  [(ngModel)]="address"
   name="address">
-  <label for="latitude">latitudine</label>
-  <input type="number" class="form control" id="latitude"
-  formControlName="latitude"
-  [(ngModel)]="location.latitude" 
-  name="latitude"
-  >
-  <label for="longitude">longitudine</label>
-  <input type="number" class="form control" id="longitude"
-  formControlName="longitude"
-  [(ngModel)]="location.longitude" 
-  name="longitude"
-  >
 </form>
+address{{address}}

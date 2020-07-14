@@ -103,7 +103,6 @@ this.barcodeForm.valueChanges.subscribe(val=>{
 
       this.format = data.data.format
 
-      console.log('data',data.data)
 
       this.onChange(this.barcode)
     })

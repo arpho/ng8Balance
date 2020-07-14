@@ -84,6 +84,7 @@
         [id]="question?.key"
         [address]="question.value?.adress"
         [formControlName]="question?.key"
+      (ngModelChange)="question?.onChange($event)"
       ></input-geolocation>
       <input
         [id]="question?.key"

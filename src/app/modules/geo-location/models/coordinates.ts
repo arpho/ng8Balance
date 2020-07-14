@@ -8,7 +8,7 @@ export class Coordinates {
         if (v) {
             this.latitude = v.latitude;
             this.longitude = v.longitude;
-            this.address = v.address || ' to be implemented';
+            this.address = v.address || ' where I am ';
         }
     }
 
