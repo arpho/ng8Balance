@@ -97,6 +97,7 @@ import { ScannerPopupPage } from './modules/barcode/pages/scanner-popup/scanner-
     BarcodeModule,
     ItemModule,
     WidgetModule,
+    NgxBarcode6Component,
     UtilitiesModule,
     DynamicFormModule,
     GeoLocationModule,
