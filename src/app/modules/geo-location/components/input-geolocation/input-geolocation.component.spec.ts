@@ -4,6 +4,7 @@ import { InputGeolocationComponent } from './input-geolocation.component';
 import { IonicModule, NavController } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { Location, LocationStrategy, PathLocationStrategy, APP_BASE_HREF } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('InputGeolocationComponent', () => {
   let component: InputGeolocationComponent;
@@ -12,7 +13,7 @@ describe('InputGeolocationComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [InputGeolocationComponent],
-      imports: [IonicModule.forRoot(), HttpClientModule],
+      imports: [IonicModule.forRoot(), HttpClientModule,ReactiveFormsModule],
       providers: [NavController, Location, { provide: LocationStrategy, useClass: PathLocationStrategy },
         { provide: APP_BASE_HREF, useValue: '/my/app' }]
 

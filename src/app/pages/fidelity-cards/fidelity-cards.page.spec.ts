@@ -3,6 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { FidelityCardsPage } from './fidelity-cards.page';
 import { ItemModule } from 'src/app/modules/item/item.module';
+import { RouterModule } from '@angular/router';
 
 describe('FidelityCardsPage', () => {
   let component: FidelityCardsPage;
@@ -11,7 +12,8 @@ describe('FidelityCardsPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ FidelityCardsPage ],
-      imports: [IonicModule.forRoot(),ItemModule]
+      imports: [IonicModule.forRoot(),ItemModule,RouterModule.forRoot([])
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(FidelityCardsPage);
