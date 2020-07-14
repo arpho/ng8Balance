@@ -25,12 +25,14 @@ export class UpdateFidelityCardPage extends CreateFidelityCardPage implements On
   ngOnInit() {
     this.card = this.navParams.get('item')
     console.log('updating card', this.card)
-    this.title = `modifica carta ${this.card.title}`
+    if (this.card) {
+      this.title = `modifica carta ${this.card.title}`
+    }
     this.cardFields = [
       new QuestionBarcode({
         key: 'barcode',
         label: 'codice a barre',
-        value: this.card.barcode,
+        value: this.card && this.card.barcode,
         order: 2
       }),
       new TextboxQuestion({
@@ -38,13 +40,13 @@ export class UpdateFidelityCardPage extends CreateFidelityCardPage implements On
         label: 'titolo',
         order: 3,
         required: true,
-        value: this.card.title
+        value: this.card && this.card.title
       }),
       new TextAreaBox({
         key: 'note',
         label: 'note',
-        value: this.card.note,
-        autoGrow:true,
+        value: this.card && this.card.note,
+        autoGrow: true,
         order: 1
       }),
 
@@ -54,7 +56,7 @@ export class UpdateFidelityCardPage extends CreateFidelityCardPage implements On
 
   submit(card) {
     this.card.load(card)
-    this.service.updateItem(this.card).then(v=>{
+    this.service.updateItem(this.card).then(v => {
       this.dismiss(v)
     })
   }
