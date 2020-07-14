@@ -39,6 +39,7 @@
     "d3": "^5.15.0",
     "firebase": "^7.13.1",
     "firebase-admin": "^8.10.0",
+    "jsbarcode": "^3.11.0",
     "ng-connection-service": "^1.0.4",
     "ngx-barcode-scanner": "0.0.7",
     "phonegap-plugin-barcodescanner": "^8.1.0",
