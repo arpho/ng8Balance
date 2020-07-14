@@ -15,6 +15,12 @@ latitude  [(ngModel)]="location.address"
   formControlName="latitude"
   [(ngModel)]="location.latitude"
   name="latitude">
+  <label for="longitude">longitudine</label>
+  <input type="number" class="form-control" id="longitude"
+  formControlName="longitude"
+  [(ngModel)]="location.longitude"
+  name="longitude">
 </form>
 address{{location.address}}
 latitudine{{location.latitude}}
+longitudine{{location.longitude}}
