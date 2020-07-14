@@ -32,6 +32,7 @@
     "@ionic/storage": "^2.2.0",
     "@ngrx/store": "^8.6.0",
     "@types/d3": "^5.7.2",
+    "angular-barcode": "^2.0.1",
     "angular-google-chart": "^0.1.0",
     "angular-google-charts": "^0.1.6",
     "cordova-browser": "^6.0.0",
