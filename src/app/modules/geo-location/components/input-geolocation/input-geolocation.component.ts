@@ -54,6 +54,7 @@ export class InputGeolocationComponent implements OnInit, ControlValueAccessor {
     console.log('location',this.location
     )
     this.onChange(this.location);
+    
 
   }
 
@@ -82,6 +83,7 @@ export class InputGeolocationComponent implements OnInit, ControlValueAccessor {
         this.testRadioOpen = false;
         this.selectedAddress = data;
         this.writeValue(new Coordinates({ latitude: coordinates.coords.latitude, longitude: coordinates.coords.longitude, address: data }));
+        this.onTouch()
       }
     }
     ];

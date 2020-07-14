@@ -105,6 +105,8 @@ this.barcodeForm.valueChanges.subscribe(val=>{
 
 
       this.onChange(this.barcode)
+
+      this.onTouched()
     })
     return await modal.present()
   }
