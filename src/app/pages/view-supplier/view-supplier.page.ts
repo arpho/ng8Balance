@@ -13,6 +13,7 @@ import { GeoLocateQuestion } from 'src/app/modules/dynamic-form/models/question-
 import { Coordinates } from 'src/app/modules/geo-location/models/coordinates';
 import { ItemServiceInterface } from 'src/app/modules/item/models/ItemServiceInterface';
 import { CategoriesService } from 'src/app/services/categories/categorie.service';
+import { TextAreaBox } from 'src/app/modules/dynamic-form/models/question-textArea';
 
 @Component({
   selector: 'app-view-supplier',
@@ -38,7 +39,7 @@ export class ViewSupplierPage implements OnInit {
         value: (this.supplier) ? this.supplier.title : '',
         order: 1
       }),
-      new TextboxQuestion({
+      new TextAreaBox({
         key: 'note',
         label: 'note',
         value: (this.supplier) ? this.supplier.note : '',
