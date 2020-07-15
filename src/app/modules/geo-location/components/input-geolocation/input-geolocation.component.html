@@ -1,15 +1,17 @@
 <ion-button (click)="geolocalize()">
     <ion-icon name="locate"></ion-icon>
 </ion-button>
-<form
+<form class="container"
 [formGroup]="addressForm"
 >
-
+<div id='fields'>
   <label for="address">indirizzo</label>
-  <input type="text" class="form-control" id="address"
+  <ion-textarea autoGrow='true' type="text" class="form-control" id="address"
   formControlName="address"
-latitude  [(ngModel)]="location.address"
-  name="address">
+ [(ngModel)]="location.address"
+  name="address"
+  ></ion-textarea>
+  
   <label for="latitude">latitudine</label>
   <input type="number" class="form-control" id="latitude"
   formControlName="latitude"
@@ -20,4 +22,5 @@ latitude  [(ngModel)]="location.address"
   formControlName="longitude"
   [(ngModel)]="location.longitude"
   name="longitude">
+  </div>
 </form>
