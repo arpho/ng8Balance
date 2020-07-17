@@ -11,7 +11,7 @@
  [(ngModel)]="location.address"
   name="address"
   ></ion-textarea>
-  
+  <div *ngIf="showSpinner"><ion-spinner name="Bubbles"></ion-spinner></div> 
   <label for="latitude">latitudine</label>
   <input type="number" class="form-control" id="latitude"
   formControlName="latitude"

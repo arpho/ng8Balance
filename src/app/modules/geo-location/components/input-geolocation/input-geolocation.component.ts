@@ -36,7 +36,7 @@ export class InputGeolocationComponent implements OnInit, ControlValueAccessor {
   private onChange: Function = (location: Coordinates) => { };
   // tslint:disable-next-line: ban-types
   private onTouch: Function = () => { };
-
+  showSpinner = false
 
   constructor(
     public service: GeoService,
@@ -44,17 +44,16 @@ export class InputGeolocationComponent implements OnInit, ControlValueAccessor {
     private formBuilder: FormBuilder) { }
 
   writeValue(value) {
-    console.log('writing ',value)
-    
-    value = value || new Coordinates({ latitude: 0, longitude: 0, address: '' });
+    console.log('writing ', value)
 
+    value = value || new Coordinates({ latitude: 0, longitude: 0, address: '' });
     this.address = value.address
     // if value is undefined it fails
     this.location = value;
-    console.log('location',this.location
+    console.log('location', this.location
     )
     this.onChange(this.location);
-    
+
 
   }
 
@@ -91,12 +90,14 @@ export class InputGeolocationComponent implements OnInit, ControlValueAccessor {
   }
 
   async geolocalize() {
+    this.showSpinner = true
     const options: GeolocationOptions = {};
     options.enableHighAccuracy = true;
 
     const coordinates = await Geolocation.getCurrentPosition(options);
     this.service.inverseGeoLocation(coordinates.coords.latitude, coordinates.coords.longitude).subscribe((v: {}) => {
       // tslint:disable-next-line: no-string-literal
+      this.showSpinner = false
       const address = v['results'].map(item => item['formatted_address']);
       const out = this.promptAddress(address, coordinates);
     });
@@ -117,7 +118,7 @@ export class InputGeolocationComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit() {
-    this.location = new Coordinates({latitude:0,longitude:0,address:'via vatte'})
+    this.location = new Coordinates({ latitude: 0, longitude: 0, address: 'via vatte' })
 
     this.addressForm = this.formBuilder.group({
       'address': this.location.address,
@@ -125,7 +126,7 @@ export class InputGeolocationComponent implements OnInit, ControlValueAccessor {
       'longitude': this.location.longitude
     },
     )
-    this.addressForm.valueChanges.subscribe(v=>{
+    this.addressForm.valueChanges.subscribe(v => {
     })
   }
 
