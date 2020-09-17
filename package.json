@@ -36,6 +36,7 @@
     "angular-google-chart": "^0.1.0",
     "angular-google-charts": "^0.1.6",
     "cordova-browser": "^6.0.0",
+    "cordova-sqlite-storage": "^5.1.0",
     "core-js": "^2.5.4",
     "d3": "^5.15.0",
     "firebase": "^7.13.1",
