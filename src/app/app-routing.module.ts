@@ -44,6 +44,10 @@ const routes:  Routes = [
     path: 'scanner-popup',
     loadChildren: () => import('./modules/barcode/pages/scanner-popup/scanner-popup.module').then( m => m.ScannerPopupPageModule)
   },
+  {
+    path: 'dev',
+    loadChildren: () => import('./modules/offline/pages/dev/dev.module').then( m => m.DevPageModule)
+  },
 ];
 
 @NgModule({

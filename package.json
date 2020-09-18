@@ -31,6 +31,7 @@
     "@ionic/angular": "^4.11.10",
     "@ionic/storage": "^2.2.0",
     "@ngrx/store": "^8.6.0",
+    "@ngx-pwa/local-storage": "^8.2.4",
     "@types/d3": "^5.7.2",
     "angular-google-chart": "^0.1.0",
     "angular-google-charts": "^0.1.6",

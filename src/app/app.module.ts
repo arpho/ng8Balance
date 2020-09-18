@@ -46,7 +46,6 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { UpdateFidelityCardPage } from './pages/update-fidelity-card/update-fidelity-card.page';
 import { CreateFidelityCardPage } from './pages/create-fidelity-card/create-fidelity-card.page';
 import { ScannerPopupPage } from './modules/barcode/pages/scanner-popup/scanner-popup.page';
-import * as PouchDB from 'pouchdb';
 @NgModule({
   entryComponents: [
     CreateSupplierPage,
