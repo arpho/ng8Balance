@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { thresholdFreedmanDiaconis } from 'd3';
-import { OfflineDBService } from '../../services/offline-db.service';
+import { PeristenceService } from '../../services/offline-db.service';
 
 @Component({
   selector: 'app-dev',
@@ -9,7 +9,7 @@ import { OfflineDBService } from '../../services/offline-db.service';
 })
 export class DevPage implements OnInit {
 
-  constructor(public db:OfflineDBService) { }
+  constructor(public db:PeristenceService) { }
 
   ngOnInit() {
     this.db.has('categories').subscribe(v=>{

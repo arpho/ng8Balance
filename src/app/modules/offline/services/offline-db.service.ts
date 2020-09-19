@@ -4,7 +4,7 @@ import { JSONSchema, StorageMap } from '@ngx-pwa/local-storage';
 @Injectable({
   providedIn: 'root'
 })
-export class OfflineDBService {
+export class PeristenceService {
 
   constructor(private storage: StorageMap) {
     console.log('ciao db')

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { OfflineDBService } from './offline-db.service';
+import { PeristenceService } from './offline-db.service';
 
 describe('OfflineDBService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: OfflineDBService = TestBed.get(OfflineDBService);
+    const service: PeristenceService = TestBed.get(PeristenceService);
     expect(service).toBeTruthy();
   });
 });
