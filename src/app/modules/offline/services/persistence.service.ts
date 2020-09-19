@@ -4,10 +4,9 @@ import { JSONSchema, StorageMap } from '@ngx-pwa/local-storage';
 @Injectable({
   providedIn: 'root'
 })
-export class PeristenceService {
+export class PersistenceService {
 
   constructor(private storage: StorageMap) {
-    console.log('ciao db')
   }
 
   getItem(key: string, schema?: JSONSchema) {
