@@ -7,11 +7,13 @@ import { FetchItems } from '../business/fetchItems'
   providedIn: 'root'
 })
 export class OfflineDbServiceService {
+  
   public categoriesListRef: firebase.database.Reference;
 
 
   fetchItems: FetchItems
   constructor(public persistence: PersistenceService) {
+
     this.fetchItems = new FetchItems(this.persistence)
 
   }

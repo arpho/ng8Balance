@@ -10,18 +10,29 @@ export class FetchItems {
     }
 
     async FetchAllItems(entityKey: string, cb?) {
+
+
         this._items.subscribe(cb)
+
+
         const items = []
+
+
         const a = async (key) => {
+
+
             const item = await this.persistence.getItem(key).toPromise()
+
+
             if (item['entityKey'] && item.entityKey == entityKey) { items.push(item) }
+
+
             this._items.next(items)
         }
         this.persistence.keys().subscribe({
-            next: a,
-            complete: () => {
-                console.log('fetching completed')
-            }
+
+
+            next: a
 
         })
     }
