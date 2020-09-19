@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { thresholdFreedmanDiaconis } from 'd3';
-import { PeristenceService } from '../../services/offline-db.service';
+import { PeristenceService } from '../../services/persistence.service';
 
 @Component({
   selector: 'app-dev',
@@ -25,7 +25,7 @@ export class DevPage implements OnInit {
       },
     })
 
-    this.db.deleteItem('catehgories').subscribe(v=>{
+    this.db.clear().subscribe(v=>{
       console.log('deleted',v)
     })
     this.db.size().subscribe(n=> {

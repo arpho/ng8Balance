@@ -35,4 +35,8 @@ export class PeristenceService {
     return this.storage.keys()
   }
 
+  clear(){
+    return this.storage.clear()
+  }
+
 }

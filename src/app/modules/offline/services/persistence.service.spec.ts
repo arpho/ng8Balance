@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PeristenceService } from './offline-db.service';
+import { PeristenceService } from './persistence.service';
 
 describe('OfflineDBService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
