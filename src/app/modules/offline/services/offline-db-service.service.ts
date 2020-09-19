@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { JSONSchema } from '@ngx-pwa/local-storage';
-import { ConnectionServiceModule } from 'ng-connection-service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Entities } from '../../user/models/EntitiesModel';
 import { PersistenceService } from './persistence.service';
 import { FetchItems } from '../business/fetchItems'
 
