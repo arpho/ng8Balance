@@ -4,7 +4,7 @@ import { ConnectionServiceModule } from 'ng-connection-service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Entities } from '../../user/models/EntitiesModel';
 import { PersistenceService } from './persistence.service';
-import { Fetchitems } from '../business/fetchItems'
+import { FetchItems } from '../business/fetchItems'
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,9 @@ export class OfflineDbServiceService {
   public categoriesListRef: firebase.database.Reference;
 
 
-  _items: BehaviorSubject<Array<{}>> = new BehaviorSubject([])
-  readonly items: Observable<Array<{}>> = this._items.asObservable()
-  fetchItems: Fetchitems
+  fetchItems: FetchItems
   constructor(public persistence: PersistenceService) {
-    this.fetchItems = new Fetchitems(this.persistence)
+    this.fetchItems = new FetchItems(this.persistence)
 
   }
 

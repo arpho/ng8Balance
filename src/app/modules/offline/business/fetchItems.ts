@@ -1,28 +1,28 @@
 import { BehaviorSubject, Observable } from 'rxjs'
 import { PersistenceService } from '../services/persistence.service'
 
-export class Fetchitems{
-     
-  _items: BehaviorSubject<Array<{}>> = new BehaviorSubject([])
-  readonly items: Observable<Array<{}>> = this._items.asObservable()
-  constructor(public persistence:PersistenceService){
-      
-  }
+export class FetchItems {
 
-  async FetchAllItems(entityKey:string,cb?){
-    this._items.subscribe(cb)
-    const items= []
-    const a = async (key)=>{
-      const item = await this.persistence.getItem(key).toPromise()
-      items.push(item)
-      this._items.next(items)
+    _items: BehaviorSubject<Array<{}>> = new BehaviorSubject([])
+    readonly items: Observable<Array<{}>> = this._items.asObservable()
+    constructor(public persistence: PersistenceService) {
+
     }
-    this.persistence.keys().subscribe({
-        next:a,
-      complete:()=>{
-        console.log('fetching completed')
-      }
-    
-    })
-  }
+
+    async FetchAllItems(entityKey: string, cb?) {
+        this._items.subscribe(cb)
+        const items = []
+        const a = async (key) => {
+            const item = await this.persistence.getItem(key).toPromise()
+            if (item['entityKey'] && item.entityKey == entityKey) { items.push(item) }
+            this._items.next(items)
+        }
+        this.persistence.keys().subscribe({
+            next: a,
+            complete: () => {
+                console.log('fetching completed')
+            }
+
+        })
+    }
 }
