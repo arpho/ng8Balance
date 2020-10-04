@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './modules/user/services/authguard';
+import {usersRoutes} from './modules/user/user-routing.module'
 
 const routes:  Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -47,6 +48,10 @@ const routes:  Routes = [
   {
     path: 'dev',
     loadChildren: () => import('./modules/offline/pages/dev/dev.module').then( m => m.DevPageModule)
+  },
+  {
+    path: "user/login",
+    loadChildren:()=>import('./modules/user/pages/login/login.module').then(m=>m.LoginPageModule)
   },
 ];
 

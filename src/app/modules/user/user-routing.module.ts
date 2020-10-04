@@ -15,16 +15,17 @@ const routes: Routes = [
   },
   {
     path: "user/login",
-    loadChildren: "./pages/login/login.module#LoginPageModule"
+    //loadChildren: "./pages/login/login.module#LoginPageModule"
+    loadChildren:()=>import('./pages/login/login.module')
   },
   {
     path: "reset-password",
-    loadChildren:
-      "./pages/reset-password/reset-password.module#ResetPasswordPageModule"
+    loadChildren:()=>import(
+      "./pages/reset-password/reset-password.module")
   },
   {
     path: "users",
-    loadChildren: "./pages/users/users.module#UsersPageModule",
+    loadChildren: ()=>import('./pages/users/users.module'),
     canActivate: [AuthGuard]
   },
   {
@@ -42,4 +43,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UserRoutingModule {}
+export class UserRoutingModule { }
+
