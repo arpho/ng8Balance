@@ -49,10 +49,7 @@ const routes:  Routes = [
     path: 'dev',
     loadChildren: () => import('./modules/offline/pages/dev/dev.module').then( m => m.DevPageModule)
   },
-  {
-    path: "user/login",
-    loadChildren:()=>import('./modules/user/pages/login/login.module').then(m=>m.LoginPageModule)
-  },
+  ...usersRoutes
 ];
 
 @NgModule({

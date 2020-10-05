@@ -6,37 +6,35 @@ import { AuthGuard } from "./services/authguard.service";
 const routes: Routes = [
   {
     path: "user/profile",
-    loadChildren: "./pages/profile/profile.module#ProfilePageModule",
+    loadChildren: ()=>import('./pages/profile/profile.module').then(m=>m.ProfilePageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "user/signup",
-    loadChildren: "./pages/signup/signup.module#SignupPageModule"
+    loadChildren: ()=>import("./pages/signup/signup.module").then(m=>m.SignupPageModule)
   },
   {
     path: "user/login",
-    //loadChildren: "./pages/login/login.module#LoginPageModule"
-    loadChildren:()=>import('./pages/login/login.module')
+    loadChildren:()=>import('./pages/login/login.module').then(m=>m.LoginPageModule)
   },
   {
     path: "reset-password",
     loadChildren:()=>import(
-      "./pages/reset-password/reset-password.module")
+      "./pages/reset-password/reset-password.module").then(m=>m.ResetPasswordPageModule)
   },
   {
     path: "users",
-    loadChildren: ()=>import('./pages/users/users.module'),
+    loadChildren: ()=>import('./pages/users/users.module').then(m=>m.UsersPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "user/edit-user/:key",
-    loadChildren: "./pages/edit-user/edit-user.module#EditUserPageModule",
+    loadChildren: ()=>import('./pages/edit-user/edit-user.module').then(m=>m.EditUserPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "user/not-authorized/:message",
-    loadChildren:
-      "./pages/not-authorized/not-authorized.module#NotAuthorizedPageModule"
+    loadChildren:()=>import('./pages/not-authorized/not-authorized.module').then(m=>m.NotAuthorizedPageModule)
   }
 ];
 @NgModule({
@@ -44,4 +42,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class UserRoutingModule { }
+export {routes as usersRoutes}
 
