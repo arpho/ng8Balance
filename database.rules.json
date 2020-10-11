@@ -41,6 +41,11 @@
       "$uid":{
           ".read":"$uid===auth.uid",
           ".write":"$uid===auth.uid"
+      },
+      "widgets":{
+      "$uid":{
+          ".read":"$uid===auth.uid",
+          ".write":"$uid===auth.uid"
       }
     }
 
