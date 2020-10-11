@@ -11,7 +11,7 @@ export class FetchItems {
 
     async FetchAllItems(entityKey: string, cb?) {
 
-
+/**@note items must have a field entityKey */
         this._items.subscribe(cb)
 
 
@@ -19,6 +19,8 @@ export class FetchItems {
 
 
         const a = async (key) => {
+
+            console.log ('this is the key',key)
 
 
             const item = await this.persistence.getItem(key).toPromise()
@@ -35,5 +37,10 @@ export class FetchItems {
             next: a
 
         })
+    }
+
+
+    async FetchAllItems2(entityKey: string, storage, ch?) {
+        
     }
 }

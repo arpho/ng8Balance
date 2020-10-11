@@ -24,9 +24,9 @@ export class OfflineDbServiceService {
   }
 
 
-  setItem(key: string, data: any, schema?: JSONSchema) {
+  setItem(key: string, data: any, entityKey:string, schema?: JSONSchema) {
 
-    return this.persistence.setItem(key, data, schema)
+    return this.persistence.setItem(key, data, entityKey, schema)
   }
 
 
@@ -39,5 +39,12 @@ export class OfflineDbServiceService {
   async fetchAllItems(entityKey: string, cb?) {
 
     return this.fetchItems.FetchAllItems(entityKey, cb)
+  }
+
+  async fetchAllItems2(entityKey: string, cb?) {
+    console.log('fetchall items 2')
+    this.persistence.fetchItems(entityKey, (items) => {
+      console.log('in the end items',items)
+    })
   }
 }

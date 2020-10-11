@@ -20,13 +20,18 @@ export class DevPage implements OnInit {
 
     this.db.keys().subscribe({
       next: (key) => {
+        console.log('key:',key)
       },
       complete: () => {
         console.log('Done');
       },
     })
-    this.db.setItem('d',{text:'this is another test',entityKey:'test'}).subscribe(_=>{})
+    let data = { text: 'yat', value: 5 }
+    
 
+    this.db.setItem('a', data, 'yat').subscribe(v => {
+      console.log('set item', v,data)
+    })
     /* this.db.clear().subscribe(v=>{
       console.log('deleted',v)
     }) */
@@ -35,7 +40,9 @@ export class DevPage implements OnInit {
       console.log('got items on subscription',items)
     }
   
-    this.offlineDb.fetchAllItems('test',cb).then(items=>{
+
+    this.offlineDb.fetchAllItems2('yat').then(v => {
+      console.log('finished fetching',v)
     })
   }
 

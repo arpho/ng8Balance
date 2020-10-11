@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JSONSchema, StorageMap } from '@ngx-pwa/local-storage';
+import { filter, mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,11 @@ export class PersistenceService {
   }
 
 
-  setItem(key: string, data: any, schema?: JSONSchema) {
-    return this.storage.set(key, data, schema)
+  setItem(key: string, data: any, entityKey: string, schema?: JSONSchema) {
+    return this.storage.set(this.makeKey(key, entityKey), data, schema)
+  }
+  makeKey(key: string, entityKey: string): string {
+    return `${entityKey}_${key}`
   }
 
   has(key: string) {
@@ -34,8 +38,21 @@ export class PersistenceService {
     return this.storage.keys()
   }
 
-  clear(){
+  clear() {
     return this.storage.clear()
   }
 
-}
+  async fetchItems(entityKey: string,cb) {
+    const items = []
+    const next = (v) => {
+      items.push(v)
+      console.log('filtered items', v, items)
+    }
+    const complete = () => {
+      console.log('finished', items)
+      cb(items)
+    }
+    this.storage.keys().pipe(filter((key) => key.startsWith(`${entityKey}_`)), mergeMap((key) => this.storage.get(key))).subscribe({
+      next: next,
+    complete:complete})
+  }  }
