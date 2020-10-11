@@ -41,6 +41,9 @@ export class PersistenceService {
   clear() {
     return this.storage.clear()
   }
+  private makePrefix(entityKey) {
+    return `${entityKey}_`
+  }
 
   async fetchItems(entityKey: string,cb) {
     const items = []
@@ -52,7 +55,7 @@ export class PersistenceService {
       console.log('finished', items)
       cb(items)
     }
-    this.storage.keys().pipe(filter((key) => key.startsWith(`${entityKey}_`)), mergeMap((key) => this.storage.get(key))).subscribe({
+    this.storage.keys().pipe(filter((key) => key.startsWith(this.makePrefix(entityKey))), mergeMap((key) => this.storage.get(key))).subscribe({
       next: next,
     complete:complete})
   }  }
