@@ -9,7 +9,7 @@ export class TodoOPeration {
 
   signature: string
 
-  sinchronizedBy: [string]
+  sinchronizedByList: [string]
 
   operation: Operations
 
@@ -30,7 +30,7 @@ export class TodoOPeration {
 
       date: this.date.formatDate(),
 
-      sinchronizedBy: this.sinchronizedBy,
+      sinchronizedByList: this.sinchronizedBy,
 
       operation: this.operation,
 
@@ -40,16 +40,16 @@ export class TodoOPeration {
   }
 
 
-  sinchronize(signature: string) {
+  sinchronizedBy(signature: string) {
 
-    this.sinchronizedBy.push(signature)
+    this.sinchronizedByList.push(signature)
 
   }
 
 
   hasBeenSinchronizedBy(signature: string) {
 
-    return this.sinchronizedBy.indexOf(signature) > -1
+    return this.sinchronizedByList.indexOf(signature) > -1
 
   }
 }
