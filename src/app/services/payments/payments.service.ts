@@ -45,7 +45,7 @@ export class PaymentsService implements ItemServiceInterface, EntityWidgetServic
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.paymentsListRef = firebase.database().ref(`/pagamenti/${user.uid}/`);
-        this.getEntitiesList().on('value', eventCategoriesListSnapshot => {
+        this.paymentsListRef.on('value', eventCategoriesListSnapshot => {
           this.items_list = [];
           eventCategoriesListSnapshot.forEach(snap => {
             const payment = new PaymentsModel().initialize(snap.val())
@@ -73,9 +73,6 @@ export class PaymentsService implements ItemServiceInterface, EntityWidgetServic
   paymentsService?: ItemServiceInterface;
   suppliersListRef?: any;
 
-  getEntitiesList(): firebase.database.Reference {
-    return this.paymentsListRef;
-  }
 
 
   getItem(prId: string): firebase.database.Reference {

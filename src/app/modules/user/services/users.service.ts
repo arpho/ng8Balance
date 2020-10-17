@@ -39,6 +39,8 @@ export class UsersService implements ItemServiceInterface,OnInit {
   }
 
   loadItems() {
+
+  
     
     console.log('init uers')
     firebase.auth().onAuthStateChanged(user => {
