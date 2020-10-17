@@ -43,7 +43,7 @@ export class ProfileService {
       password
     );
     return this.currentUser
-      .reauthenticateAndRetrieveDataWithCredential(credential)
+      .reauthenticateWithCredential(credential)
       .then(() => {
         this.currentUser.updateEmail(newEmail).then(() => {
           this.userProfile.update({ email: newEmail });

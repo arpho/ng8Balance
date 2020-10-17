@@ -8,7 +8,9 @@
       [formControlName]="question?.key"
       [id]="question?.key"
       [type]="question?.type"
+      [(ngModel)]="modello"
     />
+    
     
     <div [ngSwitch]="question?.controlType">
       <ion-textarea
