@@ -53,10 +53,6 @@ export class ShoppingKartsService implements ItemServiceInterface {
     })
     return Kart;
   }
-  getEntitiesList(): import('firebase').database.Reference {
-    // tslint:disable-next-line: semicolon
-    return this.shoppingKartsListRef
-  }
 
   constructor(categories: CategoriesService, public payments: PaymentsService, public suppliers: SuppliersService) {
 
@@ -116,7 +112,7 @@ export class ShoppingKartsService implements ItemServiceInterface {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.shoppingKartsListRef = firebase.database().ref(`/acquisti/${user.uid}/`);
-        this.getEntitiesList().on('value', eventSuppliersListSnapshot => {
+        this.shoppingKartsListRef.on('value', eventSuppliersListSnapshot => {
           this.items_list = [];
           eventSuppliersListSnapshot.forEach(snap => {
             const kart = this.initializeSingleKart(snap)
