@@ -18,25 +18,35 @@ export class UsersService implements ItemServiceInterface,OnInit {
   readonly items: Observable<Array<UserModel>> = this._items.asObservable()
 
   constructor() {
+    console.log('hi users')
     this.usersRef = firebase.database().ref("/userProfile");
+    this.loadItems()
     
   }
   populateItems = (UsersListSnapshot) => {
+    console.log('populating users')
     this.items_list = [];
     UsersListSnapshot.forEach(snap => {
-      const supplier = new UserModel(undefined, snap.key).load(snap.val())
-      supplier.key = snap.key // alcuni item non hanno il campo key
-      this.items_list.push(supplier);
-      if (supplier.key === '') {
+      const user = new UserModel(undefined, snap.key).load(snap.val())
+      user.key = snap.key // alcuni item non hanno il campo key
+      this.items_list.push(user);
+      if (user.key === '') {
       }
     });
     this._items.next(this.items_list)
   }
   ngOnInit(): void {
+  }
+
+  loadItems() {
+    
+    console.log('init uers')
     firebase.auth().onAuthStateChanged(user => {
+      console.log('users service init ',user)
       if (user) {
         this.usersRef = firebase.database().ref(`/userProfile/`);
-        this.getEntitiesList().on('value', this.populateItems );
+        console.log('users ref',this.usersRef)
+        this.usersRef.on('value', this.populateItems );
       }
     });
   }

@@ -16,6 +16,7 @@ export class RoleGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean {
     // this will be passed from the route config
     // on the data property
+    console.log('role guard')
     const expectedRole = route.data.expectedRole[0];
 
     firebase.auth().onAuthStateChanged((user: firebase.User) => {

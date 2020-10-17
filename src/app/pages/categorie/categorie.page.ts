@@ -51,20 +51,7 @@ export class CategoriePage implements OnInit {
   }
 
   ngOnInit() {
-
-    if (this.categories.getEntitiesList()) {
-      this.categories.getEntitiesList().on('value', eventCategoriesListSnapshot => {
-        this.CategoriesList = [];
-      });
-    }
   }
 
-  ionViewDidLoad() {
-    this.categories.getEntitiesList().on('value', eventCategoriesListSnapshot => {
-      this.CategoriesList = [];
-      eventCategoriesListSnapshot.forEach(snap => {
-      });
-    });
-  }
 
 }

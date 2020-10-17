@@ -16,15 +16,6 @@ export class UsersPage implements OnInit {
   constructor(public service: UsersService) { }
 
   ngOnInit() {
-    if (this.service.getEntitiesList()) {
-      this.service.getEntitiesList().on("value", snapshot => {
-        // console.log("distribuzioni", snapshot);
-        this.usersList = [];
-        snapshot.forEach(snap => {
-          const user = new UserModel(undefined, snap.key).load({ key: snap.key });
-          this.usersList.push(user);
-        });
-      });
-    }
+    console.log('utenti page initialized')
   }
 }

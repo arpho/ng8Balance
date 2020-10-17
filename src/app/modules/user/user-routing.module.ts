@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "./services/authguard.service";
+import { RoleGuardService } from './services/role-guards.service';
 // import { CanActivate } from "@angular/router/src/utils/preactivation";
 
 const routes: Routes = [
@@ -20,12 +21,14 @@ const routes: Routes = [
   {
     path: "reset-password",
     loadChildren:()=>import(
-      "./pages/reset-password/reset-password.module").then(m=>m.ResetPasswordPageModule)
+      "./pages/reset-password/reset-password.module").then(m => m.ResetPasswordPageModule),
+    canActivate: [AuthGuard]
+    
   },
   {
     path: "users",
     loadChildren: ()=>import('./pages/users/users.module').then(m=>m.UsersPageModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard,RoleGuardService]
   },
   {
     path: "user/edit-user/:key",
