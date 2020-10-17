@@ -103,19 +103,6 @@ export class FornitoriPage implements OnInit, OnChanges, ItemControllerInterface
           this.geo.distance(b.address.latitude, b.address.longitude, this.position.latitude, this.position.longitude);
       }
     });
-    if (this.suppliers.getEntitiesList()) {
-      this.suppliers.getEntitiesList().on('value', eventSuppliersListSnapshot => {
-        this.ItemsList = [undefined];
-        eventSuppliersListSnapshot.forEach(snap => {
-          const supplier = new SupplierModel(snap.val(), snap.key)
-          supplier.load()
-          supplier.key = snap.key // alcuni item non hanno il campo key
-          this.ItemsList.push(supplier);
-          if (supplier.key === '') {
-          }
-        });
-      });
-    }
   }
 
 

@@ -35,7 +35,7 @@ export class SuppliersService implements ItemServiceInterface, EntityWidgetServi
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.suppliersListRef = firebase.database().ref(`/fornitori/${user.uid}/`);
-        this.getEntitiesList().on('value', eventSuppliersListSnapshot => {
+        this.suppliersListRef.on('value', eventSuppliersListSnapshot => {
           this.items_list = [];
           eventSuppliersListSnapshot.forEach(snap => {
             const supplier = new SupplierModel(undefined, snap.key).initialize(snap.val())
@@ -79,11 +79,6 @@ export class SuppliersService implements ItemServiceInterface, EntityWidgetServi
     })
     return Supplier
   }
-
-  getEntitiesList(): firebase.database.Reference {
-    return this.suppliersListRef;
-  }
-
 
   getItem(prId: string): firebase.database.Reference {
 
