@@ -15,6 +15,7 @@ const getUpdatedUser = (event: any) => {
 const setClaims = async (data: {
   email: string;
   level: number;
+  offlineEnabled:boolean,
   enabled: boolean;
 }) => {
   console.log("setting claims", data);
@@ -22,6 +23,7 @@ const setClaims = async (data: {
   console.log("authUser", authUser.uid);
   return admin.auth().setCustomUserClaims(authUser.uid, {
     level: data.level,
+    offlineEnabled:data.offlineEnabled,
     enabled: data.enabled
   });
 };
@@ -32,6 +34,7 @@ exports.triggerUsers = functions.database.ref("/userProfile").onWrite(event => {
     const claims = {
       email: userData.email,
       level: userData.level,
+      offlineEnabled:userData.offlineEnabled,
       enabled: userData.enabled
     };
     // tslint:disable-next-line: no-floating-promises

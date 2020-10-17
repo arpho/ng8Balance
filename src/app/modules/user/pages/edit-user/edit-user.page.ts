@@ -99,7 +99,17 @@ export class EditUserPage implements OnInit {
         label: 'Ruolo utente',
         options: configs.accessLevel,
         value:this.currentUser? this.currentUser.level:3
-      })
+      }),
+      new SwitchQuestion({
+        key: 'offlineEnabled',
+        label: 'supporto offline ',
+        value: this.currentUser ? this.currentUser.enabled : false,
+        labelTrue: 'supporto offline ok',
+        labelFalse: ' solo cloud ',
+        iconTrue: 'cloud-upload',
+        iconFalse: 'cloud',
+        order: 3
+      }),
     ];
     this.questions = questions;
   }

@@ -19,6 +19,7 @@ import { FormGroup } from '@angular/forms';
 import { ComboValue } from 'src/app/modules/dynamic-form/models/ComboValueinterface';
 import { WidgetTypes } from '../../models/WidgetsTypes';
 import { WidgetSince } from '../../models/WidgetSince';
+import { TextAreaBox } from 'src/app/modules/dynamic-form/models/question-textArea';
 
 @Component({
   selector: 'app-create-widget',
@@ -70,7 +71,7 @@ export class CreateWidgetPage implements OnInit {
         value: this.widget.title,
         order: 1
       }),
-      new TextboxQuestion({
+      new TextAreaBox({
         key: 'note',
         label: 'note',
         value: this.widget.note,

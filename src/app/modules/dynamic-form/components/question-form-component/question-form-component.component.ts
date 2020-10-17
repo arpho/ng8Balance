@@ -29,8 +29,8 @@ export class QuestionFormComponent implements OnInit, OnChanges {
       ? this.form
       : new FormGroup({
         // I need an instance of formgroup for run the tests
-        name: new FormControl('turiddu'),
-        age: new FormControl('20')
+        name: new FormControl(this.question.key),
+        value: new FormControl(this.question.value)
       });
   }
 
