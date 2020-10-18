@@ -58,12 +58,12 @@ export class CategoriesSelectorPage implements OnInit {
     })
     this.selectedCategoriesList = this.navParams.get('categories') || []
     this.filterFunction = this.filterFactory({ selectedCategoriesList: this.selectedCategoriesList })
-    this.baseFilter = this.filterFactory({ selectedCategoriesList: this.selectedCategoriesList })
+    this.baseFilter = this.filterFactory({ selectedCategoriesList: this.selectedCategoriesList })/* 
     if (this.service.getEntitiesList()) {
       this.service.getEntitiesList().on('value', snap => {
         this.service.items.subscribe(items => { this.categoriesList = items })
       })
-    }
+    } */
   }
 
   makeFilter(pattern: string) {
