@@ -58,12 +58,9 @@ export class CategoriesSelectorPage implements OnInit {
     })
     this.selectedCategoriesList = this.navParams.get('categories') || []
     this.filterFunction = this.filterFactory({ selectedCategoriesList: this.selectedCategoriesList })
-    this.baseFilter = this.filterFactory({ selectedCategoriesList: this.selectedCategoriesList })/* 
-    if (this.service.getEntitiesList()) {
-      this.service.getEntitiesList().on('value', snap => {
-        this.service.items.subscribe(items => { this.categoriesList = items })
-      })
-    } */
+    this.baseFilter = this.filterFactory({ selectedCategoriesList: this.selectedCategoriesList })
+    this.service.items.subscribe(items => { this.categoriesList = items })
+
   }
 
   makeFilter(pattern: string) {
@@ -72,17 +69,10 @@ export class CategoriesSelectorPage implements OnInit {
   }
 
   createCategory() {
-
-    console.log('creare', this.filterString)
     const newCategory = new CategoryModel().build({ title: this.filterString, key: '', service: this.service })
-    console.log('new category', newCategory)
-
-
     this.service.createItem(newCategory).then(category => {
       console.log('created', category)
-     /*  category.on('value', cat => {
-        console.log('created', cat)
-      }) */
+
       newCategory.key = category.key
       this.selectedCategoriesList = [...this.selectedCategoriesList, newCategory]
     })
@@ -94,8 +84,7 @@ export class CategoriesSelectorPage implements OnInit {
     this.filterFunction = this.filterFactory({ selectedCategoriesList: this.selectedCategoriesList })
   }
   hasCat(cat2BeChecked: CategoryModel) {
-    // return this.selectedCategoriesList.map((cat:CategoryModel)=>cat.key).includes(cat2BeChecked.key)
-    return this.selectedCategoriesList.some((cat:CategoryModel)=>cat.key==cat2BeChecked.key)
+    return this.selectedCategoriesList.some((cat: CategoryModel) => cat.key == cat2BeChecked.key)
   }
   includesCategories(newCat: CategoryModel[]) {/**
    * add only the categories not already dselected
