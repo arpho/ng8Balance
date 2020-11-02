@@ -9,6 +9,7 @@
       [id]="question?.key"
       [type]="question?.type"
       [(ngModel)]="modello"
+      [value] = "question?.value"
     />
     
     
@@ -19,7 +20,7 @@
         [formControlName]="question?.key"
         [id]="question?.key"
         autoGrow="question?.autoGrow"
-
+        [value]= "question?.value"
       ></ion-textarea>
       </div>
 

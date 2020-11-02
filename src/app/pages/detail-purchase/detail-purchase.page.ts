@@ -29,9 +29,9 @@ export class DetailPurchasePage extends CreatePurchasePage implements OnInit {
         order: 1
       }),
       new TextAreaBox({
-        autoGrow:true,
+        autoGrow: true,
         key: 'note',
-        label: 'note',
+        label: 'annotazioni',
         value: this.purchase ? this.purchase.note : '',
         order: 2
       }),

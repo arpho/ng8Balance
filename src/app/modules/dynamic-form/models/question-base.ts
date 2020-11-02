@@ -21,7 +21,7 @@ export class QuestionBase<T> {
   service: ItemServiceInterface
   labelFalse: string;
   text: string;
-  disabled:boolean
+  disabled: boolean
   options: ComboValue[]
   onChange: any = () => { };
   neutralFilter: (item: ItemModelInterface) => true
@@ -38,6 +38,7 @@ export class QuestionBase<T> {
     this.type = options['type'] || ''
     this.label = options.label || "";
     this.required = !!options['required'];
+    this.value = options['value']
     this.filterFunction = options['filterFunction']
     this.order = options['order'] === undefined ? 1 : options['order'];
     this.controlType = options['controlType'] || "";
