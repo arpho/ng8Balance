@@ -27,7 +27,7 @@ export class ShoppingKartModel implements ItemModelInterface {
     fornitoreId: string; // campo di comodo
     pagamentoId: string // campo di comodo
     key: string
-    title: string
+    title=''
     moneta = '€'
     public pagamento: PaymentsModel
     online: boolean

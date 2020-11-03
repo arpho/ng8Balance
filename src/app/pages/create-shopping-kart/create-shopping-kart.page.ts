@@ -49,6 +49,7 @@ export class CreateShoppingKartPage implements OnInit {
     public service: ShoppingKartsService,
   ) {
     this.kart = new ShoppingKartModel()
+    console.log('new kart',this.kart.title)
     this.supplierSorterFunction = (a: SupplierModel, b: SupplierModel) => {
       return this.geo.distance(a.address.latitude, a.address.longitude, this.position.latitude, this.position.longitude) -
         this.geo.distance(b.address.latitude, b.address.longitude, this.position.latitude, this.position.longitude);
@@ -76,14 +77,14 @@ export class CreateShoppingKartPage implements OnInit {
       new TextboxQuestion({
         key: 'title',
         label: 'titolo spesa',
-        value: kart.title,
+        value: this.kart.title,
         order: 1
       }),
       new TextAreaBox({
         autoGrow:true,
         key: 'note',
         label: 'note',
-        value: kart.note,
+        value: this.kart.note,
         order: 2
       }),
       new SwitchQuestion({
