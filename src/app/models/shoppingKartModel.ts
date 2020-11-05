@@ -138,7 +138,7 @@ export class ShoppingKartModel implements ItemModelInterface {
     }
 
     getValue3(): Value {
-        return new Value({ value: this.purchaseDate.formatDate(), label: ' data di acquisto' })
+        return new Value({ value: this.purchaseDate.formatDate(), label: '' })
     }
 
     getValue4(): Value {
