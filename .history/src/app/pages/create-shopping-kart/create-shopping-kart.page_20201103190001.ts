@@ -36,7 +36,7 @@ export class CreateShoppingKartPage implements OnInit {
   kartFields: any
   Form: FormGroup
   title: string
-
+  
   categoryColor = 'blue'
   categoryIcon = 'pricetag'
   textSelectSupplier = 'Fornitore'
@@ -73,7 +73,7 @@ export class CreateShoppingKartPage implements OnInit {
   }
 
   setFormFields(kart: ShoppingKartModel, ItemsFilterFunction: (item: ItemModelInterface) => boolean, sorterFunction?) {
-    console.log('setting kart', kart)
+    console.log('setting kart',kart)
     return [
       new TextboxQuestion({
         key: 'title',
@@ -82,7 +82,7 @@ export class CreateShoppingKartPage implements OnInit {
         order: 1
       }),
       new TextAreaBox({
-        autoGrow: true,
+        autoGrow:true,
         key: 'note',
         label: 'note',
         value: kart.note,
@@ -188,12 +188,13 @@ export class CreateShoppingKartPage implements OnInit {
       } else {
         this.supplierFilterFunction = (item) => true
       }
+      console.log('title',this.kart.title)
       this.kartFields = this.setFormFields(this.kart, this.supplierFilterFunction)
     })
   }
 
   filter(ev) {
-    Object.assign(this.kart, ev) // forse non è la cosa piú pulita da fare, ma funziona, da sistemarer se c'è tempo
+    console.log('kart title',this.kart.title)
     if (ev.supplier) {
       this.selectedSupplier(ev.supplier)
     }
@@ -203,7 +204,7 @@ export class CreateShoppingKartPage implements OnInit {
   }
   submit(ev) {
     this.showSpinner = true
-    Object.assign(this.kart), ev
+    Object.assign(this.kart),ev
     this.kart.title = ev.title || this.kart.fornitore.getTitle().value
 
     this.kart.purchaseDate = new DateModel(new Date(ev.dataAcquisto))
