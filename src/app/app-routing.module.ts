@@ -49,7 +49,10 @@ const routes:  Routes = [
     path: 'dev',
     loadChildren: () => import('./modules/offline/pages/dev/dev.module').then( m => m.DevPageModule)
   },
-  ...usersRoutes
+  {
+    path: 'user',
+   loadChildren:()=>import('./modules/user/user.module').then(m=>m.UserModule)
+  }
 ];
 
 @NgModule({

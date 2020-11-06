@@ -6,16 +6,16 @@ import { RoleGuardService } from './services/role-guards.service';
 
 const routes: Routes = [
   {
-    path: "user/profile",
+    path: "profile",
     loadChildren: ()=>import('./pages/profile/profile.module').then(m=>m.ProfilePageModule),
     canActivate: [AuthGuard]
   },
   {
-    path: "user/signup",
+    path: "signup",
     loadChildren: ()=>import("./pages/signup/signup.module").then(m=>m.SignupPageModule)
   },
   {
-    path: "user/login",
+    path: "login",
     loadChildren:()=>import('./pages/login/login.module').then(m=>m.LoginPageModule)
   },
   {
@@ -31,12 +31,12 @@ const routes: Routes = [
     canActivate: [AuthGuard,RoleGuardService]
   },
   {
-    path: "user/edit-user/:key",
+    path: "edit-user/:key",
     loadChildren: ()=>import('./pages/edit-user/edit-user.module').then(m=>m.EditUserPageModule),
     canActivate: [AuthGuard]
   },
   {
-    path: "user/not-authorized/:message",
+    path: "not-authorized/:message",
     loadChildren:()=>import('./pages/not-authorized/not-authorized.module').then(m=>m.NotAuthorizedPageModule)
   }
 ];
