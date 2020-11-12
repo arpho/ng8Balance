@@ -27,7 +27,7 @@ export class ShoppingKartModel implements ItemModelInterface {
     fornitoreId: string; // campo di comodo
     pagamentoId: string // campo di comodo
     key: string
-    title=''
+    title = ''
     moneta = '€'
     public pagamento: PaymentsModel
     online: boolean
@@ -232,7 +232,7 @@ export class ShoppingKartModel implements ItemModelInterface {
     }
 
     getValue2() {
-        return new Value({ value: Math.round(this.totale * (this.tassoConversione || 1) * 100) / 100, label: 'totale' })
+        return new Value({ value: this.moneta + ' ' + Math.round(this.totale * (this.tassoConversione || 1) * 100) / 100, label: 'totale' })
     }
 
     getRoundedTotal() {

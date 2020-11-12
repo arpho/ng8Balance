@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './modules/user/services/authguard';
-import {usersRoutes} from './modules/user/user-routing.module'
 
 const routes:  Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
