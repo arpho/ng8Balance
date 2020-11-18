@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "fir-6062c"
+    "default": "fir-6062c",
+    "myBalance": "fir-6062c"
   }
 }

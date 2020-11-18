@@ -1,9 +1,9 @@
 // tslint:disable:semicolon
 export class DateModel extends Date {
-  day: number;
-  month: number;
-  year: number;
-  fullDate: Date
+  day = 18;
+  month = 10;
+  year = 2020;
+  fullDate = new Date()
   constructor(d?: any) {
     super(d)
     // tslint:disable: quotemark

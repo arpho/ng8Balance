@@ -1,4 +1,5 @@
-export enum Operations{
+export enum Operations {
   created = 0,
-  updated,deleted
+  updated,
+  deleted
 }

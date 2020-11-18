@@ -1,5 +1,7 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
+import { CloudFunctions } from "../../src/app/modules/offline/business/cloudFunctions"
+import { Operations } from "../../src/app/modules/offline/models/Operations";
 admin.initializeApp();
 
 
@@ -15,7 +17,7 @@ const getUpdatedUser = (event: any) => {
 const setClaims = async (data: {
   email: string;
   level: number;
-  offlineEnabled:boolean,
+  offlineEnabled: boolean,
   enabled: boolean;
 }) => {
   console.log("setting claims", data);
@@ -23,7 +25,7 @@ const setClaims = async (data: {
   console.log("authUser", authUser.uid);
   return admin.auth().setCustomUserClaims(authUser.uid, {
     level: data.level,
-    offlineEnabled:data.offlineEnabled,
+    offlineEnabled: data.offlineEnabled,
     enabled: data.enabled
   });
 };
@@ -34,7 +36,7 @@ exports.triggerUsers = functions.database.ref("/userProfile").onWrite(event => {
     const claims = {
       email: userData.email,
       level: userData.level,
-      offlineEnabled:userData.offlineEnabled,
+      offlineEnabled: userData.offlineEnabled,
       enabled: userData.enabled
     };
     // tslint:disable-next-line: no-floating-promises
@@ -48,11 +50,22 @@ exports.triggerUsers = functions.database.ref("/userProfile").onWrite(event => {
       });
   });
 
+
+  
+
   // console.log('snapshot',event.after[event.after.key])
 });
 // add a updatedAt field with the server timestamp to categories
-exports.generateUpdaterdAtCategory = functions.database.ref("/categotie/{uid}").onWrite((data, context) =>{
+exports.generateUpdaterdAtCategory = functions.database.ref("/categotie/{uid}").onWrite((data, context) => {
+  
 
   // const uid = context.params.uid
   // const timestamp = context.timestamp
 })
+
+
+exports.updatedCategory = functions.database.ref("/categorie/{uid").onUpdate((data, context) => {
+  console.log('triggered')
+  new CloudFunctions().toBeSynchronized(Operations.updated,'categorie',data,context)
+})
+
