@@ -29,6 +29,14 @@ const setClaims = async (data: {
     enabled: data.enabled
   });
 };
+
+
+exports.createdCategory = functions.database.ref("/categorie/{uid").onUpdate((data, context) => {
+  console.log('triggered')
+  const cloud = new CloudFunctions;
+  cloud.toBeSynchronized(Operations.created, 'categorie', data, context);
+});
+
 // set user's role
 exports.triggerUsers = functions.database.ref("/userProfile").onWrite(event => {
   getUpdatedUser(event).forEach(user => {
@@ -49,23 +57,4 @@ exports.triggerUsers = functions.database.ref("/userProfile").onWrite(event => {
         console.log("error", err);
       });
   });
-
-
-  
-
-  // console.log('snapshot',event.after[event.after.key])
 });
-// add a updatedAt field with the server timestamp to categories
-exports.generateUpdaterdAtCategory = functions.database.ref("/categotie/{uid}").onWrite((data, context) => {
-  
-
-  // const uid = context.params.uid
-  // const timestamp = context.timestamp
-})
-
-
-exports.updatedCategory = functions.database.ref("/categorie/{uid").onUpdate((data, context) => {
-  console.log('triggered')
-  new CloudFunctions().toBeSynchronized(Operations.updated,'categorie',data,context)
-})
-
