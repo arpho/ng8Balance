@@ -43,7 +43,15 @@ export class CategoriesSelectorPage implements OnInit {
     this.searchControl = new FormControl()
   }
   filterFactory(args: { selectedCategoriesList: Array<CategoryModel> }) {
-    return (a: ItemModelInterface) => !args.selectedCategoriesList.map((cat: ItemModelInterface) => cat.key).includes(a.key)
+    return (a: ItemModelInterface) => {
+      if(!a)
+      {
+        a = new CategoryModel()
+        a.key = ''
+      }
+      return !args.selectedCategoriesList.map((cat: ItemModelInterface) => cat.key
+      ).includes(a.key)
+    }
   }
 
   onInput(ev) {
