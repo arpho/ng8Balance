@@ -20,12 +20,14 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
   readonly items: Observable<Array<CategoryModel>> = this._items.asObservable()
   items_list: Array<CategoryModel> = []
   initializeCategory(cat) {
-    const Cat = new CategoryModel(cat.key).initialize(cat)
-    if (Cat.fatherKey) {
-      this.getItem(Cat.fatherKey).on('value', father => {
-        const FatherCategory = this.initializeCategory(father.val())
-        Cat.father = FatherCategory
-      })
+    if (cat && cat.key) {
+      var Cat = new CategoryModel(cat.key).initialize(cat)
+      if (Cat.fatherKey) {
+        this.getItem(Cat.fatherKey).on('value', father => {
+          const FatherCategory = this.initializeCategory(father.val())
+          Cat.father = FatherCategory
+        })
+      }
     }
     return Cat
   }
@@ -80,7 +82,7 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
   async createItem(item: CategoryModel) {
     var Category
     const category = await this.categoriesListRef.push(item.serialize())
-    category.on('value',(cat)=>{
+    category.on('value', (cat) => {
       Category = this.initializeCategory(cat.val())
       Category.key = cat.key
       this.updateItem(Category)
@@ -114,11 +116,13 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.categoriesListRef = firebase.database().ref(`/categorie/${user.uid}/`);
-         this.categoriesListRef.on('value', eventCategoriesListSnapshot => {
+        this.categoriesListRef.on('value', eventCategoriesListSnapshot => {
           this.items_list = [];
           eventCategoriesListSnapshot.forEach(snap => {
             const cat = this.initializeCategory(snap.val())
-            cat.key = cat.key || snap.key // inizialmente il campo key non  veniva serializzato
+            if (cat && cat.key === undefined) {
+              cat.key = snap.key
+            }
             this.items_list.push(cat)
           }
           );
