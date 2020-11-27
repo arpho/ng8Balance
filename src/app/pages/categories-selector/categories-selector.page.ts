@@ -44,8 +44,7 @@ export class CategoriesSelectorPage implements OnInit {
   }
   filterFactory(args: { selectedCategoriesList: Array<CategoryModel> }) {
     return (a: ItemModelInterface) => {
-      if(!a)
-      {
+      if (!a) {
         a = new CategoryModel()
         a.key = ''
       }
@@ -74,7 +73,9 @@ export class CategoriesSelectorPage implements OnInit {
   }
 
   makeFilter(pattern: string) {
-    return (item: CategoryModel) => this.baseFilter(item) && String(item.getTitle().value).toLowerCase().includes(pattern.toLowerCase())
+    return (item: CategoryModel) =>
+      item ? this.baseFilter(item) && String(item.getTitle().value).toLowerCase().includes(pattern.toLowerCase()) : false
+
 
   }
 
