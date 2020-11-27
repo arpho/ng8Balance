@@ -9,6 +9,7 @@ import { PricedCategory } from 'src/app/models/pricedCategory';
 import { PurchaseModel } from 'src/app/models/purchasesModel';
 import { ShoppingKartModel } from 'src/app/models/shoppingKartModel';
 import { values } from 'd3';
+import { ComponentsPageModule } from 'src/app/modules/item/components/components.module';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +24,21 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
     if (cat && cat.key) {
       var Cat = new CategoryModel(cat.key).initialize(cat)
       if (Cat.fatherKey) {
-        this.getItem(Cat.fatherKey).on('value', father => {
+        this.fetchItem(Cat.fatherKey, father => {
           const FatherCategory = this.initializeCategory(father.val())
           Cat.father = FatherCategory
         })
       }
     }
     return Cat
+  }
+
+  fetchItem(key: string, next) {
+    this.items.subscribe((items:CategoryModel[]) => {
+      const Item = items.filter((item: CategoryModel) => item.key == key)
+      next(Item)
+      
+    })
   }
 
 
