@@ -21,15 +21,12 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
   readonly items: Observable<Array<CategoryModel>> = this._items.asObservable()
   items_list: Array<CategoryModel> = []
   initializeCategory(cat) {
-    console.log('deb initializing', cat)
+
     if (cat && cat.key) {
       var Cat = new CategoryModel(cat.key).initialize(cat)
       if (Cat.fatherKey) {
-        console.log('deb fetching father', Cat.fatherKey)
         this.getItem(Cat.fatherKey).on('value', father => { // in this case it is not posible use fetchItem
-          console.log('deb fetched father', father.val())
           const FatherCategory = this.initializeCategory(father.val())
-          console.log('deb initialized father', FatherCategory)
           if (FatherCategory) {
             FatherCategory.key = father && father.key ? father.key : FatherCategory.key
             Cat.father = FatherCategory
