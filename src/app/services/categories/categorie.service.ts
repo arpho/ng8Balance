@@ -22,7 +22,7 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
   items_list: Array<CategoryModel> = []
   initializeCategory(cat) {
 
-    if (cat && cat.key) {
+   
       var Cat = new CategoryModel(cat.key).initialize(cat)
       if (Cat.fatherKey) {
         this.getItem(Cat.fatherKey).on('value', father => { // in this case it is not posible use fetchItem
@@ -34,7 +34,7 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
 
         })
       }
-    }
+    
     return Cat
   }
 
@@ -95,9 +95,10 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
 
   async createItem(item: CategoryModel) {
     var Category
-    const category = await this.categoriesListRef.push(item.serialize())
-    category.on('value', (cat) => {
+    const category = await this.categoriesListRef.push(item.serialize()).on('value', (cat) => {
+      console.log('created',cat.key,cat.val())
       Category = this.initializeCategory(cat.val())
+      console.log('initialized',Category)
       Category.key = cat.key
       this.updateItem(Category)
     })
