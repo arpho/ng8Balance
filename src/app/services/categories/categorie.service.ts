@@ -100,7 +100,6 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
       Category = this.initializeCategory(cat.val())
       console.log('initialized', Category)
       Category.key = cat.key
-      this.updateItem(Category)
     })
     return Category;
 
@@ -134,7 +133,6 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
         const notHierarchicalCategories: CategoryModel[] = [] // first load cathegories before father is loaded
         this.categoriesListRef.on('value', eventCategoriesListSnapshot => {
           this.items_list = [];
-          console.time('loading')
           eventCategoriesListSnapshot.forEach(snap => {
             notHierarchicalCategories.push(new CategoryModel(snap.key).initialize(snap.val()))
           }
@@ -145,7 +143,6 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
             this.items_list.push(Category)
           })
           this._items.next(this.items_list)
-          console.timeEnd('loading')
         });
       }
     });
