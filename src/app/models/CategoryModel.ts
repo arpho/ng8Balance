@@ -32,6 +32,11 @@ export class CategoryModel implements FirebaseObject, ItemModelInterface, Widget
         return this
     }
 
+    setKey(key: string) {
+        this.key = key
+        return this
+    }
+
     hasQuickActions() {
         return false
     }
