@@ -21,6 +21,7 @@ export class CategoryModel implements FirebaseObject, ItemModelInterface, Widget
 
     constructor(key?: string, ) {
         this.key = key
+        
         // this.service = service
     }
     build(obj: { title: string, key: string, service?: CategoriesService }) {

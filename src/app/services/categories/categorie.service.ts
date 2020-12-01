@@ -22,19 +22,19 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
   items_list: Array<CategoryModel> = []
   initializeCategory(cat) {
 
-   
-      var Cat = new CategoryModel(cat.key).initialize(cat)
-      if (Cat.fatherKey) {
-        this.getItem(Cat.fatherKey).on('value', father => { // in this case it is not posible use fetchItem
-          const FatherCategory = this.initializeCategory(father.val())
-          if (FatherCategory) {
-            FatherCategory.key = father && father.key ? father.key : FatherCategory.key
-            Cat.father = FatherCategory
-          }
 
-        })
-      }
-    
+    var Cat = new CategoryModel(cat.key).initialize(cat)
+    if (Cat.fatherKey) {
+      this.getItem(Cat.fatherKey).on('value', father => { // in this case it is not posible use fetchItem
+        const FatherCategory = this.initializeCategory(father.val())
+        if (FatherCategory) {
+          FatherCategory.key = father && father.key ? father.key : FatherCategory.key
+          Cat.father = FatherCategory
+        }
+
+      })
+    }
+
     return Cat
   }
 
@@ -96,9 +96,9 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
   async createItem(item: CategoryModel) {
     var Category
     const category = await this.categoriesListRef.push(item.serialize()).on('value', (cat) => {
-      console.log('created',cat.key,cat.val())
+      console.log('created', cat.key, cat.val())
       Category = this.initializeCategory(cat.val())
-      console.log('initialized',Category)
+      console.log('initialized', Category)
       Category.key = cat.key
       this.updateItem(Category)
     })
@@ -131,19 +131,21 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.categoriesListRef = firebase.database().ref(`/categorie/${user.uid}/`);
-          const notHierarchicalCategories:CategoryModel[] = [] // first load cathegories before father is loaded
+        const notHierarchicalCategories: CategoryModel[] = [] // first load cathegories before father is loaded
         this.categoriesListRef.on('value', eventCategoriesListSnapshot => {
           this.items_list = [];
+          console.time('loading')
           eventCategoriesListSnapshot.forEach(snap => {
-            const cat = this.initializeCategory(snap.val())
-           notHierarchicalCategories.push(new CategoryModel(snap.val()).setKey(snap.key))
+            notHierarchicalCategories.push(new CategoryModel(snap.key).initialize(snap.val()))
           }
           );
           // now we load father
           notHierarchicalCategories.forEach(category => {
-            const Category = this.setFather(category,notHierarchicalCategories)
+            const Category = this.setFather(category, notHierarchicalCategories)
+            this.items_list.push(Category)
           })
           this._items.next(this.items_list)
+          console.timeEnd('loading')
         });
       }
     });
@@ -152,12 +154,12 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
   }
   setFather(category: CategoryModel, categoriesList: CategoryModel[]) {
     if (category && category.fatherKey) {
-      const father = this.setFather(categoriesList.filter((f: CategoryModel) => f.key == category.fatherKey)[0],categoriesList)
-    
+      const father = this.setFather(categoriesList.filter((f: CategoryModel) => f.key == category.fatherKey)[0], categoriesList)
+
       category.father = father
     }
     return category
-    
+
   }
   instatiateItem: (args: {}) => ItemModelInterface;
 
