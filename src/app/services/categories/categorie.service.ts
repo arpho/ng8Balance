@@ -133,14 +133,13 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
         this.categoriesListRef = firebase.database().ref(`/categorie/${user.uid}/`);
         this.categoriesListRef.on('value', eventCategoriesListSnapshot => {
           this.items_list = [];
+          const notHierarchicalCategories:CategoryModel[] = [] // first load cathegories before father is loaded
           eventCategoriesListSnapshot.forEach(snap => {
             const cat = this.initializeCategory(snap.val())
-            if (cat && cat.key === undefined) {
-              cat.key = snap.key
-            }
-            this.items_list.push(cat)
+           notHierarchicalCategories.push(new CategoryModel(snap.val()).setKey(snap.key))
           }
           );
+          // now we load father
           this._items.next(this.items_list)
         });
       }
