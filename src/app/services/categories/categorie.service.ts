@@ -131,21 +131,33 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.categoriesListRef = firebase.database().ref(`/categorie/${user.uid}/`);
+          const notHierarchicalCategories:CategoryModel[] = [] // first load cathegories before father is loaded
         this.categoriesListRef.on('value', eventCategoriesListSnapshot => {
           this.items_list = [];
-          const notHierarchicalCategories:CategoryModel[] = [] // first load cathegories before father is loaded
           eventCategoriesListSnapshot.forEach(snap => {
             const cat = this.initializeCategory(snap.val())
            notHierarchicalCategories.push(new CategoryModel(snap.val()).setKey(snap.key))
           }
           );
           // now we load father
+          notHierarchicalCategories.forEach(category => {
+            const Category = this.setFather(category,notHierarchicalCategories)
+          })
           this._items.next(this.items_list)
         });
       }
     });
 
 
+  }
+  setFather(category: CategoryModel, categoriesList: CategoryModel[]) {
+    if (category && category.fatherKey) {
+      const father = this.setFather(categoriesList.filter((f: CategoryModel) => f.key == category.fatherKey)[0],categoriesList)
+    
+      category.father = father
+    }
+    return category
+    
   }
   instatiateItem: (args: {}) => ItemModelInterface;
 
