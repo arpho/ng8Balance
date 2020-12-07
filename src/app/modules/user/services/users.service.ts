@@ -18,13 +18,11 @@ export class UsersService implements ItemServiceInterface,OnInit {
   readonly items: Observable<Array<UserModel>> = this._items.asObservable()
 
   constructor() {
-    console.log('hi users')
     this.usersRef = firebase.database().ref("/userProfile");
     this.loadItems()
     
   }
   populateItems = (UsersListSnapshot) => {
-    console.log('populating users')
     this.items_list = [];
     UsersListSnapshot.forEach(snap => {
       const user = new UserModel(undefined, snap.key).load(snap.val())
@@ -39,15 +37,9 @@ export class UsersService implements ItemServiceInterface,OnInit {
   }
 
   loadItems() {
-
-  
-    
-    console.log('init uers')
     firebase.auth().onAuthStateChanged(user => {
-      console.log('users service init ',user)
       if (user) {
         this.usersRef = firebase.database().ref(`/userProfile/`);
-        console.log('users ref',this.usersRef)
         this.usersRef.on('value', this.populateItems );
       }
     });
