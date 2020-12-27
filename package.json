@@ -69,6 +69,7 @@
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
     "angular-ide": "^0.9.74",
     "codelyzer": "^5.2.2",
     "cordova-plugin-device": "^2.0.2",
