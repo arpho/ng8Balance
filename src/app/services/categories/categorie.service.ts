@@ -134,7 +134,7 @@ export class CategoriesService implements ItemServiceInterface, EntityWidgetServ
         this.categoriesListRef.on('value', eventCategoriesListSnapshot => {
           this.items_list = [];
           eventCategoriesListSnapshot.forEach(snap => {
-            notHierarchicalCategories.push(new CategoryModel(snap.key).initialize(snap.val()))
+            notHierarchicalCategories.push(new CategoryModel(snap.key).initialize(snap.val()).setKey(snap.key))
           }
           );
           // now we load father
