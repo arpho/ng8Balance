@@ -9,7 +9,9 @@ import { ItemFilterOPtions } from '../modules/item/models/ItemFIlterOptions';
 import { GeneratedFile } from '@angular/compiler';
 import { CategoriesService } from '../services/categories/categorie.service';
 import { WidgetitemInteface } from '../modules/widget/models/widgetItemIterface';
-export class CategoryModel implements FirebaseObject, ItemModelInterface, WidgetitemInteface {
+import { OfflineItemModelInterface } from '../modules/offline/models/OffilineModelInterface';
+import { QuickAction } from '../modules/item/models/QuickAction';
+export class CategoryModel implements FirebaseObject, ItemModelInterface, WidgetitemInteface, OfflineItemModelInterface {
 
     key: string;
     title: string;
@@ -19,10 +21,35 @@ export class CategoryModel implements FirebaseObject, ItemModelInterface, Widget
     father: CategoryModel;
     widgetText = '..'
 
-    constructor(key?: string, ) {
+    constructor(key?: string,) {
         this.key = key
-        
+
         // this.service = service
+    }
+    serialize4Offline(): {} {
+        throw new Error('Method not implemented.');
+    }
+    offlineKey: 'categories';
+    dependeciesList: [string] = [''];
+    signature: string;
+    coherent: boolean;
+    entityKey: string;
+    hasDepencies(): boolean {
+        return false
+    }
+    isCoherent(): boolean {
+        return this.coherent
+    }
+    quickActions?: QuickAction[];
+    archived?: boolean;
+    isArchived?(): boolean {
+        throw new Error('Method not implemented.');
+    }
+    archiveItem?(b: boolean) {
+        this.archived = b
+    }
+    isArchivable?(): boolean {
+        throw new Error('Method not implemented.');
     }
     build(obj: { title: string, key: string, service?: CategoriesService }) {
         this.title = obj.title;

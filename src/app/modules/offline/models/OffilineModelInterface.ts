@@ -8,6 +8,7 @@ export interface OfflineItemModelInterface extends ItemModelInterface{
     entityKey:string
 
     hasDepencies():boolean
-    updateDendencies(entityKey:string,offlineKey:string,onlineKey)
+    updateDendencies?(entityKey:string,offlineKey:string,onlineKey)
     isCoherent():boolean
+    serialize4Offline():{}
 }
