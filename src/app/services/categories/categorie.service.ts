@@ -10,7 +10,8 @@ import { PurchaseModel } from 'src/app/models/purchasesModel';
 import { ShoppingKartModel } from 'src/app/models/shoppingKartModel';
 import { values } from 'd3';
 import { ComponentsPageModule } from 'src/app/modules/item/components/components.module';
-
+import { offlineWrapper } from 'src/app/modules/offline/business/decoratorItemService';
+@offlineWrapper
 @Injectable({
   providedIn: 'root'
 })
