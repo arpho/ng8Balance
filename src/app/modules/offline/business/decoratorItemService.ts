@@ -1,20 +1,24 @@
-import { Inject } from "@angular/core"
-import { OfflineItemModelInterface } from "../models/OffilineModelInterface"
-import { OfflineService } from "../services/offline.service"
 
-class Business {
-
-    constructor(@Inject(OfflineService) private service) {
-
-    }
-
-    registerEntity(entity: OfflineItemModelInterface) {
-        this.service.registerEntity(entity)
-        console.log('registered ', entity)
-    }
+import { Injectable } from '@angular/core';
+import { OfflineService } from '../services/offline.service';
+@Injectable()
+export class DecoratorService {
+     private static service: OfflineService | undefined = undefined;
+     public constructor(service: OfflineService) {
+         DecoratorService.service = service;
+     }
+     public static getService(): OfflineService {
+         if(!DecoratorService.service) {
+             throw new Error('DecoratorService not initialized');
+         }
+         return DecoratorService.service;
+     }
 }
 
-const OfflineWrapper = (target: Function) => {
-    console.log('ciao, ho decorato ', target)
+
+ const OfflineWrapper =(target:Function)=>{
+console.log('ciao, ho decorato ',target)
+const service = DecoratorService.getService()
+console.log('service',service)
 }
-export { OfflineWrapper as offlineWrapper }
+export   {OfflineWrapper as offlineWrapper}
