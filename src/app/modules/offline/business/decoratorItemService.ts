@@ -18,7 +18,7 @@ export class DecoratorService {
 
  const OfflineWrapper =(target:Function)=>{
 console.log('ciao, ho decorato ',target)
-const service = DecoratorService.getService()
-console.log('service',service)
+// const service = DecoratorService.getService()
+// console.log('service',service)
 }
 export   {OfflineWrapper as offlineWrapper}
