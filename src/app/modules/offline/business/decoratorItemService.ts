@@ -1,5 +1,20 @@
+import { Inject } from "@angular/core"
+import { OfflineItemModelInterface } from "../models/OffilineModelInterface"
+import { OfflineService } from "../services/offline.service"
 
- const OfflineWrapper =(target:Function)=>{
-console.log('ciao, ho decorato ',target)
+class Business {
+
+    constructor(@Inject(OfflineService) private service) {
+
+    }
+
+    registerEntity(entity: OfflineItemModelInterface) {
+        this.service.registerEntity(entity)
+        console.log('registered ', entity)
+    }
 }
-export   {OfflineWrapper as offlineWrapper}
+
+const OfflineWrapper = (target: Function) => {
+    console.log('ciao, ho decorato ', target)
+}
+export { OfflineWrapper as offlineWrapper }
