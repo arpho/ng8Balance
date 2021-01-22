@@ -7,6 +7,8 @@ import { PaymentsService } from '../services/payments/payments.service';
 import { ShoppingKartsService } from '../services/shoppingKarts/shopping-karts.service';
 import { CreateShoppingKartPage } from '../pages/create-shopping-kart/create-shopping-kart.page';
 import { FidelityCardService } from '../services/fidelity-card.service';
+import { DecoratorService } from '../modules/offline/business/decoratorItemService';
+import { OfflineService } from '../modules/offline/services/offline.service';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +20,8 @@ export class HomePage {
   constructor(
     public modalCtrl: ModalController,
     // initializing services, no good way
+    private off:OfflineService,
+    public ofline: DecoratorService,
     public categories: CategoriesService,
     public suppliers: SuppliersService,
     public payments: PaymentsService,
